@@ -55,7 +55,7 @@ Where the code and this spec disagree on an interface, **the code in `packages/c
 | D-10 | Audio is synthesized with WebAudio (as in the prototype). No audio files. | assetrizz has no audio. |
 | D-11 | assetrizz has no casino-specific category. Sprites are chosen from its `icons`, `ui`, `vfx`, `props`, `backgrounds` categories by search; any logical key with no acceptable match gets a generated vector placeholder. | Keeps the build unblocked. |
 | D-12 | Desktop-first, responsive down to 360 px portrait. Latest Chrome, Firefox, Safari. | |
-| D-13 | Repo is `mojomast/jackpotsyndicate`, private. It **already exists** when Hermes starts and contains the foundation described in 0.1 (workspace root, `packages/contracts`, `packages/physics`, harness, docs). The animation agent adds `packages/anim/` to it (tag `anim-v1`). Hermes builds on what is there and does not recreate or rewrite it. | Owner decision. |
+| D-13 | Repo is `mojomast/jackpotsyndicate`, **public** (owner decision; no LICENSE file, all rights reserved for now). It **already exists** when Hermes starts and contains the foundation described in 0.1 (workspace root, `packages/contracts`, `packages/physics`, harness, docs). The animation agent adds `packages/anim/` to it (tag `anim-v1`). Hermes builds on what is there and does not recreate or rewrite it. | Owner decision. |
 | D-14 | All numeric tuning (prices, quotas, strip weights, cash-per-chip) is initial; task T-082 owns final values within the acceptance bands in 1.7. | |
 
 ---
