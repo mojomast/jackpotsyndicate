@@ -1,0 +1,3 @@
+# Nearest workspace boundary: package-local install and lockfile, no root install.
+packages:
+  - '.'

@@ -1,0 +1,13 @@
+{
+  "note": "Portable summary of the original HyperFrames 0.9.47 trailer check; machine-local paths and preview metadata omitted.",
+  "ok": true,
+  "lint": { "ok": true, "errorCount": 0, "warningCount": 8, "warningCode": "nested_structure_needs_subcomposition" },
+  "runtime": { "ok": true, "errorCount": 0, "warningCount": 0 },
+  "layout": { "ok": true, "errorCount": 0, "warningCount": 0 },
+  "contrast": { "ok": true, "errorCount": 0, "warningCount": 0, "checked": 24, "passed": 24 },
+  "samples": [1.333, 4, 6.667, 9.333, 12, 14.667, 17.333, 20, 22.667],
+  "overlapSamples": 23,
+  "duration": 24,
+  "audioStreams": 0,
+  "craftPassEnabled": false
+}
