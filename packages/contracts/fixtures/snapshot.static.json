@@ -1,0 +1,747 @@
+{
+ "tick": 2527,
+ "dozer": {
+  "frontY": 328.772,
+  "stroke": 34,
+  "surging": false,
+  "reciprocations": 20
+ },
+ "suction": 0,
+ "pegs": [
+  {
+   "id": 0,
+   "x": 75,
+   "y": 52,
+   "kind": "gold",
+   "radius": 5.5,
+   "flash": 6
+  },
+  {
+   "id": 1,
+   "x": 150,
+   "y": 52,
+   "kind": "golden",
+   "radius": 8,
+   "flash": 0
+  },
+  {
+   "id": 2,
+   "x": 225,
+   "y": 52,
+   "kind": "golden",
+   "radius": 8,
+   "flash": 0
+  },
+  {
+   "id": 3,
+   "x": 300,
+   "y": 52,
+   "kind": "golden",
+   "radius": 8,
+   "flash": 8
+  },
+  {
+   "id": 4,
+   "x": 375,
+   "y": 52,
+   "kind": "gold",
+   "radius": 5.5,
+   "flash": 0
+  },
+  {
+   "id": 5,
+   "x": 450,
+   "y": 52,
+   "kind": "golden",
+   "radius": 8,
+   "flash": 0
+  },
+  {
+   "id": 6,
+   "x": 525,
+   "y": 52,
+   "kind": "gold",
+   "radius": 5.5,
+   "flash": 0
+  },
+  {
+   "id": 7,
+   "x": 98.571,
+   "y": 89.4,
+   "kind": "golden",
+   "radius": 8,
+   "flash": 0
+  },
+  {
+   "id": 8,
+   "x": 184.286,
+   "y": 89.4,
+   "kind": "splitter",
+   "radius": 5.5,
+   "flash": 0
+  },
+  {
+   "id": 9,
+   "x": 270,
+   "y": 89.4,
+   "kind": "golden",
+   "radius": 8,
+   "flash": 0
+  },
+  {
+   "id": 10,
+   "x": 355.714,
+   "y": 89.4,
+   "kind": "gold",
+   "radius": 5.5,
+   "flash": 0
+  },
+  {
+   "id": 11,
+   "x": 441.429,
+   "y": 89.4,
+   "kind": "splitter",
+   "radius": 5.5,
+   "flash": 0
+  },
+  {
+   "id": 12,
+   "x": 527.143,
+   "y": 89.4,
+   "kind": "gold",
+   "radius": 5.5,
+   "flash": 0
+  },
+  {
+   "id": 13,
+   "x": 75,
+   "y": 126.8,
+   "kind": "golden",
+   "radius": 8,
+   "flash": 0
+  },
+  {
+   "id": 14,
+   "x": 150,
+   "y": 126.8,
+   "kind": "golden",
+   "radius": 8,
+   "flash": 0
+  },
+  {
+   "id": 15,
+   "x": 225,
+   "y": 126.8,
+   "kind": "gold",
+   "radius": 5.5,
+   "flash": 0
+  },
+  {
+   "id": 16,
+   "x": 300,
+   "y": 126.8,
+   "kind": "bumper",
+   "radius": 11,
+   "flash": 0
+  },
+  {
+   "id": 17,
+   "x": 375,
+   "y": 126.8,
+   "kind": "golden",
+   "radius": 8,
+   "flash": 3
+  },
+  {
+   "id": 18,
+   "x": 450,
+   "y": 126.8,
+   "kind": "golden",
+   "radius": 8,
+   "flash": 0
+  },
+  {
+   "id": 19,
+   "x": 525,
+   "y": 126.8,
+   "kind": "golden",
+   "radius": 8,
+   "flash": 0
+  },
+  {
+   "id": 20,
+   "x": 98.571,
+   "y": 164.2,
+   "kind": "golden",
+   "radius": 8,
+   "flash": 0
+  },
+  {
+   "id": 21,
+   "x": 184.286,
+   "y": 164.2,
+   "kind": "golden",
+   "radius": 8,
+   "flash": 0
+  },
+  {
+   "id": 22,
+   "x": 270,
+   "y": 164.2,
+   "kind": "golden",
+   "radius": 8,
+   "flash": 0
+  },
+  {
+   "id": 23,
+   "x": 355.714,
+   "y": 164.2,
+   "kind": "golden",
+   "radius": 8,
+   "flash": 0
+  },
+  {
+   "id": 24,
+   "x": 441.429,
+   "y": 164.2,
+   "kind": "golden",
+   "radius": 8,
+   "flash": 0
+  },
+  {
+   "id": 25,
+   "x": 527.143,
+   "y": 164.2,
+   "kind": "gold",
+   "radius": 5.5,
+   "flash": 0
+  },
+  {
+   "id": 26,
+   "x": 75,
+   "y": 201.6,
+   "kind": "golden",
+   "radius": 8,
+   "flash": 0
+  },
+  {
+   "id": 27,
+   "x": 150,
+   "y": 201.6,
+   "kind": "golden",
+   "radius": 8,
+   "flash": 0
+  },
+  {
+   "id": 28,
+   "x": 225,
+   "y": 201.6,
+   "kind": "gold",
+   "radius": 5.5,
+   "flash": 0
+  },
+  {
+   "id": 29,
+   "x": 300,
+   "y": 201.6,
+   "kind": "gold",
+   "radius": 5.5,
+   "flash": 0
+  },
+  {
+   "id": 30,
+   "x": 375,
+   "y": 201.6,
+   "kind": "gold",
+   "radius": 5.5,
+   "flash": 0
+  },
+  {
+   "id": 31,
+   "x": 450,
+   "y": 201.6,
+   "kind": "gold",
+   "radius": 5.5,
+   "flash": 0
+  },
+  {
+   "id": 32,
+   "x": 525,
+   "y": 201.6,
+   "kind": "golden",
+   "radius": 8,
+   "flash": 0
+  }
+ ],
+ "orbs": [
+  {
+   "id": 116,
+   "x": 92.598,
+   "y": 56.345,
+   "vx": 1.038,
+   "vy": 3.204,
+   "radius": 9,
+   "symbolId": "diamond"
+  },
+  {
+   "id": 117,
+   "x": 248.195,
+   "y": 42.298,
+   "vx": 3.051,
+   "vy": 2.351,
+   "radius": 9,
+   "symbolId": "cherry"
+  },
+  {
+   "id": 118,
+   "x": 253.341,
+   "y": 98.248,
+   "vx": 11,
+   "vy": -1.698,
+   "radius": 9,
+   "symbolId": "uranium"
+  },
+  {
+   "id": 119,
+   "x": 315.366,
+   "y": 44.728,
+   "vx": -0.488,
+   "vy": -5,
+   "radius": 9,
+   "symbolId": "skull"
+  },
+  {
+   "id": 120,
+   "x": 388.111,
+   "y": 161.541,
+   "vx": -0.291,
+   "vy": 6.724,
+   "radius": 9,
+   "symbolId": "seven"
+  },
+  {
+   "id": 121,
+   "x": 568.487,
+   "y": 54.735,
+   "vx": 1.59,
+   "vy": 3.282,
+   "radius": 9,
+   "symbolId": "scrap"
+  },
+  {
+   "id": 122,
+   "x": 73.551,
+   "y": 32.85,
+   "vx": -1.94,
+   "vy": -2.349,
+   "radius": 9,
+   "symbolId": "cherry"
+  }
+ ],
+ "tokens": [
+  {
+   "id": 10,
+   "x": 319.002,
+   "y": 453.191,
+   "vx": 0.108,
+   "vy": 0.27,
+   "radius": 10,
+   "symbolId": "uranium",
+   "skin": "uranium",
+   "stack": 1,
+   "welded": true,
+   "lift": 0.085
+  },
+  {
+   "id": 15,
+   "x": 335.117,
+   "y": 438.959,
+   "vx": 0.016,
+   "vy": 0.164,
+   "radius": 11,
+   "symbolId": "diamond",
+   "skin": "diamond",
+   "stack": 1,
+   "welded": true,
+   "lift": 0.047
+  },
+  {
+   "id": 40,
+   "x": 468.62,
+   "y": 421.368,
+   "vx": 0,
+   "vy": 0,
+   "radius": 6.5,
+   "symbolId": "cherry",
+   "skin": "cherry",
+   "stack": 1,
+   "welded": false,
+   "lift": 0
+  },
+  {
+   "id": 41,
+   "x": 483.807,
+   "y": 421.75,
+   "vx": 0,
+   "vy": 0,
+   "radius": 6.5,
+   "symbolId": "cherry",
+   "skin": "cherry",
+   "stack": 1,
+   "welded": false,
+   "lift": 0
+  },
+  {
+   "id": 47,
+   "x": 450.333,
+   "y": 398.885,
+   "vx": 0,
+   "vy": 0,
+   "radius": 10,
+   "symbolId": "scrap",
+   "skin": "copper",
+   "stack": 1,
+   "welded": false,
+   "lift": 0
+  },
+  {
+   "id": 69,
+   "x": 437.78,
+   "y": 425.593,
+   "vx": 0,
+   "vy": 0,
+   "radius": 12,
+   "symbolId": "seven",
+   "skin": "bullion",
+   "stack": 3,
+   "welded": false,
+   "lift": 0
+  },
+  {
+   "id": 70,
+   "x": 73.026,
+   "y": 394.308,
+   "vx": 0,
+   "vy": 0,
+   "radius": 6.5,
+   "symbolId": "cherry",
+   "skin": "cherry",
+   "stack": 1,
+   "welded": false,
+   "lift": 0
+  },
+  {
+   "id": 71,
+   "x": 87.026,
+   "y": 436.041,
+   "vx": 0,
+   "vy": 0,
+   "radius": 6.5,
+   "symbolId": "cherry",
+   "skin": "cherry",
+   "stack": 1,
+   "welded": false,
+   "lift": 0
+  },
+  {
+   "id": 72,
+   "x": 293.071,
+   "y": 395.834,
+   "vx": -0.049,
+   "vy": 0.409,
+   "radius": 6.5,
+   "symbolId": "cherry",
+   "skin": "cherry",
+   "stack": 1,
+   "welded": true,
+   "lift": 0.121
+  },
+  {
+   "id": 73,
+   "x": 306.004,
+   "y": 391.757,
+   "vx": -0.212,
+   "vy": 0.27,
+   "radius": 6.5,
+   "symbolId": "cherry",
+   "skin": "cherry",
+   "stack": 1,
+   "welded": true,
+   "lift": 0.478
+  },
+  {
+   "id": 74,
+   "x": 297.94,
+   "y": 465.996,
+   "vx": 0,
+   "vy": 0.267,
+   "radius": 6.5,
+   "symbolId": "cherry",
+   "skin": "cherry",
+   "stack": 1,
+   "welded": false,
+   "lift": 0.022
+  },
+  {
+   "id": 76,
+   "x": 286.665,
+   "y": 408.787,
+   "vx": -0.032,
+   "vy": 0.257,
+   "radius": 6.5,
+   "symbolId": "cherry",
+   "skin": "cherry",
+   "stack": 1,
+   "welded": true,
+   "lift": 0.133
+  },
+  {
+   "id": 77,
+   "x": 279.543,
+   "y": 441.173,
+   "vx": -0.054,
+   "vy": 0.251,
+   "radius": 6.5,
+   "symbolId": "cherry",
+   "skin": "cherry",
+   "stack": 1,
+   "welded": true,
+   "lift": 0.032
+  },
+  {
+   "id": 79,
+   "x": 130.032,
+   "y": 458.655,
+   "vx": 0,
+   "vy": 0,
+   "radius": 10,
+   "symbolId": "scrap",
+   "skin": "copper",
+   "stack": 1,
+   "welded": false,
+   "lift": 0
+  },
+  {
+   "id": 83,
+   "x": 108.368,
+   "y": 422.998,
+   "vx": 0,
+   "vy": 0,
+   "radius": 10,
+   "symbolId": "uranium",
+   "skin": "uranium",
+   "stack": 1,
+   "welded": false,
+   "lift": 0
+  },
+  {
+   "id": 84,
+   "x": 304.659,
+   "y": 409.706,
+   "vx": 0.061,
+   "vy": 0.297,
+   "radius": 11,
+   "symbolId": "diamond",
+   "skin": "diamond",
+   "stack": 1,
+   "welded": true,
+   "lift": 0.378
+  },
+  {
+   "id": 85,
+   "x": 149.33,
+   "y": 444.684,
+   "vx": 0,
+   "vy": 0,
+   "radius": 12,
+   "symbolId": "seven",
+   "skin": "bullion",
+   "stack": 3,
+   "welded": false,
+   "lift": 0
+  },
+  {
+   "id": 87,
+   "x": 313.641,
+   "y": 472.95,
+   "vx": -0.011,
+   "vy": 0.238,
+   "radius": 10,
+   "symbolId": "scrap",
+   "skin": "copper",
+   "stack": 1,
+   "welded": false,
+   "lift": 0.024
+  },
+  {
+   "id": 89,
+   "x": 312.529,
+   "y": 363.318,
+   "vx": 0.138,
+   "vy": 0.339,
+   "radius": 10,
+   "symbolId": "scrap",
+   "skin": "copper",
+   "stack": 1,
+   "welded": true,
+   "lift": 0.526
+  },
+  {
+   "id": 95,
+   "x": 312.89,
+   "y": 431.604,
+   "vx": -0.037,
+   "vy": 0.303,
+   "radius": 12,
+   "symbolId": "seven",
+   "skin": "bullion",
+   "stack": 3,
+   "welded": false,
+   "lift": 0.315
+  },
+  {
+   "id": 96,
+   "x": 294.999,
+   "y": 379.657,
+   "vx": 0.029,
+   "vy": 0.544,
+   "radius": 9.5,
+   "symbolId": "skull",
+   "skin": "skull",
+   "stack": 1,
+   "welded": false,
+   "lift": 0.239
+  },
+  {
+   "id": 105,
+   "x": 289.918,
+   "y": 426.482,
+   "vx": -0.041,
+   "vy": 0.263,
+   "radius": 11,
+   "symbolId": "diamond",
+   "skin": "diamond",
+   "stack": 1,
+   "welded": true,
+   "lift": 0.272
+  },
+  {
+   "id": 107,
+   "x": 276.414,
+   "y": 458.897,
+   "vx": -0.072,
+   "vy": 0.251,
+   "radius": 11,
+   "symbolId": "diamond",
+   "skin": "diamond",
+   "stack": 1,
+   "welded": true,
+   "lift": 0.024
+  },
+  {
+   "id": 108,
+   "x": 296.154,
+   "y": 448.107,
+   "vx": -0.061,
+   "vy": 0.269,
+   "radius": 11,
+   "symbolId": "diamond",
+   "skin": "diamond",
+   "stack": 1,
+   "welded": true,
+   "lift": 0.105
+  },
+  {
+   "id": 109,
+   "x": 504.253,
+   "y": 405.623,
+   "vx": 0,
+   "vy": 0,
+   "radius": 11,
+   "symbolId": "diamond",
+   "skin": "diamond",
+   "stack": 1,
+   "welded": false,
+   "lift": 0
+  },
+  {
+   "id": 110,
+   "x": 291.44,
+   "y": 359.135,
+   "vx": 0.086,
+   "vy": 0.608,
+   "radius": 11,
+   "symbolId": "diamond",
+   "skin": "diamond",
+   "stack": 1,
+   "welded": true,
+   "lift": 0.275
+  },
+  {
+   "id": 111,
+   "x": 290.709,
+   "y": 338.272,
+   "vx": 0.067,
+   "vy": 0.604,
+   "radius": 9.5,
+   "symbolId": "skull",
+   "skin": "skull",
+   "stack": 1,
+   "welded": false,
+   "lift": 0.221
+  },
+  {
+   "id": 112,
+   "x": 307.217,
+   "y": 335.272,
+   "vx": 0.228,
+   "vy": 0.604,
+   "radius": 6.5,
+   "symbolId": "cherry",
+   "skin": "cherry",
+   "stack": 1,
+   "welded": false,
+   "lift": 0.569
+  },
+  {
+   "id": 113,
+   "x": 305.445,
+   "y": 348.342,
+   "vx": -0.559,
+   "vy": 0.524,
+   "radius": 6.5,
+   "symbolId": "cherry",
+   "skin": "cherry",
+   "stack": 1,
+   "welded": false,
+   "lift": 0.532
+  },
+  {
+   "id": 114,
+   "x": 312.189,
+   "y": 380.317,
+   "vx": 0.213,
+   "vy": 0.341,
+   "radius": 6.5,
+   "symbolId": "cherry",
+   "skin": "cherry",
+   "stack": 1,
+   "welded": false,
+   "lift": 0.466
+  },
+  {
+   "id": 115,
+   "x": 318.216,
+   "y": 397.727,
+   "vx": -0.138,
+   "vy": 0.091,
+   "radius": 6.5,
+   "symbolId": "cherry",
+   "skin": "cherry",
+   "stack": 1,
+   "welded": false,
+   "lift": 0.085
+  }
+ ],
+ "queuedOrbs": 0
+}

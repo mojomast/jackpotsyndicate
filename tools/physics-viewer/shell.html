@@ -1,0 +1,9 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Jackpot Syndicate physics viewer</title>
+<style>body{background:#07090e;color:#e2e8f0;font:13px system-ui;margin:0;display:flex;flex-direction:column;align-items:center;gap:8px;padding:12px}
+canvas{width:min(96vw,720px);height:auto;border:1px solid #1e293b;border-radius:8px}
+button{background:#121826;color:#fbbf24;border:1px solid #334155;border-radius:6px;padding:6px 10px;font:12px monospace;cursor:pointer}
+div{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}p{color:#94a3b8;max-width:720px;margin:0;text-align:center}</style></head><body>
+<canvas id="c" width="600" height="560"></canvas>
+<div><button id="spin">Spin (launch orbs)</button><button id="surge">Dozer surge</button><button id="ice">Drop ice blocks</button><button id="suction">Boss suction: off</button><button id="floor">FLOOR_NEON</button><button id="auto">Auto-spin: on</button><button id="speed">Speed 1x</button><button id="reset">Reset</button></div>
+<p>Debug view of the deterministic physics. The shelf is drawn in 2.5D from the 2D simulation; the darker strips beside the gutters are the bevel that sets each floor's rake. White outlines are welded tokens.</p>
+<script>/*BUNDLE*/</script></body></html>
