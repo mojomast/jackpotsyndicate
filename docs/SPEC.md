@@ -16,7 +16,7 @@
 | K-2 | **Scope:** full Mode 1 run (3 floors, 3 bosses, branching elevator, archetype shop, trinkets/coins/drinks, fever) **plus** reel/payline mutations (3–5 columns, 3–4 rows, Hyper/Ways/Cluster wirings, jumper wires, overvolt). |
 | K-3 | **Physics:** the simulation is 2D top-down, deterministic, fixed-timestep, seeded. **Rendering of the pusher is 2.5D** (perspective shelf, coin thickness, stacks, shadows, tumbling exits) drawn from the 2D state. No 3D physics. |
 | K-4 | **Backend:** none. Static client, localStorage saves, shareable seeds. Play money only. |
-| K-5 | **Animation is built externally.** A separate HyperFrames agent is already building `packages/anim/` (reel and scene timelines, cabinet DOM, tick-synced player, compositions, trailer) from its own prompt. Hermes does **not** dispatch bees for that work. Hermes merges the folder, swaps its shim for the shared contracts, and wires it in (tasks X-ANIM and T-052, and 2.11). |
+| K-5 | **Animation is built externally.** A separate HyperFrames agent built `packages/anim/` (now merged, tag `anim-v1`) (reel and scene timelines, cabinet DOM, tick-synced player, compositions, trailer) from its own prompt. Hermes does **not** dispatch bees for that work. Hermes merges the folder, swaps its shim for the shared contracts, and wires it in (tasks X-ANIM and T-052, and 2.11). |
 
 ### 0.1 Already built (do not redo)
 
@@ -29,6 +29,7 @@ The owner had the highest-risk foundation built before handing this spec to Herm
 | T-020 | **Done** | Physics kernel: seeded PRNG, binary serialize, hash, deterministic sine | Nothing |
 | T-021 | **Done** | Pinfield chamber with all symbol behaviours | Nothing |
 | T-022 | **Done** | Coin pusher with all symbol/boss behaviours; rake within AC-5 on all four floors | Re-measure rake through the real engine once T-080 exists (`docs/PHYSICS.md`) |
+| X-ANIM | **Done, merged** (`anim-v1`, `fce7b36`) | `packages/anim` (`@jackpotsyndicate/anim`): timelines, cabinet DOM, tick-synced player, 10 compositions, scrubber demo, 93 tests, `artifacts/trailer.mp4` (24 s, 1080p60, silent), shim verified against `contracts`. See `packages/anim/README.md#merge-notes` and `INTEGRATION.md` | T-052 only: swap shim for `contracts` re-exports (keep helpers), import the CSS, supply motion/assets/bezel content, keep orb-launch order, atlas-backed `SpriteResolver`, re-render trailer with real sprites |
 
 Where the code and this spec disagree on an interface, **the code in `packages/contracts` wins**; the differences are listed in `docs/CONTRACTS.md` and summarised here:
 
