@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.cache/
+.render/
+.hyperframes/
+.agents/
+.opencode/
+artifacts/qa/
+artifacts/*.log
+artifacts/*.zip
+artifacts/*.bundle
+*.tsbuildinfo
+.env
+.env.*

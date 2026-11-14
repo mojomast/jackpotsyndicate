@@ -1,0 +1,24 @@
+{
+  "name": "@jackpotsyndicate/anim",
+  "packageManager": "pnpm@10.28.0",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/anim.js" }, "./style.css": "./dist/style.css" },
+  "files": ["dist", "assets", "fixtures", "compositions", "artifacts/trailer.mp4", "README.md"],
+  "scripts": {
+    "build": "vite build && tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "contracts:check": "node scripts/check-contracts.mjs",
+    "test": "vitest run",
+    "lint": "node scripts/lint.mjs",
+    "demo": "vite --host 127.0.0.1 --port 5180",
+    "compositions:build": "node scripts/build-compositions.mjs",
+    "preview": "node scripts/build-compositions.mjs && hyperframes preview .render/trailer --port 5181 --foreground --no-open",
+    "render": "node scripts/render.mjs",
+    "qa": "node scripts/qa.mjs"
+  },
+  "dependencies": { "gsap": "3.15.1" },
+  "devDependencies": { "hyperframes": "0.9.47", "typescript": "7.0.2", "vite": "8.3.8", "vitest": "5.1.0", "@types/node": "22.19.11" }
+}
