@@ -477,7 +477,7 @@ test('round result and boss bar render at a 390px viewport without a shell crash
   fabricate(core, (state) => {
     state.phase = 'ROUND_RESULT';
     state.round = 1;
-    state.bankroll = 900;
+    state.bankroll = 100; // below the round-1 quota, so the verdict is a miss
   });
   attach(core);
 

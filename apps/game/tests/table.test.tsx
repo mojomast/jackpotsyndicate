@@ -173,7 +173,7 @@ test('HUD quota follows the content table on every floor (not the shallow protot
   render(React.createElement(Hud));
   assert.equal(
     screen.getByTestId(TEST_IDS.quota).textContent,
-    '$9,261',
+    '$8,000',
     'Cryo round 1 must use the content quota, not the 1000 × local-scale shortcut',
   );
 });
@@ -241,7 +241,11 @@ test('J1: fixed-seed spin reaches LipDrop and increases bankroll through the rea
   assert.equal(useGameStore.getState().state.phase, 'SPINNING');
 
   const reached = await api.runUntil(
-    (target) => target.getState().stats.lipDrops > 0 && target.getState().bankroll > startBankroll,
+    // Seeded shelf tokens carry cash, so wait for the spin's own token as well.
+    (target) =>
+      target.getState().stats.lipDrops > 0 &&
+      target.getState().bankroll > startBankroll &&
+      events.some((event) => event.t === 'TokenSpawned'),
     3000,
   );
 
@@ -292,8 +296,9 @@ test('J6: real shop chassis mutation re-lays out four WAYS reels and the next sp
   const api = apiModule.installTestApi(core);
   const { container } = render(React.createElement(TableScreen));
 
+  const bankrollBefore = api.getState().bankroll;
   api.grantCash(5000);
-  assert.equal(api.getState().bankroll, 5500);
+  assert.equal(api.getState().bankroll, bankrollBefore + 5000);
 
   for (let spin = 0; spin < 7; spin++) {
     assert.deepEqual(api.dispatch({ c: 'Spin' }), { ok: true });

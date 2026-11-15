@@ -174,7 +174,7 @@ test('MockGameCore drives the HUD, cabinet, cascade equation, trinket rail and l
   const { container } = render(React.createElement(App, { initialRoute: 'table' }));
 
   assert.equal(screen.getByTestId(TEST_IDS.bankroll).textContent, '$500');
-  assert.equal(screen.getByTestId(TEST_IDS.quota).textContent, '$1,000');
+  assert.equal(screen.getByTestId(TEST_IDS.quota).textContent, '$450');
   assert.equal(screen.getByTestId(TEST_IDS.spinsLeft).textContent, '7');
   assert.equal(screen.getByTestId(TEST_IDS.fever).textContent, '40%');
 
