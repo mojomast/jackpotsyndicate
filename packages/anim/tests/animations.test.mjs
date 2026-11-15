@@ -49,3 +49,22 @@ test('TimelinePlayer uses the supplied tick, clamps, stays paused, and completes
   expect(await page.evaluate(() => window.qa.playerCheck())).toEqual({ time: .5, clamped: 0, once: 1, twice: 2, paused: true, stopped: true });
 });
 test('source has no nondeterministic clocks, timers, or unseeded random calls', async () => { expect(await checkSource()).toEqual([]); });
+describe('reel v2 effects', () => {
+  for (const speed of [1, 2, 4]) test(`light envelopes have at most one flash cycle at ${speed}x`, async () => {
+    expect(await page.evaluate(speed => window.qa.flashEnvelopes(speed), speed)).toEqual([]);
+  });
+  for (const reducedMotion of [false, true]) test(`orb-plan slots, per-frame seek idempotence, seeded particles; reduced=${reducedMotion}`, async () => {
+    const result = await page.evaluate(r => window.qa.effectChecks(r), reducedMotion);
+    expect(result.failures).toEqual([]); expect(result.same).toBe(true); expect(result.reducedViolations).toEqual([]);
+    expect(result.count).toBeLessThanOrEqual(48); expect(result.different).toBe(!reducedMotion);
+  });
+  test('near-miss is derived from supplied grid and disabled for clusters', async () => {
+    expect(await page.evaluate(() => window.qa.nearCheck())).toEqual({ yes: true, no: false, cluster: false, diagonal: true, frozenLine: false, ways: true, frozenWays: false, hyper: true, hyperClassic: false, frozenHyper: false });
+  });
+  for (const tier of ['small', 'big', 'mega', 'jackpot']) for (const kind of ['line', 'ways', 'cluster']) test(`${tier}/${kind}: glow, paths, RGB and particle seeks`, async () => {
+    expect(await page.evaluate(({ tier, kind }) => window.qa.seekCheck('lineWin', { ...window.qa.fixtures.lineWin, seed: 73, winTier: tier, wins: [{ kind, overvolt: true, cells: [[0, 1], [1, 0], [2, 1]] }] }), { tier, kind })).toEqual({ pass: true });
+  });
+  for (const blurMode of ['echo', 'svg']) test(`${blurMode}: cylindrical blur seek idempotence`, async () => {
+    expect(await page.evaluate(blurMode => window.qa.seekCheck('reelSpin', { ...window.qa.fixtures.reelSpin, blurMode }), blurMode)).toEqual({ pass: true });
+  });
+});

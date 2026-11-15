@@ -1,5 +1,76 @@
 # @jackpotsyndicate/anim
 
+## Reel animation v2
+
+The `anim/reels-v2` branch replaces the four reel factories with cylindrical CSS
+3D drums, velocity-linked SVG blur/ghosts, brass landing lights, near-miss tension,
+tiered line/ways/cluster wins, analytical seeded particles, and folding relayouts.
+All engine timing constants are unchanged. See `REVIEW-V2.md` for current evidence
+and limitations; the original anim-v1 handoff below is retained as history.
+
+### V2 merge notes
+
+- Existing factory exports and required params are unchanged. The shim now
+  re-exports shared contracts, including these additive optional fields:
+  - `ReelSpinParams`: `floorId`, `grain`, `wiring`, `blurMode: 'svg' | 'echo'`.
+  - `LineWinParams`: `seed`, `equity`, `winTier`, `launchOrder`, `floorId`, `grain`,
+    `exitEdge: 'bottom' | 'right'`.
+  - `TumbleStepParams` / `GridRelayoutParams`: `seed`, `floorId`, `grain`.
+    `gridRelayout` currently uses deterministic geometry and reserves `seed` for
+    optional future variation.
+- Tier thresholds use equity: small <250, big >=250, mega >=1000, jackpot >=5000.
+  An explicit `winTier` overrides this. Small symbol celebrations last 120 ms;
+  the complete timeline still reserves every engine-required launch slot.
+- `launchOrder` accepts the authoritative orb-plan cells. Null entries reserve
+  scrap/bonus launch slots. A cell detaches once at its first occurrence.
+- Default blur is SVG, applied outside the projected drum to preserve CSS 3D.
+  The cheaper path was selected by measuring both strategies. At most five reel
+  filters plus one ambient-light filter run during spinning. Wins allocate one
+  shared bloom, at most one overvolt filter, and jackpot-only RGB groups.
+- Particles are capped at 48. Their positions are closed-form functions of
+  tween progress; numeric property setters render identically with callbacks
+  suppressed. No clocks, simulation stepping, or random draws during seeking.
+- V2 styles are installed once by `createCabinet` from `reels.styles.ts`, keeping
+  direct factory imports compatible with the game's Node-based test runner.
+  Existing `data-testid`, cabinet, grid, symbol, payline and bezel anchors survive.
+  New anchors include `reel-drum`, `velocity-blur`, `near-miss`, `light-rig`,
+  `reel-divider`, `win-tier`, `beam-core`, `particle` and `scanlines`.
+- `grain: false` disables scanlines. Reduced motion omits drums, blur, particles,
+  RGB separation, sheen travel and all transform animation. Stop/detach times and
+  timeline durations are unchanged. Lighting uses one envelope, not strobing.
+- `symbol.<id>` still resolves through the supplied atlas resolver; null keeps
+  vector fallbacks. Compositions use unmodified local copies of the game's five
+  symbol PNGs. Provenance: `assets/reels/README.md`.
+- New composition: `reelShowcase`, 18 seconds at 1080p60. It explicitly identifies
+  editorial fixtures and covers all tiers, CLASSIC, both HYPER paths, WAYS,
+  CLUSTER, overvolt, near-miss, tumble and relayout using the live factories.
+- Additional commands: `node scripts/perf-reels.mjs`,
+  `node scripts/capture-game.mjs`, `node scripts/capture-tumble.mjs`,
+  `node scripts/render-v2.mjs`, and `node scripts/qa-v2.mjs`.
+  Capture scripts exercise the production preview through normal UI controls.
+  Tool versions and dependency pins remain those listed below.
+
+### V2 requests and integration limitations
+
+1. **Lever anchor:** the lever is baked into the host cabinet artwork. Supply a
+   separate lever element/art layer to animate it with the four-tick wind-up.
+2. **CLUSTER scheduling:** `core.ts` schedules the first orb at evaluation + 6 +
+   `36 * tumbleCount`, while `CabinetStage` replaces `lineWin` with each tumble.
+   Its aggregated orb plan can also repeat a cell across different tumble grids.
+   Supply per-tumble launch provenance/ticks and host timeline sequencing for a
+   continuous hand-off. V2 preserves the existing engine schedule; it cannot
+   satisfy the brief's evaluation+6 launch rule for CLUSTER under current contracts.
+3. **Relayout host lifecycle:** the host's grid-dimension effect rebuilds the
+   cabinet on size changes, potentially replacing an in-progress relayout.
+   The 90-tick morph is verified independently; preserving it in the live host
+   requires coordination beyond additive parameter/anchor wiring.
+4. **Clock ownership:** the production store currently advances one simulation
+   tick per `setTimeout`; it does not use the core's elapsed-time fixed-step loop.
+   Animation remains tick-exact, but a busy host can stretch wall-clock playback.
+
+Only the two explicitly permitted integration files are changed outside this
+package. The remaining Merge notes describe the historical anim-v1 delivery.
+
 Simulation-driven, seekable GSAP animations for JACKPOT SYNDICATE. Nine factories, a clock-free player, responsive cabinet, vector placeholders, local fonts, ten HyperFrames compositions, a tick-scrubber demo, and a **24-second 1080p60 silent trailer**.
 
 ## Install and use

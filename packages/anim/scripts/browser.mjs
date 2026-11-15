@@ -14,10 +14,10 @@ async function findBrowser(dir) {
   }
   return null;
 }
-export async function launchBrowser() {
+export async function launchBrowser(args = []) {
   let executablePath = process.env.CHROME_BIN;
   if (!executablePath) for (const dir of [join(homedir(), '.cache/hyperframes/chrome'), join(homedir(), '.cache/puppeteer')]) { executablePath = await findBrowser(dir); if (executablePath) break; }
   if (!executablePath) for (const path of ['/usr/bin/chromium', '/usr/bin/google-chrome']) { try { await access(path); executablePath = path; break; } catch {} }
   if (!executablePath) throw new Error('Set CHROME_BIN to Chrome/Chromium, or run pnpm exec hyperframes setup.');
-  return puppeteer.launch({ executablePath, headless: true, args: ['--no-sandbox', '--disable-dev-shm-usage'], defaultViewport: { width: 1920, height: 1080 } });
+  return puppeteer.launch({ executablePath, headless: true, args: ['--no-sandbox', '--disable-dev-shm-usage', ...args], defaultViewport: { width: 1920, height: 1080 } });
 }

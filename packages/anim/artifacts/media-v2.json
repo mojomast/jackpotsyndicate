@@ -1,0 +1,22 @@
+[
+  {
+    "name": "trailer",
+    "duration": 24,
+    "frames": 1440,
+    "width": 1920,
+    "height": 1080,
+    "codec": "h264",
+    "bytes": 5751737,
+    "fullDecode": true
+  },
+  {
+    "name": "reelShowcase",
+    "duration": 18,
+    "frames": 1080,
+    "width": 1920,
+    "height": 1080,
+    "codec": "h264",
+    "bytes": 9686432,
+    "fullDecode": true
+  }
+]

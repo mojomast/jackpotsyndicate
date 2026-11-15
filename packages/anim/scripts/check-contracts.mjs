@@ -1,18 +1,17 @@
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { execFileSync } from 'node:child_process';
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import vm from 'node:vm';
 
-// Optional repository-integration check; the package build/runtime has no shared import.
+// Repository-integration check, including the shared re-export shim.
 const shared = resolve('../contracts/src');
 const require = createRequire(import.meta.url);
 const hyperframesRequire = createRequire(require.resolve('hyperframes/package.json'));
-const { transformSync } = hyperframesRequire('esbuild');
+const { buildSync } = hyperframesRequire('esbuild');
 async function values(file) {
-  const source = await readFile(file, 'utf8');
-  const output = transformSync(source, { loader: 'ts', format: 'cjs', target: 'es2022' }).code;
+  const output = buildSync({ entryPoints: [resolve(file)], bundle: true, write: false, platform: 'node', format: 'cjs', target: 'es2022' }).outputFiles[0].text;
   const context = { module: { exports: {} } };
   vm.runInNewContext(output, context, { filename: file });
   return context.module.exports;
