@@ -11,11 +11,16 @@ export function hasNearMiss(p: ReelSpinParams): boolean {
   if (p.wiring === 'CLUSTER') return false;
   if (p.wiring === 'WAYS') return SYMBOL_IDS.some(id => p.finalGrid.slice(0, -1).every(col => col.includes(id)));
   const paths = Array.from({ length: p.rows }, (_, row) => Array.from({ length: p.cols }, () => row));
+  if (p.cols <= p.rows) {
+    paths.push(Array.from({ length: p.cols }, (_, c) => c));
+    paths.push(Array.from({ length: p.cols }, (_, c) => p.rows - 1 - c));
+  }
   if (p.wiring === 'HYPER') {
     paths.push(Array.from({ length: p.cols }, (_, c) => Math.round(Math.abs(c - (p.cols - 1) / 2) * (p.rows - 1) / ((p.cols - 1) / 2))));
     paths.push(paths[paths.length - 1]!.map(r => p.rows - 1 - r));
   }
   return paths.some(rows => {
+    if (p.frozenCells?.some(([c, r]) => c < p.cols - 1 && rows[c] === r)) return false;
     const prefix = rows.slice(0, -1).map((r, c) => p.finalGrid[c]![r]!);
     return prefix.every(s => s === prefix[0]);
   });
