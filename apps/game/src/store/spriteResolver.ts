@@ -24,7 +24,12 @@ export type AssetManifest = SpriteManifest;
 export type { SpriteFrame, SpriteResolver };
 
 /** Atlas output directory produced by T-040, served from the game's public dir. */
-export const DEFAULT_ATLAS_BASE_URL = '/atlas';
+/** Follows the build's base path (vite `base`), so the game works from a subpath or a relative host. */
+const BUILD_BASE_URL: string =
+  typeof import.meta.env !== 'undefined' && typeof import.meta.env.BASE_URL === 'string'
+    ? import.meta.env.BASE_URL
+    : '/';
+export const DEFAULT_ATLAS_BASE_URL = `${BUILD_BASE_URL.endsWith('/') ? BUILD_BASE_URL : `${BUILD_BASE_URL}/`}atlas`;
 export const DEFAULT_ASSET_MANIFEST_URL = `${DEFAULT_ATLAS_BASE_URL}/asset-manifest.json`;
 
 /** Every logical sprite key requested by packages/anim. */
