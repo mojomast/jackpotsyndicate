@@ -1,0 +1,79 @@
+/** @jsxRuntime automatic */
+import { FLOOR_LABELS, formatCash, quotaForRound, useGameStore } from '../store/gameStore';
+import { TEST_IDS } from '@jackpotsyndicate/contracts';
+import { CascadeEquation } from './CascadeEquation';
+
+export function Hud() {
+  const state = useGameStore((store) => store.state);
+  const dispatch = useGameStore((store) => store.dispatch);
+
+  const quota = quotaForRound(state.round, state.floorId);
+  const canSpin = state.phase === 'PREP';
+  const fever = Math.round(state.fever);
+
+  const spin = () => {
+    dispatch({ c: 'Spin' });
+  };
+
+  return (
+    <section className="hud panel" aria-label="Heads-up display">
+      <div className="hud-topline">
+        <span className="hud-label">{state.phase.replaceAll('_', ' ')}</span>
+        <span className="hud-label">Round {state.round} · {FLOOR_LABELS[state.floorId]}</span>
+        <span className="hud-label">Round cash {formatCash(state.roundCash)}</span>
+      </div>
+
+      <CascadeEquation />
+
+      <dl className="hud-stats">
+        <div className="hud-stat">
+          <dt>Bankroll</dt>
+          <dd className="gold" data-testid={TEST_IDS.bankroll} aria-label="Bankroll">
+            {formatCash(state.bankroll)}
+          </dd>
+        </div>
+        <div className="hud-stat">
+          <dt>Quota</dt>
+          <dd className="cyan" data-testid={TEST_IDS.quota} aria-label="Round quota">
+            {formatCash(quota)}
+          </dd>
+        </div>
+        <div className="hud-stat">
+          <dt>Spins left</dt>
+          <dd data-testid={TEST_IDS.spinsLeft} aria-label="Spins left">
+            {state.spinsLeft}
+          </dd>
+        </div>
+        <div className="hud-stat">
+          <dt>Fever</dt>
+          <dd className="crimson" data-testid={TEST_IDS.fever} aria-label="Fever">
+            {fever}%
+          </dd>
+        </div>
+        <div className="hud-stat">
+          <dt>Floor</dt>
+          <dd className="emerald" data-testid={TEST_IDS.floorBadge} aria-label="Floor">
+            {FLOOR_LABELS[state.floorId]}
+          </dd>
+        </div>
+      </dl>
+
+      <div className="hud-actions">
+        <button
+          type="button"
+          className="btn btn-primary hud-spin"
+          data-testid={TEST_IDS.spinBtn}
+          onClick={spin}
+          disabled={!canSpin}
+          aria-keyshortcuts="Space"
+          title={canSpin ? 'Spin (Space)' : `Spin unavailable during ${state.phase}`}
+        >
+          {canSpin ? 'Spin' : state.phase.replaceAll('_', ' ')}
+        </button>
+        <span className="hud-seed" data-testid={TEST_IDS.seedDisplay}>
+          Seed <strong>{state.seed}</strong>
+        </span>
+      </div>
+    </section>
+  );
+}
