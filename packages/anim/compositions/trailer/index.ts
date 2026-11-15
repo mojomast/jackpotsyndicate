@@ -1,5 +1,5 @@
 import { gsap } from 'gsap';
-import { reelSpin, lineWin, gridRelayout, fever, bossIntro, floorTransition, victory, createCabinet, setCabinetGrid, DEFAULT_TOKENS, defaultSpriteResolver } from '../../src';
+import { reelSpin, lineWin, gridRelayout, fever, bossIntro, floorTransition, victory, createCabinet, setCabinetGrid, DEFAULT_TOKENS } from '../../src';
 import type { ReelSpinParams, LineWinParams, GridRelayoutParams, BossIntroParams, FloorTransitionParams } from '../../src';
 import spinParams from '../../fixtures/reelSpin.json';
 import winParams from '../../fixtures/lineWin.json';
@@ -10,10 +10,11 @@ import floorParams from '../../fixtures/floorTransition.json';
 import victoryParams from '../../fixtures/victory.json';
 import { register } from '../register';
 import '../style.css';
+import { reelArt } from '../reel-art';
 
 const root = document.querySelector<HTMLElement>('#composition')!;
 const node = (name: string) => root.querySelector<HTMLElement>('[data-anim="' + name + '"]')!;
-const tokens = DEFAULT_TOKENS, sprites = defaultSpriteResolver;
+const tokens = DEFAULT_TOKENS, sprites = reelArt;
 const tl = gsap.timeline({ paused: true, defaults: { lazy: false } });
 tl.to({}, { duration: 24 }, 0);
 const shots = [...root.querySelectorAll<HTMLElement>('[data-anim="shot"]')];

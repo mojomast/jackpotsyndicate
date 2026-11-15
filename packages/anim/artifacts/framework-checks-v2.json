@@ -1,0 +1,145 @@
+{
+  "trailer": {
+    "ok": true,
+    "version": "0.9.47",
+    "lint": {
+      "ok": true,
+      "errorCount": 0,
+      "warningCount": 8,
+      "infoCount": 0,
+      "filesScanned": 1,
+      "codes": [
+        "nested_structure_needs_subcomposition"
+      ]
+    },
+    "runtime": {
+      "ok": true,
+      "errorCount": 0,
+      "warningCount": 0,
+      "infoCount": 0,
+      "codes": []
+    },
+    "layout": {
+      "ok": true,
+      "errorCount": 0,
+      "warningCount": 0,
+      "infoCount": 0,
+      "duration": 24,
+      "transitionSamplesDropped": 0,
+      "tolerance": 2,
+      "totalIssueCount": 0,
+      "truncated": false,
+      "codes": []
+    },
+    "motion": {
+      "ok": true,
+      "errorCount": 0,
+      "warningCount": 0,
+      "infoCount": 0,
+      "enabled": false,
+      "codes": []
+    },
+    "contrast": {
+      "ok": true,
+      "errorCount": 0,
+      "warningCount": 0,
+      "infoCount": 0,
+      "enabled": true,
+      "checked": 24,
+      "passed": 24,
+      "codes": []
+    },
+    "craft": {
+      "ok": true,
+      "errorCount": 0,
+      "warningCount": 0,
+      "infoCount": 0,
+      "enabled": false,
+      "step": 0,
+      "codes": []
+    },
+    "audio": {
+      "ok": true,
+      "errorCount": 0,
+      "warningCount": 0,
+      "infoCount": 1,
+      "codes": [
+        "audio_none"
+      ]
+    }
+  },
+  "showcase": {
+    "ok": true,
+    "version": "0.9.47",
+    "lint": {
+      "ok": true,
+      "errorCount": 0,
+      "warningCount": 14,
+      "infoCount": 0,
+      "filesScanned": 1,
+      "codes": [
+        "timed_element_missing_clip_class",
+        "nested_structure_needs_subcomposition"
+      ]
+    },
+    "runtime": {
+      "ok": true,
+      "errorCount": 0,
+      "warningCount": 0,
+      "infoCount": 0,
+      "codes": []
+    },
+    "layout": {
+      "ok": true,
+      "errorCount": 0,
+      "warningCount": 0,
+      "infoCount": 26,
+      "duration": 18,
+      "transitionSamplesDropped": 0,
+      "tolerance": 2,
+      "totalIssueCount": 26,
+      "truncated": false,
+      "codes": [
+        "container_overflow",
+        "escaped_container",
+        "panel_out_of_canvas"
+      ]
+    },
+    "motion": {
+      "ok": true,
+      "errorCount": 0,
+      "warningCount": 0,
+      "infoCount": 0,
+      "enabled": false,
+      "codes": []
+    },
+    "contrast": {
+      "ok": true,
+      "errorCount": 0,
+      "warningCount": 0,
+      "infoCount": 0,
+      "enabled": true,
+      "checked": 46,
+      "passed": 46,
+      "codes": []
+    },
+    "craft": {
+      "ok": true,
+      "errorCount": 0,
+      "warningCount": 0,
+      "infoCount": 0,
+      "enabled": false,
+      "step": 0,
+      "codes": []
+    },
+    "audio": {
+      "ok": true,
+      "errorCount": 0,
+      "warningCount": 0,
+      "infoCount": 1,
+      "codes": [
+        "audio_none"
+      ]
+    }
+  }
+}

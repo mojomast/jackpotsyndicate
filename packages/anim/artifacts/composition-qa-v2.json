@@ -1,0 +1,29 @@
+{
+  "errors": [],
+  "reports": [
+    {
+      "name": "trailer",
+      "times": 32,
+      "reverse": true,
+      "shuffled": true,
+      "pixelMatches": 9,
+      "moving": true,
+      "seconds": 24,
+      "fps": "60/1",
+      "bundleSha256": "e6825ebeef28c6be4240257bbd16cbaead60bd0c7bc467b99077011e0f9d6a24",
+      "sha256": "e6f37e073399a98bc06d22f4a3a266f027e6d8d726b1a3524a31c31844b812dc"
+    },
+    {
+      "name": "reelShowcase",
+      "times": 30,
+      "reverse": true,
+      "shuffled": true,
+      "pixelMatches": 10,
+      "moving": true,
+      "seconds": 18,
+      "fps": "60/1",
+      "bundleSha256": "770bdde261702802134022b24b6ac884f84107b70c0ef0cc670b9fed7564a78d",
+      "sha256": "ea8898c56dd6779f6ac4f831f7cfd29783223be396fd4f2af4b82590c4d89001"
+    }
+  ]
+}
