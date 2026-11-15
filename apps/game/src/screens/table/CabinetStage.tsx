@@ -94,6 +94,8 @@ export function CabinetStage({ core, seed, cols, rows, reducedMotion }: CabinetS
             finalGrid: state.grid.visible as SymbolId[][],
             frozenCells: state.grid.frozen.map((entry) => entry.cell),
             seed: hashSeed(state.seed),
+            floorId: state.floorId,
+            wiring: state.grid.wiring,
             reducedMotion,
           };
           player.play(reelSpin(root, params, DESIGN_TOKENS, SPRITES), event.tick);
@@ -110,6 +112,11 @@ export function CabinetStage({ core, seed, cols, rows, reducedMotion }: CabinetS
               ...(win.overvolt === true ? { overvolt: true } : {}),
             })),
             reducedMotion,
+            seed: hashSeed(state.seed) ^ event.tick,
+            equity: event.equity,
+            launchOrder: event.orbPlan.map((orb) => orb.cell === null ? null : [orb.cell[0], orb.cell[1]]),
+            floorId: state.floorId,
+            exitEdge: window.innerWidth < 900 ? 'bottom' : 'right',
           };
           player.play(lineWin(root, params, DESIGN_TOKENS, SPRITES), event.tick);
           return;
@@ -121,6 +128,8 @@ export function CabinetStage({ core, seed, cols, rows, reducedMotion }: CabinetS
             cleared: event.cleared.map((cell) => [cell[0], cell[1]]),
             gridAfter: event.gridAfter as SymbolId[][],
             reducedMotion,
+            seed: hashSeed(state.seed) ^ event.tick,
+            floorId: state.floorId,
           };
           player.play(tumbleStep(root, params, DESIGN_TOKENS, SPRITES), event.tick);
           return;
@@ -144,6 +153,8 @@ export function CabinetStage({ core, seed, cols, rows, reducedMotion }: CabinetS
             from: event.from,
             to: event.to,
             reducedMotion,
+            seed: hashSeed(state.seed) ^ event.tick,
+            floorId: state.floorId,
           };
           player.play(gridRelayout(root, params, DESIGN_TOKENS, SPRITES), event.tick);
           relayoutRef.current = event.tick + ANIM_TICKS.gridRelayout;

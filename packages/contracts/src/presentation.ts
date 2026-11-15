@@ -48,10 +48,27 @@ export type TimelineFactory<P, T extends SeekableTimeline = SeekableTimeline> = 
 
 type Motion = { reducedMotion: boolean };
 export type AnimCell = [col: number, row: number];
-export interface ReelSpinParams extends Motion { cols: number; rows: number; finalGrid: SymbolId[][]; frozenCells?: AnimCell[]; seed: number }
-export interface LineWinParams extends Motion { cols: number; rows: number; wins: { cells: AnimCell[]; kind: 'line' | 'ways' | 'cluster'; overvolt?: boolean }[] }
-export interface TumbleStepParams extends Motion { cols: number; rows: number; cleared: AnimCell[]; gridAfter: SymbolId[][] }
-export interface GridRelayoutParams extends Motion { from: { cols: number; rows: number }; to: { cols: number; rows: number } }
+export interface ReelSpinParams extends Motion {
+  cols: number; rows: number; finalGrid: SymbolId[][]; frozenCells?: AnimCell[]; seed: number;
+  floorId?: FloorId; grain?: boolean; wiring?: 'CLASSIC' | 'HYPER' | 'WAYS' | 'CLUSTER';
+  /** Optional quality strategy; reduced motion always disables motion blur. */
+  blurMode?: 'echo' | 'svg';
+}
+export interface LineWinParams extends Motion {
+  cols: number; rows: number; wins: { cells: AnimCell[]; kind: 'line' | 'ways' | 'cluster'; overvolt?: boolean }[];
+  seed?: number; equity?: number; winTier?: 'small' | 'big' | 'mega' | 'jackpot';
+  /** Authoritative orb-plan order; null entries reserve a launch slot (scrap). */
+  launchOrder?: (AnimCell | null)[];
+  floorId?: FloorId; grain?: boolean; exitEdge?: 'bottom' | 'right';
+}
+export interface TumbleStepParams extends Motion {
+  cols: number; rows: number; cleared: AnimCell[]; gridAfter: SymbolId[][];
+  seed?: number; floorId?: FloorId; grain?: boolean;
+}
+export interface GridRelayoutParams extends Motion {
+  from: { cols: number; rows: number }; to: { cols: number; rows: number };
+  seed?: number; floorId?: FloorId; grain?: boolean;
+}
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type -- names the empty reduced-motion payload
 export interface FeverParams extends Motion {}
 export interface BossIntroParams extends Motion { bossId: BossId; bossName: string; tagline: string }
