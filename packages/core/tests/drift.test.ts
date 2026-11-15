@@ -192,3 +192,17 @@ test('drinks boost the spin they are drunk for and do not leak into the next (D-
   assert.equal(absinthe.evaluated.xMult, 2);
   assert.deepEqual(absinthe.nextSpin.xBonus, {});
 });
+
+test('a new floor reseeds the shelf and forgets the old tokens’ cash (D-05)', () => {
+  const core = newCore();
+  const state = live(core);
+  for (const token of core.getSimSnapshot().tokens) state.tokenCash[token.id] = 10;
+  const oldIds = Object.keys(state.tokenCash).map(Number);
+  assert.equal(oldIds.length, RULES.SHELF_SEED_TOKENS);
+  state.floorId = 'FLOOR_CRYO';
+  core.tick();
+  const live_ids = new Set(core.getSimSnapshot().tokens.map((token) => token.id));
+  assert.equal(live_ids.size, RULES.SHELF_SEED_TOKENS);
+  for (const id of oldIds) assert.equal(live_ids.has(id), false);
+  for (const key of Object.keys(core.getState().tokenCash)) assert.ok(live_ids.has(Number(key)));
+});
