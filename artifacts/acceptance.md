@@ -103,11 +103,13 @@ pnpm install --frozen-lockfile       PASS
 pnpm lint                            PASS
 pnpm typecheck                       PASS
 pnpm test                            223 passing (191 package + 32 app-level)
-pnpm sim:replay                      MATCH at f6ee393f9861280acd61c44b (re-recorded fixture)
+pnpm sim:replay                      MATCH at f6ee393f9861280acd61c44b (re-recorded fixture, 150 commands)
 pnpm sim:hitrate                     40.6% PASS
 pnpm assets:verify                   73 files PASS
-pnpm perf                            1.72 MB gzip, PASS
-pnpm exec playwright test           29 passed, 1 skipped (WebKit J8 4×)
+pnpm perf                            1.90 MB gzip, PASS; sim tick 0.341 ms
+pnpm exec playwright test --project=chromium  10 passed (after audit fixes)
+pnpm exec playwright test e2e/golden.spec.ts --project=firefox  1 passed
+pnpm exec playwright test e2e/golden.spec.ts --project=webkit   1 passed
 pnpm exec playwright test e2e/network.spec.ts  3 projects PASS
 hyperframes lint                     0 errors, warnings only
 ```
