@@ -1,141 +1,371 @@
 {
   "boss.auditor": {
-    "file": "placeholders/boss.auditor.svg",
-    "placeholder": true,
-    "sha256": "7c29f12e57c28336c0f80383637ed17d6e89ba7537093e291d9fefab73ac5a3f",
-    "source": "placeholder:obsidian-noir:boss.auditor"
+    "atlas": "bosses",
+    "file": "assets/d887f97488d9-boss.auditor.png",
+    "frame": {
+      "h": 448,
+      "w": 448,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "d887f97488d9f25ebd8411b2a15ae84d71b51e91f1047639441a0a0054e28d4b",
+    "source": "imagegen:d5b2d07:boss.auditor"
   },
   "boss.valenti": {
-    "file": "placeholders/boss.valenti.svg",
-    "placeholder": true,
-    "sha256": "756c0c1d30a9c58ccdbca9c139393558361bf6aeba9b0f31aa5af88603683bfe",
-    "source": "placeholder:obsidian-noir:boss.valenti"
+    "atlas": "bosses",
+    "file": "assets/dccf6d70fd04-boss.valenti.png",
+    "frame": {
+      "h": 448,
+      "w": 448,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "dccf6d70fd04b52dce6acf9e330b7c30ad38087360eafe6ec2e919dd5385d366",
+    "source": "imagegen:d5b2d07:boss.valenti"
   },
   "boss.zero": {
-    "file": "placeholders/boss.zero.svg",
-    "placeholder": true,
-    "sha256": "bddb1e07c0785611bbf2a768ef86652efb3a3cc41bff704f483f8784decba30a",
-    "source": "placeholder:obsidian-noir:boss.zero"
+    "atlas": "bosses",
+    "file": "assets/cdfc2cfe0db4-boss.zero.png",
+    "frame": {
+      "h": 448,
+      "w": 448,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "cdfc2cfe0db40c430cf5893b69e511bc6706750ce143f34983efb20fd7ffb817",
+    "source": "imagegen:d5b2d07:boss.zero"
   },
   "chassis.harness-cluster": {
-    "file": "placeholders/chassis.harness-cluster.svg",
-    "placeholder": true,
-    "sha256": "c3cee46e01e4d83a5c7e8519af537ead221f5694a9db8f78093365b1a0deff58",
-    "source": "placeholder:obsidian-noir:chassis.harness-cluster"
+    "atlas": "chassis",
+    "file": "assets/587d7210e4b9-chassis.harness-cluster.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "587d7210e4b983ffbd24c488d1a686c4360fe6a5128e8f218746eb717530b46a",
+    "source": "imagegen:d5b2d07:chassis.harness-cluster"
   },
   "chassis.harness-hyper": {
-    "file": "placeholders/chassis.harness-hyper.svg",
-    "placeholder": true,
-    "sha256": "b1743032b077212159fcdc9728ca76ea076053ca985779338cc94739493f8752",
-    "source": "placeholder:obsidian-noir:chassis.harness-hyper"
+    "atlas": "chassis",
+    "file": "assets/9e724ebb48af-chassis.harness-hyper.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "9e724ebb48afb40d0841076310fda2793044b03200e494cb529802d23bf70815",
+    "source": "imagegen:d5b2d07:chassis.harness-hyper"
   },
   "chassis.harness-ways": {
-    "file": "placeholders/chassis.harness-ways.svg",
-    "placeholder": true,
-    "sha256": "62f3c67ba3e19ad8e75261765e85e54f75d0af5c3a2f464620d6baecbf7f0193",
-    "source": "placeholder:obsidian-noir:chassis.harness-ways"
+    "atlas": "chassis",
+    "file": "assets/f1898763adc8-chassis.harness-ways.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "f1898763adc81960f729370e5f901beebd4e031ffc2ebc9e47e9af5834ca3105",
+    "source": "imagegen:d5b2d07:chassis.harness-ways"
   },
   "chassis.jumper-wire": {
-    "file": "placeholders/chassis.jumper-wire.svg",
-    "placeholder": true,
-    "sha256": "2d5504a9c7a4699e71db4f619286e017d4aea4aabfd321617fa0cbabfda09f57",
-    "source": "placeholder:obsidian-noir:chassis.jumper-wire"
+    "atlas": "chassis",
+    "file": "assets/285c1bb12a8d-chassis.jumper-wire.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "285c1bb12a8d5f10aad64120dffb3903d554fd7825eb43f959ede55f4ee808f4",
+    "source": "imagegen:d5b2d07:chassis.jumper-wire"
   },
   "chassis.overvolt": {
-    "file": "placeholders/chassis.overvolt.svg",
-    "placeholder": true,
-    "sha256": "8306b9732d27987759fc63f5617da8cf63602ef1c562f5838f4c586c91db0dd0",
-    "source": "placeholder:obsidian-noir:chassis.overvolt"
+    "atlas": "chassis",
+    "file": "assets/82642fcfc6ac-chassis.overvolt.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "82642fcfc6ac2ec189d849bc5dcd203e5395507ced4a50afb42440e7035a408c",
+    "source": "imagegen:d5b2d07:chassis.overvolt"
   },
   "chassis.reel-column": {
-    "file": "placeholders/chassis.reel-column.svg",
-    "placeholder": true,
-    "sha256": "9cd90db6d32cdcbf2298332b1ef903f2f048a0779832cf74b5554e0d199d8df9",
-    "source": "placeholder:obsidian-noir:chassis.reel-column"
+    "atlas": "chassis",
+    "file": "assets/0834f605c5c2-chassis.reel-column.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "0834f605c5c21fefbbaada35a04ba27d7ca3e590a4ad9ae6fafd886552abef31",
+    "source": "imagegen:d5b2d07:chassis.reel-column"
   },
   "chassis.row": {
-    "file": "placeholders/chassis.row.svg",
-    "placeholder": true,
-    "sha256": "7f9c3a1cda9cc3c936decbd341f9bfc692759e63f67da448eaff5c312e53ecc1",
-    "source": "placeholder:obsidian-noir:chassis.row"
+    "atlas": "chassis",
+    "file": "assets/b6573549179a-chassis.row.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "b6573549179a837c56c0aa92e418ec707c9bc6e30816baf25d19b3d8b8fb5b7f",
+    "source": "imagegen:d5b2d07:chassis.row"
   },
   "coin.blood-doubloon": {
-    "file": "placeholders/coin.blood-doubloon.svg",
-    "placeholder": true,
-    "sha256": "0868417d1dcfa99a775f7fde54845e603e00d489f1197a7d2375782385fe1ff9",
-    "source": "placeholder:obsidian-noir:coin.blood-doubloon"
+    "atlas": "coins",
+    "file": "assets/e6ada7024d80-coin.blood-doubloon.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "e6ada7024d802cd442a75ff08018f613bba937d526649a1bd5ae4f470ad53e85",
+    "source": "imagegen:d5b2d07:coin.blood-doubloon"
   },
   "coin.copper-token": {
-    "file": "placeholders/coin.copper-token.svg",
-    "placeholder": true,
-    "sha256": "2aff17e05fe7bd961a402d71bd1550d3323d7fccc216d8406145ffb39ec42773",
-    "source": "placeholder:obsidian-noir:coin.copper-token"
+    "atlas": "coins",
+    "file": "assets/5ce5bb1bf99e-coin.copper-token.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "5ce5bb1bf99e589946026dd07c0d2a5383f101c703ef85d18067e39007d4e130",
+    "source": "imagegen:d5b2d07:coin.copper-token"
   },
   "coin.heavy-lead-slug": {
-    "file": "placeholders/coin.heavy-lead-slug.svg",
-    "placeholder": true,
-    "sha256": "a9b50e76ac61aa5b1cefc551ebabb94d2bcd99f5c093ef3f8294ffedf6209d25",
-    "source": "placeholder:obsidian-noir:coin.heavy-lead-slug"
+    "atlas": "coins",
+    "file": "assets/fedbec32fb8b-coin.heavy-lead-slug.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "fedbec32fb8bec043fab5111150dc105f001336a0e1c80e1f16cab278507cea6",
+    "source": "imagegen:d5b2d07:coin.heavy-lead-slug"
   },
   "coin.polymer-superball": {
-    "file": "placeholders/coin.polymer-superball.svg",
-    "placeholder": true,
-    "sha256": "b5b7d2c40626ab49cb19f5351afa5b414fbe91ee0c01f844bfa1e022bc98d0d2",
-    "source": "placeholder:obsidian-noir:coin.polymer-superball"
+    "atlas": "coins",
+    "file": "assets/8ba62e748798-coin.polymer-superball.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "8ba62e74879844f70433a9dcf49f24560cc99ac3d193d66d97dbed042031cf78",
+    "source": "imagegen:d5b2d07:coin.polymer-superball"
   },
   "drink.alchemist-absinthe": {
-    "file": "placeholders/drink.alchemist-absinthe.svg",
-    "placeholder": true,
-    "sha256": "62adcbc5448cd24b24d61026e1148c23990fd741a1683500be5fe17b9941b153",
-    "source": "placeholder:obsidian-noir:drink.alchemist-absinthe"
+    "atlas": "drinks",
+    "file": "assets/8400ad99379e-drink.alchemist-absinthe.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "8400ad99379eb29895f86457f35bb6696f6f37d0dcaaf3f0c514a9a6c4035681",
+    "source": "imagegen:d5b2d07:drink.alchemist-absinthe"
   },
   "drink.dirty-syndicate-martini": {
-    "file": "placeholders/drink.dirty-syndicate-martini.svg",
-    "placeholder": true,
-    "sha256": "710cb095e85b939eb65d9b952165357ab5263fb8128255562b69174936fbec2d",
-    "source": "placeholder:obsidian-noir:drink.dirty-syndicate-martini"
+    "atlas": "drinks",
+    "file": "assets/8694f2369beb-drink.dirty-syndicate-martini.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "8694f2369bebe75ad86731e643e5a9b6c994e832fb9400c02c5c0b22643b84ea",
+    "source": "imagegen:d5b2d07:drink.dirty-syndicate-martini"
   },
   "drink.green-fairy-absinthe": {
-    "file": "placeholders/drink.green-fairy-absinthe.svg",
-    "placeholder": true,
-    "sha256": "a09932925550da736716c708be62a17b22c1493c635076b6aa77ec0d2d6e8489",
-    "source": "placeholder:obsidian-noir:drink.green-fairy-absinthe"
+    "atlas": "drinks",
+    "file": "assets/37be311dad26-drink.green-fairy-absinthe.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "37be311dad267b4bd9d33ffe34a8bce341474058e6a92126d06e0143d0ca07e2",
+    "source": "imagegen:d5b2d07:drink.green-fairy-absinthe"
   },
   "drink.lubricant-oil-shot": {
-    "file": "placeholders/drink.lubricant-oil-shot.svg",
-    "placeholder": true,
-    "sha256": "651f15a8e416d0f4b65a3402a06639d9ebb112af5981dea3b5ae96eca4dba1bf",
-    "source": "placeholder:obsidian-noir:drink.lubricant-oil-shot"
+    "atlas": "drinks",
+    "file": "assets/a8e389463db0-drink.lubricant-oil-shot.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "a8e389463db0f1786435b7c4f84a4ad877fa5f8d625f36dd694e8e3f50589f10",
+    "source": "imagegen:d5b2d07:drink.lubricant-oil-shot"
   },
   "drink.nitrous-espresso": {
-    "file": "placeholders/drink.nitrous-espresso.svg",
-    "placeholder": true,
-    "sha256": "d6693ae3299461d23b5340cf5a08a1d8b3c93f0a8c3276827d3600e13736aeea",
-    "source": "placeholder:obsidian-noir:drink.nitrous-espresso"
+    "atlas": "drinks",
+    "file": "assets/e56f98f91b99-drink.nitrous-espresso.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "e56f98f91b99c9f6484fb3e6af7ca60ef75220869d0e24c29c9cda44d2132718",
+    "source": "imagegen:d5b2d07:drink.nitrous-espresso"
   },
   "floor.FLOOR_CRYO.bg": {
-    "file": "placeholders/floor.FLOOR_CRYO.bg.svg",
-    "placeholder": true,
-    "sha256": "0c8d39b12733346823b26e4d5fa12ec70bb50ea322e4c69d2be4a58596476f8b",
-    "source": "placeholder:obsidian-noir:floor.FLOOR_CRYO.bg"
+    "atlas": "floors",
+    "file": "assets/aca2e2cc898f-floor.FLOOR_CRYO.bg.png",
+    "frame": {
+      "h": 450,
+      "w": 800,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "aca2e2cc898f22ea11f5a9fba9fc98ed7ab5c20e7a67e08c6d3a49b9cdf30ebd",
+    "source": "imagegen:d5b2d07:floor.FLOOR_CRYO.bg"
   },
   "floor.FLOOR_FOUNDRY.bg": {
-    "file": "placeholders/floor.FLOOR_FOUNDRY.bg.svg",
-    "placeholder": true,
-    "sha256": "77ea9bdca38904ce7c8bf993324c84430abdb8d1f6d73ca594f251486bf98de0",
-    "source": "placeholder:obsidian-noir:floor.FLOOR_FOUNDRY.bg"
+    "atlas": "floors",
+    "file": "assets/415e02074693-floor.FLOOR_FOUNDRY.bg.png",
+    "frame": {
+      "h": 450,
+      "w": 800,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "415e020746936eef8ab958454081094d77e29ac16276275727db43b961099c8b",
+    "source": "imagegen:d5b2d07:floor.FLOOR_FOUNDRY.bg"
   },
   "floor.FLOOR_NEON.bg": {
-    "file": "placeholders/floor.FLOOR_NEON.bg.svg",
-    "placeholder": true,
-    "sha256": "286974248e875b62e62564f1bea08cd08cd7af52337d69ea8b862d4b02326b19",
-    "source": "placeholder:obsidian-noir:floor.FLOOR_NEON.bg"
+    "atlas": "floors",
+    "file": "assets/3ebf0825b24b-floor.FLOOR_NEON.bg.png",
+    "frame": {
+      "h": 450,
+      "w": 800,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "3ebf0825b24b7e9fe7652ed7712d98ae0d8edef304769dd3a3e26221ac321c51",
+    "source": "imagegen:d5b2d07:floor.FLOOR_NEON.bg"
   },
   "floor.FLOOR_PENTHOUSE.bg": {
-    "file": "placeholders/floor.FLOOR_PENTHOUSE.bg.svg",
-    "placeholder": true,
-    "sha256": "aa8ef9db0f76015a6f9be74f34c3eff994b7f62ca8d2599ff898dd4feca0a39d",
-    "source": "placeholder:obsidian-noir:floor.FLOOR_PENTHOUSE.bg"
+    "atlas": "floors",
+    "file": "assets/91a2bd2cdee8-floor.FLOOR_PENTHOUSE.bg.png",
+    "frame": {
+      "h": 450,
+      "w": 800,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "91a2bd2cdee8cf28197a654ecade49a069cc3ece572345f595f405bf89d02353",
+    "source": "imagegen:d5b2d07:floor.FLOOR_PENTHOUSE.bg"
   },
   "glyph.blood-diamond": {
     "file": "placeholders/glyph.blood-diamond.svg",
@@ -144,22 +374,52 @@
     "source": "placeholder:obsidian-noir:glyph.blood-diamond"
   },
   "glyph.cherry": {
-    "file": "placeholders/glyph.cherry.svg",
-    "placeholder": true,
-    "sha256": "ca6f46b99a49144f940144558208bbed7b8c28c4d3dda4240029c6d1593baa6b",
-    "source": "placeholder:obsidian-noir:glyph.cherry"
+    "atlas": "glyphs",
+    "file": "assets/aa6277bdf531-glyph.cherry.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "aa6277bdf531d1827f6a7b824740b18f86a5f13d2b8bdfb45fd9ea8fe7a4534f",
+    "source": "imagegen:d5b2d07:glyph.cherry"
   },
   "glyph.lucky-seven": {
-    "file": "placeholders/glyph.lucky-seven.svg",
-    "placeholder": true,
-    "sha256": "0e1d4c4c35cf025cd3780667c879d153c277afa9b3c592e739d5c57d366d5f33",
-    "source": "placeholder:obsidian-noir:glyph.lucky-seven"
+    "atlas": "glyphs",
+    "file": "assets/f371940b9960-glyph.lucky-seven.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "f371940b99606123957ee8b92bf342b5296446e04cfe6de40c824e5ad86f9ff0",
+    "source": "imagegen:d5b2d07:glyph.lucky-seven"
   },
   "glyph.magnet-skull": {
-    "file": "placeholders/glyph.magnet-skull.svg",
-    "placeholder": true,
-    "sha256": "e2e5d0c77edc19fa38df5cd3f1de5700d3a7d763394c1453a6f39a7b4b2b7a7a",
-    "source": "placeholder:obsidian-noir:glyph.magnet-skull"
+    "atlas": "glyphs",
+    "file": "assets/fe9b2bc319e9-glyph.magnet-skull.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "fe9b2bc319e9e4c49a00422c367c85788831493a0598992267937804de7e6905",
+    "source": "imagegen:d5b2d07:glyph.magnet-skull"
   },
   "glyph.uranium": {
     "file": "placeholders/glyph.uranium.svg",
@@ -168,196 +428,516 @@
     "source": "placeholder:obsidian-noir:glyph.uranium"
   },
   "peg.bumper": {
-    "file": "placeholders/peg.bumper.svg",
-    "placeholder": true,
-    "sha256": "099b9a33cd3d2f3c2f758415d5c44d8308c1812038806ad9233cfa30e1238843",
-    "source": "placeholder:obsidian-noir:peg.bumper"
+    "atlas": "pegs",
+    "file": "assets/aa4fe7ca7c26-peg.bumper.png",
+    "frame": {
+      "h": 56,
+      "w": 56,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "aa4fe7ca7c26acd0efb8cb4bcadb32e2c1223127573f68342e7748bef47abe64",
+    "source": "imagegen:d5b2d07:peg.bumper"
   },
   "peg.gold": {
-    "file": "placeholders/peg.gold.svg",
-    "placeholder": true,
-    "sha256": "6ff91289ab2dfffb38957869196e711f1d11fbdc44087a172841aae3e889544f",
-    "source": "placeholder:obsidian-noir:peg.gold"
+    "atlas": "pegs",
+    "file": "assets/bb986433d285-peg.gold.png",
+    "frame": {
+      "h": 56,
+      "w": 56,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "bb986433d28565a1ed7ebe0c52ca94050f88ead3ff42b508dad211203ad1ce8c",
+    "source": "imagegen:d5b2d07:peg.gold"
   },
   "peg.golden": {
-    "file": "placeholders/peg.golden.svg",
-    "placeholder": true,
-    "sha256": "4416362cd65b4e182b576f3570950545f7195851ee73abb9ad05016923234949",
-    "source": "placeholder:obsidian-noir:peg.golden"
+    "atlas": "pegs",
+    "file": "assets/41bb3531c5c5-peg.golden.png",
+    "frame": {
+      "h": 56,
+      "w": 56,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "41bb3531c5c561f7234635fd26894dd1de0ab6bf1357c4c026447facc84bc152",
+    "source": "imagegen:d5b2d07:peg.golden"
   },
   "peg.splitter": {
-    "file": "placeholders/peg.splitter.svg",
-    "placeholder": true,
-    "sha256": "2854129727ff2a1510b18bc01a69492f89f6c10c06e37bdb38e35f7010564417",
-    "source": "placeholder:obsidian-noir:peg.splitter"
+    "atlas": "pegs",
+    "file": "assets/9c4c0a70f320-peg.splitter.png",
+    "frame": {
+      "h": 56,
+      "w": 56,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "9c4c0a70f320a197bbe4a515bbeb4786b8ca7804bee0bf16ce5e51e4a7ff4634",
+    "source": "imagegen:d5b2d07:peg.splitter"
   },
   "symbol.cherry": {
-    "file": "placeholders/symbol.cherry.svg",
-    "placeholder": true,
-    "sha256": "872994a64aa06305d1ca4fdee128c43e636a079a5c5d1d4aa29a62fa9cb365c7",
-    "source": "placeholder:obsidian-noir:symbol.cherry"
+    "atlas": "symbols",
+    "file": "assets/a5e0d2606348-symbol.cherry.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "a5e0d26063489da8b70a9175720d7b438058eb02021b8106bea0b19b5cb8cf0a",
+    "source": "imagegen:d5b2d07:symbol.cherry"
   },
   "symbol.diamond": {
-    "file": "placeholders/symbol.diamond.svg",
-    "placeholder": true,
-    "sha256": "128276988909c2a6d3525cb93549bfe07877227623d118cca9d1cdd9520143a2",
-    "source": "placeholder:obsidian-noir:symbol.diamond"
+    "atlas": "symbols",
+    "file": "assets/f09dc5674060-symbol.diamond.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "f09dc56740608cc3891ef0ec02190ef2d89c5294d5ac95f13388bed88b0338c1",
+    "source": "imagegen:d5b2d07:symbol.diamond"
   },
   "symbol.scrap": {
-    "file": "placeholders/symbol.scrap.svg",
-    "placeholder": true,
-    "sha256": "389119233ec3a95d5d713a140f7be250a6a7bb2459fc9efdd0be5c2ec13b7ca2",
-    "source": "placeholder:obsidian-noir:symbol.scrap"
+    "atlas": "symbols",
+    "file": "assets/5dc5b9178f98-symbol.scrap.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "5dc5b9178f98c8e9498aa0ca8cb5558c032a695285a422f27770903893293351",
+    "source": "imagegen:d5b2d07:symbol.scrap"
   },
   "symbol.seven": {
-    "file": "placeholders/symbol.seven.svg",
-    "placeholder": true,
-    "sha256": "8963e1bb0e688f40c243989bbca17864ba1b1b0d2802bd6b79b92d2e7bba3edc",
-    "source": "placeholder:obsidian-noir:symbol.seven"
+    "atlas": "symbols",
+    "file": "assets/01342373d196-symbol.seven.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "01342373d196a0b4c64716c1a06ebe4ef359e65993c1cff67d0e8789e69a1d5d",
+    "source": "imagegen:d5b2d07:symbol.seven"
   },
   "symbol.skull": {
-    "file": "placeholders/symbol.skull.svg",
-    "placeholder": true,
-    "sha256": "45d09e6ee7147d8a313472e6c16727bfaa5cf8e2014ba939e58c8c2fefee8cdf",
-    "source": "placeholder:obsidian-noir:symbol.skull"
+    "atlas": "symbols",
+    "file": "assets/a752186c0e6e-symbol.skull.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "a752186c0e6ef4e021eb70a4b49adc8409d27a0d879424be438bc689eb7899e2",
+    "source": "imagegen:d5b2d07:symbol.skull"
   },
   "symbol.uranium": {
-    "file": "placeholders/symbol.uranium.svg",
-    "placeholder": true,
-    "sha256": "b2e10e11c9868aecae04b9345de7ccd5c3526fd37fa1ec0e00736b047e580c21",
-    "source": "placeholder:obsidian-noir:symbol.uranium"
+    "atlas": "symbols",
+    "file": "assets/9e7279b4c14b-symbol.uranium.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "9e7279b4c14b86e494406b2e18bfd44a2dcd68b35f0a0ba0f08af1f0ae2ea61a",
+    "source": "imagegen:d5b2d07:symbol.uranium"
   },
   "token.bullion": {
-    "file": "placeholders/token.bullion.svg",
-    "placeholder": true,
-    "sha256": "72265bcc74ac421a785e0cba3ecdc118019a4cc6169bd2d462dd36c0a0e741a8",
-    "source": "placeholder:obsidian-noir:token.bullion"
+    "atlas": "tokens",
+    "file": "assets/1ccd89ac8a46-token.bullion.png",
+    "frame": {
+      "h": 112,
+      "w": 112,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "1ccd89ac8a46c3268219f91818d60f76a71f11cbe057435e17a935aca00e4369",
+    "source": "imagegen:d5b2d07:token.bullion"
   },
   "token.cherry": {
-    "file": "placeholders/token.cherry.svg",
-    "placeholder": true,
-    "sha256": "fe639405406a06a17ab587344e02e339eed839d9de08e4ab899c6d909a17e37c",
-    "source": "placeholder:obsidian-noir:token.cherry"
+    "atlas": "tokens",
+    "file": "assets/5fd04a49dcb4-token.cherry.png",
+    "frame": {
+      "h": 112,
+      "w": 112,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "5fd04a49dcb4ed77b0e7e74a921db245d47e181c4d6d955bd7edbae2b43b7572",
+    "source": "imagegen:d5b2d07:token.cherry"
   },
   "token.copper": {
-    "file": "placeholders/token.copper.svg",
-    "placeholder": true,
-    "sha256": "4fc517d9f0d2f6a36d1a1115dbdb2f6c2064dc0132c6811bb1ab38cc25a6949e",
-    "source": "placeholder:obsidian-noir:token.copper"
+    "atlas": "tokens",
+    "file": "assets/6e626d78562f-token.copper.png",
+    "frame": {
+      "h": 112,
+      "w": 112,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "6e626d78562fe79ce6ce28eb88e99a79a96d8b3667125cf1f0b613c2754a00a4",
+    "source": "imagegen:d5b2d07:token.copper"
   },
   "token.diamond": {
-    "file": "placeholders/token.diamond.svg",
-    "placeholder": true,
-    "sha256": "d90acc0ceee81223ec6b9c37f9faad61ee9d3f197e7c655eff2eae1403b19988",
-    "source": "placeholder:obsidian-noir:token.diamond"
+    "atlas": "tokens",
+    "file": "assets/ccb88c8a334a-token.diamond.png",
+    "frame": {
+      "h": 112,
+      "w": 112,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "ccb88c8a334acb25e58d8ff5129f91ad8301d017a8c66f3f718da961a8008efb",
+    "source": "imagegen:d5b2d07:token.diamond"
   },
   "token.ice": {
-    "file": "placeholders/token.ice.svg",
-    "placeholder": true,
-    "sha256": "5a5022934ae353bfb7761460248a655faad41a721377e9020810223cb8925a71",
-    "source": "placeholder:obsidian-noir:token.ice"
+    "atlas": "tokens",
+    "file": "assets/12328bd8d04d-token.ice.png",
+    "frame": {
+      "h": 112,
+      "w": 112,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "12328bd8d04db6e1e1ef579a2f53cf18bc845ceb6131f73dec2ee9824a1bdcc9",
+    "source": "imagegen:d5b2d07:token.ice"
   },
   "token.skull": {
-    "file": "placeholders/token.skull.svg",
-    "placeholder": true,
-    "sha256": "8aaa84e39cd91e36c5dfca146549e2c4d50d966deca34575770332e427f74663",
-    "source": "placeholder:obsidian-noir:token.skull"
+    "atlas": "tokens",
+    "file": "assets/e7db5b77e498-token.skull.png",
+    "frame": {
+      "h": 112,
+      "w": 112,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "e7db5b77e4986b75fbab29533952f72b4777b8d3f7aba85e53701f890355fd3d",
+    "source": "imagegen:d5b2d07:token.skull"
   },
   "token.uranium": {
-    "file": "placeholders/token.uranium.svg",
-    "placeholder": true,
-    "sha256": "d57db3718153f8d4000e6827cf3e3adaba1dae7bbcbf4ca70ac31831c7cce7cb",
-    "source": "placeholder:obsidian-noir:token.uranium"
+    "atlas": "tokens",
+    "file": "assets/5e20fc6bb13a-token.uranium.png",
+    "frame": {
+      "h": 112,
+      "w": 112,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "5e20fc6bb13a5dca9e293b689941e3d13013db4e116451928979aed7ffc24054",
+    "source": "imagegen:d5b2d07:token.uranium"
   },
   "trinket.electromagnetic-hopper": {
-    "file": "placeholders/trinket.electromagnetic-hopper.svg",
-    "placeholder": true,
-    "sha256": "c615bdcf0937a3b150f948ab8fa60d403c4619d46fedd9e3fb80d7aa932a8979",
-    "source": "placeholder:obsidian-noir:trinket.electromagnetic-hopper"
+    "atlas": "trinkets",
+    "file": "assets/6a341ffa4e01-trinket.electromagnetic-hopper.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "6a341ffa4e0156a974e6b0a49d8727a5a8031cde3b26c4b489980cfa3401ae79",
+    "source": "imagegen:d5b2d07:trinket.electromagnetic-hopper"
   },
   "trinket.gold-peg-alchemist": {
-    "file": "placeholders/trinket.gold-peg-alchemist.svg",
-    "placeholder": true,
-    "sha256": "0970e3053460d192b451ee35f4375d9193ea4809a949182f898816c6f0439591",
-    "source": "placeholder:obsidian-noir:trinket.gold-peg-alchemist"
+    "atlas": "trinkets",
+    "file": "assets/0bebb5ed6cc8-trinket.gold-peg-alchemist.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "0bebb5ed6cc857f9d4f515a5e35aa6ece7651dec94f56a9294dd1f5960b284a3",
+    "source": "imagegen:d5b2d07:trinket.gold-peg-alchemist"
   },
   "trinket.gutter-guard-bumper": {
-    "file": "placeholders/trinket.gutter-guard-bumper.svg",
-    "placeholder": true,
-    "sha256": "1cfe032d28101199871ef99cf92785de1e402d9c25bf7bc52ca16a038b547da7",
-    "source": "placeholder:obsidian-noir:trinket.gutter-guard-bumper"
+    "atlas": "trinkets",
+    "file": "assets/938a96557f8b-trinket.gutter-guard-bumper.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "938a96557f8b6ad7e1ef9e15c0eccda98f2a175f5fd7f36c186c5bf96dd9301c",
+    "source": "imagegen:d5b2d07:trinket.gutter-guard-bumper"
   },
   "trinket.hydraulic-dozer-piston": {
-    "file": "placeholders/trinket.hydraulic-dozer-piston.svg",
-    "placeholder": true,
-    "sha256": "ef9b05a647d0e4dd66e8b0364b615a92a34d5172ce95e53ee89c02e3bc90c249",
-    "source": "placeholder:obsidian-noir:trinket.hydraulic-dozer-piston"
+    "atlas": "trinkets",
+    "file": "assets/5776f54b4723-trinket.hydraulic-dozer-piston.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "5776f54b47231bb4f57063b6d53ef6f176fe26c4e9735bc34c018ed8872f9c92",
+    "source": "imagegen:d5b2d07:trinket.hydraulic-dozer-piston"
   },
   "trinket.loaded-platinum-die": {
-    "file": "placeholders/trinket.loaded-platinum-die.svg",
-    "placeholder": true,
-    "sha256": "721bc2f6190eed0aa985cee1c6c8807a5793241d7ff7bd38139b4a7e4c206ada",
-    "source": "placeholder:obsidian-noir:trinket.loaded-platinum-die"
+    "atlas": "trinkets",
+    "file": "assets/8283d0cd7722-trinket.loaded-platinum-die.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "8283d0cd77222daebf0ad0ace67b58402eecf313ceb842cab02432e5fc1fd1c0",
+    "source": "imagegen:d5b2d07:trinket.loaded-platinum-die"
   },
   "trinket.midas-lip-sensor": {
-    "file": "placeholders/trinket.midas-lip-sensor.svg",
-    "placeholder": true,
-    "sha256": "2d4089f0719326d79d06b6f7e94dab27782f5ce74c26bb098ef263d986a22e28",
-    "source": "placeholder:obsidian-noir:trinket.midas-lip-sensor"
+    "atlas": "trinkets",
+    "file": "assets/1a6ea3b72c3c-trinket.midas-lip-sensor.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "1a6ea3b72c3c4e803a5fc073997c78ebefdb8315e9d59fd242b6309b3881983a",
+    "source": "imagegen:d5b2d07:trinket.midas-lip-sensor"
   },
   "trinket.ouroboros-capacitor": {
-    "file": "placeholders/trinket.ouroboros-capacitor.svg",
-    "placeholder": true,
-    "sha256": "a8362812788e0253efe1c0943db9cfe8d41620142d29f30319f6a4e0ac823d7a",
-    "source": "placeholder:obsidian-noir:trinket.ouroboros-capacitor"
+    "atlas": "trinkets",
+    "file": "assets/5822f14d3813-trinket.ouroboros-capacitor.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "5822f14d38133453e8fea3e70e05e10332c7ae6964a956c3ee0785d659c64735",
+    "source": "imagegen:d5b2d07:trinket.ouroboros-capacitor"
   },
   "trinket.overvolted-solenoid": {
-    "file": "placeholders/trinket.overvolted-solenoid.svg",
-    "placeholder": true,
-    "sha256": "0d4eea26f0354a14526ed02c2914472fb209f8b9df1583744da3767c6c2287e5",
-    "source": "placeholder:obsidian-noir:trinket.overvolted-solenoid"
+    "atlas": "trinkets",
+    "file": "assets/ec4709290bf0-trinket.overvolted-solenoid.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "ec4709290bf0f5206be9beb2074cb773997d1700acdf646926d9e7980e1d60b0",
+    "source": "imagegen:d5b2d07:trinket.overvolted-solenoid"
   },
   "trinket.quantum-splitter-coil": {
-    "file": "placeholders/trinket.quantum-splitter-coil.svg",
-    "placeholder": true,
-    "sha256": "4408de984ef0cfd4937c355b66c526aaccafc2b2a7129e0d9eb867612f1e5fc2",
-    "source": "placeholder:obsidian-noir:trinket.quantum-splitter-coil"
+    "atlas": "trinkets",
+    "file": "assets/5c353ded45e4-trinket.quantum-splitter-coil.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "5c353ded45e4e683a10a74f51bf0c53017004afde9c3ea3c9c9ef576f4ceecf1",
+    "source": "imagegen:d5b2d07:trinket.quantum-splitter-coil"
   },
   "trinket.rubber-gutter-bumper": {
-    "file": "placeholders/trinket.rubber-gutter-bumper.svg",
-    "placeholder": true,
-    "sha256": "f085a97fb161911531e08c54650da3c453464ea42c1c44e8d618e6774573e4cb",
-    "source": "placeholder:obsidian-noir:trinket.rubber-gutter-bumper"
+    "atlas": "trinkets",
+    "file": "assets/b36efddaa383-trinket.rubber-gutter-bumper.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "b36efddaa3835ac1693eade4d9457d30daf0b72eeb058dc33c241598458c1c49",
+    "source": "imagegen:d5b2d07:trinket.rubber-gutter-bumper"
   },
   "trinket.tesla-peg-capacitor": {
-    "file": "placeholders/trinket.tesla-peg-capacitor.svg",
-    "placeholder": true,
-    "sha256": "b2d8a33994f8063a720e70b568c50a0a5db22cd6cf5c65c563bca811d7480157",
-    "source": "placeholder:obsidian-noir:trinket.tesla-peg-capacitor"
+    "atlas": "trinkets",
+    "file": "assets/79af49ca1d35-trinket.tesla-peg-capacitor.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "79af49ca1d3548e0762c3e8ac2e684463f672e00466a721a3e7492413cf7a48a",
+    "source": "imagegen:d5b2d07:trinket.tesla-peg-capacitor"
   },
   "trinket.turbo-dozer-cam": {
-    "file": "placeholders/trinket.turbo-dozer-cam.svg",
-    "placeholder": true,
-    "sha256": "9608eab556bbd9eac221a28b48bfb9f9fabb63b5b3b0d338323b0f4f8014d9db",
-    "source": "placeholder:obsidian-noir:trinket.turbo-dozer-cam"
+    "atlas": "trinkets",
+    "file": "assets/d31e0fb81cb6-trinket.turbo-dozer-cam.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "d31e0fb81cb6549b4a4fb495633eecda74e30a94afc4266771694ca0ef56fc70",
+    "source": "imagegen:d5b2d07:trinket.turbo-dozer-cam"
   },
   "trinket.vampiric-rake-collector": {
-    "file": "placeholders/trinket.vampiric-rake-collector.svg",
-    "placeholder": true,
-    "sha256": "8d2b8ae49d103b1c46434fcb6c6080649056f82621d64c39953e0b725b946307",
-    "source": "placeholder:obsidian-noir:trinket.vampiric-rake-collector"
+    "atlas": "trinkets",
+    "file": "assets/fe7a8ea8b9d7-trinket.vampiric-rake-collector.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "fe7a8ea8b9d782c819c210011774374a5e4961984d2c84d8fe16f22296d3e881",
+    "source": "imagegen:d5b2d07:trinket.vampiric-rake-collector"
   },
   "trinket.vampiric-stepper-motor": {
-    "file": "placeholders/trinket.vampiric-stepper-motor.svg",
-    "placeholder": true,
-    "sha256": "bb3dd9de8d542be95d003defd254535a121e3d62d824cb92821cc58a9b108847",
-    "source": "placeholder:obsidian-noir:trinket.vampiric-stepper-motor"
+    "atlas": "trinkets",
+    "file": "assets/aa9e923dbbf7-trinket.vampiric-stepper-motor.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "aa9e923dbbf75811b0ed96dc37f6c7d5ae44aba32395afe9b8adb5f343318d39",
+    "source": "imagegen:d5b2d07:trinket.vampiric-stepper-motor"
   },
   "trinket.vip-bullion-stamp": {
-    "file": "placeholders/trinket.vip-bullion-stamp.svg",
-    "placeholder": true,
-    "sha256": "41a713d3b80f1e74b6b67d9c9d1205c7c2260be6f8bd960362b0f1377c6b782f",
-    "source": "placeholder:obsidian-noir:trinket.vip-bullion-stamp"
+    "atlas": "trinkets",
+    "file": "assets/bd1b1c783b7f-trinket.vip-bullion-stamp.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "bd1b1c783b7f6a2e1e4dd9f34a384903fa72af33fd62c50425d92c23daeb4c63",
+    "source": "imagegen:d5b2d07:trinket.vip-bullion-stamp"
   },
   "ui.bezel": {
     "file": "placeholders/ui.bezel.svg",
@@ -366,40 +946,100 @@
     "source": "placeholder:obsidian-noir:ui.bezel"
   },
   "ui.button": {
-    "file": "placeholders/ui.button.svg",
-    "placeholder": true,
-    "sha256": "b79327be9d182e3ac06dd169d1c600fb1164b11acbea1171aab181b8db6aa445",
-    "source": "placeholder:obsidian-noir:ui.button"
+    "atlas": "ui",
+    "file": "assets/5d7e0f0f0dce-ui.button.png",
+    "frame": {
+      "h": 384,
+      "w": 384,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "5d7e0f0f0dce8475b484bb1d25745374a2fc679579f5b385f1f41b612fa6607a",
+    "source": "imagegen:d5b2d07:ui.button"
   },
   "ui.cabinet": {
-    "file": "placeholders/ui.cabinet.svg",
-    "placeholder": true,
-    "sha256": "172c96fe1586e68c14502dd00a47009cb81a195829bef0e2d512d362879135ff",
-    "source": "placeholder:obsidian-noir:ui.cabinet"
+    "atlas": "ui",
+    "file": "assets/afad1e5ba3cc-ui.cabinet.png",
+    "frame": {
+      "h": 384,
+      "w": 384,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "afad1e5ba3ccc8bcb9d662a5aa30732eda3ff43bb5664266afa3c7c760b5f9cd",
+    "source": "imagegen:d5b2d07:ui.cabinet"
   },
   "ui.dozer": {
-    "file": "placeholders/ui.dozer.svg",
-    "placeholder": true,
-    "sha256": "d26770fea8caac2753cd23725c163d52b09dadc233c4e541f48fb24e889313c6",
-    "source": "placeholder:obsidian-noir:ui.dozer"
+    "atlas": "ui",
+    "file": "assets/2100d1dfcfe4-ui.dozer.png",
+    "frame": {
+      "h": 384,
+      "w": 384,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "2100d1dfcfe4a6de5a56aea74f779d573e7a48e2adafc9984f929791fcdf9f29",
+    "source": "imagegen:d5b2d07:ui.dozer"
   },
   "ui.gutter": {
-    "file": "placeholders/ui.gutter.svg",
-    "placeholder": true,
-    "sha256": "04b065b4588e4ec3818425cdca9d41c6b1e4187049e11bd93df2a1899612570d",
-    "source": "placeholder:obsidian-noir:ui.gutter"
+    "atlas": "ui",
+    "file": "assets/39b287741185-ui.gutter.png",
+    "frame": {
+      "h": 384,
+      "w": 384,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "39b287741185f2d276b10d3474f1037a05c10c29832c4fc1401f8af7b5b7be07",
+    "source": "imagegen:d5b2d07:ui.gutter"
   },
   "ui.lip": {
-    "file": "placeholders/ui.lip.svg",
-    "placeholder": true,
-    "sha256": "3f854bec281c125c01e9083298e45bae80a2a7297f310b2539ab07a272609f0f",
-    "source": "placeholder:obsidian-noir:ui.lip"
+    "atlas": "ui",
+    "file": "assets/8dbab0fabeab-ui.lip.png",
+    "frame": {
+      "h": 384,
+      "w": 384,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "8dbab0fabeab52ae35ae76dfdae36e109972dd127f383b54a96fe081a7d55803",
+    "source": "imagegen:d5b2d07:ui.lip"
   },
   "ui.panel": {
-    "file": "placeholders/ui.panel.svg",
-    "placeholder": true,
-    "sha256": "21eb4b874c09c49b2db6f27b9f9e2c96541e6c57542df8e3db5d6350aa36ee4b",
-    "source": "placeholder:obsidian-noir:ui.panel"
+    "atlas": "ui",
+    "file": "assets/4e597c51938c-ui.panel.png",
+    "frame": {
+      "h": 384,
+      "w": 384,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "4e597c51938cefe1c63be148ae08d50b0d6279fcba9d2824087e8cf23cba54c0",
+    "source": "imagegen:d5b2d07:ui.panel"
   },
   "vfx.coinburst": {
     "file": "placeholders/vfx.coinburst.svg",
@@ -408,10 +1048,20 @@
     "source": "placeholder:obsidian-noir:vfx.coinburst"
   },
   "vfx.freeze": {
-    "file": "placeholders/vfx.freeze.svg",
-    "placeholder": true,
-    "sha256": "fc44ef89da8a85884cae4dd65e1584d9fa439c7df46ae791c6380a5a46bca202",
-    "source": "placeholder:obsidian-noir:vfx.freeze"
+    "atlas": "vfx",
+    "file": "assets/a7067029beac-vfx.freeze.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "a7067029beac47faaba2f0615049ca57084b12d3250cb83fc7ee6cacd1c9604d",
+    "source": "imagegen:d5b2d07:vfx.freeze"
   },
   "vfx.shock": {
     "file": "placeholders/vfx.shock.svg",
