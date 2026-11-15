@@ -305,10 +305,10 @@
   },
   "floor.FLOOR_CRYO.bg": {
     "atlas": "floors",
-    "file": "assets/aca2e2cc898f-floor.FLOOR_CRYO.bg.png",
+    "file": "assets/1a54403988ac-floor.FLOOR_CRYO.bg.png",
     "frame": {
-      "h": 450,
-      "w": 800,
+      "h": 405,
+      "w": 720,
       "x": 0,
       "y": 0
     },
@@ -316,15 +316,15 @@
       "x": 0.5,
       "y": 0.5
     },
-    "sha256": "aca2e2cc898f22ea11f5a9fba9fc98ed7ab5c20e7a67e08c6d3a49b9cdf30ebd",
+    "sha256": "1a54403988ac17376ff8d0b7dc3398ab56d1459c3ff25b9f27a37a3e70f119a4",
     "source": "imagegen:d5b2d07:floor.FLOOR_CRYO.bg"
   },
   "floor.FLOOR_FOUNDRY.bg": {
     "atlas": "floors",
-    "file": "assets/415e02074693-floor.FLOOR_FOUNDRY.bg.png",
+    "file": "assets/3691455c03fb-floor.FLOOR_FOUNDRY.bg.png",
     "frame": {
-      "h": 450,
-      "w": 800,
+      "h": 405,
+      "w": 720,
       "x": 0,
       "y": 0
     },
@@ -332,15 +332,15 @@
       "x": 0.5,
       "y": 0.5
     },
-    "sha256": "415e020746936eef8ab958454081094d77e29ac16276275727db43b961099c8b",
+    "sha256": "3691455c03fbd081c99c9614a1ea76f58b5c1af296799699b09e4f000309f54c",
     "source": "imagegen:d5b2d07:floor.FLOOR_FOUNDRY.bg"
   },
   "floor.FLOOR_NEON.bg": {
     "atlas": "floors",
-    "file": "assets/3ebf0825b24b-floor.FLOOR_NEON.bg.png",
+    "file": "assets/207e76948c29-floor.FLOOR_NEON.bg.png",
     "frame": {
-      "h": 450,
-      "w": 800,
+      "h": 405,
+      "w": 720,
       "x": 0,
       "y": 0
     },
@@ -348,15 +348,15 @@
       "x": 0.5,
       "y": 0.5
     },
-    "sha256": "3ebf0825b24b7e9fe7652ed7712d98ae0d8edef304769dd3a3e26221ac321c51",
+    "sha256": "207e76948c291abf0caaea9258ccb38ed0cae7595c6540628dcedd0feee6d30b",
     "source": "imagegen:d5b2d07:floor.FLOOR_NEON.bg"
   },
   "floor.FLOOR_PENTHOUSE.bg": {
     "atlas": "floors",
-    "file": "assets/91a2bd2cdee8-floor.FLOOR_PENTHOUSE.bg.png",
+    "file": "assets/8f064b1e0541-floor.FLOOR_PENTHOUSE.bg.png",
     "frame": {
-      "h": 450,
-      "w": 800,
+      "h": 405,
+      "w": 720,
       "x": 0,
       "y": 0
     },
@@ -364,7 +364,7 @@
       "x": 0.5,
       "y": 0.5
     },
-    "sha256": "91a2bd2cdee8cf28197a654ecade49a069cc3ece572345f595f405bf89d02353",
+    "sha256": "8f064b1e05412315b524353415d1326527dfc2ecd5d91ce3f83981d3e182f248",
     "source": "imagegen:d5b2d07:floor.FLOOR_PENTHOUSE.bg"
   },
   "glyph.blood-diamond": {

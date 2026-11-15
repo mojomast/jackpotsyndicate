@@ -20,8 +20,8 @@ The six placeholders are `glyph.blood-diamond`, `glyph.uranium`, `ui.bezel`,
 `vfx.coinburst`, `vfx.shock` and `vfx.spark`. The delivered exports were resized and
 quantized to fit the asset budget; the full source files remain on the handoff branch.
 
-The committed atlas output directory totals **1,562,306 bytes** (1.49 MiB; about
-1.56 MB decimal), including asset copies, manifest and contact sheet. This is the
+The committed atlas output directory totals **1,470,299 bytes** (1.40 MiB; about
+1.47 MB decimal), including asset copies, manifest and contact sheet. This is the
 `tools/assets` output size, not a packed-atlas measurement: the current pipeline
 copies locked files and records atlas labels/frames but does not pack pixel atlases.
 The handoff report's warning about the 1.5 MB atlas limit therefore still applies to
@@ -105,7 +105,7 @@ represent the build as having cleared commercial asset rights.
 
 1. **Working batch, not final art.** 65 of 71 keys are locked; six placeholder keys remain. The handoff records quality issues: diamond token is cyan rather than blood-red, skull token lacks the magnet, boss portraits are tightly framed, `chassis.harness-hyper` reads as wearable gear, and UI nine-slicing has not been tested in the game.
 2. **Item sprite-key naming is now normalized.** Content uses canonical kebab-case keys (`trinket.quantum-splitter-coil`, `glyph.blood-diamond`, `chassis.harness-hyper`, etc.) and the content test rejects non-canonical item keys.
-3. **No packed atlases.** The current pipeline copies per-key PNGs and records atlas labels/frames; it does not pack pixel atlases. The committed output is 1,562,306 bytes (1.49 MiB) as a directory, not a verified 1.5 MB atlas.
+3. **No packed atlases.** The current pipeline copies per-key PNGs and records atlas labels/frames; it does not pack pixel atlases. The committed output is 1,470,299 bytes (1.40 MiB) as a directory, not a verified 1.5 MB atlas.
 4. **Asset verification was run on the working branch.** `tools/assets build` reported 71 keys / 65 locked / 6 placeholders and `verify` checked 73 files. This does not establish final art rights, browser rendering everywhere, or trailer re-render.
 5. **The trailer's art path is still placeholder/vector based.** Do not describe it as final sprite art.
 
