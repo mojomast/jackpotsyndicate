@@ -201,7 +201,7 @@ test('saveCore refuses transient spin phases instead of writing a bricked save',
   assert.equal(browser.localStorage.getItem(STORAGE_KEYS.save), null);
 });
 
-test('saveCore blocks machine-private picker phases and allows durable settle', () => {
+test('saveCore writes durable picker and settle phases', () => {
   const fakeCore = (phase: string) =>
     ({
       getState: () => ({ phase }),
@@ -214,8 +214,8 @@ test('saveCore blocks machine-private picker phases and allows durable settle', 
       }),
     }) as never;
 
-  assert.equal(saveCore(fakeCore('RELIC_PICK')), null);
-  assert.equal(saveCore(fakeCore('JUMPER_PICK')), null);
+  assert.ok(saveCore(fakeCore('RELIC_PICK')));
+  assert.ok(saveCore(fakeCore('JUMPER_PICK')));
   assert.ok(saveCore(fakeCore('ROUND_SETTLE')));
 });
 

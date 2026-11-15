@@ -20,8 +20,6 @@ const NON_RESUMABLE_PHASES: ReadonlySet<Phase> = new Set<Phase>([
   'VICTORY',
   'SPINNING',
   'RESOLVING',
-  'RELIC_PICK',
-  'JUMPER_PICK',
 ]);
 
 const BOUNDARY_PHASES: ReadonlySet<Phase> = new Set<Phase>([
@@ -29,6 +27,8 @@ const BOUNDARY_PHASES: ReadonlySet<Phase> = new Set<Phase>([
   'ROUND_RESULT',
   'SHOP',
   'BOSS_INTRO',
+  'RELIC_PICK',
+  'JUMPER_PICK',
   'ELEVATOR',
   'FLOOR_TRANSITION',
   'GAME_OVER',
@@ -65,15 +65,10 @@ export function saveCore(core: GameCore = useGameStore.getState().core): SaveFil
   if (store === null) return null;
   // A spin's in-flight schedule lives beside RunState, not inside it, so
   // SPINNING/RESOLVING reload into a phase no command can leave. Picker
-  // phases are also blocked because their dealt offers are machine-private.
-  // ROUND_SETTLE is durable: resumeTimers re-arms its countdown.
+  // phases are durable: RunState keeps pendingRelics / pendingJumpers and the
+  // core re-sends the offer on load. ROUND_SETTLE re-arms its countdown.
   const phase = core.getState().phase;
-  if (
-    phase === 'SPINNING' ||
-    phase === 'RESOLVING' ||
-    phase === 'RELIC_PICK' ||
-    phase === 'JUMPER_PICK'
-  ) {
+  if (phase === 'SPINNING' || phase === 'RESOLVING') {
     return null;
   }
   try {
