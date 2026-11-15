@@ -1,16 +1,27 @@
 /** @jsxRuntime automatic */
-import { useEffect, useRef } from 'react';
-import type { GameCore, GameEvent } from '@jackpotsyndicate/contracts';
+import { useEffect, useLayoutEffect, useRef, useState, type RefObject } from 'react';
+import {
+  ANIM_TICKS,
+  DESIGN_TOKENS,
+  type GameCore,
+  type GameEvent,
+} from '@jackpotsyndicate/contracts';
 import { createAudioEngine, type AudioEngine, type GestureTarget } from '@jackpotsyndicate/audio';
 import { Hud } from '../../components/Hud';
+import { CascadeEquation } from '../../components/CascadeEquation';
 import { LogPanel } from '../../components/LogPanel';
-import { SlotFrame } from '../../components/Artwork';
+import { SlotFrame, SpriteImage } from '../../components/Artwork';
 import { TrinketRail } from '../../components/TrinketRail';
-import { MockGameCore, useGameStore } from '../../store/gameStore';
+import { MockGameCore, formatCash, useGameStore } from '../../store/gameStore';
+import { itemName } from '../meta/metaContent';
+import { TimelinePlayer } from '../../../../../packages/anim/src/runtime/TimelinePlayer';
+import { fever as feverScene } from '../../../../../packages/anim/src/scenes/fever';
 import { BoardView } from './BoardView';
 import { CabinetStage } from './CabinetStage';
-import { PrepControls } from './PrepControls';
-import { SpeedControls } from './SpeedControls';
+import { PrepControls, coinSpriteKey, drinkSpriteKey } from './PrepControls';
+import { SpinDeck } from './SpinDeck';
+import { TABLE_CSS } from './table.styles';
+import { subscribeCoreEvents, useCoreEvents } from './tableEvents';
 import { createTableCore, decorateCore } from './tableCore';
 
 interface SubscribableCore extends GameCore {
@@ -58,6 +69,63 @@ function useTableAudio(core: GameCore): AudioEngine | null {
 }
 
 /**
+ * Size the desktop cockpit to the viewport space the shell leaves for it, so
+ * the table never scrolls at ≥ 1024 px. Everything after the table in the
+ * shell (footer, gaps, padding) is measured, not assumed.
+ */
+function useCockpitHeight(ref: RefObject<HTMLElement | null>): void {
+  const layoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect;
+  layoutEffect(() => {
+    const element = ref.current;
+    if (!element || typeof window === 'undefined' || typeof getComputedStyle === 'undefined') return undefined;
+    let frame = 0;
+    const measure = (): void => {
+      frame = 0;
+      if (window.innerWidth < 1024) {
+        element.style.removeProperty('--table-h');
+        return;
+      }
+      const top = element.getBoundingClientRect().top + window.scrollY;
+      let below = 0;
+      let node: HTMLElement = element;
+      while (node.parentElement && node !== document.body) {
+        const parent = node.parentElement;
+        const style = getComputedStyle(parent);
+        const flow = style.display.includes('flex') || style.display.includes('grid');
+        const gap = flow ? Number.parseFloat(style.rowGap) || 0 : 0;
+        let sibling = node.nextElementSibling as HTMLElement | null;
+        while (sibling) {
+          const s = getComputedStyle(sibling);
+          if (s.display !== 'none' && s.position !== 'absolute' && s.position !== 'fixed') {
+            below += sibling.offsetHeight + gap
+              + (Number.parseFloat(s.marginTop) || 0) + (Number.parseFloat(s.marginBottom) || 0);
+          }
+          sibling = sibling.nextElementSibling as HTMLElement | null;
+        }
+        below += (Number.parseFloat(style.paddingBottom) || 0) + (Number.parseFloat(style.borderBottomWidth) || 0);
+        node = parent;
+      }
+      const height = Math.max(540, Math.floor(window.innerHeight - top - below - 1));
+      element.style.setProperty('--table-h', `${height}px`);
+    };
+    const schedule = (): void => {
+      if (frame === 0) frame = requestAnimationFrame(measure);
+    };
+    measure();
+    const observer = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(schedule);
+    observer?.observe(document.body);
+    window.addEventListener('resize', schedule);
+    return () => {
+      if (frame) cancelAnimationFrame(frame);
+      observer?.disconnect();
+      window.removeEventListener('resize', schedule);
+    };
+  }, [ref]);
+}
+
+type Flash = { id: number; kind: 'fever' | 'big' | 'mega' | 'none' };
+
+/**
  * T-072 Table. The screen only reads the Zustand mirror and acts through
  * `dispatch`; the real GameCore is attached to the store in production, while
  * tests may attach any GameCore implementation before rendering.
@@ -68,7 +136,10 @@ export function TableScreen() {
   const cols = useGameStore((store) => store.state.grid.cols);
   const rows = useGameStore((store) => store.state.grid.rows);
   const floorId = useGameStore((store) => store.state.floorId);
+  const phase = useGameStore((store) => store.state.phase);
   const reducedMotion = useGameStore((store) => store.settings.reducedMotion);
+  const screenRef = useRef<HTMLElement>(null);
+  const [flash, setFlash] = useState<Flash>({ id: 0, kind: 'none' });
 
   useEffect(() => {
     decorateCore(core);
@@ -82,38 +153,174 @@ export function TableScreen() {
   }, [core]);
 
   useTableAudio(core);
+  useCockpitHeight(screenRef);
+
+  useCoreEvents(core, (event) => {
+    if (event.t === 'FeverTriggered') {
+      setFlash((current) => ({ id: current.id + 1, kind: 'fever' }));
+    } else if (event.t === 'SpinEvaluated' && event.equity >= 1000) {
+      setFlash((current) => ({ id: current.id + 1, kind: event.equity >= 5000 ? 'mega' : 'big' }));
+    }
+  });
+
+  useEffect(() => {
+    if (flash.kind === 'none' || typeof window === 'undefined') return undefined;
+    const timer = window.setTimeout(() => setFlash((current) => (current.id === flash.id ? { ...current, kind: 'none' } : current)), flash.kind === 'fever' ? 2400 : 900);
+    return () => window.clearTimeout(timer);
+  }, [flash]);
 
   const gutterRisk = floorRisk(floorId);
 
   return (
-    <section className="screen table-screen" aria-labelledby="table-heading" data-core={core.constructor.name}>
+    <section
+      ref={screenRef}
+      className="screen table-screen"
+      aria-labelledby="table-heading"
+      data-core={core.constructor.name}
+      data-phase={phase}
+      data-flash={flash.kind}
+      data-flash-id={flash.id % 2}
+      data-reduced-motion={reducedMotion}
+    >
       <TableStyle />
       <h1 className="sr-only" id="table-heading">Table</h1>
-      <div className="table-layout">
-        <div className="table-main">
-          <Hud />
-          <div className="table-stage">
-            <SlotFrame>
-              <CabinetStage
-                core={core}
-                seed={seed}
-                cols={cols}
-                rows={rows}
-                reducedMotion={reducedMotion}
-              />
-            </SlotFrame>
-            <BoardView core={core} floorId={floorId} gutterRisk={gutterRisk} />
+      <div className="table-top">
+        <Hud />
+        <LogPanel />
+      </div>
+      <div className="table-hero-wrap">
+      <div className="table-hero">
+        <div className="table-cabinet-col">
+          <div className="cabinet-fit">
+            <div className="cabinet-shell">
+              <SlotFrame>
+                <CabinetStage
+                  core={core}
+                  seed={seed}
+                  cols={cols}
+                  rows={rows}
+                  reducedMotion={reducedMotion}
+                />
+              </SlotFrame>
+              <CabinetConsole core={core} />
+              <FeverOverlay core={core} reducedMotion={reducedMotion} />
+            </div>
           </div>
-          <PrepControls />
         </div>
-        <aside className="table-side">
-          <TrinketRail />
-          <SpeedControls />
-          <LogPanel />
-        </aside>
+        <BoardView core={core} floorId={floorId} gutterRisk={gutterRisk} />
+        <TrinketRail />
+      </div>
+      </div>
+      <div className="table-console">
+        <PrepControls />
+        <CascadeEquation />
+        <SpinDeck />
       </div>
     </section>
   );
+}
+
+const PHASE_LED: Record<string, string> = {
+  PREP: 'Ready',
+  SPINNING: 'Reels rolling',
+  RESOLVING: 'Orbs in play',
+  ROUND_SETTLE: 'Settling',
+  ROUND_RESULT: 'Round over',
+};
+
+/**
+ * Diegetic readouts on the cabinet base: the loaded coin and active drink sit
+ * in the wooden side plates, and the tray LED calls the action.
+ */
+function CabinetConsole({ core }: { core: GameCore }) {
+  const phase = useGameStore((store) => store.state.phase);
+  const loadedCoin = useGameStore((store) => store.state.loadedCoin);
+  const activeDrink = useGameStore((store) => store.state.activeDrink);
+  const spinsLeft = useGameStore((store) => store.state.spinsLeft);
+  const [message, setMessage] = useState<{ text: string; tone: string; id: number } | null>(null);
+
+  useCoreEvents(core, (event) => {
+    if (event.t === 'SpinEvaluated') {
+      const lines = event.wins.length;
+      setMessage((m) => ({
+        id: (m?.id ?? 0) + 1,
+        text: lines > 0 ? `${lines} win${lines === 1 ? '' : 's'} · ${event.orbPlan.length} orbs` : 'No line · 1 orb',
+        tone: lines > 0 ? 'win' : 'idle',
+      }));
+    } else if (event.t === 'CashBanked') {
+      setMessage((m) => ({ id: (m?.id ?? 0) + 1, text: `Banked ${formatCash(event.cash)}`, tone: 'cash' }));
+    } else if (event.t === 'GutterLoss') {
+      setMessage((m) => ({ id: (m?.id ?? 0) + 1, text: 'Raked into the gutter', tone: 'loss' }));
+    }
+  });
+
+  useEffect(() => {
+    if (!message || typeof window === 'undefined') return undefined;
+    const timer = window.setTimeout(() => setMessage((m) => (m?.id === message.id ? null : m)), 1800);
+    return () => window.clearTimeout(timer);
+  }, [message]);
+
+  const idle = phase === 'PREP' ? `Ready · ${spinsLeft} spin${spinsLeft === 1 ? '' : 's'}` : PHASE_LED[phase] ?? phase.replaceAll('_', ' ');
+
+  return (
+    <div className="cabinet-console" aria-hidden="true">
+      <span className="cabinet-plate cabinet-plate-left" title="Loaded coin">
+        <SpriteImage spriteKey={coinSpriteKey(loadedCoin)} className="cabinet-plate-art" />
+        <small>{itemName(loadedCoin).replace(/ Token$/, '')}</small>
+      </span>
+      <span className={`cabinet-led tone-${message?.tone ?? 'phase'}`} key={message?.id ?? phase}>
+        {message?.text ?? idle}
+      </span>
+      <span className="cabinet-plate cabinet-plate-right" title="Active drink">
+        {activeDrink ? (
+          <>
+            <SpriteImage spriteKey={drinkSpriteKey(activeDrink)} className="cabinet-plate-art" />
+            <small>{itemName(activeDrink)}</small>
+          </>
+        ) : (
+          <small className="cabinet-plate-empty">No drink</small>
+        )}
+      </span>
+    </div>
+  );
+}
+
+/** Plays the packages/anim `fever` scene over the cabinet, seeked from sim ticks. */
+function FeverOverlay({ core, reducedMotion }: { core: GameCore; reducedMotion: boolean }) {
+  const rootRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(false);
+
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return undefined;
+    const player = new TimelinePlayer();
+    let endTick = -1;
+    const offEvents = subscribeCoreEvents(core, (event) => {
+      if (event.t !== 'FeverTriggered') return;
+      try {
+        player.play(feverScene(root, { reducedMotion }, DESIGN_TOKENS, () => null), event.tick);
+        endTick = event.tick + ANIM_TICKS.fever + 6;
+        setActive(true);
+      } catch {
+        // Presentation only; the sim never waits on this.
+      }
+    });
+    const offTick = useGameStore.subscribe((store) => {
+      if (endTick < 0) return;
+      player.syncToTick(store.state.tick);
+      if (store.state.tick >= endTick) {
+        endTick = -1;
+        setActive(false);
+      }
+    });
+    return () => {
+      offEvents();
+      offTick();
+      player.stop();
+    };
+  }, [core, reducedMotion]);
+
+  return <div className="fever-overlay" data-active={active} ref={rootRef} aria-hidden="true" />;
 }
 
 function floorRisk(floorId: string): number {
@@ -130,49 +337,7 @@ function floorRisk(floorId: string): number {
 }
 
 function TableStyle() {
-  return (
-    <style>{`
-      .table-stage { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
-      .table-cabinet { min-width: 0; }
-      .slot-frame { position: relative; width: 100%; aspect-ratio: 365 / 343; min-width: 0; }
-      .slot-frame-art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill; pointer-events: none; z-index: 0; filter: drop-shadow(0 18px 35px #0008); }
-      .slot-frame-window { position: absolute; left: 12.6%; top: 25.7%; width: 71.8%; height: 44.3%; display: flex; align-items: center; justify-content: center; overflow: hidden; z-index: 1; }
-      .slot-frame-window .table-cabinet { position: absolute; inset: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
-      .slot-frame-window .jsa-root { width: 100%; height: 100%; }
-      .slot-frame-window .jsa-cabinet { position: absolute; inset: 0; width: auto; height: auto; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; display: flex; align-items: center; justify-content: center; }
-      .slot-frame-window .jsa-cabinet-header, .slot-frame-window .jsa-bezel-rail { display: none; }
-      .slot-frame-window .jsa-reel-window { width: 100% !important; height: 100% !important; max-width: none; aspect-ratio: auto !important; border: 0; border-radius: 0; box-shadow: none; }
-      .table-board { min-width: 0; padding: 12px; }
-      .table-board-heading { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 8px; color: var(--color-muted); font-family: var(--font-mono); font-size: .72rem; }
-      .table-board-svg { display: block; width: 100%; height: auto; aspect-ratio: 600 / 510; border-radius: 10px; background: #07090e; border: 1px solid rgba(251,191,36,.16); }
-      .prep-controls, .speed-panel { padding: 14px; }
-      .prep-row { display: grid; gap: 8px; padding: 10px 0; border-top: 1px solid rgba(148,163,184,.1); }
-      .prep-row:first-of-type { border-top: 0; }
-      .prep-label { display: flex; flex-direction: column; gap: 2px; }
-      .prep-label span { color: var(--color-muted); font-size: .78rem; }
-      .prep-options { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-      .prep-select { min-width: 180px; }
-      .prep-feedback { margin: 8px 0 0; color: var(--color-muted); font-family: var(--font-mono); font-size: .74rem; }
-      @media (min-width: 900px) { .table-stage { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; } }
-      .jsa-root { position: relative; isolation: isolate; color: #e9eef5; }
-      .jsa-root * { box-sizing: border-box; }
-      .jsa-cabinet { position: relative; width: 100%; padding: 3.3%; border: 1px solid #8e702c; border-radius: 18px; background: linear-gradient(125deg,#30343b,#101521 22%,#0b1019 65%,#3d3123); box-shadow: inset 0 0 0 7px #151c29, 0 18px 70px #0009; }
-      .jsa-cabinet-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 1% 1% 3.4%; color: #fbbf24; font-family: var(--font-display); font-weight: 700; letter-spacing: .18em; }
-      .jsa-reel-window { position: relative; width: 100%; background: #07090e; border: 2px solid #5b4729; border-radius: 6px; box-shadow: inset 0 0 25px #000; overflow: hidden; }
-      .jsa-layer { position: absolute; inset: 0; pointer-events: none; }
-      .jsa-cell { position: absolute; padding: 3%; border: 1px solid #36415570; display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); place-items: center; background: radial-gradient(ellipse at 50% 20%,#23314880,transparent 80%); }
-      .jsa-symbol { width: 100%; height: 100%; min-height: 0; position: relative; display: grid; place-items: center; }
-      .jsa-sprite { display: block; width: 100%; height: 100%; overflow: hidden; }
-      .jsa-symbol > .jsa-sprite { width: auto; height: 100%; max-width: 100%; max-height: 100%; filter: drop-shadow(0 3px 5px #000a); }
-      .jsa-cell-glow { position: absolute; inset: 5%; border: 2px solid #fbbf24; border-radius: 12%; box-shadow: 0 0 18px #fbbf2466; background: #fbbf2419; }
-      .jsa-streams { z-index: 2; overflow: hidden; }
-      .jsa-reel-stream { position: absolute; top: 0; height: 100%; }
-      .jsa-stream-symbol { position: absolute; width: 100%; padding: 12%; display: grid; place-items: center; }
-      .jsa-duration { position: absolute; width: 0; height: 0; overflow: hidden; pointer-events: none; }
-      .jsa-bezel-rail { min-height: 12px; margin-top: 3.4%; border: 1px solid #594727; border-radius: 3px; background: linear-gradient(90deg,#0a111c,#233047,#0a111c); }
-      .jsa-relayout-previous { position: absolute; left: 0; top: 0; pointer-events: none; }
-    `}</style>
-  );
+  return <style>{TABLE_CSS}</style>;
 }
 
 export default TableScreen;
