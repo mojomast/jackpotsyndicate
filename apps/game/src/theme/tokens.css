@@ -4561,3 +4561,22 @@ button.btn.hud-spin {
   font-family: var(--font-display);
   font-size: var(--text-md);
 }
+
+@media (max-width: 620px) {
+  .settings-row {
+    flex-wrap: nowrap;
+  }
+
+  .settings-copy {
+    flex: 1 1 0;
+  }
+
+  .settings-control {
+    max-width: 52%;
+  }
+
+  .seed-card {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+  }
+}

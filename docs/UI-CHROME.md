@@ -51,6 +51,39 @@ The implementation follows the common 9-slice/nine-patch contract:
 - Primary buttons keep hover, active and disabled states; focus outlines remain
   global.
 
+## Design system (apps/game/src/theme/tokens.css)
+
+Art direction: art-deco noir casino with neon accents. One stylesheet, in order:
+fonts, tokens, base, icons, primitives, shell, meta screens, table/components,
+motion/accessibility, responsive.
+
+- **Fonts**: Outfit (display), Inter (body), JetBrains Mono (numbers, labels),
+  SIL OFL 1.1, self-hosted from `apps/game/public/fonts/` via `@font-face`
+  (bundled by the build; no font CDN).
+- **Colour**: the C-9 `--color-*` brand values (obsidian, slate-dark, panel,
+  gold, cyan, crimson, emerald) plus `--surface-0..4`, ink (`--color-text`,
+  `--color-muted`, `--color-faint`), the brass family (`--brass-*`,
+  `--brass-gradient`, `--brass-text`) and rarity colours (`--rarity-*`).
+- **Scales**: `--text-2xs..hero`, `--space-1..9`, `--gutter`, `--radius-xs..pill`,
+  `--shadow-1..3` (`--shadow-panel` aliases 2), `--glow-*`, `--focus-ring`.
+- **Motion**: `--dur-1..5` and `--ease-out|in-out|spring`. Reduced motion (the
+  setting sets `html[data-reduced-motion=true]`; the OS query too) collapses
+  every animation/transition and its delay, and hides decorative loops.
+- **Primitives**: `.btn` + `-primary|-secondary|-ghost|-danger|-danger-solid|-cyan`
+  and `-sm|-lg|-hero|-icon|-back`; `.deco-frame` corner brackets; `.stat-tile`;
+  `.pip-meter`; `.seed-card`; `.switch`; `.segmented`; `.range`; `.progress-track`.
+- Existing custom-property and class names used by `components/` and
+  `screens/table/` are kept unchanged.
+
+## Shell routing
+
+Game screens (table, shop, elevator, boss, game over, victory) follow the
+phase machine: a phase change moves the player to its screen, round results
+open as a modal over the settled table, and a typed URL for a screen the phase
+has not reached is redirected. Compendium and Settings are menus that return
+to where they were opened (Back or Escape). The screen-jump nav is a dev
+affordance shown only in development builds opened with `?dev=1` or `?test=1`.
+
 ## Known limitations
 
 - The panel slice now reserves the generated crest rows (`37px` top and bottom),
