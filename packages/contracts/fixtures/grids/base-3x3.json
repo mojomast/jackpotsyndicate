@@ -1,0 +1,25 @@
+{
+  "id": "base-3x3-classic-row0",
+  "wiring": "CLASSIC",
+  "cols": 3,
+  "rows": 3,
+  "grid": [
+    ["cherry", "uranium", "diamond"],
+    ["cherry", "seven", "skull"],
+    ["cherry", "diamond", "uranium"]
+  ],
+  "expected": {
+    "wins": [
+      {
+        "kind": "line",
+        "symbolId": "cherry",
+        "cells": [[0, 0], [1, 0], [2, 0]],
+        "lineId": "row0",
+        "lineMult": 1
+      }
+    ],
+    "chips": 60,
+    "addMult": 3,
+    "xMult": 1
+  }
+}
