@@ -133,6 +133,13 @@ test('real Table mounts cabinet, board, HUD, audio and command-only prep control
     (container.querySelectorAll('[data-testid="board"] image').length) > 0,
     'the board must render real floor, peg, orb or token artwork',
   );
+  assert.ok(container.querySelector('.slot-frame-art'), 'the slot cabinet chrome must be rendered');
+  assert.ok(
+    container.querySelector('.slot-frame-window [data-anim="cell"]'),
+    'the live reel grid must sit inside the cabinet window',
+  );
+  assert.ok(container.querySelector('.hud.ui9-panel'), 'the HUD must use the 9-slice frame');
+  assert.ok(container.querySelector('.hud-spin.ui9-button'), 'the spin button must use the 9-slice frame');
 
   fireEvent.change(screen.getByTestId('prep-overvolt'), { target: { value: 'row:0' } });
   assert.equal(useGameStore.getState().state.overvoltLineId, 'row:0');

@@ -1,6 +1,6 @@
 /** @jsxRuntime automatic */
 import { TEST_IDS } from '@jackpotsyndicate/contracts';
-import { SpriteImage, uiPanelStyle } from './Artwork';
+import { SpriteImage } from './Artwork';
 import { useGameStore } from '../store/gameStore';
 
 export interface TrinketMeta {
@@ -82,7 +82,7 @@ export function TrinketRail() {
   const trinkets = useGameStore((store) => store.state.trinkets);
 
   return (
-    <section className="trinket-panel panel" aria-label="Mounted trinkets" style={uiPanelStyle()}>
+    <section className="trinket-panel panel ui9-panel" aria-label="Mounted trinkets">
       <div className="panel-heading">
         <h2>Trinket rail</h2>
         <span>{trinkets.length} mounted</span>

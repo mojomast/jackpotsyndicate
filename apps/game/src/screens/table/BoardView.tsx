@@ -179,7 +179,7 @@ export function BoardView({ core, floorId, gutterRisk }: BoardViewProps) {
   );
 
   return (
-    <section className="table-board panel" data-testid="board" aria-label="Pinfield and coin pusher board">
+    <section className="table-board panel ui9-panel" data-testid="board" aria-label="Pinfield and coin pusher board">
       <div className="table-board-heading">
         <span>Board</span>
         <span>{plan.orbs.length} orbs · {plan.tokens.length} tokens</span>

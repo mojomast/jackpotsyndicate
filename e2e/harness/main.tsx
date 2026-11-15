@@ -13,6 +13,7 @@ import {
 } from '../../apps/game/src/screens/table/tableCore';
 import { startGameLoop, useGameStore } from '../../apps/game/src/store/gameStore';
 import { preloadSpriteAssets, type SpriteManifest } from '../../apps/game/src/store/spriteResolver';
+import { preloadUiChrome, installUiArtVariables } from '../../apps/game/src/components/Artwork';
 import { installTestApi } from '../../apps/game/src/testApi';
 import '../../apps/game/src/theme/tokens.css';
 import assetManifest from '../../apps/game/public/atlas/asset-manifest.json';
@@ -236,6 +237,8 @@ attach();
 const root = document.getElementById('root');
 if (!root) throw new Error('Missing #root element');
 await preloadSpriteAssets(assetManifest as SpriteManifest);
+await preloadUiChrome();
+installUiArtVariables();
 createRoot(root).render(
   <StrictMode>
     <HarnessRoot />

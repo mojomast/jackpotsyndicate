@@ -1,6 +1,5 @@
 /** @jsxRuntime automatic */
 import { useGameStore } from '../../store/gameStore';
-import { uiPanelStyle } from '../../components/Artwork';
 
 /**
  * Speed is a browser-loop multiplier only: the fixed-step loop runs the same
@@ -11,7 +10,7 @@ export function SpeedControls() {
   const setSpeed = useGameStore((store) => store.setSpeed);
 
   return (
-    <section className="speed-panel panel" aria-label="Simulation speed" data-testid="table-speed" style={uiPanelStyle()}>
+    <section className="speed-panel panel ui9-panel" aria-label="Simulation speed" data-testid="table-speed">
       <div className="panel-heading">
         <h2>Loop speed</h2>
         <span>{speed}× fixed step</span>

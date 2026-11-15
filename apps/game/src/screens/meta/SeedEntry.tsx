@@ -79,7 +79,7 @@ export function SeedEntry({ onNavigate, initialSeed, compact = false }: SeedEntr
             spellCheck={false}
           />
         </label>
-        <button type="submit" className="btn btn-primary" data-testid="start-run">
+        <button type="submit" className="btn btn-primary ui9-button" data-testid="start-run">
           Start run
         </button>
         <button

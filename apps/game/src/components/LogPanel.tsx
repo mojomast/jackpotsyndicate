@@ -1,7 +1,6 @@
 /** @jsxRuntime automatic */
 import type { GameEvent } from '@jackpotsyndicate/contracts';
 import { formatCash, useGameStore } from '../store/gameStore';
-import { uiPanelStyle } from './Artwork';
 
 function summarize(event: GameEvent): string {
   switch (event.t) {
@@ -86,7 +85,7 @@ export function LogPanel() {
   const events = useGameStore((store) => store.events);
 
   return (
-    <section className="log-panel panel" aria-label="Event log" style={uiPanelStyle()}>
+    <section className="log-panel panel ui9-panel" aria-label="Event log">
       <div className="panel-heading">
         <h2>Event log</h2>
         <span>{events.length} events</span>

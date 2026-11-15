@@ -17,7 +17,7 @@ import {
   offerDescription,
   shopArchetypeLabel,
 } from './metaContent';
-import { FloorBanner, MetaBezel, SpriteImage, uiPanelStyle } from '../../components/Artwork';
+import { FloorBanner, MetaBezel, SpriteImage } from '../../components/Artwork';
 import { MetaNotice, MetaScreen } from './MetaScreen';
 import { JumperPicker, ReelTargetPicker, RelicPicker } from './Pickers';
 import { useMetaAutosave } from './persistence';
@@ -134,7 +134,7 @@ export function ShopScreen({ onNavigate }: ShopScreenProps) {
     >
       <FloorBanner floorId={state.floorId} floorName={floorName(state.floorId)} eyebrow="Vendor floor" />
       <MetaBezel />
-      <div className="shop-summary panel" style={uiPanelStyle()}>
+      <div className="shop-summary panel ui9-panel">
         <div>
           <span className="eyebrow">Vendor archetype</span>
           <strong data-testid="shop-archetype">{shopArchetypeLabel(state.shop.archetype)}</strong>

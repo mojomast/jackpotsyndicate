@@ -1,6 +1,7 @@
 /** @jsxRuntime automatic */
 import type { CSSProperties, ReactNode } from 'react';
 import assetManifest from '../../public/atlas/asset-manifest.json';
+import ui9Data from './ui9-data.json';
 import {
   spriteAssetFromManifest,
   type SpriteAsset,
@@ -34,11 +35,35 @@ export function uiButtonStyle(): CSSProperties | undefined {
   return artBackground('ui.button', 0.48);
 }
 
+/** Tight-cropped UI chrome assets used as structural 9-slice frames. */
+export const UI9_ASSETS = ui9Data as { panel: string; button: string; cabinet: string };
+
+const UI9_URLS = Object.values(UI9_ASSETS);
+
+/** Warm the CSS border-image and cabinet frame assets before first render. */
+export function preloadUiChrome(): Promise<void> {
+  if (typeof Image === 'undefined') return Promise.resolve();
+  return Promise.all(
+    UI9_URLS.map(
+      (url) =>
+        new Promise<void>((resolve) => {
+          const image = new Image();
+          image.decoding = 'async';
+          image.onload = () => resolve();
+          image.onerror = () => resolve();
+          image.src = url;
+        }),
+    ),
+  ).then(() => undefined);
+}
+
 /** Expose reusable UI-art URLs to CSS for primary buttons. */
 export function installUiArtVariables(): void {
   if (typeof document === 'undefined') return;
   const button = spriteAsset('ui.button');
   if (button) document.documentElement.style.setProperty('--ui-button-art', `url("${button.url}")`);
+  document.documentElement.style.setProperty('--ui9-panel', `url("${UI9_ASSETS.panel}")`);
+  document.documentElement.style.setProperty('--ui9-button', `url("${UI9_ASSETS.button}")`);
 }
 
 
@@ -114,6 +139,16 @@ export function MetaBezel() {
   return (
     <div className="meta-bezel" aria-hidden="true">
       <SpriteImage spriteKey="ui.bezel" className="meta-bezel-art" />
+    </div>
+  );
+}
+
+/** Put the live reel game inside the transparent window of the cabinet art. */
+export function SlotFrame({ children }: { children: ReactNode }) {
+  return (
+    <div className="slot-frame">
+      <img className="slot-frame-art" src={UI9_ASSETS.cabinet} alt="" aria-hidden="true" draggable={false} />
+      <div className="slot-frame-window">{children}</div>
     </div>
   );
 }

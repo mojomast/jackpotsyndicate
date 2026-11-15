@@ -2,7 +2,6 @@
 import { useMemo, useState } from 'react';
 import type { Wiring } from '@jackpotsyndicate/contracts';
 import { useGameStore } from '../../store/gameStore';
-import { uiPanelStyle } from '../../components/Artwork';
 
 function humanize(id: string): string {
   return id
@@ -63,7 +62,7 @@ export function PrepControls() {
   };
 
   return (
-    <section className="prep-controls panel" aria-label="Prep controls" data-testid="prep-controls" style={uiPanelStyle()}>
+    <section className="prep-controls panel ui9-panel" aria-label="Prep controls" data-testid="prep-controls">
       <div className="panel-heading">
         <h2>Prep</h2>
         <span>{canPrep ? 'Ready to spin' : phase.replaceAll('_', ' ')}</span>

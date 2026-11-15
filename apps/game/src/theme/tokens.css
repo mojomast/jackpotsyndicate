@@ -30,6 +30,9 @@
   --radius-md: 14px;
   --radius-lg: 20px;
   --shadow-panel: 0 20px 60px rgba(0, 0, 0, 0.42);
+  --ui9-panel: none;
+  --ui9-button: none;
+  --ui9-cabinet: none;
 
   color-scheme: dark;
 }
@@ -93,9 +96,13 @@ samp {
 .app-shell {
   width: 100%;
   max-width: none;
-  min-height: 100vh;
+  min-height: 100dvh;
   margin: 0 auto;
-  padding: clamp(6px, 1.2vw, 20px);
+  padding:
+    max(clamp(6px, 1.2vw, 20px), env(safe-area-inset-top))
+    max(clamp(6px, 1.2vw, 20px), env(safe-area-inset-right))
+    max(clamp(6px, 1.2vw, 20px), env(safe-area-inset-bottom))
+    max(clamp(6px, 1.2vw, 20px), env(safe-area-inset-left));
   display: flex;
   flex-direction: column;
   gap: clamp(12px, 2vw, 24px);
@@ -238,6 +245,42 @@ samp {
     linear-gradient(180deg, rgba(18, 24, 38, 0.96), rgba(15, 20, 32, 0.94)),
     var(--color-panel);
   box-shadow: var(--shadow-panel);
+}
+
+/* Structural 9-slice chrome. The source frames are tight-cropped derivatives
+ * of the generated UI art; corners stay fixed while edges stretch. */
+.panel.ui9-panel {
+  border: 12px solid transparent;
+  border-radius: 0;
+  background: rgba(7, 9, 14, 0.18);
+  border-image-source: var(--ui9-panel);
+  border-image-slice: 24 45 24 45 fill;
+  border-image-width: 12px 22px;
+  border-image-repeat: stretch;
+  padding: clamp(14px, 1.6vw, 22px) clamp(20px, 2vw, 30px);
+}
+
+.btn-primary.ui9-button {
+  border: 9px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  border-image-source: var(--ui9-button);
+  border-image-slice: 20 36 20 36 fill;
+  border-image-width: 9px 18px;
+  border-image-repeat: stretch;
+  color: #f8e7b0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
+}
+
+.btn-primary.ui9-button:hover:not(:disabled) {
+  border-color: transparent;
+  background: transparent;
+  filter: brightness(1.08);
+}
+
+.btn-primary.ui9-button:active:not(:disabled) {
+  filter: brightness(1.18);
+  transform: translateY(1px);
 }
 
 .screen {
@@ -559,10 +602,11 @@ a:focus-visible {
 
 .hud-spin {
   flex: 1 1 190px;
-  min-height: 48px;
-  font-size: 1rem;
+  min-height: 56px;
+  font-size: 1.04rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  box-shadow: inset 0 0 18px rgba(251, 191, 36, 0.12), 0 8px 22px rgba(251, 191, 36, 0.16);
 }
 
 .hud-seed {

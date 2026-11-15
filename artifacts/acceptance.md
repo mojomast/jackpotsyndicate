@@ -39,7 +39,7 @@ every acceptance criterion is green; the gaps are listed explicitly.
   per-key files and records atlas labels/frames.
 - Content item sprite keys were normalized to the canonical kebab-case catalog.
 - Reel symbols are inlined as data URIs to satisfy the zero-network J1 requirement.
-- The UI is full-width at desktop with the slot cabinet and board using the available width; Shop, Compendium, Boss and Elevator use floor/item/boss art. The HUD, side panels, spin button and cabinet use generated panel/button/cabinet art, and the freeze badge uses `vfx.freeze`. The horizontal dozer/gutter/lip trims remain unplaced pending nine-slice/projection support; three VFX keys and `glyph.uranium` remain placeholders.
+- The UI is full-width at desktop with the slot cabinet and board using the available width. Panel/button chrome uses CSS `border-image` 9-slice frames (tight-cropped derivatives, fixed corners, fill center); the live reel grid sits inside the transparent window of the generated cabinet art. See `docs/UI-CHROME.md`. Shop, Compendium, Boss and Elevator use floor/item/boss art. The HUD, side panels, spin button and cabinet use generated panel/button/cabinet art, and the freeze badge uses `vfx.freeze`. The horizontal dozer/gutter/lip trims remain unplaced pending nine-slice/projection support; three VFX keys and `glyph.uranium` remain placeholders.
 
 Handoff quality issues remain open: diamond token color, skull magnet, boss padding,
 `chassis.harness-hyper` shape, UI nine-slicing, and the four missing clean cutouts.
