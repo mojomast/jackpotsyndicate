@@ -8,7 +8,8 @@
   "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/anim.js" }, "./style.css": "./dist/style.css" },
   "files": ["dist", "assets", "fixtures", "compositions", "artifacts/trailer.mp4", "README.md"],
   "scripts": {
-    "build": "vite build && tsc -p tsconfig.build.json",
+    "build": "vite build",
+    "build:types": "tsc -p tsconfig.build.json",
     "typecheck": "tsc --noEmit",
     "contracts:check": "node scripts/check-contracts.mjs",
     "test": "vitest run",

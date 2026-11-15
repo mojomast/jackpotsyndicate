@@ -1,0 +1,1017 @@
+{
+  "project": "jackpotsyndicate",
+  "style_pack": "obsidian-noir",
+  "status": "all 71 C-7 keys currently resolve to generated vector placeholders; 0 locked real assets",
+  "delivery": {
+    "root": "assets/imagegen/",
+    "format": "PNG RGBA for alpha:true; PNG (opaque) for alpha:false",
+    "naming": "<logical-key>.png exactly, including dots",
+    "notes": [
+      "No text, logos, watermarks or signatures baked into images.",
+      "No real people or copyrighted characters; boss faces must be invented.",
+      "Keep the object centered with 8-12% transparent padding for icons.",
+      "Source images may be larger; final atlases must total <= 1.5 MB, so optimise exports."
+    ]
+  },
+  "counts": {
+    "total": 71,
+    "P0": 35,
+    "P1": 36
+  },
+  "assets": [
+    {
+      "key": "boss.auditor",
+      "category": "bosses",
+      "name": "The Iron Auditor",
+      "file": "assets/imagegen/boss.auditor.png",
+      "size": "1024x1024",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P0",
+      "prompt": "Fictional casino boss portrait, invented face (not a real person), waist-up, dramatic noir lighting, transparent background, no text. Subject: The Iron Auditor."
+    },
+    {
+      "key": "boss.valenti",
+      "category": "bosses",
+      "name": "Don Valenti",
+      "file": "assets/imagegen/boss.valenti.png",
+      "size": "1024x1024",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P0",
+      "prompt": "Fictional casino boss portrait, invented face (not a real person), waist-up, dramatic noir lighting, transparent background, no text. Subject: Don Valenti."
+    },
+    {
+      "key": "boss.zero",
+      "category": "bosses",
+      "name": "Madame Zero",
+      "file": "assets/imagegen/boss.zero.png",
+      "size": "1024x1024",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P0",
+      "prompt": "Fictional casino boss portrait, invented face (not a real person), waist-up, dramatic noir lighting, transparent background, no text. Subject: Madame Zero."
+    },
+    {
+      "key": "chassis.harness-cluster",
+      "category": "items/chassis",
+      "name": "Harness Cluster",
+      "file": "assets/imagegen/chassis.harness-cluster.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P1",
+      "prompt": "Slot-machine chassis upgrade module icon, single component, centered, readable at 96 px, industrial noir style, no text. Subject: Harness Cluster."
+    },
+    {
+      "key": "chassis.harness-hyper",
+      "category": "items/chassis",
+      "name": "Harness Hyper",
+      "file": "assets/imagegen/chassis.harness-hyper.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P1",
+      "prompt": "Slot-machine chassis upgrade module icon, single component, centered, readable at 96 px, industrial noir style, no text. Subject: Harness Hyper."
+    },
+    {
+      "key": "chassis.harness-ways",
+      "category": "items/chassis",
+      "name": "Harness Ways",
+      "file": "assets/imagegen/chassis.harness-ways.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P1",
+      "prompt": "Slot-machine chassis upgrade module icon, single component, centered, readable at 96 px, industrial noir style, no text. Subject: Harness Ways."
+    },
+    {
+      "key": "chassis.jumper-wire",
+      "category": "items/chassis",
+      "name": "Jumper Wire",
+      "file": "assets/imagegen/chassis.jumper-wire.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P1",
+      "prompt": "Slot-machine chassis upgrade module icon, single component, centered, readable at 96 px, industrial noir style, no text. Subject: Jumper Wire."
+    },
+    {
+      "key": "chassis.overvolt",
+      "category": "items/chassis",
+      "name": "Overvolt",
+      "file": "assets/imagegen/chassis.overvolt.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P1",
+      "prompt": "Slot-machine chassis upgrade module icon, single component, centered, readable at 96 px, industrial noir style, no text. Subject: Overvolt."
+    },
+    {
+      "key": "chassis.reel-column",
+      "category": "items/chassis",
+      "name": "+Reel Column",
+      "file": "assets/imagegen/chassis.reel-column.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P1",
+      "prompt": "Slot-machine chassis upgrade module icon, single component, centered, readable at 96 px, industrial noir style, no text. Subject: +Reel Column."
+    },
+    {
+      "key": "chassis.row",
+      "category": "items/chassis",
+      "name": "Row",
+      "file": "assets/imagegen/chassis.row.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P1",
+      "prompt": "Slot-machine chassis upgrade module icon, single component, centered, readable at 96 px, industrial noir style, no text. Subject: Row."
+    },
+    {
+      "key": "coin.blood-doubloon",
+      "category": "items/coins",
+      "name": "Blood Doubloon",
+      "file": "assets/imagegen/coin.blood-doubloon.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P1",
+      "prompt": "Special casino coin inventory icon, single coin, centered, readable at 96 px, obsidian-noir style, no text. Subject: Blood Doubloon."
+    },
+    {
+      "key": "coin.copper-token",
+      "category": "items/coins",
+      "name": "Copper Token",
+      "file": "assets/imagegen/coin.copper-token.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P1",
+      "prompt": "Special casino coin inventory icon, single coin, centered, readable at 96 px, obsidian-noir style, no text. Subject: Copper Token."
+    },
+    {
+      "key": "coin.heavy-lead-slug",
+      "category": "items/coins",
+      "name": "Heavy Lead Slug",
+      "file": "assets/imagegen/coin.heavy-lead-slug.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P1",
+      "prompt": "Special casino coin inventory icon, single coin, centered, readable at 96 px, obsidian-noir style, no text. Subject: Heavy Lead Slug."
+    },
+    {
+      "key": "coin.polymer-superball",
+      "category": "items/coins",
+      "name": "Polymer Superball",
+      "file": "assets/imagegen/coin.polymer-superball.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P1",
+      "prompt": "Special casino coin inventory icon, single coin, centered, readable at 96 px, obsidian-noir style, no text. Subject: Polymer Superball."
+    },
+    {
+      "key": "drink.alchemist-absinthe",
+      "category": "items/drinks",
+      "name": "Alchemist Absinthe",
+      "file": "assets/imagegen/drink.alchemist-absinthe.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P1",
+      "prompt": "Casino bar drink inventory icon, single glass/bottle, centered, readable at 96 px, noir neon bar style, no text. Subject: Alchemist Absinthe."
+    },
+    {
+      "key": "drink.dirty-syndicate-martini",
+      "category": "items/drinks",
+      "name": "Dirty Syndicate Martini",
+      "file": "assets/imagegen/drink.dirty-syndicate-martini.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P1",
+      "prompt": "Casino bar drink inventory icon, single glass/bottle, centered, readable at 96 px, noir neon bar style, no text. Subject: Dirty Syndicate Martini."
+    },
+    {
+      "key": "drink.green-fairy-absinthe",
+      "category": "items/drinks",
+      "name": "Green Fairy Absinthe",
+      "file": "assets/imagegen/drink.green-fairy-absinthe.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P1",
+      "prompt": "Casino bar drink inventory icon, single glass/bottle, centered, readable at 96 px, noir neon bar style, no text. Subject: Green Fairy Absinthe."
+    },
+    {
+      "key": "drink.lubricant-oil-shot",
+      "category": "items/drinks",
+      "name": "Lubricant Oil Shot",
+      "file": "assets/imagegen/drink.lubricant-oil-shot.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P1",
+      "prompt": "Casino bar drink inventory icon, single glass/bottle, centered, readable at 96 px, noir neon bar style, no text. Subject: Lubricant Oil Shot."
+    },
+    {
+      "key": "drink.nitrous-espresso",
+      "category": "items/drinks",
+      "name": "Nitrous Espresso",
+      "file": "assets/imagegen/drink.nitrous-espresso.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P1",
+      "prompt": "Casino bar drink inventory icon, single glass/bottle, centered, readable at 96 px, noir neon bar style, no text. Subject: Nitrous Espresso."
+    },
+    {
+      "key": "floor.FLOOR_CRYO.bg",
+      "category": "floors",
+      "name": "Cryo floor background",
+      "file": "assets/imagegen/floor.FLOOR_CRYO.bg.png",
+      "size": "1920x1080",
+      "alpha": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P0",
+      "prompt": "Full-bleed 16:9 casino floor background plate, no characters, no UI, no text, no logos, dark cinematic obsidian-noir lighting, safe empty centre for gameplay. Subject: Cryo floor background."
+    },
+    {
+      "key": "floor.FLOOR_FOUNDRY.bg",
+      "category": "floors",
+      "name": "Foundry floor background",
+      "file": "assets/imagegen/floor.FLOOR_FOUNDRY.bg.png",
+      "size": "1920x1080",
+      "alpha": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P0",
+      "prompt": "Full-bleed 16:9 casino floor background plate, no characters, no UI, no text, no logos, dark cinematic obsidian-noir lighting, safe empty centre for gameplay. Subject: Foundry floor background."
+    },
+    {
+      "key": "floor.FLOOR_NEON.bg",
+      "category": "floors",
+      "name": "Neon floor background",
+      "file": "assets/imagegen/floor.FLOOR_NEON.bg.png",
+      "size": "1920x1080",
+      "alpha": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P0",
+      "prompt": "Full-bleed 16:9 casino floor background plate, no characters, no UI, no text, no logos, dark cinematic obsidian-noir lighting, safe empty centre for gameplay. Subject: Neon floor background."
+    },
+    {
+      "key": "floor.FLOOR_PENTHOUSE.bg",
+      "category": "floors",
+      "name": "Penthouse floor background",
+      "file": "assets/imagegen/floor.FLOOR_PENTHOUSE.bg.png",
+      "size": "1920x1080",
+      "alpha": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P0",
+      "prompt": "Full-bleed 16:9 casino floor background plate, no characters, no UI, no text, no logos, dark cinematic obsidian-noir lighting, safe empty centre for gameplay. Subject: Penthouse floor background."
+    },
+    {
+      "key": "glyph.blood-diamond",
+      "category": "items/glyphs",
+      "name": "Blood Diamond",
+      "file": "assets/imagegen/glyph.blood-diamond.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P1",
+      "prompt": "Reel glyph upgrade icon, single engraved symbol, centered, readable at 96 px, obsidian-noir style, no text. Subject: Blood Diamond."
+    },
+    {
+      "key": "glyph.cherry",
+      "category": "items/glyphs",
+      "name": "Splitter Cherry",
+      "file": "assets/imagegen/glyph.cherry.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P1",
+      "prompt": "Reel glyph upgrade icon, single engraved symbol, centered, readable at 96 px, obsidian-noir style, no text. Subject: Splitter Cherry."
+    },
+    {
+      "key": "glyph.lucky-seven",
+      "category": "items/glyphs",
+      "name": "Lucky Seven",
+      "file": "assets/imagegen/glyph.lucky-seven.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P1",
+      "prompt": "Reel glyph upgrade icon, single engraved symbol, centered, readable at 96 px, obsidian-noir style, no text. Subject: Lucky Seven."
+    },
+    {
+      "key": "glyph.magnet-skull",
+      "category": "items/glyphs",
+      "name": "Magnet Skull",
+      "file": "assets/imagegen/glyph.magnet-skull.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P1",
+      "prompt": "Reel glyph upgrade icon, single engraved symbol, centered, readable at 96 px, obsidian-noir style, no text. Subject: Magnet Skull."
+    },
+    {
+      "key": "glyph.uranium",
+      "category": "items/glyphs",
+      "name": "Uranium-235",
+      "file": "assets/imagegen/glyph.uranium.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P1",
+      "prompt": "Reel glyph upgrade icon, single engraved symbol, centered, readable at 96 px, obsidian-noir style, no text. Subject: Uranium-235."
+    },
+    {
+      "key": "peg.bumper",
+      "category": "pegs",
+      "name": "Bumper peg",
+      "file": "assets/imagegen/peg.bumper.png",
+      "size": "128x128",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P0",
+      "prompt": "Pachinko peg sprite, front view, compact metallic/neon object, readable at 32 px. Subject: Bumper peg."
+    },
+    {
+      "key": "peg.gold",
+      "category": "pegs",
+      "name": "Gold peg",
+      "file": "assets/imagegen/peg.gold.png",
+      "size": "128x128",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P0",
+      "prompt": "Pachinko peg sprite, front view, compact metallic/neon object, readable at 32 px. Subject: Gold peg."
+    },
+    {
+      "key": "peg.golden",
+      "category": "pegs",
+      "name": "Golden peg",
+      "file": "assets/imagegen/peg.golden.png",
+      "size": "128x128",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P0",
+      "prompt": "Pachinko peg sprite, front view, compact metallic/neon object, readable at 32 px. Subject: Golden peg."
+    },
+    {
+      "key": "peg.splitter",
+      "category": "pegs",
+      "name": "Splitter peg",
+      "file": "assets/imagegen/peg.splitter.png",
+      "size": "128x128",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P0",
+      "prompt": "Pachinko peg sprite, front view, compact metallic/neon object, readable at 32 px. Subject: Splitter peg."
+    },
+    {
+      "key": "symbol.cherry",
+      "category": "symbols",
+      "name": "Splitter Cherry",
+      "file": "assets/imagegen/symbol.cherry.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P0",
+      "prompt": "Casino reel symbol icon, centered, readable at 96 px, dark obsidian-noir style with cinematic gold/cyan/emerald accents. Subject: Splitter Cherry."
+    },
+    {
+      "key": "symbol.diamond",
+      "category": "symbols",
+      "name": "Blood Diamond",
+      "file": "assets/imagegen/symbol.diamond.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P0",
+      "prompt": "Casino reel symbol icon, centered, readable at 96 px, dark obsidian-noir style with cinematic gold/cyan/emerald accents. Subject: Blood Diamond."
+    },
+    {
+      "key": "symbol.scrap",
+      "category": "symbols",
+      "name": "Scrap Orb",
+      "file": "assets/imagegen/symbol.scrap.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P0",
+      "prompt": "Casino reel symbol icon, centered, readable at 96 px, dark obsidian-noir style with cinematic gold/cyan/emerald accents. Subject: Scrap Orb."
+    },
+    {
+      "key": "symbol.seven",
+      "category": "symbols",
+      "name": "Overclocked Seven",
+      "file": "assets/imagegen/symbol.seven.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P0",
+      "prompt": "Casino reel symbol icon, centered, readable at 96 px, dark obsidian-noir style with cinematic gold/cyan/emerald accents. Subject: Overclocked Seven."
+    },
+    {
+      "key": "symbol.skull",
+      "category": "symbols",
+      "name": "Magnet Skull",
+      "file": "assets/imagegen/symbol.skull.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P0",
+      "prompt": "Casino reel symbol icon, centered, readable at 96 px, dark obsidian-noir style with cinematic gold/cyan/emerald accents. Subject: Magnet Skull."
+    },
+    {
+      "key": "symbol.uranium",
+      "category": "symbols",
+      "name": "Uranium-235",
+      "file": "assets/imagegen/symbol.uranium.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P0",
+      "prompt": "Casino reel symbol icon, centered, readable at 96 px, dark obsidian-noir style with cinematic gold/cyan/emerald accents. Subject: Uranium-235."
+    },
+    {
+      "key": "token.bullion",
+      "category": "tokens",
+      "name": "Bullion token",
+      "file": "assets/imagegen/token.bullion.png",
+      "size": "256x256",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P0",
+      "prompt": "Physical casino coin/token sprite, slight 3/4 top view, metallic rim, readable at 64 px, obsidian-noir palette. Subject: Bullion token."
+    },
+    {
+      "key": "token.cherry",
+      "category": "tokens",
+      "name": "Splitter Cherry token",
+      "file": "assets/imagegen/token.cherry.png",
+      "size": "256x256",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P0",
+      "prompt": "Physical casino coin/token sprite, slight 3/4 top view, metallic rim, readable at 64 px, obsidian-noir palette. Subject: Splitter Cherry token."
+    },
+    {
+      "key": "token.copper",
+      "category": "tokens",
+      "name": "Copper token",
+      "file": "assets/imagegen/token.copper.png",
+      "size": "256x256",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P0",
+      "prompt": "Physical casino coin/token sprite, slight 3/4 top view, metallic rim, readable at 64 px, obsidian-noir palette. Subject: Copper token."
+    },
+    {
+      "key": "token.diamond",
+      "category": "tokens",
+      "name": "Blood Diamond token",
+      "file": "assets/imagegen/token.diamond.png",
+      "size": "256x256",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P0",
+      "prompt": "Physical casino coin/token sprite, slight 3/4 top view, metallic rim, readable at 64 px, obsidian-noir palette. Subject: Blood Diamond token."
+    },
+    {
+      "key": "token.ice",
+      "category": "tokens",
+      "name": "Ice token",
+      "file": "assets/imagegen/token.ice.png",
+      "size": "256x256",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P0",
+      "prompt": "Physical casino coin/token sprite, slight 3/4 top view, metallic rim, readable at 64 px, obsidian-noir palette. Subject: Ice token."
+    },
+    {
+      "key": "token.skull",
+      "category": "tokens",
+      "name": "Magnet Skull token",
+      "file": "assets/imagegen/token.skull.png",
+      "size": "256x256",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P0",
+      "prompt": "Physical casino coin/token sprite, slight 3/4 top view, metallic rim, readable at 64 px, obsidian-noir palette. Subject: Magnet Skull token."
+    },
+    {
+      "key": "token.uranium",
+      "category": "tokens",
+      "name": "Uranium-235 token",
+      "file": "assets/imagegen/token.uranium.png",
+      "size": "256x256",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P0",
+      "prompt": "Physical casino coin/token sprite, slight 3/4 top view, metallic rim, readable at 64 px, obsidian-noir palette. Subject: Uranium-235 token."
+    },
+    {
+      "key": "trinket.electromagnetic-hopper",
+      "category": "items/trinkets",
+      "name": "Electromagnetic Hopper",
+      "file": "assets/imagegen/trinket.electromagnetic-hopper.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P1",
+      "prompt": "Collectible machine-part trinket inventory icon, single object, centered, readable at 96 px, obsidian-noir steampunk-casino style, no text. Subject: Electromagnetic Hopper."
+    },
+    {
+      "key": "trinket.gold-peg-alchemist",
+      "category": "items/trinkets",
+      "name": "Gold Peg Alchemist",
+      "file": "assets/imagegen/trinket.gold-peg-alchemist.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P1",
+      "prompt": "Collectible machine-part trinket inventory icon, single object, centered, readable at 96 px, obsidian-noir steampunk-casino style, no text. Subject: Gold Peg Alchemist."
+    },
+    {
+      "key": "trinket.gutter-guard-bumper",
+      "category": "items/trinkets",
+      "name": "Gutter Guard Bumper",
+      "file": "assets/imagegen/trinket.gutter-guard-bumper.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P1",
+      "prompt": "Collectible machine-part trinket inventory icon, single object, centered, readable at 96 px, obsidian-noir steampunk-casino style, no text. Subject: Gutter Guard Bumper."
+    },
+    {
+      "key": "trinket.hydraulic-dozer-piston",
+      "category": "items/trinkets",
+      "name": "Hydraulic Dozer Piston",
+      "file": "assets/imagegen/trinket.hydraulic-dozer-piston.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P1",
+      "prompt": "Collectible machine-part trinket inventory icon, single object, centered, readable at 96 px, obsidian-noir steampunk-casino style, no text. Subject: Hydraulic Dozer Piston."
+    },
+    {
+      "key": "trinket.loaded-platinum-die",
+      "category": "items/trinkets",
+      "name": "Loaded Platinum Die",
+      "file": "assets/imagegen/trinket.loaded-platinum-die.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P1",
+      "prompt": "Collectible machine-part trinket inventory icon, single object, centered, readable at 96 px, obsidian-noir steampunk-casino style, no text. Subject: Loaded Platinum Die."
+    },
+    {
+      "key": "trinket.midas-lip-sensor",
+      "category": "items/trinkets",
+      "name": "Midas Lip Sensor",
+      "file": "assets/imagegen/trinket.midas-lip-sensor.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P1",
+      "prompt": "Collectible machine-part trinket inventory icon, single object, centered, readable at 96 px, obsidian-noir steampunk-casino style, no text. Subject: Midas Lip Sensor."
+    },
+    {
+      "key": "trinket.ouroboros-capacitor",
+      "category": "items/trinkets",
+      "name": "Ouroboros Capacitor",
+      "file": "assets/imagegen/trinket.ouroboros-capacitor.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P1",
+      "prompt": "Collectible machine-part trinket inventory icon, single object, centered, readable at 96 px, obsidian-noir steampunk-casino style, no text. Subject: Ouroboros Capacitor."
+    },
+    {
+      "key": "trinket.overvolted-solenoid",
+      "category": "items/trinkets",
+      "name": "Overvolted Solenoid",
+      "file": "assets/imagegen/trinket.overvolted-solenoid.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P1",
+      "prompt": "Collectible machine-part trinket inventory icon, single object, centered, readable at 96 px, obsidian-noir steampunk-casino style, no text. Subject: Overvolted Solenoid."
+    },
+    {
+      "key": "trinket.quantum-splitter-coil",
+      "category": "items/trinkets",
+      "name": "Quantum Splitter Coil",
+      "file": "assets/imagegen/trinket.quantum-splitter-coil.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P1",
+      "prompt": "Collectible machine-part trinket inventory icon, single object, centered, readable at 96 px, obsidian-noir steampunk-casino style, no text. Subject: Quantum Splitter Coil."
+    },
+    {
+      "key": "trinket.rubber-gutter-bumper",
+      "category": "items/trinkets",
+      "name": "Rubber Gutter Bumper",
+      "file": "assets/imagegen/trinket.rubber-gutter-bumper.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P1",
+      "prompt": "Collectible machine-part trinket inventory icon, single object, centered, readable at 96 px, obsidian-noir steampunk-casino style, no text. Subject: Rubber Gutter Bumper."
+    },
+    {
+      "key": "trinket.tesla-peg-capacitor",
+      "category": "items/trinkets",
+      "name": "Tesla Peg Capacitor",
+      "file": "assets/imagegen/trinket.tesla-peg-capacitor.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P1",
+      "prompt": "Collectible machine-part trinket inventory icon, single object, centered, readable at 96 px, obsidian-noir steampunk-casino style, no text. Subject: Tesla Peg Capacitor."
+    },
+    {
+      "key": "trinket.turbo-dozer-cam",
+      "category": "items/trinkets",
+      "name": "Turbo Dozer Cam",
+      "file": "assets/imagegen/trinket.turbo-dozer-cam.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P1",
+      "prompt": "Collectible machine-part trinket inventory icon, single object, centered, readable at 96 px, obsidian-noir steampunk-casino style, no text. Subject: Turbo Dozer Cam."
+    },
+    {
+      "key": "trinket.vampiric-rake-collector",
+      "category": "items/trinkets",
+      "name": "Vampiric Rake Collector",
+      "file": "assets/imagegen/trinket.vampiric-rake-collector.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P1",
+      "prompt": "Collectible machine-part trinket inventory icon, single object, centered, readable at 96 px, obsidian-noir steampunk-casino style, no text. Subject: Vampiric Rake Collector."
+    },
+    {
+      "key": "trinket.vampiric-stepper-motor",
+      "category": "items/trinkets",
+      "name": "Vampiric Stepper Motor",
+      "file": "assets/imagegen/trinket.vampiric-stepper-motor.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P1",
+      "prompt": "Collectible machine-part trinket inventory icon, single object, centered, readable at 96 px, obsidian-noir steampunk-casino style, no text. Subject: Vampiric Stepper Motor."
+    },
+    {
+      "key": "trinket.vip-bullion-stamp",
+      "category": "items/trinkets",
+      "name": "VIP Bullion Stamp",
+      "file": "assets/imagegen/trinket.vip-bullion-stamp.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P1",
+      "prompt": "Collectible machine-part trinket inventory icon, single object, centered, readable at 96 px, obsidian-noir steampunk-casino style, no text. Subject: VIP Bullion Stamp."
+    },
+    {
+      "key": "ui.bezel",
+      "category": "ui",
+      "name": "Bezel trim",
+      "file": "assets/imagegen/ui.bezel.png",
+      "size": "1024x1024",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P0",
+      "prompt": "UI sprite/texture, isolated on transparent background, ornamental obsidian-and-gold casino machine style, no text, no labels, no watermark; design so it can be cropped or nine-sliced. Subject: Bezel trim."
+    },
+    {
+      "key": "ui.button",
+      "category": "ui",
+      "name": "Ornate button",
+      "file": "assets/imagegen/ui.button.png",
+      "size": "1024x1024",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P0",
+      "prompt": "UI sprite/texture, isolated on transparent background, ornamental obsidian-and-gold casino machine style, no text, no labels, no watermark; design so it can be cropped or nine-sliced. Subject: Ornate button."
+    },
+    {
+      "key": "ui.cabinet",
+      "category": "ui",
+      "name": "Cabinet frame",
+      "file": "assets/imagegen/ui.cabinet.png",
+      "size": "1024x1024",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P0",
+      "prompt": "UI sprite/texture, isolated on transparent background, ornamental obsidian-and-gold casino machine style, no text, no labels, no watermark; design so it can be cropped or nine-sliced. Subject: Cabinet frame."
+    },
+    {
+      "key": "ui.dozer",
+      "category": "ui",
+      "name": "Dozer blade",
+      "file": "assets/imagegen/ui.dozer.png",
+      "size": "1024x1024",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P0",
+      "prompt": "UI sprite/texture, isolated on transparent background, ornamental obsidian-and-gold casino machine style, no text, no labels, no watermark; design so it can be cropped or nine-sliced. Subject: Dozer blade."
+    },
+    {
+      "key": "ui.gutter",
+      "category": "ui",
+      "name": "Gutter rail",
+      "file": "assets/imagegen/ui.gutter.png",
+      "size": "1024x1024",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P0",
+      "prompt": "UI sprite/texture, isolated on transparent background, ornamental obsidian-and-gold casino machine style, no text, no labels, no watermark; design so it can be cropped or nine-sliced. Subject: Gutter rail."
+    },
+    {
+      "key": "ui.lip",
+      "category": "ui",
+      "name": "Pusher lip",
+      "file": "assets/imagegen/ui.lip.png",
+      "size": "1024x1024",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P0",
+      "prompt": "UI sprite/texture, isolated on transparent background, ornamental obsidian-and-gold casino machine style, no text, no labels, no watermark; design so it can be cropped or nine-sliced. Subject: Pusher lip."
+    },
+    {
+      "key": "ui.panel",
+      "category": "ui",
+      "name": "UI panel",
+      "file": "assets/imagegen/ui.panel.png",
+      "size": "1024x1024",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P0",
+      "prompt": "UI sprite/texture, isolated on transparent background, ornamental obsidian-and-gold casino machine style, no text, no labels, no watermark; design so it can be cropped or nine-sliced. Subject: UI panel."
+    },
+    {
+      "key": "vfx.coinburst",
+      "category": "vfx",
+      "name": "Coin burst",
+      "file": "assets/imagegen/vfx.coinburst.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P0",
+      "prompt": "VFX sprite/impact texture, isolated on transparent background, additive-friendly bright core with soft falloff, no text, no watermark. Subject: Coin burst."
+    },
+    {
+      "key": "vfx.freeze",
+      "category": "vfx",
+      "name": "Frost burst",
+      "file": "assets/imagegen/vfx.freeze.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P0",
+      "prompt": "VFX sprite/impact texture, isolated on transparent background, additive-friendly bright core with soft falloff, no text, no watermark. Subject: Frost burst."
+    },
+    {
+      "key": "vfx.shock",
+      "category": "vfx",
+      "name": "Shockwave",
+      "file": "assets/imagegen/vfx.shock.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P0",
+      "prompt": "VFX sprite/impact texture, isolated on transparent background, additive-friendly bright core with soft falloff, no text, no watermark. Subject: Shockwave."
+    },
+    {
+      "key": "vfx.spark",
+      "category": "vfx",
+      "name": "Spark burst",
+      "file": "assets/imagegen/vfx.spark.png",
+      "size": "512x512",
+      "alpha": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "priority": "P0",
+      "prompt": "VFX sprite/impact texture, isolated on transparent background, additive-friendly bright core with soft falloff, no text, no watermark. Subject: Spark burst."
+    }
+  ]
+}

@@ -159,6 +159,8 @@ importers:
         specifier: workspace:*
         version: link:../contracts
 
+  tools/assets: {}
+
   tools/sim: {}
 
 packages:
