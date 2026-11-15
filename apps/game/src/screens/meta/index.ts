@@ -35,7 +35,14 @@ export {
   ResumeScreen,
   type ResumePromptProps,
 } from './ResumePrompt';
-export { RoundResult, RoundResultScreen, type RoundResultScreenProps } from './RoundResult';
+export {
+  RoundResult,
+  RoundResultOverlay,
+  RoundResultScreen,
+  type RoundResultScreenProps,
+} from './RoundResult';
+export { cleanSeed, randomSeed } from './seed';
+export { CATEGORY_LABEL, PipMeter, RARITY_LABEL, SeedCard, StatTile, rarityClass } from './ui';
 export { SeedEntry, SeedEntryScreen, type SeedEntryProps } from './SeedEntry';
 export { Shop, ShopScreen, ShopStub, type ShopScreenProps } from './Shop';
 export { Victory, VictoryScreen, VictoryStub, type VictoryScreenProps } from './Victory';

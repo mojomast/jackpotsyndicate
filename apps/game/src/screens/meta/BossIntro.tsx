@@ -1,4 +1,5 @@
 /** @jsxRuntime automatic */
+import { useEffect, useRef } from 'react';
 import { useGameStore } from '../../store/gameStore';
 import { dispatchMeta } from './commands';
 import {
@@ -6,10 +7,10 @@ import {
   bossForFloor,
   bossForFloorId,
   floorName,
-  formatCash,
+  floorOrder,
 } from './metaContent';
 import { BossBar, BossTugOfWar, TugOfWarBar } from './BossBar';
-import { MetaNotice, MetaScreen } from './MetaScreen';
+import { MetaNotice } from './MetaScreen';
 import { SpriteImage } from '../../components/Artwork';
 import { RelicPicker } from './Pickers';
 import { useMetaAutosave } from './persistence';
@@ -19,11 +20,18 @@ export interface BossIntroScreenProps {
   onNavigate?: MetaNavigate;
 }
 
+/** R-BOS-01: the boss walks on, states the house rule, and the duel begins. */
 export function BossIntroScreen({ onNavigate }: BossIntroScreenProps) {
   useMetaAutosave();
   const state = useGameStore((store) => store.state);
   const boss = bossForFloor(state.floorId);
   const bossId = bossForFloorId(state.floorId);
+  const beginRef = useRef<HTMLButtonElement | null>(null);
+  const canBegin = state.phase === 'BOSS_INTRO';
+
+  useEffect(() => {
+    if (canBegin) beginRef.current?.focus({ preventScroll: true });
+  }, [canBegin]);
 
   if (state.phase === 'RELIC_PICK') {
     return <RelicPicker onNavigate={onNavigate} />;
@@ -31,7 +39,7 @@ export function BossIntroScreen({ onNavigate }: BossIntroScreenProps) {
 
   const playerScore = state.roundCash;
   const bossScore = state.boss?.score ?? 0;
-  const canBegin = state.phase === 'BOSS_INTRO';
+  const name = boss?.name ?? 'The boss';
 
   const begin = () => {
     if (canBegin) {
@@ -43,69 +51,77 @@ export function BossIntroScreen({ onNavigate }: BossIntroScreenProps) {
   };
 
   return (
-    <MetaScreen
-      eyebrow="Floor boss · R-BOS-01"
-      title={boss?.name ?? 'Boss intro'}
-      description={
-        boss?.tagline ??
-        'A head-to-head duel. The player banks round cash; the boss scores once per spin.'
-      }
-      testId="boss-intro"
+    <section
+      className={`screen meta-screen meta-stage boss-screen boss-${bossId}`}
+      data-testid="boss-intro"
+      aria-labelledby="boss-name"
     >
+      <div className="boss-stage" aria-hidden="true">
+        <span className="boss-spotlight" />
+        <span className="boss-smoke" />
+      </div>
+
       <div className="boss-layout">
-        <div className="boss-dossier panel">
+        <div className="boss-portrait-wrap">
           <SpriteImage
             spriteKey={boss?.spriteKey}
             className="boss-intro-portrait"
             decorative={false}
-            alt={boss?.name ?? 'Boss portrait'}
+            alt={`${name}, portrait`}
           />
-          <span className="eyebrow">{floorName(state.floorId)} · round {state.round}</span>
-          <h2>{boss?.name ?? bossId}</h2>
-          <p>{BOSS_SABOTAGE[bossId]}</p>
+        </div>
+
+        <div className="boss-dossier">
+          <p className="eyebrow boss-eyebrow">
+            Floor {floorOrder(state.floorId)} boss · {floorName(state.floorId)}
+          </p>
+          <h1 className="boss-name" id="boss-name">{name}</h1>
+          <p className="boss-tagline">{boss?.tagline ?? 'Head-to-head duel'}</p>
+
+          <div className="house-rule">
+            <span className="house-rule-label">House rule</span>
+            <p className="house-rule-text">{BOSS_SABOTAGE[bossId]}</p>
+          </div>
+
+          <BossBar
+            playerScore={playerScore}
+            bossScore={bossScore}
+            bossName={name}
+            pending={state.phase === 'BOSS_INTRO' || state.spinsLeft > 0}
+          />
+
           <dl className="boss-facts">
             <div>
-              <dt>Player round cash</dt>
-              <dd>{formatCash(playerScore)}</dd>
-            </div>
-            <div>
-              <dt>Boss score</dt>
-              <dd>{formatCash(bossScore)}</dd>
-            </div>
-            <div>
-              <dt>Spins left</dt>
+              <dt>Spins</dt>
               <dd>{state.spinsLeft}</dd>
             </div>
             <div>
               <dt>Quota</dt>
-              <dd>None in boss rounds (D-04)</dd>
+              <dd>None</dd>
+            </div>
+            <div>
+              <dt>Stakes</dt>
+              <dd>Relic or ruin</dd>
             </div>
           </dl>
+
           {state.boss === null && state.phase !== 'BOSS_INTRO' ? (
-            <MetaNotice tone="info">
-              The boss round has not started on this floor yet.
-            </MetaNotice>
+            <MetaNotice tone="info">The boss round has not started on this floor yet.</MetaNotice>
           ) : null}
-          <div className="stub-actions">
-            <button type="button" className="btn btn-primary" onClick={begin}>
+
+          <div className="screen-actions">
+            <button
+              type="button"
+              className={`btn btn-lg ${canBegin ? 'btn-danger-solid' : 'btn-secondary'}`}
+              onClick={begin}
+              ref={beginRef}
+            >
               {canBegin ? 'Begin boss round' : 'Back to table'}
             </button>
           </div>
         </div>
-
-        <BossBar
-          playerScore={playerScore}
-          bossScore={bossScore}
-          bossName={boss?.name ?? bossId}
-          pending={state.phase === 'BOSS_INTRO' || state.spinsLeft > 0}
-        />
       </div>
-
-      <p className="meta-hint">
-        Sabotage resolves before the spin. Boss scores are fixed per seed, so the
-        same seed always produces the same duel.
-      </p>
-    </MetaScreen>
+    </section>
   );
 }
 
