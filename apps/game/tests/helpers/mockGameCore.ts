@@ -124,7 +124,6 @@ function fnv64(input: string): string {
 }
 
 type ScheduledEvent = { at: number; event: GameEvent };
-type SpinEvalEvent = Extract<GameEvent, { t: 'SpinEvaluated' }>;
 
 export class MockGameCore extends MockGameCoreBrand implements GameCore {
   private state: RunState;

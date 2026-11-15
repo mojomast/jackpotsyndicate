@@ -62,7 +62,6 @@ import {
   drinkRefs,
   engineHash,
   findCoin,
-  getWiringEvaluator,
   hashString,
   loadSave,
   planBossSpin,
