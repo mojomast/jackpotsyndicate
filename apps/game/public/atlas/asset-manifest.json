@@ -1,0 +1,428 @@
+{
+  "boss.auditor": {
+    "file": "placeholders/boss.auditor.svg",
+    "placeholder": true,
+    "sha256": "7c29f12e57c28336c0f80383637ed17d6e89ba7537093e291d9fefab73ac5a3f",
+    "source": "placeholder:obsidian-noir:boss.auditor"
+  },
+  "boss.valenti": {
+    "file": "placeholders/boss.valenti.svg",
+    "placeholder": true,
+    "sha256": "756c0c1d30a9c58ccdbca9c139393558361bf6aeba9b0f31aa5af88603683bfe",
+    "source": "placeholder:obsidian-noir:boss.valenti"
+  },
+  "boss.zero": {
+    "file": "placeholders/boss.zero.svg",
+    "placeholder": true,
+    "sha256": "bddb1e07c0785611bbf2a768ef86652efb3a3cc41bff704f483f8784decba30a",
+    "source": "placeholder:obsidian-noir:boss.zero"
+  },
+  "chassis.harness-cluster": {
+    "file": "placeholders/chassis.harness-cluster.svg",
+    "placeholder": true,
+    "sha256": "c3cee46e01e4d83a5c7e8519af537ead221f5694a9db8f78093365b1a0deff58",
+    "source": "placeholder:obsidian-noir:chassis.harness-cluster"
+  },
+  "chassis.harness-hyper": {
+    "file": "placeholders/chassis.harness-hyper.svg",
+    "placeholder": true,
+    "sha256": "b1743032b077212159fcdc9728ca76ea076053ca985779338cc94739493f8752",
+    "source": "placeholder:obsidian-noir:chassis.harness-hyper"
+  },
+  "chassis.harness-ways": {
+    "file": "placeholders/chassis.harness-ways.svg",
+    "placeholder": true,
+    "sha256": "62f3c67ba3e19ad8e75261765e85e54f75d0af5c3a2f464620d6baecbf7f0193",
+    "source": "placeholder:obsidian-noir:chassis.harness-ways"
+  },
+  "chassis.jumper-wire": {
+    "file": "placeholders/chassis.jumper-wire.svg",
+    "placeholder": true,
+    "sha256": "2d5504a9c7a4699e71db4f619286e017d4aea4aabfd321617fa0cbabfda09f57",
+    "source": "placeholder:obsidian-noir:chassis.jumper-wire"
+  },
+  "chassis.overvolt": {
+    "file": "placeholders/chassis.overvolt.svg",
+    "placeholder": true,
+    "sha256": "8306b9732d27987759fc63f5617da8cf63602ef1c562f5838f4c586c91db0dd0",
+    "source": "placeholder:obsidian-noir:chassis.overvolt"
+  },
+  "chassis.reel-column": {
+    "file": "placeholders/chassis.reel-column.svg",
+    "placeholder": true,
+    "sha256": "9cd90db6d32cdcbf2298332b1ef903f2f048a0779832cf74b5554e0d199d8df9",
+    "source": "placeholder:obsidian-noir:chassis.reel-column"
+  },
+  "chassis.row": {
+    "file": "placeholders/chassis.row.svg",
+    "placeholder": true,
+    "sha256": "7f9c3a1cda9cc3c936decbd341f9bfc692759e63f67da448eaff5c312e53ecc1",
+    "source": "placeholder:obsidian-noir:chassis.row"
+  },
+  "coin.blood-doubloon": {
+    "file": "placeholders/coin.blood-doubloon.svg",
+    "placeholder": true,
+    "sha256": "0868417d1dcfa99a775f7fde54845e603e00d489f1197a7d2375782385fe1ff9",
+    "source": "placeholder:obsidian-noir:coin.blood-doubloon"
+  },
+  "coin.copper-token": {
+    "file": "placeholders/coin.copper-token.svg",
+    "placeholder": true,
+    "sha256": "2aff17e05fe7bd961a402d71bd1550d3323d7fccc216d8406145ffb39ec42773",
+    "source": "placeholder:obsidian-noir:coin.copper-token"
+  },
+  "coin.heavy-lead-slug": {
+    "file": "placeholders/coin.heavy-lead-slug.svg",
+    "placeholder": true,
+    "sha256": "a9b50e76ac61aa5b1cefc551ebabb94d2bcd99f5c093ef3f8294ffedf6209d25",
+    "source": "placeholder:obsidian-noir:coin.heavy-lead-slug"
+  },
+  "coin.polymer-superball": {
+    "file": "placeholders/coin.polymer-superball.svg",
+    "placeholder": true,
+    "sha256": "b5b7d2c40626ab49cb19f5351afa5b414fbe91ee0c01f844bfa1e022bc98d0d2",
+    "source": "placeholder:obsidian-noir:coin.polymer-superball"
+  },
+  "drink.alchemist-absinthe": {
+    "file": "placeholders/drink.alchemist-absinthe.svg",
+    "placeholder": true,
+    "sha256": "62adcbc5448cd24b24d61026e1148c23990fd741a1683500be5fe17b9941b153",
+    "source": "placeholder:obsidian-noir:drink.alchemist-absinthe"
+  },
+  "drink.dirty-syndicate-martini": {
+    "file": "placeholders/drink.dirty-syndicate-martini.svg",
+    "placeholder": true,
+    "sha256": "710cb095e85b939eb65d9b952165357ab5263fb8128255562b69174936fbec2d",
+    "source": "placeholder:obsidian-noir:drink.dirty-syndicate-martini"
+  },
+  "drink.green-fairy-absinthe": {
+    "file": "placeholders/drink.green-fairy-absinthe.svg",
+    "placeholder": true,
+    "sha256": "a09932925550da736716c708be62a17b22c1493c635076b6aa77ec0d2d6e8489",
+    "source": "placeholder:obsidian-noir:drink.green-fairy-absinthe"
+  },
+  "drink.lubricant-oil-shot": {
+    "file": "placeholders/drink.lubricant-oil-shot.svg",
+    "placeholder": true,
+    "sha256": "651f15a8e416d0f4b65a3402a06639d9ebb112af5981dea3b5ae96eca4dba1bf",
+    "source": "placeholder:obsidian-noir:drink.lubricant-oil-shot"
+  },
+  "drink.nitrous-espresso": {
+    "file": "placeholders/drink.nitrous-espresso.svg",
+    "placeholder": true,
+    "sha256": "d6693ae3299461d23b5340cf5a08a1d8b3c93f0a8c3276827d3600e13736aeea",
+    "source": "placeholder:obsidian-noir:drink.nitrous-espresso"
+  },
+  "floor.FLOOR_CRYO.bg": {
+    "file": "placeholders/floor.FLOOR_CRYO.bg.svg",
+    "placeholder": true,
+    "sha256": "0c8d39b12733346823b26e4d5fa12ec70bb50ea322e4c69d2be4a58596476f8b",
+    "source": "placeholder:obsidian-noir:floor.FLOOR_CRYO.bg"
+  },
+  "floor.FLOOR_FOUNDRY.bg": {
+    "file": "placeholders/floor.FLOOR_FOUNDRY.bg.svg",
+    "placeholder": true,
+    "sha256": "77ea9bdca38904ce7c8bf993324c84430abdb8d1f6d73ca594f251486bf98de0",
+    "source": "placeholder:obsidian-noir:floor.FLOOR_FOUNDRY.bg"
+  },
+  "floor.FLOOR_NEON.bg": {
+    "file": "placeholders/floor.FLOOR_NEON.bg.svg",
+    "placeholder": true,
+    "sha256": "286974248e875b62e62564f1bea08cd08cd7af52337d69ea8b862d4b02326b19",
+    "source": "placeholder:obsidian-noir:floor.FLOOR_NEON.bg"
+  },
+  "floor.FLOOR_PENTHOUSE.bg": {
+    "file": "placeholders/floor.FLOOR_PENTHOUSE.bg.svg",
+    "placeholder": true,
+    "sha256": "aa8ef9db0f76015a6f9be74f34c3eff994b7f62ca8d2599ff898dd4feca0a39d",
+    "source": "placeholder:obsidian-noir:floor.FLOOR_PENTHOUSE.bg"
+  },
+  "glyph.blood-diamond": {
+    "file": "placeholders/glyph.blood-diamond.svg",
+    "placeholder": true,
+    "sha256": "1fbf3cc4e414684aeb0f7036a173a2983d78dc901cc14bd0c10181d656f62f08",
+    "source": "placeholder:obsidian-noir:glyph.blood-diamond"
+  },
+  "glyph.cherry": {
+    "file": "placeholders/glyph.cherry.svg",
+    "placeholder": true,
+    "sha256": "ca6f46b99a49144f940144558208bbed7b8c28c4d3dda4240029c6d1593baa6b",
+    "source": "placeholder:obsidian-noir:glyph.cherry"
+  },
+  "glyph.lucky-seven": {
+    "file": "placeholders/glyph.lucky-seven.svg",
+    "placeholder": true,
+    "sha256": "0e1d4c4c35cf025cd3780667c879d153c277afa9b3c592e739d5c57d366d5f33",
+    "source": "placeholder:obsidian-noir:glyph.lucky-seven"
+  },
+  "glyph.magnet-skull": {
+    "file": "placeholders/glyph.magnet-skull.svg",
+    "placeholder": true,
+    "sha256": "e2e5d0c77edc19fa38df5cd3f1de5700d3a7d763394c1453a6f39a7b4b2b7a7a",
+    "source": "placeholder:obsidian-noir:glyph.magnet-skull"
+  },
+  "glyph.uranium": {
+    "file": "placeholders/glyph.uranium.svg",
+    "placeholder": true,
+    "sha256": "01b02c1183a0635dba1070721034bc88b289094021e173078a5e4647cb65adb1",
+    "source": "placeholder:obsidian-noir:glyph.uranium"
+  },
+  "peg.bumper": {
+    "file": "placeholders/peg.bumper.svg",
+    "placeholder": true,
+    "sha256": "099b9a33cd3d2f3c2f758415d5c44d8308c1812038806ad9233cfa30e1238843",
+    "source": "placeholder:obsidian-noir:peg.bumper"
+  },
+  "peg.gold": {
+    "file": "placeholders/peg.gold.svg",
+    "placeholder": true,
+    "sha256": "6ff91289ab2dfffb38957869196e711f1d11fbdc44087a172841aae3e889544f",
+    "source": "placeholder:obsidian-noir:peg.gold"
+  },
+  "peg.golden": {
+    "file": "placeholders/peg.golden.svg",
+    "placeholder": true,
+    "sha256": "4416362cd65b4e182b576f3570950545f7195851ee73abb9ad05016923234949",
+    "source": "placeholder:obsidian-noir:peg.golden"
+  },
+  "peg.splitter": {
+    "file": "placeholders/peg.splitter.svg",
+    "placeholder": true,
+    "sha256": "2854129727ff2a1510b18bc01a69492f89f6c10c06e37bdb38e35f7010564417",
+    "source": "placeholder:obsidian-noir:peg.splitter"
+  },
+  "symbol.cherry": {
+    "file": "placeholders/symbol.cherry.svg",
+    "placeholder": true,
+    "sha256": "872994a64aa06305d1ca4fdee128c43e636a079a5c5d1d4aa29a62fa9cb365c7",
+    "source": "placeholder:obsidian-noir:symbol.cherry"
+  },
+  "symbol.diamond": {
+    "file": "placeholders/symbol.diamond.svg",
+    "placeholder": true,
+    "sha256": "128276988909c2a6d3525cb93549bfe07877227623d118cca9d1cdd9520143a2",
+    "source": "placeholder:obsidian-noir:symbol.diamond"
+  },
+  "symbol.scrap": {
+    "file": "placeholders/symbol.scrap.svg",
+    "placeholder": true,
+    "sha256": "389119233ec3a95d5d713a140f7be250a6a7bb2459fc9efdd0be5c2ec13b7ca2",
+    "source": "placeholder:obsidian-noir:symbol.scrap"
+  },
+  "symbol.seven": {
+    "file": "placeholders/symbol.seven.svg",
+    "placeholder": true,
+    "sha256": "8963e1bb0e688f40c243989bbca17864ba1b1b0d2802bd6b79b92d2e7bba3edc",
+    "source": "placeholder:obsidian-noir:symbol.seven"
+  },
+  "symbol.skull": {
+    "file": "placeholders/symbol.skull.svg",
+    "placeholder": true,
+    "sha256": "45d09e6ee7147d8a313472e6c16727bfaa5cf8e2014ba939e58c8c2fefee8cdf",
+    "source": "placeholder:obsidian-noir:symbol.skull"
+  },
+  "symbol.uranium": {
+    "file": "placeholders/symbol.uranium.svg",
+    "placeholder": true,
+    "sha256": "b2e10e11c9868aecae04b9345de7ccd5c3526fd37fa1ec0e00736b047e580c21",
+    "source": "placeholder:obsidian-noir:symbol.uranium"
+  },
+  "token.bullion": {
+    "file": "placeholders/token.bullion.svg",
+    "placeholder": true,
+    "sha256": "72265bcc74ac421a785e0cba3ecdc118019a4cc6169bd2d462dd36c0a0e741a8",
+    "source": "placeholder:obsidian-noir:token.bullion"
+  },
+  "token.cherry": {
+    "file": "placeholders/token.cherry.svg",
+    "placeholder": true,
+    "sha256": "fe639405406a06a17ab587344e02e339eed839d9de08e4ab899c6d909a17e37c",
+    "source": "placeholder:obsidian-noir:token.cherry"
+  },
+  "token.copper": {
+    "file": "placeholders/token.copper.svg",
+    "placeholder": true,
+    "sha256": "4fc517d9f0d2f6a36d1a1115dbdb2f6c2064dc0132c6811bb1ab38cc25a6949e",
+    "source": "placeholder:obsidian-noir:token.copper"
+  },
+  "token.diamond": {
+    "file": "placeholders/token.diamond.svg",
+    "placeholder": true,
+    "sha256": "d90acc0ceee81223ec6b9c37f9faad61ee9d3f197e7c655eff2eae1403b19988",
+    "source": "placeholder:obsidian-noir:token.diamond"
+  },
+  "token.ice": {
+    "file": "placeholders/token.ice.svg",
+    "placeholder": true,
+    "sha256": "5a5022934ae353bfb7761460248a655faad41a721377e9020810223cb8925a71",
+    "source": "placeholder:obsidian-noir:token.ice"
+  },
+  "token.skull": {
+    "file": "placeholders/token.skull.svg",
+    "placeholder": true,
+    "sha256": "8aaa84e39cd91e36c5dfca146549e2c4d50d966deca34575770332e427f74663",
+    "source": "placeholder:obsidian-noir:token.skull"
+  },
+  "token.uranium": {
+    "file": "placeholders/token.uranium.svg",
+    "placeholder": true,
+    "sha256": "d57db3718153f8d4000e6827cf3e3adaba1dae7bbcbf4ca70ac31831c7cce7cb",
+    "source": "placeholder:obsidian-noir:token.uranium"
+  },
+  "trinket.electromagnetic-hopper": {
+    "file": "placeholders/trinket.electromagnetic-hopper.svg",
+    "placeholder": true,
+    "sha256": "c615bdcf0937a3b150f948ab8fa60d403c4619d46fedd9e3fb80d7aa932a8979",
+    "source": "placeholder:obsidian-noir:trinket.electromagnetic-hopper"
+  },
+  "trinket.gold-peg-alchemist": {
+    "file": "placeholders/trinket.gold-peg-alchemist.svg",
+    "placeholder": true,
+    "sha256": "0970e3053460d192b451ee35f4375d9193ea4809a949182f898816c6f0439591",
+    "source": "placeholder:obsidian-noir:trinket.gold-peg-alchemist"
+  },
+  "trinket.gutter-guard-bumper": {
+    "file": "placeholders/trinket.gutter-guard-bumper.svg",
+    "placeholder": true,
+    "sha256": "1cfe032d28101199871ef99cf92785de1e402d9c25bf7bc52ca16a038b547da7",
+    "source": "placeholder:obsidian-noir:trinket.gutter-guard-bumper"
+  },
+  "trinket.hydraulic-dozer-piston": {
+    "file": "placeholders/trinket.hydraulic-dozer-piston.svg",
+    "placeholder": true,
+    "sha256": "ef9b05a647d0e4dd66e8b0364b615a92a34d5172ce95e53ee89c02e3bc90c249",
+    "source": "placeholder:obsidian-noir:trinket.hydraulic-dozer-piston"
+  },
+  "trinket.loaded-platinum-die": {
+    "file": "placeholders/trinket.loaded-platinum-die.svg",
+    "placeholder": true,
+    "sha256": "721bc2f6190eed0aa985cee1c6c8807a5793241d7ff7bd38139b4a7e4c206ada",
+    "source": "placeholder:obsidian-noir:trinket.loaded-platinum-die"
+  },
+  "trinket.midas-lip-sensor": {
+    "file": "placeholders/trinket.midas-lip-sensor.svg",
+    "placeholder": true,
+    "sha256": "2d4089f0719326d79d06b6f7e94dab27782f5ce74c26bb098ef263d986a22e28",
+    "source": "placeholder:obsidian-noir:trinket.midas-lip-sensor"
+  },
+  "trinket.ouroboros-capacitor": {
+    "file": "placeholders/trinket.ouroboros-capacitor.svg",
+    "placeholder": true,
+    "sha256": "a8362812788e0253efe1c0943db9cfe8d41620142d29f30319f6a4e0ac823d7a",
+    "source": "placeholder:obsidian-noir:trinket.ouroboros-capacitor"
+  },
+  "trinket.overvolted-solenoid": {
+    "file": "placeholders/trinket.overvolted-solenoid.svg",
+    "placeholder": true,
+    "sha256": "0d4eea26f0354a14526ed02c2914472fb209f8b9df1583744da3767c6c2287e5",
+    "source": "placeholder:obsidian-noir:trinket.overvolted-solenoid"
+  },
+  "trinket.quantum-splitter-coil": {
+    "file": "placeholders/trinket.quantum-splitter-coil.svg",
+    "placeholder": true,
+    "sha256": "4408de984ef0cfd4937c355b66c526aaccafc2b2a7129e0d9eb867612f1e5fc2",
+    "source": "placeholder:obsidian-noir:trinket.quantum-splitter-coil"
+  },
+  "trinket.rubber-gutter-bumper": {
+    "file": "placeholders/trinket.rubber-gutter-bumper.svg",
+    "placeholder": true,
+    "sha256": "f085a97fb161911531e08c54650da3c453464ea42c1c44e8d618e6774573e4cb",
+    "source": "placeholder:obsidian-noir:trinket.rubber-gutter-bumper"
+  },
+  "trinket.tesla-peg-capacitor": {
+    "file": "placeholders/trinket.tesla-peg-capacitor.svg",
+    "placeholder": true,
+    "sha256": "b2d8a33994f8063a720e70b568c50a0a5db22cd6cf5c65c563bca811d7480157",
+    "source": "placeholder:obsidian-noir:trinket.tesla-peg-capacitor"
+  },
+  "trinket.turbo-dozer-cam": {
+    "file": "placeholders/trinket.turbo-dozer-cam.svg",
+    "placeholder": true,
+    "sha256": "9608eab556bbd9eac221a28b48bfb9f9fabb63b5b3b0d338323b0f4f8014d9db",
+    "source": "placeholder:obsidian-noir:trinket.turbo-dozer-cam"
+  },
+  "trinket.vampiric-rake-collector": {
+    "file": "placeholders/trinket.vampiric-rake-collector.svg",
+    "placeholder": true,
+    "sha256": "8d2b8ae49d103b1c46434fcb6c6080649056f82621d64c39953e0b725b946307",
+    "source": "placeholder:obsidian-noir:trinket.vampiric-rake-collector"
+  },
+  "trinket.vampiric-stepper-motor": {
+    "file": "placeholders/trinket.vampiric-stepper-motor.svg",
+    "placeholder": true,
+    "sha256": "bb3dd9de8d542be95d003defd254535a121e3d62d824cb92821cc58a9b108847",
+    "source": "placeholder:obsidian-noir:trinket.vampiric-stepper-motor"
+  },
+  "trinket.vip-bullion-stamp": {
+    "file": "placeholders/trinket.vip-bullion-stamp.svg",
+    "placeholder": true,
+    "sha256": "41a713d3b80f1e74b6b67d9c9d1205c7c2260be6f8bd960362b0f1377c6b782f",
+    "source": "placeholder:obsidian-noir:trinket.vip-bullion-stamp"
+  },
+  "ui.bezel": {
+    "file": "placeholders/ui.bezel.svg",
+    "placeholder": true,
+    "sha256": "45734a25f13ecf41987ec964d4eff0d6fcf412bf4ea46d52138a8769c07db4a6",
+    "source": "placeholder:obsidian-noir:ui.bezel"
+  },
+  "ui.button": {
+    "file": "placeholders/ui.button.svg",
+    "placeholder": true,
+    "sha256": "b79327be9d182e3ac06dd169d1c600fb1164b11acbea1171aab181b8db6aa445",
+    "source": "placeholder:obsidian-noir:ui.button"
+  },
+  "ui.cabinet": {
+    "file": "placeholders/ui.cabinet.svg",
+    "placeholder": true,
+    "sha256": "172c96fe1586e68c14502dd00a47009cb81a195829bef0e2d512d362879135ff",
+    "source": "placeholder:obsidian-noir:ui.cabinet"
+  },
+  "ui.dozer": {
+    "file": "placeholders/ui.dozer.svg",
+    "placeholder": true,
+    "sha256": "d26770fea8caac2753cd23725c163d52b09dadc233c4e541f48fb24e889313c6",
+    "source": "placeholder:obsidian-noir:ui.dozer"
+  },
+  "ui.gutter": {
+    "file": "placeholders/ui.gutter.svg",
+    "placeholder": true,
+    "sha256": "04b065b4588e4ec3818425cdca9d41c6b1e4187049e11bd93df2a1899612570d",
+    "source": "placeholder:obsidian-noir:ui.gutter"
+  },
+  "ui.lip": {
+    "file": "placeholders/ui.lip.svg",
+    "placeholder": true,
+    "sha256": "3f854bec281c125c01e9083298e45bae80a2a7297f310b2539ab07a272609f0f",
+    "source": "placeholder:obsidian-noir:ui.lip"
+  },
+  "ui.panel": {
+    "file": "placeholders/ui.panel.svg",
+    "placeholder": true,
+    "sha256": "21eb4b874c09c49b2db6f27b9f9e2c96541e6c57542df8e3db5d6350aa36ee4b",
+    "source": "placeholder:obsidian-noir:ui.panel"
+  },
+  "vfx.coinburst": {
+    "file": "placeholders/vfx.coinburst.svg",
+    "placeholder": true,
+    "sha256": "c36a37685d3249ff2a9a8738eecd4866ce4c48064fdcfbe83e866073aa44cd12",
+    "source": "placeholder:obsidian-noir:vfx.coinburst"
+  },
+  "vfx.freeze": {
+    "file": "placeholders/vfx.freeze.svg",
+    "placeholder": true,
+    "sha256": "fc44ef89da8a85884cae4dd65e1584d9fa439c7df46ae791c6380a5a46bca202",
+    "source": "placeholder:obsidian-noir:vfx.freeze"
+  },
+  "vfx.shock": {
+    "file": "placeholders/vfx.shock.svg",
+    "placeholder": true,
+    "sha256": "c1cffed49d9927b3a76538e3919cebe83b218cd420eb8e4f0cc061dcf4dc7f75",
+    "source": "placeholder:obsidian-noir:vfx.shock"
+  },
+  "vfx.spark": {
+    "file": "placeholders/vfx.spark.svg",
+    "placeholder": true,
+    "sha256": "3f2e0225320100d06aae2655a7d7f14ec5348d3fc2c362189dd0a884487d324d",
+    "source": "placeholder:obsidian-noir:vfx.spark"
+  }
+}

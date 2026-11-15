@@ -1,0 +1,288 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1428" height="1186" viewBox="0 0 1428 1186">
+  <rect width="1428" height="1186" fill="#07090e"/>
+  <text x="24" y="34" font-family="monospace" font-size="16" fill="#fbbf24">Jackpot Syndicate asset contact sheet (71 keys)</text>
+  <rect x="28" y="62" width="222" height="84" rx="8" fill="hsl(42 38% 13%)" stroke="hsl(84 55% 38%)"/>
+  <text x="38" y="88" font-family="monospace" font-size="11" fill="#fbbf24">boss.auditor</text>
+  <text x="38" y="108" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="38" y="126" font-family="monospace" font-size="8" fill="#64748b">7c29f12e57c28336</text>
+  <rect x="258" y="62" width="222" height="84" rx="8" fill="hsl(287 38% 13%)" stroke="hsl(329 55% 38%)"/>
+  <text x="268" y="88" font-family="monospace" font-size="11" fill="#fbbf24">boss.valenti</text>
+  <text x="268" y="108" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="268" y="126" font-family="monospace" font-size="8" fill="#64748b">756c0c1d30a9c58c</text>
+  <rect x="488" y="62" width="222" height="84" rx="8" fill="hsl(164 38% 13%)" stroke="hsl(206 55% 38%)"/>
+  <text x="498" y="88" font-family="monospace" font-size="11" fill="#fbbf24">boss.zero</text>
+  <text x="498" y="108" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="498" y="126" font-family="monospace" font-size="8" fill="#64748b">bddb1e07c0785611</text>
+  <rect x="718" y="62" width="222" height="84" rx="8" fill="hsl(35 38% 13%)" stroke="hsl(77 55% 38%)"/>
+  <text x="728" y="88" font-family="monospace" font-size="11" fill="#fbbf24">chassis.harness-cluster</text>
+  <text x="728" y="108" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="728" y="126" font-family="monospace" font-size="8" fill="#64748b">c3cee46e01e4d83a</text>
+  <rect x="948" y="62" width="222" height="84" rx="8" fill="hsl(175 38% 13%)" stroke="hsl(217 55% 38%)"/>
+  <text x="958" y="88" font-family="monospace" font-size="11" fill="#fbbf24">chassis.harness-hyper</text>
+  <text x="958" y="108" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="958" y="126" font-family="monospace" font-size="8" fill="#64748b">b1743032b0772121</text>
+  <rect x="1178" y="62" width="222" height="84" rx="8" fill="hsl(122 38% 13%)" stroke="hsl(164 55% 38%)"/>
+  <text x="1188" y="88" font-family="monospace" font-size="11" fill="#fbbf24">chassis.harness-ways</text>
+  <text x="1188" y="108" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="1188" y="126" font-family="monospace" font-size="8" fill="#64748b">62f3c67ba3e19ad8</text>
+  <rect x="28" y="154" width="222" height="84" rx="8" fill="hsl(180 38% 13%)" stroke="hsl(222 55% 38%)"/>
+  <text x="38" y="180" font-family="monospace" font-size="11" fill="#fbbf24">chassis.jumper-wire</text>
+  <text x="38" y="200" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="38" y="218" font-family="monospace" font-size="8" fill="#64748b">2d5504a9c7a4699e</text>
+  <rect x="258" y="154" width="222" height="84" rx="8" fill="hsl(68 38% 13%)" stroke="hsl(110 55% 38%)"/>
+  <text x="268" y="180" font-family="monospace" font-size="11" fill="#fbbf24">chassis.overvolt</text>
+  <text x="268" y="200" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="268" y="218" font-family="monospace" font-size="8" fill="#64748b">8306b9732d279877</text>
+  <rect x="488" y="154" width="222" height="84" rx="8" fill="hsl(276 38% 13%)" stroke="hsl(318 55% 38%)"/>
+  <text x="498" y="180" font-family="monospace" font-size="11" fill="#fbbf24">chassis.reel-column</text>
+  <text x="498" y="200" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="498" y="218" font-family="monospace" font-size="8" fill="#64748b">9cd90db6d32cdcbf</text>
+  <rect x="718" y="154" width="222" height="84" rx="8" fill="hsl(349 38% 13%)" stroke="hsl(31 55% 38%)"/>
+  <text x="728" y="180" font-family="monospace" font-size="11" fill="#fbbf24">chassis.row</text>
+  <text x="728" y="200" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="728" y="218" font-family="monospace" font-size="8" fill="#64748b">7f9c3a1cda9cc3c9</text>
+  <rect x="948" y="154" width="222" height="84" rx="8" fill="hsl(126 38% 13%)" stroke="hsl(168 55% 38%)"/>
+  <text x="958" y="180" font-family="monospace" font-size="11" fill="#fbbf24">coin.blood-doubloon</text>
+  <text x="958" y="200" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="958" y="218" font-family="monospace" font-size="8" fill="#64748b">0868417d1dcfa99a</text>
+  <rect x="1178" y="154" width="222" height="84" rx="8" fill="hsl(112 38% 13%)" stroke="hsl(154 55% 38%)"/>
+  <text x="1188" y="180" font-family="monospace" font-size="11" fill="#fbbf24">coin.copper-token</text>
+  <text x="1188" y="200" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="1188" y="218" font-family="monospace" font-size="8" fill="#64748b">2aff17e05fe7bd96</text>
+  <rect x="28" y="246" width="222" height="84" rx="8" fill="hsl(309 38% 13%)" stroke="hsl(351 55% 38%)"/>
+  <text x="38" y="272" font-family="monospace" font-size="11" fill="#fbbf24">coin.heavy-lead-slug</text>
+  <text x="38" y="292" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="38" y="310" font-family="monospace" font-size="8" fill="#64748b">a9b50e76ac61aa5b</text>
+  <rect x="258" y="246" width="222" height="84" rx="8" fill="hsl(196 38% 13%)" stroke="hsl(238 55% 38%)"/>
+  <text x="268" y="272" font-family="monospace" font-size="11" fill="#fbbf24">coin.polymer-superball</text>
+  <text x="268" y="292" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="268" y="310" font-family="monospace" font-size="8" fill="#64748b">b5b7d2c40626ab49</text>
+  <rect x="488" y="246" width="222" height="84" rx="8" fill="hsl(135 38% 13%)" stroke="hsl(177 55% 38%)"/>
+  <text x="498" y="272" font-family="monospace" font-size="11" fill="#fbbf24">drink.alchemist-absinthe</text>
+  <text x="498" y="292" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="498" y="310" font-family="monospace" font-size="8" fill="#64748b">62adcbc5448cd24b</text>
+  <rect x="718" y="246" width="222" height="84" rx="8" fill="hsl(310 38% 13%)" stroke="hsl(352 55% 38%)"/>
+  <text x="728" y="272" font-family="monospace" font-size="11" fill="#fbbf24">drink.dirty-syndicate-mart...</text>
+  <text x="728" y="292" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="728" y="310" font-family="monospace" font-size="8" fill="#64748b">710cb095e85b939e</text>
+  <rect x="948" y="246" width="222" height="84" rx="8" fill="hsl(15 38% 13%)" stroke="hsl(57 55% 38%)"/>
+  <text x="958" y="272" font-family="monospace" font-size="11" fill="#fbbf24">drink.green-fairy-absinthe</text>
+  <text x="958" y="292" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="958" y="310" font-family="monospace" font-size="8" fill="#64748b">a09932925550da73</text>
+  <rect x="1178" y="246" width="222" height="84" rx="8" fill="hsl(208 38% 13%)" stroke="hsl(250 55% 38%)"/>
+  <text x="1188" y="272" font-family="monospace" font-size="11" fill="#fbbf24">drink.lubricant-oil-shot</text>
+  <text x="1188" y="292" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="1188" y="310" font-family="monospace" font-size="8" fill="#64748b">651f15a8e416d0f4</text>
+  <rect x="28" y="338" width="222" height="84" rx="8" fill="hsl(17 38% 13%)" stroke="hsl(59 55% 38%)"/>
+  <text x="38" y="364" font-family="monospace" font-size="11" fill="#fbbf24">drink.nitrous-espresso</text>
+  <text x="38" y="384" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="38" y="402" font-family="monospace" font-size="8" fill="#64748b">d6693ae3299461d2</text>
+  <rect x="258" y="338" width="222" height="84" rx="8" fill="hsl(70 38% 13%)" stroke="hsl(112 55% 38%)"/>
+  <text x="268" y="364" font-family="monospace" font-size="11" fill="#fbbf24">floor.FLOOR_CRYO.bg</text>
+  <text x="268" y="384" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="268" y="402" font-family="monospace" font-size="8" fill="#64748b">0c8d39b127333468</text>
+  <rect x="488" y="338" width="222" height="84" rx="8" fill="hsl(180 38% 13%)" stroke="hsl(222 55% 38%)"/>
+  <text x="498" y="364" font-family="monospace" font-size="11" fill="#fbbf24">floor.FLOOR_FOUNDRY.bg</text>
+  <text x="498" y="384" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="498" y="402" font-family="monospace" font-size="8" fill="#64748b">77ea9bdca38904ce</text>
+  <rect x="718" y="338" width="222" height="84" rx="8" fill="hsl(215 38% 13%)" stroke="hsl(257 55% 38%)"/>
+  <text x="728" y="364" font-family="monospace" font-size="11" fill="#fbbf24">floor.FLOOR_NEON.bg</text>
+  <text x="728" y="384" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="728" y="402" font-family="monospace" font-size="8" fill="#64748b">286974248e875b62</text>
+  <rect x="948" y="338" width="222" height="84" rx="8" fill="hsl(157 38% 13%)" stroke="hsl(199 55% 38%)"/>
+  <text x="958" y="364" font-family="monospace" font-size="11" fill="#fbbf24">floor.FLOOR_PENTHOUSE.bg</text>
+  <text x="958" y="384" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="958" y="402" font-family="monospace" font-size="8" fill="#64748b">aa8ef9db0f76015a</text>
+  <rect x="1178" y="338" width="222" height="84" rx="8" fill="hsl(58 38% 13%)" stroke="hsl(100 55% 38%)"/>
+  <text x="1188" y="364" font-family="monospace" font-size="11" fill="#fbbf24">glyph.blood-diamond</text>
+  <text x="1188" y="384" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="1188" y="402" font-family="monospace" font-size="8" fill="#64748b">1fbf3cc4e414684a</text>
+  <rect x="28" y="430" width="222" height="84" rx="8" fill="hsl(211 38% 13%)" stroke="hsl(253 55% 38%)"/>
+  <text x="38" y="456" font-family="monospace" font-size="11" fill="#fbbf24">glyph.cherry</text>
+  <text x="38" y="476" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="38" y="494" font-family="monospace" font-size="8" fill="#64748b">ca6f46b99a49144f</text>
+  <rect x="258" y="430" width="222" height="84" rx="8" fill="hsl(111 38% 13%)" stroke="hsl(153 55% 38%)"/>
+  <text x="268" y="456" font-family="monospace" font-size="11" fill="#fbbf24">glyph.lucky-seven</text>
+  <text x="268" y="476" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="268" y="494" font-family="monospace" font-size="8" fill="#64748b">0e1d4c4c35cf025c</text>
+  <rect x="488" y="430" width="222" height="84" rx="8" fill="hsl(138 38% 13%)" stroke="hsl(180 55% 38%)"/>
+  <text x="498" y="456" font-family="monospace" font-size="11" fill="#fbbf24">glyph.magnet-skull</text>
+  <text x="498" y="476" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="498" y="494" font-family="monospace" font-size="8" fill="#64748b">e2e5d0c77edc19fa</text>
+  <rect x="718" y="430" width="222" height="84" rx="8" fill="hsl(299 38% 13%)" stroke="hsl(341 55% 38%)"/>
+  <text x="728" y="456" font-family="monospace" font-size="11" fill="#fbbf24">glyph.uranium</text>
+  <text x="728" y="476" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="728" y="494" font-family="monospace" font-size="8" fill="#64748b">01b02c1183a0635d</text>
+  <rect x="948" y="430" width="222" height="84" rx="8" fill="hsl(359 38% 13%)" stroke="hsl(41 55% 38%)"/>
+  <text x="958" y="456" font-family="monospace" font-size="11" fill="#fbbf24">peg.bumper</text>
+  <text x="958" y="476" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="958" y="494" font-family="monospace" font-size="8" fill="#64748b">099b9a33cd3d2f3c</text>
+  <rect x="1178" y="430" width="222" height="84" rx="8" fill="hsl(25 38% 13%)" stroke="hsl(67 55% 38%)"/>
+  <text x="1188" y="456" font-family="monospace" font-size="11" fill="#fbbf24">peg.gold</text>
+  <text x="1188" y="476" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="1188" y="494" font-family="monospace" font-size="8" fill="#64748b">6ff91289ab2dfffb</text>
+  <rect x="28" y="522" width="222" height="84" rx="8" fill="hsl(1 38% 13%)" stroke="hsl(43 55% 38%)"/>
+  <text x="38" y="548" font-family="monospace" font-size="11" fill="#fbbf24">peg.golden</text>
+  <text x="38" y="568" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="38" y="586" font-family="monospace" font-size="8" fill="#64748b">4416362cd65b4e18</text>
+  <rect x="258" y="522" width="222" height="84" rx="8" fill="hsl(205 38% 13%)" stroke="hsl(247 55% 38%)"/>
+  <text x="268" y="548" font-family="monospace" font-size="11" fill="#fbbf24">peg.splitter</text>
+  <text x="268" y="568" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="268" y="586" font-family="monospace" font-size="8" fill="#64748b">2854129727ff2a15</text>
+  <rect x="488" y="522" width="222" height="84" rx="8" fill="hsl(154 38% 13%)" stroke="hsl(196 55% 38%)"/>
+  <text x="498" y="548" font-family="monospace" font-size="11" fill="#fbbf24">symbol.cherry</text>
+  <text x="498" y="568" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="498" y="586" font-family="monospace" font-size="8" fill="#64748b">872994a64aa06305</text>
+  <rect x="718" y="522" width="222" height="84" rx="8" fill="hsl(52 38% 13%)" stroke="hsl(94 55% 38%)"/>
+  <text x="728" y="548" font-family="monospace" font-size="11" fill="#fbbf24">symbol.diamond</text>
+  <text x="728" y="568" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="728" y="586" font-family="monospace" font-size="8" fill="#64748b">128276988909c2a6</text>
+  <rect x="948" y="522" width="222" height="84" rx="8" fill="hsl(114 38% 13%)" stroke="hsl(156 55% 38%)"/>
+  <text x="958" y="548" font-family="monospace" font-size="11" fill="#fbbf24">symbol.scrap</text>
+  <text x="958" y="568" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="958" y="586" font-family="monospace" font-size="8" fill="#64748b">389119233ec3a95d</text>
+  <rect x="1178" y="522" width="222" height="84" rx="8" fill="hsl(125 38% 13%)" stroke="hsl(167 55% 38%)"/>
+  <text x="1188" y="548" font-family="monospace" font-size="11" fill="#fbbf24">symbol.seven</text>
+  <text x="1188" y="568" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="1188" y="586" font-family="monospace" font-size="8" fill="#64748b">8963e1bb0e688f40</text>
+  <rect x="28" y="614" width="222" height="84" rx="8" fill="hsl(261 38% 13%)" stroke="hsl(303 55% 38%)"/>
+  <text x="38" y="640" font-family="monospace" font-size="11" fill="#fbbf24">symbol.skull</text>
+  <text x="38" y="660" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="38" y="678" font-family="monospace" font-size="8" fill="#64748b">45d09e6ee7147d8a</text>
+  <rect x="258" y="614" width="222" height="84" rx="8" fill="hsl(46 38% 13%)" stroke="hsl(88 55% 38%)"/>
+  <text x="268" y="640" font-family="monospace" font-size="11" fill="#fbbf24">symbol.uranium</text>
+  <text x="268" y="660" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="268" y="678" font-family="monospace" font-size="8" fill="#64748b">b2e10e11c9868aec</text>
+  <rect x="488" y="614" width="222" height="84" rx="8" fill="hsl(252 38% 13%)" stroke="hsl(294 55% 38%)"/>
+  <text x="498" y="640" font-family="monospace" font-size="11" fill="#fbbf24">token.bullion</text>
+  <text x="498" y="660" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="498" y="678" font-family="monospace" font-size="8" fill="#64748b">72265bcc74ac421a</text>
+  <rect x="718" y="614" width="222" height="84" rx="8" fill="hsl(2 38% 13%)" stroke="hsl(44 55% 38%)"/>
+  <text x="728" y="640" font-family="monospace" font-size="11" fill="#fbbf24">token.cherry</text>
+  <text x="728" y="660" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="728" y="678" font-family="monospace" font-size="8" fill="#64748b">fe639405406a06a1</text>
+  <rect x="948" y="614" width="222" height="84" rx="8" fill="hsl(82 38% 13%)" stroke="hsl(124 55% 38%)"/>
+  <text x="958" y="640" font-family="monospace" font-size="11" fill="#fbbf24">token.copper</text>
+  <text x="958" y="660" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="958" y="678" font-family="monospace" font-size="8" fill="#64748b">4fc517d9f0d2f6a3</text>
+  <rect x="1178" y="614" width="222" height="84" rx="8" fill="hsl(97 38% 13%)" stroke="hsl(139 55% 38%)"/>
+  <text x="1188" y="640" font-family="monospace" font-size="11" fill="#fbbf24">token.diamond</text>
+  <text x="1188" y="660" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="1188" y="678" font-family="monospace" font-size="8" fill="#64748b">d90acc0ceee81223</text>
+  <rect x="28" y="706" width="222" height="84" rx="8" fill="hsl(37 38% 13%)" stroke="hsl(79 55% 38%)"/>
+  <text x="38" y="732" font-family="monospace" font-size="11" fill="#fbbf24">token.ice</text>
+  <text x="38" y="752" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="38" y="770" font-family="monospace" font-size="8" fill="#64748b">5a5022934ae353bf</text>
+  <rect x="258" y="706" width="222" height="84" rx="8" fill="hsl(324 38% 13%)" stroke="hsl(6 55% 38%)"/>
+  <text x="268" y="732" font-family="monospace" font-size="11" fill="#fbbf24">token.skull</text>
+  <text x="268" y="752" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="268" y="770" font-family="monospace" font-size="8" fill="#64748b">8aaa84e39cd91e36</text>
+  <rect x="488" y="706" width="222" height="84" rx="8" fill="hsl(357 38% 13%)" stroke="hsl(39 55% 38%)"/>
+  <text x="498" y="732" font-family="monospace" font-size="11" fill="#fbbf24">token.uranium</text>
+  <text x="498" y="752" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="498" y="770" font-family="monospace" font-size="8" fill="#64748b">d57db3718153f8d4</text>
+  <rect x="718" y="706" width="222" height="84" rx="8" fill="hsl(29 38% 13%)" stroke="hsl(71 55% 38%)"/>
+  <text x="728" y="732" font-family="monospace" font-size="11" fill="#fbbf24">trinket.electromagnetic-ho...</text>
+  <text x="728" y="752" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="728" y="770" font-family="monospace" font-size="8" fill="#64748b">c615bdcf0937a3b1</text>
+  <rect x="948" y="706" width="222" height="84" rx="8" fill="hsl(43 38% 13%)" stroke="hsl(85 55% 38%)"/>
+  <text x="958" y="732" font-family="monospace" font-size="11" fill="#fbbf24">trinket.gold-peg-alchemist</text>
+  <text x="958" y="752" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="958" y="770" font-family="monospace" font-size="8" fill="#64748b">0970e3053460d192</text>
+  <rect x="1178" y="706" width="222" height="84" rx="8" fill="hsl(286 38% 13%)" stroke="hsl(328 55% 38%)"/>
+  <text x="1188" y="732" font-family="monospace" font-size="11" fill="#fbbf24">trinket.gutter-guard-bumper</text>
+  <text x="1188" y="752" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="1188" y="770" font-family="monospace" font-size="8" fill="#64748b">1cfe032d28101199</text>
+  <rect x="28" y="798" width="222" height="84" rx="8" fill="hsl(334 38% 13%)" stroke="hsl(16 55% 38%)"/>
+  <text x="38" y="824" font-family="monospace" font-size="11" fill="#fbbf24">trinket.hydraulic-dozer-pi...</text>
+  <text x="38" y="844" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="38" y="862" font-family="monospace" font-size="8" fill="#64748b">ef9b05a647d0e4dd</text>
+  <rect x="258" y="798" width="222" height="84" rx="8" fill="hsl(187 38% 13%)" stroke="hsl(229 55% 38%)"/>
+  <text x="268" y="824" font-family="monospace" font-size="11" fill="#fbbf24">trinket.loaded-platinum-die</text>
+  <text x="268" y="844" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="268" y="862" font-family="monospace" font-size="8" fill="#64748b">721bc2f6190eed0a</text>
+  <rect x="488" y="798" width="222" height="84" rx="8" fill="hsl(115 38% 13%)" stroke="hsl(157 55% 38%)"/>
+  <text x="498" y="824" font-family="monospace" font-size="11" fill="#fbbf24">trinket.midas-lip-sensor</text>
+  <text x="498" y="844" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="498" y="862" font-family="monospace" font-size="8" fill="#64748b">2d4089f0719326d7</text>
+  <rect x="718" y="798" width="222" height="84" rx="8" fill="hsl(312 38% 13%)" stroke="hsl(354 55% 38%)"/>
+  <text x="728" y="824" font-family="monospace" font-size="11" fill="#fbbf24">trinket.ouroboros-capacitor</text>
+  <text x="728" y="844" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="728" y="862" font-family="monospace" font-size="8" fill="#64748b">a8362812788e0253</text>
+  <rect x="948" y="798" width="222" height="84" rx="8" fill="hsl(253 38% 13%)" stroke="hsl(295 55% 38%)"/>
+  <text x="958" y="824" font-family="monospace" font-size="11" fill="#fbbf24">trinket.overvolted-solenoid</text>
+  <text x="958" y="844" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="958" y="862" font-family="monospace" font-size="8" fill="#64748b">0d4eea26f0354a14</text>
+  <rect x="1178" y="798" width="222" height="84" rx="8" fill="hsl(61 38% 13%)" stroke="hsl(103 55% 38%)"/>
+  <text x="1188" y="824" font-family="monospace" font-size="11" fill="#fbbf24">trinket.quantum-splitter-c...</text>
+  <text x="1188" y="844" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="1188" y="862" font-family="monospace" font-size="8" fill="#64748b">4408de984ef0cfd4</text>
+  <rect x="28" y="890" width="222" height="84" rx="8" fill="hsl(84 38% 13%)" stroke="hsl(126 55% 38%)"/>
+  <text x="38" y="916" font-family="monospace" font-size="11" fill="#fbbf24">trinket.rubber-gutter-bump...</text>
+  <text x="38" y="936" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="38" y="954" font-family="monospace" font-size="8" fill="#64748b">f085a97fb1619115</text>
+  <rect x="258" y="890" width="222" height="84" rx="8" fill="hsl(348 38% 13%)" stroke="hsl(30 55% 38%)"/>
+  <text x="268" y="916" font-family="monospace" font-size="11" fill="#fbbf24">trinket.tesla-peg-capacitor</text>
+  <text x="268" y="936" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="268" y="954" font-family="monospace" font-size="8" fill="#64748b">b2d8a33994f8063a</text>
+  <rect x="488" y="890" width="222" height="84" rx="8" fill="hsl(218 38% 13%)" stroke="hsl(260 55% 38%)"/>
+  <text x="498" y="916" font-family="monospace" font-size="11" fill="#fbbf24">trinket.turbo-dozer-cam</text>
+  <text x="498" y="936" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="498" y="954" font-family="monospace" font-size="8" fill="#64748b">9608eab556bbd9ea</text>
+  <rect x="718" y="890" width="222" height="84" rx="8" fill="hsl(85 38% 13%)" stroke="hsl(127 55% 38%)"/>
+  <text x="728" y="916" font-family="monospace" font-size="11" fill="#fbbf24">trinket.vampiric-rake-coll...</text>
+  <text x="728" y="936" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="728" y="954" font-family="monospace" font-size="8" fill="#64748b">8d2b8ae49d103b1c</text>
+  <rect x="948" y="890" width="222" height="84" rx="8" fill="hsl(77 38% 13%)" stroke="hsl(119 55% 38%)"/>
+  <text x="958" y="916" font-family="monospace" font-size="11" fill="#fbbf24">trinket.vampiric-stepper-m...</text>
+  <text x="958" y="936" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="958" y="954" font-family="monospace" font-size="8" fill="#64748b">bb3dd9de8d542be9</text>
+  <rect x="1178" y="890" width="222" height="84" rx="8" fill="hsl(184 38% 13%)" stroke="hsl(226 55% 38%)"/>
+  <text x="1188" y="916" font-family="monospace" font-size="11" fill="#fbbf24">trinket.vip-bullion-stamp</text>
+  <text x="1188" y="936" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="1188" y="954" font-family="monospace" font-size="8" fill="#64748b">41a713d3b80f1e74</text>
+  <rect x="28" y="982" width="222" height="84" rx="8" fill="hsl(297 38% 13%)" stroke="hsl(339 55% 38%)"/>
+  <text x="38" y="1008" font-family="monospace" font-size="11" fill="#fbbf24">ui.bezel</text>
+  <text x="38" y="1028" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="38" y="1046" font-family="monospace" font-size="8" fill="#64748b">45734a25f13ecf41</text>
+  <rect x="258" y="982" width="222" height="84" rx="8" fill="hsl(161 38% 13%)" stroke="hsl(203 55% 38%)"/>
+  <text x="268" y="1008" font-family="monospace" font-size="11" fill="#fbbf24">ui.button</text>
+  <text x="268" y="1028" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="268" y="1046" font-family="monospace" font-size="8" fill="#64748b">b79327be9d182e3a</text>
+  <rect x="488" y="982" width="222" height="84" rx="8" fill="hsl(341 38% 13%)" stroke="hsl(23 55% 38%)"/>
+  <text x="498" y="1008" font-family="monospace" font-size="11" fill="#fbbf24">ui.cabinet</text>
+  <text x="498" y="1028" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="498" y="1046" font-family="monospace" font-size="8" fill="#64748b">172c96fe1586e68c</text>
+  <rect x="718" y="982" width="222" height="84" rx="8" fill="hsl(315 38% 13%)" stroke="hsl(357 55% 38%)"/>
+  <text x="728" y="1008" font-family="monospace" font-size="11" fill="#fbbf24">ui.dozer</text>
+  <text x="728" y="1028" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="728" y="1046" font-family="monospace" font-size="8" fill="#64748b">d26770fea8caac27</text>
+  <rect x="948" y="982" width="222" height="84" rx="8" fill="hsl(57 38% 13%)" stroke="hsl(99 55% 38%)"/>
+  <text x="958" y="1008" font-family="monospace" font-size="11" fill="#fbbf24">ui.gutter</text>
+  <text x="958" y="1028" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="958" y="1046" font-family="monospace" font-size="8" fill="#64748b">04b065b4588e4ec3</text>
+  <rect x="1178" y="982" width="222" height="84" rx="8" fill="hsl(250 38% 13%)" stroke="hsl(292 55% 38%)"/>
+  <text x="1188" y="1008" font-family="monospace" font-size="11" fill="#fbbf24">ui.lip</text>
+  <text x="1188" y="1028" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="1188" y="1046" font-family="monospace" font-size="8" fill="#64748b">3f854bec281c125c</text>
+  <rect x="28" y="1074" width="222" height="84" rx="8" fill="hsl(169 38% 13%)" stroke="hsl(211 55% 38%)"/>
+  <text x="38" y="1100" font-family="monospace" font-size="11" fill="#fbbf24">ui.panel</text>
+  <text x="38" y="1120" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="38" y="1138" font-family="monospace" font-size="8" fill="#64748b">21eb4b874c09c49b</text>
+  <rect x="258" y="1074" width="222" height="84" rx="8" fill="hsl(300 38% 13%)" stroke="hsl(342 55% 38%)"/>
+  <text x="268" y="1100" font-family="monospace" font-size="11" fill="#fbbf24">vfx.coinburst</text>
+  <text x="268" y="1120" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="268" y="1138" font-family="monospace" font-size="8" fill="#64748b">c36a37685d3249ff</text>
+  <rect x="488" y="1074" width="222" height="84" rx="8" fill="hsl(306 38% 13%)" stroke="hsl(348 55% 38%)"/>
+  <text x="498" y="1100" font-family="monospace" font-size="11" fill="#fbbf24">vfx.freeze</text>
+  <text x="498" y="1120" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="498" y="1138" font-family="monospace" font-size="8" fill="#64748b">fc44ef89da8a8588</text>
+  <rect x="718" y="1074" width="222" height="84" rx="8" fill="hsl(234 38% 13%)" stroke="hsl(276 55% 38%)"/>
+  <text x="728" y="1100" font-family="monospace" font-size="11" fill="#fbbf24">vfx.shock</text>
+  <text x="728" y="1120" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="728" y="1138" font-family="monospace" font-size="8" fill="#64748b">c1cffed49d9927b3</text>
+  <rect x="948" y="1074" width="222" height="84" rx="8" fill="hsl(197 38% 13%)" stroke="hsl(239 55% 38%)"/>
+  <text x="958" y="1100" font-family="monospace" font-size="11" fill="#fbbf24">vfx.spark</text>
+  <text x="958" y="1120" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
+  <text x="958" y="1138" font-family="monospace" font-size="8" fill="#64748b">3f2e0225320100d0</text>
+</svg>
