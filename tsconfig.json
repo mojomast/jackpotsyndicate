@@ -1,5 +1,5 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": { "noEmit": true, "types": ["node"] },
-  "include": ["packages/*/src/**/*.ts", "packages/*/tests/**/*.ts", "tools/**/*.ts"]
+  "include": ["packages/*/src/**/*.ts", "packages/*/tests/**/*.ts", "apps/**/*.ts", "tools/**/*.ts", "e2e/**/*.ts"]
 }
