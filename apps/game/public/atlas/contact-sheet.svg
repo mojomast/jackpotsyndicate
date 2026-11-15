@@ -95,8 +95,8 @@
   <text x="958" y="402" font-family="monospace" font-size="8" fill="#64748b">8f064b1e05412315</text>
   <rect x="1178" y="338" width="222" height="84" rx="8" fill="hsl(58 38% 13%)" stroke="hsl(100 55% 38%)"/>
   <text x="1188" y="364" font-family="monospace" font-size="11" fill="#fbbf24">glyph.blood-diamond</text>
-  <text x="1188" y="384" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
-  <text x="1188" y="402" font-family="monospace" font-size="8" fill="#64748b">1fbf3cc4e414684a</text>
+  <text x="1188" y="384" font-family="monospace" font-size="9" fill="#94a3b8">glyphs</text>
+  <text x="1188" y="402" font-family="monospace" font-size="8" fill="#64748b">340f807fc452f715</text>
   <rect x="28" y="430" width="222" height="84" rx="8" fill="hsl(211 38% 13%)" stroke="hsl(253 55% 38%)"/>
   <text x="38" y="456" font-family="monospace" font-size="11" fill="#fbbf24">glyph.cherry</text>
   <text x="38" y="476" font-family="monospace" font-size="9" fill="#94a3b8">glyphs</text>
@@ -243,8 +243,8 @@
   <text x="1188" y="954" font-family="monospace" font-size="8" fill="#64748b">bd1b1c783b7f6a2e</text>
   <rect x="28" y="982" width="222" height="84" rx="8" fill="hsl(297 38% 13%)" stroke="hsl(339 55% 38%)"/>
   <text x="38" y="1008" font-family="monospace" font-size="11" fill="#fbbf24">ui.bezel</text>
-  <text x="38" y="1028" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
-  <text x="38" y="1046" font-family="monospace" font-size="8" fill="#64748b">45734a25f13ecf41</text>
+  <text x="38" y="1028" font-family="monospace" font-size="9" fill="#94a3b8">ui</text>
+  <text x="38" y="1046" font-family="monospace" font-size="8" fill="#64748b">21c7b52ca6e3657b</text>
   <rect x="258" y="982" width="222" height="84" rx="8" fill="hsl(161 38% 13%)" stroke="hsl(203 55% 38%)"/>
   <text x="268" y="1008" font-family="monospace" font-size="11" fill="#fbbf24">ui.button</text>
   <text x="268" y="1028" font-family="monospace" font-size="9" fill="#94a3b8">ui</text>
