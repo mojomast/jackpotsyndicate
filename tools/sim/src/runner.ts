@@ -5,6 +5,7 @@
  */
 import type {
   Command,
+  ContentBundle,
   FloorId,
   GameEvent,
   Phase,
@@ -55,7 +56,12 @@ export interface RunOptions {
   bot: BotId | Bot;
   maxTicks?: number;
   /** Optional hook for every emitted event (reporting/observability). */
-  onEvent?: (event: GameEvent) => void;
+  onEvent?: (event: GameEvent, core: Core) => void;
+  /**
+   * Content override for balance experiments (variants). Defaults to the
+   * committed CONTENT_BUNDLE, so golden replays are unaffected.
+   */
+  content?: ContentBundle;
 }
 
 interface Observation {
@@ -117,8 +123,8 @@ function observe(observation: Observation, event: GameEvent): void {
   }
 }
 
-function floorOptions(state: Readonly<RunState>): FloorId[] {
-  const floor = CONTENT_BUNDLE.floors.find((candidate) => candidate.id === state.floorId);
+function floorOptions(state: Readonly<RunState>, content: ContentBundle): FloorId[] {
+  const floor = content.floors.find((candidate) => candidate.id === state.floorId);
   return floor === undefined ? [] : [...floor.next];
 }
 
@@ -173,8 +179,8 @@ function handleRelic(core: Core, bot: Bot, rng: SimRng, observation: Observation
   observation.relicOptions = [];
 }
 
-function handleElevator(core: Core, bot: Bot, rng: SimRng): void {
-  const options = floorOptions(core.getState());
+function handleElevator(core: Core, bot: Bot, rng: SimRng, content: ContentBundle): void {
+  const options = floorOptions(core.getState(), content);
   if (options.length === 0) {
     core.tick();
     return;
@@ -188,14 +194,15 @@ function handleElevator(core: Core, bot: Bot, rng: SimRng): void {
 /** Play one complete run to Victory/Game Over, or until `maxTicks`. */
 export function playRun(options: RunOptions): RunResult {
   const bot = typeof options.bot === 'string' ? BOTS[options.bot] : options.bot;
-  const core = createGameCore();
+  const content = options.content ?? CONTENT_BUNDLE;
+  const core = options.content === undefined ? createGameCore() : createGameCore({ content });
   const observation = makeObservation();
   const rng = new SimRng(`${options.seed}:${bot.id}`);
   const owned = new Set<string>();
   const maxTicks = options.maxTicks ?? 250_000;
   const unsubscribe = core.subscribe((event) => {
     observe(observation, event);
-    options.onEvent?.(event);
+    options.onEvent?.(event, core);
   });
 
   core.dispatch({ c: 'NewRun', seed: options.seed });
@@ -215,7 +222,7 @@ export function playRun(options: RunOptions): RunResult {
     } else if (phase === 'RELIC_PICK') {
       handleRelic(core, bot, rng, observation);
     } else if (phase === 'ELEVATOR') {
-      handleElevator(core, bot, rng);
+      handleElevator(core, bot, rng, content);
     } else if (phase === 'JUMPER_PICK') {
       if (!dispatchSafe(core, { c: 'ChooseJumper', index: 0 })) core.tick();
     } else if (phase === 'TITLE') {
