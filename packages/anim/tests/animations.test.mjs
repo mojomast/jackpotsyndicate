@@ -59,7 +59,7 @@ describe('reel v2 effects', () => {
     expect(result.count).toBeLessThanOrEqual(48); expect(result.different).toBe(!reducedMotion);
   });
   test('near-miss is derived from supplied grid and disabled for clusters', async () => {
-    expect(await page.evaluate(() => window.qa.nearCheck())).toEqual({ yes: true, no: false, cluster: false });
+    expect(await page.evaluate(() => window.qa.nearCheck())).toEqual({ yes: true, no: false, cluster: false, diagonal: true, frozenLine: false, ways: true, frozenWays: false, hyper: true, hyperClassic: false, frozenHyper: false });
   });
   for (const tier of ['small', 'big', 'mega', 'jackpot']) for (const kind of ['line', 'ways', 'cluster']) test(`${tier}/${kind}: glow, paths, RGB and particle seeks`, async () => {
     expect(await page.evaluate(({ tier, kind }) => window.qa.seekCheck('lineWin', { ...window.qa.fixtures.lineWin, seed: 73, winTier: tier, wins: [{ kind, overvolt: true, cells: [[0, 1], [1, 0], [2, 1]] }] }), { tier, kind })).toEqual({ pass: true });

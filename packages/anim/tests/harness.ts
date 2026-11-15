@@ -115,7 +115,19 @@ function effectChecks(reducedMotion: boolean) {
 }
 function nearCheck() {
   const base: anim.ReelSpinParams = { cols: 3, rows: 3, reducedMotion: false, seed: 1, finalGrid: [['seven', 'diamond', 'cherry'], ['seven', 'uranium', 'skull'], ['diamond', 'cherry', 'skull']] };
-  return { yes: hasNearMiss(base), no: hasNearMiss({ ...base, finalGrid: grid(3, 3) }), cluster: hasNearMiss({ ...base, wiring: 'CLUSTER' }) };
+  const hyper: anim.ReelSpinParams = { ...base, cols: 5, rows: 4, wiring: 'HYPER', finalGrid: [['seven', 'cherry', 'cherry', 'cherry'], ['diamond', 'diamond', 'seven', 'diamond'], ['skull', 'skull', 'skull', 'seven'], ['uranium', 'uranium', 'seven', 'uranium'], ['cherry', 'diamond', 'skull', 'uranium']] };
+  return {
+    yes: hasNearMiss(base),
+    no: hasNearMiss({ ...base, finalGrid: [['cherry', 'cherry', 'cherry'], ['diamond', 'diamond', 'diamond'], ['skull', 'skull', 'skull']] }),
+    cluster: hasNearMiss({ ...base, wiring: 'CLUSTER' }),
+    diagonal: hasNearMiss({ ...base, finalGrid: grid(3, 3) }),
+    frozenLine: hasNearMiss({ ...base, frozenCells: [[0, 0]] }),
+    ways: hasNearMiss({ ...base, wiring: 'WAYS' }),
+    frozenWays: hasNearMiss({ ...base, wiring: 'WAYS', frozenCells: [[0, 0]] }),
+    hyper: hasNearMiss(hyper),
+    hyperClassic: hasNearMiss({ ...hyper, wiring: 'CLASSIC' }),
+    frozenHyper: hasNearMiss({ ...hyper, frozenCells: [[1, 2]] }),
+  };
 }
 /** Measurement host only. Runtime factories remain clock-free. */
 async function measure(blurMode: 'echo' | 'svg', speed = 1) {
