@@ -8,10 +8,19 @@
     "lint": "eslint .",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "build": "pnpm -r --if-present build",
+    "dev": "pnpm --filter @jackpotsyndicate/game dev",
+    "preview": "pnpm --filter @jackpotsyndicate/game exec vite preview",
     "test": "tsx --test \"packages/*/tests/**/*.test.ts\"",
+    "sim": "tsx tools/sim/src/index.ts",
     "sim:rake": "tsx tools/physics-harness/rake.ts",
     "sim:perf": "tsx tools/physics-harness/perf.ts",
-    "perf": "tsx apps/game/scripts/perf.ts"
+    "sim:hitrate": "tsx tools/sim/src/index.ts hitrate",
+    "sim:balance": "tsx tools/sim/src/index.ts balance",
+    "sim:replay": "tsx tools/sim/src/index.ts replay",
+    "assets:build": "tsx tools/assets/src/index.ts build",
+    "assets:verify": "tsx tools/assets/src/index.ts verify",
+    "perf": "tsx apps/game/scripts/perf.ts",
+    "release:zip": "pnpm build && cd apps/game/dist && zip -qr ../../../artifacts/jackpotsyndicate-release.zip . && cd ../../.. && sha256sum artifacts/jackpotsyndicate-release.zip"
   },
   "devDependencies": {
     "@playwright/test": "^1.55.0",

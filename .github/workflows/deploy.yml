@@ -1,0 +1,70 @@
+name: Deploy (manual artifact only)
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: Git ref to build
+        required: false
+        default: main
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: manual-artifact-${{ inputs.ref }}
+  cancel-in-progress: false
+
+jobs:
+  package:
+    name: Build release artifact
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out requested ref
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref }}
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.28.0
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install locked dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Type check
+        run: pnpm typecheck
+
+      - name: Unit tests
+        run: pnpm test
+
+      - name: Build
+        run: pnpm build
+
+      - name: Package game dist
+        run: |
+          mkdir -p artifacts
+          rm -f "artifacts/jackpotsyndicate-${GITHUB_SHA}.zip"
+          (cd apps/game/dist && zip -qr "${GITHUB_WORKSPACE}/artifacts/jackpotsyndicate-${GITHUB_SHA}.zip" .)
+          sha256sum "artifacts/jackpotsyndicate-${GITHUB_SHA}.zip" | tee artifact-sha256.txt
+
+      - name: Upload downloadable artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: jackpotsyndicate-${{ github.sha }}
+          path: |
+            artifacts/jackpotsyndicate-${{ github.sha }}.zip
+            artifact-sha256.txt
+          if-no-files-found: error
+          retention-days: 14
