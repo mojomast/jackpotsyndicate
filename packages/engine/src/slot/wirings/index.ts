@@ -28,6 +28,11 @@ export type RefillFn = (cell: Cell, step: number) => SymbolId;
 
 export interface TumbleOptions {
   maxTumbles?: number;
+  /**
+   * Boss-frozen cells (R-BOS-03). They never join a cluster, are never
+   * cleared, and stay in place while the rest of their column falls past them.
+   */
+  frozen?: readonly Cell[];
 }
 
 export interface TumbleStep {
@@ -80,7 +85,7 @@ export function classicPaylines(cols: number, rows: number): Payline[] {
   const lines: Payline[] = [];
   for (const row of range(rows)) {
     lines.push({
-      id: `row-${row}`,
+      id: `row:${row}`,
       kind: 'classic',
       cells: range(cols).map((col) => [col, row]),
     });
@@ -93,8 +98,8 @@ export function classicPaylines(cols: number, rows: number): Payline[] {
       down.push([col, col]);
       up.push([col, rows - 1 - col]);
     }
-    lines.push({ id: 'diag-down', kind: 'classic', cells: down });
-    lines.push({ id: 'diag-up', kind: 'classic', cells: up });
+    lines.push({ id: 'diag:down', kind: 'classic', cells: down });
+    lines.push({ id: 'diag:up', kind: 'classic', cells: up });
   }
   return lines;
 }
@@ -111,15 +116,15 @@ export function hyperPaylines(cols: number, rows: number): Payline[] {
     v.push([col, peak]);
     inverted.push([col, rows - 1 - peak]);
   }
-  lines.push({ id: 'hyper-v', kind: 'hyper', cells: v });
-  lines.push({ id: 'hyper-inverted-v', kind: 'hyper', cells: inverted });
+  lines.push({ id: 'hyper:v', kind: 'hyper', cells: v });
+  lines.push({ id: 'hyper:inverted-v', kind: 'hyper', cells: inverted });
   return lines;
 }
 
 export function normalizePaylines(input: readonly (Payline | readonly Cell[])[]): Payline[] {
   return input.map((line, index) => {
     if (Array.isArray(line)) {
-      return { id: `jumper-${index}`, kind: 'jumper' as const, cells: line.map((cell) => [cell[0], cell[1]] as Cell) };
+      return { id: `jumper:${index}`, kind: 'jumper' as const, cells: line.map((cell) => [cell[0], cell[1]] as Cell) };
     }
     const payline = line as Payline;
     return { id: payline.id, kind: payline.kind, cells: payline.cells.map((cell) => [cell[0], cell[1]] as Cell) };
@@ -307,23 +312,41 @@ function unionCells(wins: readonly WinEval[]): Cell[] {
   return cells;
 }
 
-function clearAndRefill(grid: SymbolGrid, cleared: readonly Cell[], refill: RefillFn, step: number): SymbolId[][] {
+function clearAndRefill(
+  grid: SymbolGrid,
+  cleared: readonly Cell[],
+  refill: RefillFn,
+  step: number,
+  frozen: Set<string> = new Set(),
+): SymbolId[][] {
   const { cols, rows } = gridSize(grid);
   const removed = frozenSet(cleared);
   const next: SymbolId[][] = [];
   for (let col = 0; col < cols; col++) {
+    // Surviving movable symbols, bottom first. Frozen cells keep their slot.
     const survivors: SymbolId[] = [];
     for (let row = rows - 1; row >= 0; row--) {
-      if (!removed.has(cellKey([col, row]))) {
-        const symbol = at(grid, col, row);
-        if (symbol !== undefined) survivors.push(symbol);
-      }
+      const key = cellKey([col, row]);
+      if (frozen.has(key) || removed.has(key)) continue;
+      const symbol = at(grid, col, row);
+      if (symbol !== undefined) survivors.push(symbol);
     }
     const column: SymbolId[] = new Array(rows);
-    for (let index = 0; index < survivors.length; index++) {
-      column[rows - 1 - index] = survivors[index]!;
+    const open: number[] = [];
+    for (let row = rows - 1; row >= 0; row--) {
+      if (frozen.has(cellKey([col, row]))) {
+        column[row] = at(grid, col, row)!;
+      } else {
+        open.push(row);
+      }
     }
-    for (let row = 0; row < rows - survivors.length; row++) {
+    // `open` lists movable slots bottom-up: survivors settle lowest, then the
+    // remaining slots are refilled top-down (the original refill call order).
+    for (let index = 0; index < open.length && index < survivors.length; index++) {
+      column[open[index]!] = survivors[index]!;
+    }
+    for (let index = open.length - 1; index >= survivors.length; index--) {
+      const row = open[index]!;
       column[row] = refill([col, row], step);
     }
     next.push(column);
@@ -337,8 +360,10 @@ export function tumbleCluster(
   options: TumbleOptions = {},
 ): TumbleResult {
   const maxTumbles = Math.max(0, Math.floor(options.maxTumbles ?? RULES.MAX_TUMBLES));
+  const frozen = frozenSet(options.frozen);
+  const evalOptions: EvaluateOptions = options.frozen === undefined ? {} : { frozen: options.frozen };
   let current = cloneGrid(grid);
-  const initialWins = evaluateCluster(current);
+  const initialWins = evaluateCluster(current, evalOptions);
   const allWins = [...initialWins];
   const steps: TumbleStep[] = [];
   if (initialWins.length === 0) {
@@ -347,8 +372,8 @@ export function tumbleCluster(
   let pending = initialWins;
   for (let step = 1; step <= maxTumbles; step++) {
     const cleared = unionCells(pending);
-    const gridAfter = clearAndRefill(current, cleared, refill, step);
-    const wins = evaluateCluster(gridAfter);
+    const gridAfter = clearAndRefill(current, cleared, refill, step, frozen);
+    const wins = evaluateCluster(gridAfter, evalOptions);
     steps.push({ step, cleared, gridAfter, wins });
     allWins.push(...wins);
     current = gridAfter;
