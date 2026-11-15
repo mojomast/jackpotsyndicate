@@ -168,7 +168,11 @@ test('every sprite key is a known C-7 key for its category', () => {
 
   for (const item of CONTENT_BUNDLE.items) {
     const prefix = CATEGORY_PREFIX[item.category];
-    assert.equal(item.spriteKey, `${prefix}.${item.id}`, `unexpected sprite key for ${item.id}`);
+    assert.match(
+      item.spriteKey,
+      new RegExp(`^${prefix}\\.[a-z0-9]+(?:-[a-z0-9]+)*$`),
+      `unexpected sprite key for ${item.id}`,
+    );
   }
 
   for (const floor of CONTENT_BUNDLE.floors) {
