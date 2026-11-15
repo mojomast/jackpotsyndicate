@@ -92,4 +92,12 @@ export type {
   TokenDraw,
 } from './renderer';
 
+export {
+  BoardScene,
+  canHostBoardScene,
+  createBoardScene,
+} from './scene';
+export type { BoardSceneOptions, BoardScenePerf, SceneEvent } from './scene';
+export { WORLD as SCENE_WORLD, chuteTint } from './textures';
+
 export { createBoardRenderer as default } from './renderer';
