@@ -36,3 +36,7 @@ export type {
   SymbolSlotStats,
   SymbolStatsTable,
 } from './scoring/index';
+
+export * from './slot/wirings/index';
+export * from './mutations/index';
+export * from './shop/index';
