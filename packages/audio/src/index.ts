@@ -12,7 +12,15 @@ export type VoiceName =
   | 'fever'
   | 'buy'
   | 'error'
-  | 'boss';
+  | 'boss'
+  | 'launch'
+  | 'coin'
+  | 'win'
+  | 'bounce'
+  | 'tumble'
+  | 'settle'
+  | 'drain'
+  | 'mount';
 
 export interface AudioParamLike {
   value: number;
@@ -96,6 +104,14 @@ const VOICE_SPECS: Record<VoiceName, VoiceSpec> = {
   buy: { wave: 'sine', startHz: 660, endHz: 990, duration: 0.24, gain: 0.13, attack: 0.004, steps: [{ at: 0.11, hz: 990 }] },
   error: { wave: 'square', startHz: 180, endHz: 120, duration: 0.32, gain: 0.12, attack: 0.005, steps: [{ at: 0.13, hz: 130 }] },
   boss: { wave: 'sawtooth', startHz: 58, endHz: 116, duration: 0.65, gain: 0.16, attack: 0.03 },
+  launch: { wave: 'triangle', startHz: 340, endHz: 620, duration: 0.09, gain: 0.08, attack: 0.003 },
+  coin: { wave: 'sine', startHz: 1320, endHz: 1760, duration: 0.16, gain: 0.12, attack: 0.002, steps: [{ at: 0.05, hz: 1980 }] },
+  win: { wave: 'triangle', startHz: 523, endHz: 1047, duration: 0.42, gain: 0.14, attack: 0.006, steps: [{ at: 0.1, hz: 659 }, { at: 0.2, hz: 784 }, { at: 0.3, hz: 1047 }] },
+  bounce: { wave: 'square', startHz: 240, endHz: 480, duration: 0.12, gain: 0.09, attack: 0.003 },
+  tumble: { wave: 'triangle', startHz: 700, endHz: 260, duration: 0.18, gain: 0.1, attack: 0.004 },
+  settle: { wave: 'sine', startHz: 392, endHz: 784, duration: 0.6, gain: 0.14, attack: 0.01, steps: [{ at: 0.2, hz: 523 }, { at: 0.4, hz: 784 }] },
+  drain: { wave: 'sawtooth', startHz: 320, endHz: 90, duration: 0.36, gain: 0.11, attack: 0.004 },
+  mount: { wave: 'sine', startHz: 880, endHz: 1320, duration: 0.2, gain: 0.11, attack: 0.003 },
 };
 
 export const VOICE_NAMES = Object.freeze(Object.keys(VOICE_SPECS) as VoiceName[]);
@@ -114,6 +130,14 @@ export const EVENT_VOICE_MAP = {
   ItemBought: 'buy',
   BossSabotage: 'error',
   BossScored: 'boss',
+  OrbLaunched: 'launch',
+  CashBanked: 'coin',
+  SpinEvaluated: 'win',
+  GutterBounce: 'bounce',
+  TumbleStep: 'tumble',
+  RoundSettled: 'settle',
+  IdleDrain: 'drain',
+  TrinketMounted: 'mount',
 } as const satisfies Partial<Record<GameEvent['t'], VoiceName>>;
 
 export function voiceForEvent(event: Pick<GameEvent, 't'>): VoiceName | null {

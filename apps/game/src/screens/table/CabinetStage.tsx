@@ -125,6 +125,20 @@ export function CabinetStage({ core, seed, cols, rows, reducedMotion }: CabinetS
           player.play(tumbleStep(root, params, DESIGN_TOKENS, SPRITES), event.tick);
           return;
         }
+        if (event.t === 'IdleDrain') {
+          // A visible, non-scoring Magnet Skull drains cash: flash those cells.
+          for (const [col, row] of event.cells) {
+            const cell = root.querySelector<HTMLElement>(
+              `[data-anim="cell"][data-col="${col}"][data-row="${row}"]:not([data-anim="relayout-previous"] *)`,
+            );
+            if (!cell) continue;
+            cell.classList.remove('is-drain');
+            void cell.offsetWidth;
+            cell.classList.add('is-drain');
+            window.setTimeout(() => cell.classList.remove('is-drain'), 1200);
+          }
+          return;
+        }
         if (event.t === 'GridMutated') {
           const params: GridRelayoutParams = {
             from: event.from,

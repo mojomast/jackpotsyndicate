@@ -1,8 +1,9 @@
 /** @jsxRuntime automatic */
+import { useId, useState } from 'react';
 import type { GameEvent } from '@jackpotsyndicate/contracts';
 import { formatCash, useGameStore } from '../store/gameStore';
 
-function summarize(event: GameEvent): string {
+export function summarize(event: GameEvent): string {
   switch (event.t) {
     case 'SpinStarted':
       return `Spin ${event.spinIndex + 1} started (${event.cols}×${event.rows})`;
@@ -81,27 +82,54 @@ function summarize(event: GameEvent): string {
   }
 }
 
+/**
+ * Event log, secondary by design: a one-line ticker with the latest event and
+ * a toggle that opens the full scrollback as a drawer. The list stays in the
+ * DOM when closed so the log is always complete for tests and screen readers.
+ */
 export function LogPanel() {
   const events = useGameStore((store) => store.events);
+  const [open, setOpen] = useState(false);
+  const listId = useId();
+  const latest = events.length > 0 ? events[events.length - 1]! : null;
 
   return (
-    <section className="log-panel panel ui9-panel" aria-label="Event log">
-      <div className="panel-heading">
-        <h2>Event log</h2>
-        <span>{events.length} events</span>
+    <section className={`log-panel ${open ? 'is-open' : ''}`} aria-label="Event log">
+      <button
+        type="button"
+        className="log-toggle"
+        aria-expanded={open}
+        aria-controls={listId}
+        onClick={() => setOpen((value) => !value)}
+      >
+        <span className="log-toggle-label">Log</span>
+        <b>{events.length}</b>
+      </button>
+      <span className="log-ticker" aria-hidden="true">
+        {latest ? summarize(latest) : 'No events yet'}
+      </span>
+      <div className="log-drawer" hidden={!open}>
+        <ol
+          className="log"
+          id={listId}
+          data-testid="event-log"
+          tabIndex={0}
+          aria-label="Event log entries"
+          aria-live="polite"
+          aria-relevant="additions"
+        >
+          {events.length === 0 ? (
+            <li className="log-empty">No events yet. Start a run and spin.</li>
+          ) : (
+            events.slice(-80).map((event, index) => (
+              <li className="log-line" key={`${event.tick}-${event.t}-${index}`}>
+                <span className="log-tick">{event.tick}</span>
+                <span className="log-text">{summarize(event)}</span>
+              </li>
+            ))
+          )}
+        </ol>
       </div>
-      <ol className="log" data-testid="event-log" tabIndex={0} aria-live="polite" aria-relevant="additions">
-        {events.length === 0 ? (
-          <li className="log-empty">No events yet. Start a run and spin.</li>
-        ) : (
-          events.slice(-80).map((event, index) => (
-            <li className="log-line" key={`${event.tick}-${event.t}-${index}`}>
-              <span className="log-tick">{event.tick}</span>
-              <span className="log-text">{summarize(event)}</span>
-            </li>
-          ))
-        )}
-      </ol>
     </section>
   );
 }

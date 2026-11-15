@@ -1,12 +1,15 @@
 /** @jsxRuntime automatic */
-import { useMemo } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import {
+  BoardScene,
   buildDrawPlan,
+  canHostBoardScene,
   projectPoint,
   type DrawCommand,
+  type SceneEvent,
 } from '@jackpotsyndicate/board-render';
-import type { GameCore, GameEvent, PhysicsEvent } from '@jackpotsyndicate/contracts';
-import { useGameStore } from '../../store/gameStore';
+import { DEFAULT_CHUTE_MULTS, type GameCore, type GameEvent, type PhysicsEvent } from '@jackpotsyndicate/contracts';
+import { formatCash, useGameStore } from '../../store/gameStore';
 import assetManifest from '../../../public/atlas/asset-manifest.json';
 import {
   spriteAssetFromManifest,
@@ -131,12 +134,175 @@ export interface BoardViewProps {
   gutterRisk: number;
 }
 
+interface SubscribableCore extends GameCore {
+  subscribe?(listener: (event: GameEvent) => void): () => void;
+}
+
+/** Token symbol → atlas chip art key (the scene paints a procedural chip until it decodes). */
+const CHIP_ART: Record<string, string> = {
+  ...TOKEN_SPRITE,
+  bullion: 'token.bullion',
+  copper: 'token.copper',
+};
+
 /**
- * T-071 board plan rendered as an SVG surface. The deterministic DrawPlan is
- * the renderer's own output; this adapter keeps the Table testable in jsdom
- * while the Pixi adapter remains available for GPU hosts.
+ * T-071/T-072 board. In a real browser the Pixi `BoardScene` renders the 2.5D
+ * coin pusher from `getSimSnapshot()` every tick, with event-driven VFX. Where
+ * no GPU canvas exists (jsdom, or a failed context) the deterministic DrawPlan
+ * is rendered as SVG instead, so the Table stays testable and placeholder-safe.
  */
 export function BoardView({ core, floorId, gutterRisk }: BoardViewProps) {
+  const [gpu] = useState(() => canHostBoardScene());
+  const [failed, setFailed] = useState(false);
+  const useScene = gpu && !failed;
+  const floorArt = spriteUrl(`floor.${floorId}.bg`);
+
+  return (
+    <section
+      className="table-board"
+      data-testid="board"
+      data-renderer={useScene ? 'pixi' : 'svg'}
+      aria-label="Pinfield and coin pusher board"
+    >
+      <div className="board-frame">
+      <div className="board-stage">
+        {floorArt ? (
+          <img className="board-backdrop" src={floorArt} alt="" aria-hidden="true" draggable={false} />
+        ) : null}
+        <div className="board-vignette" aria-hidden="true" />
+        {useScene ? (
+          <BoardSceneHost core={core} gutterRisk={gutterRisk} onFail={() => setFailed(true)} />
+        ) : (
+          <BoardPlanSvg core={core} floorId={floorId} gutterRisk={gutterRisk} />
+        )}
+      </div>
+      <BoardCounters core={core} />
+      </div>
+    </section>
+  );
+}
+
+function readCounts(core: GameCore): string {
+  const snapshot = core.getSimSnapshot();
+  return `${snapshot.orbs.length}|${snapshot.queuedOrbs ?? 0}|${snapshot.tokens.length}`;
+}
+
+function BoardCounters({ core }: { core: GameCore }) {
+  const [counts, setCounts] = useState(() => readCounts(core));
+  useEffect(() => {
+    setCounts(readCounts(core));
+    if (typeof window === 'undefined') return undefined;
+    const timer = window.setInterval(() => setCounts(readCounts(core)), 250);
+    return () => window.clearInterval(timer);
+  }, [core]);
+  const [orbs, queued, tokens] = counts.split('|').map(Number) as [number, number, number];
+  return (
+    <div className="board-counters" role="status" aria-live="off">
+      <span className="board-counter board-counter-orbs">
+        <b>{orbs}</b> orbs{queued > 0 ? <em> +{queued} queued</em> : null}
+      </span>
+      <span className="board-counter board-counter-coins">
+        <b>{tokens}</b> coins on shelf
+      </span>
+    </div>
+  );
+}
+
+function BoardSceneHost({
+  core,
+  gutterRisk,
+  onFail,
+}: {
+  core: GameCore;
+  gutterRisk: number;
+  onFail: () => void;
+}) {
+  const hostRef = useRef<HTMLDivElement>(null);
+  const sceneRef = useRef<BoardScene | null>(null);
+  const reducedMotion = useGameStore((store) => store.settings.reducedMotion);
+  const speed = useGameStore((store) => store.settings.speed);
+  const optionsRef = useRef({ gutterRisk, reducedMotion, speed, onFail });
+  optionsRef.current = { gutterRisk, reducedMotion, speed, onFail };
+
+  useEffect(() => {
+    const host = hostRef.current;
+    if (!host) return undefined;
+    let disposed = false;
+    let unsubscribeStore: (() => void) | null = null;
+    let unsubscribeCore: (() => void) | null = null;
+    const images: HTMLImageElement[] = [];
+
+    void BoardScene.create(host, {
+      gutterRisk: optionsRef.current.gutterRisk,
+      chuteMults: DEFAULT_CHUTE_MULTS,
+      reducedMotion: optionsRef.current.reducedMotion,
+      tickMs: 1000 / (60 * optionsRef.current.speed),
+      formatCash,
+    }).then((scene) => {
+      if (disposed) {
+        scene?.destroy();
+        return;
+      }
+      if (!scene) {
+        optionsRef.current.onFail();
+        return;
+      }
+      sceneRef.current = scene;
+      scene.pushSnapshot(core.getSimSnapshot());
+      let lastTick = useGameStore.getState().state.tick;
+      unsubscribeStore = useGameStore.subscribe((store) => {
+        if (store.state.tick === lastTick) return;
+        lastTick = store.state.tick;
+        scene.pushSnapshot(store.core.getSimSnapshot());
+      });
+      const subscribable = core as SubscribableCore;
+      if (typeof subscribable.subscribe === 'function') {
+        unsubscribeCore = subscribable.subscribe((event) => scene.handleEvent(event as unknown as SceneEvent));
+      } else {
+        let seen = useGameStore.getState().events;
+        const off = useGameStore.subscribe((store) => {
+          if (store.events === seen) return;
+          const previous = seen;
+          seen = store.events;
+          const start = previous.length > 0 ? store.events.lastIndexOf(previous[previous.length - 1]!) + 1 : 0;
+          for (const event of store.events.slice(start)) scene.handleEvent(event as unknown as SceneEvent);
+        });
+        unsubscribeCore = off;
+      }
+      for (const [symbolId, key] of Object.entries(CHIP_ART)) {
+        const url = spriteUrl(key);
+        if (!url) continue;
+        const image = new Image();
+        image.decoding = 'async';
+        image.onload = () => {
+          if (!disposed) scene.setChipArt(symbolId, image);
+        };
+        image.src = url;
+        images.push(image);
+      }
+    });
+
+    return () => {
+      disposed = true;
+      unsubscribeStore?.();
+      unsubscribeCore?.();
+      for (const image of images) image.onload = null;
+      sceneRef.current?.destroy();
+      sceneRef.current = null;
+    };
+  }, [core]);
+
+  useEffect(() => {
+    sceneRef.current?.setOptions({ gutterRisk, reducedMotion, tickMs: 1000 / (60 * speed) });
+  }, [gutterRisk, reducedMotion, speed]);
+
+  return <div className="board-scene" ref={hostRef} data-board-scene="pixi" />;
+}
+
+/**
+ * Static SVG rendering of the deterministic DrawPlan (jsdom and no-GPU hosts).
+ */
+function BoardPlanSvg({ core, floorId, gutterRisk }: BoardViewProps) {
   const tick = useGameStore((store) => Math.floor(store.state.tick / 2));
   const events = useGameStore((store) => store.events);
 
@@ -149,7 +315,6 @@ export function BoardView({ core, floorId, gutterRisk }: BoardViewProps) {
       vfxTick: snapshot.tick,
     });
   }, [core, tick, floorId, gutterRisk, events]);
-
   const floorArt = spriteUrl(`floor.${floorId}.bg`);
   const tokenArt = plan.tokens
     .map((token) => ({ id: token.id, url: spriteUrl(TOKEN_SPRITE[token.symbolId]), token }))
@@ -179,11 +344,7 @@ export function BoardView({ core, floorId, gutterRisk }: BoardViewProps) {
   );
 
   return (
-    <section className="table-board panel ui9-panel" data-testid="board" aria-label="Pinfield and coin pusher board">
-      <div className="table-board-heading">
-        <span>Board</span>
-        <span>{plan.orbs.length} orbs · {plan.tokens.length} tokens</span>
-      </div>
+    <>
       <svg
         className="table-board-svg"
         viewBox={`0 0 ${plan.width} ${plan.height}`}
@@ -260,6 +421,6 @@ export function BoardView({ core, floorId, gutterRisk }: BoardViewProps) {
             : null}
         </g>
       </svg>
-    </section>
+    </>
   );
 }

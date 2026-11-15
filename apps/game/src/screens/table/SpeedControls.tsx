@@ -10,26 +10,23 @@ export function SpeedControls() {
   const setSpeed = useGameStore((store) => store.setSpeed);
 
   return (
-    <section className="speed-panel panel ui9-panel" aria-label="Simulation speed" data-testid="table-speed">
-      <div className="panel-heading">
-        <h2>Loop speed</h2>
-        <span>{speed}× fixed step</span>
-      </div>
+    <section className="speed-panel" aria-label="Simulation speed" data-testid="table-speed">
+      <span className="speed-label" aria-hidden="true">Speed</span>
       <div className="speed-group" role="group" aria-label="Table simulation speed">
         {[1, 2, 4].map((value) => (
           <button
             key={value}
             type="button"
-            className="btn"
+            className="speed-btn"
             data-testid={`table-speed-${value}`}
             aria-pressed={speed === value}
+            title={`${value}× fixed step: same tick sequence at every rate`}
             onClick={() => setSpeed(value)}
           >
             {value}×
           </button>
         ))}
       </div>
-      <p className="prep-feedback">Same tick sequence at every rate.</p>
     </section>
   );
 }

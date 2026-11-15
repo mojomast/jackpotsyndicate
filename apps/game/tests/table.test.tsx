@@ -117,6 +117,7 @@ test('real Table mounts cabinet, board, HUD, audio and command-only prep control
   assert.deepEqual(core.dispatch({ c: 'NewRun', seed: 'TABLE-MOUNT' }), { ok: true });
   core.tick();
   (core.getState() as RunState).drinkTray[0] = 'dirtySyndicateMartini';
+  (core.getState() as RunState).overvoltOwned = true;
   useGameStore.getState().attachCore(core);
 
   const { container } = render(React.createElement(TableScreen));

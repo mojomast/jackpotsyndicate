@@ -1,7 +1,9 @@
 /** @jsxRuntime automatic */
+import { useId } from 'react';
 import { TEST_IDS } from '@jackpotsyndicate/contracts';
 import { SpriteImage } from './Artwork';
 import { useGameStore } from '../store/gameStore';
+import { findItem } from '../screens/meta/metaContent';
 
 export interface TrinketMeta {
   name: string;
@@ -73,43 +75,62 @@ export const TRINKET_META: Record<string, TrinketMeta> = {
 
 function humanize(id: string): string {
   return id
-    .split('-')
+    .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+    .split(/[-_\s]+/)
+    .filter(Boolean)
     .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
     .join(' ');
 }
 
+function trinketInfo(id: string): { name: string; effect: string; spriteKey: string } {
+  const meta = TRINKET_META[id];
+  const item = findItem(id);
+  return {
+    name: meta?.name ?? item?.name ?? humanize(id),
+    effect: meta?.effect ?? item?.desc ?? 'Mounted trinket.',
+    spriteKey: item?.spriteKey ?? `trinket.${id}`,
+  };
+}
+
+/**
+ * Compact trinket rail: one brass socket per mounted trinket. The name and
+ * effect sit in a focusable tooltip so the rail stays one row high.
+ */
 export function TrinketRail() {
   const trinkets = useGameStore((store) => store.state.trinkets);
+  const uid = useId();
 
   return (
-    <section className="trinket-panel panel ui9-panel" aria-label="Mounted trinkets">
-      <div className="panel-heading">
-        <h2>Trinket rail</h2>
-        <span>{trinkets.length} mounted</span>
-      </div>
+    <section className="trinket-panel" aria-label="Mounted trinkets">
+      <span className="trinket-panel-label">
+        Trinkets <b>{trinkets.length}</b>
+      </span>
       <ul className="trinket-rail" data-testid={TEST_IDS.trinketRail}>
         {trinkets.length === 0 ? (
-          <li className="trinket-empty">No trinkets mounted. Visit the shop after a round.</li>
+          <li className="trinket-empty">No trinkets yet. Visit the shop after a round.</li>
         ) : (
           trinkets.map((id, index) => {
-            const meta = TRINKET_META[id] ?? { name: humanize(id), effect: 'Mounted trinket.' };
+            const info = trinketInfo(id);
+            const tipId = `${uid}-tip-${index}`;
             return (
               <li
                 key={`${id}-${index}`}
                 className="trinket-chip"
                 data-testid={TEST_IDS.trinket(id)}
-                title={`${meta.name}: ${meta.effect}`}
+                tabIndex={0}
+                aria-describedby={tipId}
+                title={`${info.name}: ${info.effect}`}
               >
                 <span className="trinket-icon" aria-hidden="true">
                   <SpriteImage
-                    spriteKey={`trinket.${id}`}
+                    spriteKey={info.spriteKey}
                     className="trinket-art"
-                    fallback={meta.name.split(' ').map((word) => word.charAt(0)).slice(0, 2).join('')}
+                    fallback={info.name.split(' ').map((word) => word.charAt(0)).slice(0, 2).join('')}
                   />
                 </span>
-                <span className="trinket-copy">
-                  <span className="trinket-name">{meta.name}</span>
-                  <span className="trinket-effect">{meta.effect}</span>
+                <span className="trinket-copy" role="tooltip" id={tipId}>
+                  <span className="trinket-name">{info.name}</span>
+                  <span className="trinket-effect">{info.effect}</span>
                 </span>
               </li>
             );
