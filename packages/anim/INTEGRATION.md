@@ -1,5 +1,15 @@
 # Animation package integration and verification
 
+## Reel v2 integration
+
+The current branch's verification, optional contract additions, performance
+measurements and owner requests are in [REVIEW-V2.md](REVIEW-V2.md) and the README's
+**V2 merge notes**. V2 includes eleven compositions and 113 browser tests. The
+shim now re-exports shared contracts, so a repository checkout is required.
+
+The remaining sections record the historical **anim-v1** delivery, including its
+old artifact hash and standalone-install assumptions; they are not v2 results.
+
 ## Merge notes summary
 
 - Adds only `packages/anim/**`, named `@jackpotsyndicate/anim`.

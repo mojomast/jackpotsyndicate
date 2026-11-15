@@ -1,0 +1,149 @@
+{
+  "path": "pnpm build / pnpm preview",
+  "chromium": "HeadlessChrome/152.0.7977.30",
+  "interactions": "seed form, Spin and speed buttons only; no test API",
+  "log": [
+    {
+      "seed": "REEL-V2-16",
+      "viewport": "1440x900",
+      "testApi": false
+    },
+    {
+      "capture": "1440x900-mid-blur",
+      "dom": {
+        "near": "true",
+        "landed": 0,
+        "detached": 0,
+        "tumble": 0
+      }
+    },
+    {
+      "capture": "1440x900-landing",
+      "dom": {
+        "near": "true",
+        "landed": 3,
+        "detached": 0,
+        "tumble": 0
+      }
+    },
+    {
+      "capture": "1440x900-small-win",
+      "dom": {
+        "near": "true",
+        "tier": "small",
+        "landed": 9,
+        "detached": 1,
+        "tumble": 0
+      }
+    },
+    {
+      "seed": "REEL-V2-7",
+      "viewport": "1440x900",
+      "testApi": false
+    },
+    {
+      "capture": "1440x900-mega-win",
+      "dom": {
+        "near": "true",
+        "tier": "mega",
+        "landed": 9,
+        "detached": 1,
+        "tumble": 0
+      }
+    },
+    {
+      "seed": "REEL-V2-1",
+      "viewport": "1440x900",
+      "testApi": false
+    },
+    {
+      "capture": "1440x900-near-miss",
+      "dom": {
+        "near": "true",
+        "landed": 6,
+        "detached": 0,
+        "tumble": 0
+      }
+    },
+    {
+      "seed": "REEL-V2-16",
+      "viewport": "390x844",
+      "testApi": false
+    },
+    {
+      "capture": "390x844-mid-blur",
+      "dom": {
+        "near": "true",
+        "landed": 0,
+        "detached": 0,
+        "tumble": 0
+      }
+    },
+    {
+      "capture": "390x844-landing",
+      "dom": {
+        "near": "true",
+        "landed": 3,
+        "detached": 0,
+        "tumble": 0
+      }
+    },
+    {
+      "capture": "390x844-small-win",
+      "dom": {
+        "near": "true",
+        "tier": "small",
+        "landed": 9,
+        "detached": 1,
+        "tumble": 0
+      }
+    },
+    {
+      "seed": "REEL-V2-7",
+      "viewport": "390x844",
+      "testApi": false
+    },
+    {
+      "capture": "390x844-mega-win",
+      "dom": {
+        "near": "true",
+        "tier": "mega",
+        "landed": 9,
+        "detached": 0,
+        "tumble": 0
+      }
+    },
+    {
+      "seed": "REEL-V2-1",
+      "viewport": "390x844",
+      "testApi": false
+    },
+    {
+      "capture": "390x844-near-miss",
+      "dom": {
+        "near": "true",
+        "landed": 6,
+        "detached": 0,
+        "tumble": 0
+      }
+    },
+    {
+      "seed": "REEL-V2-7",
+      "viewport": "1440x900",
+      "testApi": false
+    },
+    {
+      "realSpin": 1
+    },
+    {
+      "realSpin": 1
+    },
+    {
+      "realSpin": 1
+    },
+    {
+      "realSpin": 4
+    }
+  ],
+  "failures": []
+}

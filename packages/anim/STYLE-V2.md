@@ -15,12 +15,12 @@ registered-property light rig drives a slow, low-contrast sweep and intensity.
 Scanlines are subtle and optional; reduced motion omits moving/filtered layers.
 
 Budget: max five spinning drum groups, two echo plates per drum, one overvolt
-filter group, at most 48 pooled particles. No canvas clock, stochastic callbacks,
+filter group, at most 48 particles. No canvas clock, stochastic callbacks,
 animated layout dimensions or external media. Particle displacement is an
 analytical function of seek time, with seeded constants sampled at construction.
 
 Flash policy: no periodic on/off strobe. Stop highlights rise once and stay until
-the collective settle; ambient contrast stays below 0.1 luminance modulation.
+the collective settle; ambient intensity moves only between .16 and .24.
 The win envelope is one rise/fall, including at 4× playback. Do not introduce
 repeated bright flashes for overvolt or jackpot.
 
