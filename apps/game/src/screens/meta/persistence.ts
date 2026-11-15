@@ -156,10 +156,10 @@ export function resumeFromSave(save: SaveFile): CommandResult {
   return { ok: true };
 }
 
-/** Reset the core for a new run while keeping the seed entry copyable. */
+/** Forget the run: discard the save and park a fresh core in TITLE. */
 export function forgetRun(): void {
   discardStoredSave();
-  useGameStore.getState().attachCore(useGameStore.getState().core);
+  useGameStore.getState().resetCore();
 }
 
 /**

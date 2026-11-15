@@ -1,5 +1,6 @@
 import type { Command, GameCore, Phase, TestApi } from '@jackpotsyndicate/contracts';
 import { useGameStore } from './store/gameStore';
+import { decorateCore } from './screens/table/tableCore';
 
 declare global {
   interface Window {
@@ -7,27 +8,32 @@ declare global {
   }
 }
 
-type GrantableCore = GameCore & { grantCash?: (amount: number) => void };
+/** The core the shell is showing right now; never a reference captured earlier. */
+function currentCore(): GameCore {
+  return useGameStore.getState().core;
+}
 
 /**
- * C-8 test bridge. Present only when the page is opened with ?test=1 (or when
- * the preview/e2e build enables VITE_ENABLE_TEST_API). The bridge drives the
- * same store the UI reads, so assertions see exactly what the shell sees.
+ * C-8 test bridge. Present only in development builds opened with ?test=1 (or
+ * when the preview/e2e build enables VITE_ENABLE_TEST_API). The bridge drives
+ * the same store the UI reads, so assertions see exactly what the shell sees.
+ *
+ * Every call resolves the store's *current* core. Passing `core` attaches it
+ * to the store first (the e2e harness and tests use this to install a core
+ * with custom content); later `attachCore`, `resetCore` or resume calls are
+ * followed automatically.
  */
-export function createTestApi(core: GameCore = useGameStore.getState().core): TestApi {
-  const ensure = () => {
-    const store = useGameStore.getState();
-    if (store.core !== core) store.attachCore(core);
-  };
+export function createTestApi(core?: GameCore): TestApi {
+  if (core !== undefined && useGameStore.getState().core !== core) {
+    useGameStore.getState().attachCore(core);
+  }
 
   return {
     newRun(seed: string): void {
-      ensure();
       useGameStore.getState().newRun(seed);
     },
 
     dispatch(cmd: Command): ReturnType<GameCore['dispatch']> {
-      ensure();
       return useGameStore.getState().dispatch(cmd);
     },
 
@@ -35,10 +41,10 @@ export function createTestApi(core: GameCore = useGameStore.getState().core): Te
       target: Phase | ((targetCore: GameCore) => boolean),
       maxTicks: number,
     ): Promise<boolean> {
-      ensure();
       const reached = () => {
-        if (typeof target === 'function') return target(core);
-        return core.getState().phase === target;
+        const live = currentCore();
+        if (typeof target === 'function') return target(live);
+        return live.getState().phase === target;
       };
 
       let ticks = 0;
@@ -56,11 +62,11 @@ export function createTestApi(core: GameCore = useGameStore.getState().core): Te
     },
 
     getState(): ReturnType<GameCore['getState']> {
-      return core.getState();
+      return currentCore().getState();
     },
 
     stateHash(): string {
-      return core.stateHash();
+      return currentCore().stateHash();
     },
 
     setSpeed(multiplier: number): void {
@@ -68,15 +74,10 @@ export function createTestApi(core: GameCore = useGameStore.getState().core): Te
     },
 
     grantCash(amount: number): void {
-      ensure();
-      const grantable = core as GrantableCore;
-      if (typeof grantable.grantCash === 'function') {
-        grantable.grantCash(amount);
-        useGameStore.setState({ state: { ...core.getState() } });
-        return;
-      }
-      const state = core.getState();
-      useGameStore.setState({ state: { ...state, bankroll: state.bankroll + amount } });
+      // decorateCore keeps a core's own grantCash (the test mock has one) and
+      // otherwise attaches the C-8 hook to the real core.
+      decorateCore(currentCore()).grantCash?.(amount);
+      useGameStore.getState().refresh();
     },
   };
 }
