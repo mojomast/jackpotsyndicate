@@ -20,7 +20,7 @@ every acceptance criterion is green; the gaps are listed explicitly.
 | AC-1 install/build/preview | **PASS** | frozen install, game build and Playwright preview server all run; built cabinet renders in a real browser |
 | AC-2 lint/typecheck/test/coverage | **PARTIAL** | `pnpm lint` PASS; `pnpm typecheck` PASS; `pnpm test` **189 passing**; line coverage ≥85% was not measured |
 | AC-3 golden replay | **PASS** | `pnpm sim:replay` MATCH at `bade5e3091c269a205ccace5`; Playwright golden replay passes in Chromium, Firefox and WebKit |
-| AC-4 E2E J1–J8 | **PARTIAL** | Chromium + Firefox: 20 passing. WebKit: full project reported passed with the J8 4×-speed sub-check skipped (measured 39.8%, target ≤30%, headless WebKit timer floor). NET passes on all three after inline symbol sprites |
+| AC-4 E2E J1–J8 | **PARTIAL** | **29 passed, 1 skipped** across Chromium, Firefox and WebKit. The skip is the WebKit J8 4×-speed sub-check (measured 39.8%, target ≤30%, headless WebKit timer floor). NET passes on all three after inline symbol sprites |
 | AC-5 rake | **PASS** | 10,000 spins/floor: Neon 17.0%, Cryo 22.7%, Foundry 12.0%, Penthouse 21.3%, all in band |
 | AC-6 balance | **PASS** | 2,000 runs/bot: random-buyer Floor 1 51.8%, win 5.1%; greedy win 37.3%; max bankroll 38,982,203 (<1e12) |
 | AC-7 hit rate | **PASS** | 40.6% over 5,000 evaluations, target 30–45% |
@@ -57,7 +57,7 @@ pnpm sim:replay                      MATCH at bade5e3091c269a205ccace5
 pnpm sim:hitrate                     40.6% PASS
 pnpm assets:verify                   73 files PASS
 pnpm perf                            1.72 MB gzip, PASS
-pnpm exec playwright test           Chromium/Firefox 20 PASS; WebKit with one J8 speed skip
+pnpm exec playwright test           29 passed, 1 skipped (WebKit J8 4×)
 pnpm exec playwright test e2e/network.spec.ts  3 projects PASS
 hyperframes lint                     0 errors, warnings only
 ```
