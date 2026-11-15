@@ -12,7 +12,7 @@ import { CascadeEquation } from '../../components/CascadeEquation';
 import { LogPanel } from '../../components/LogPanel';
 import { SlotFrame, SpriteImage } from '../../components/Artwork';
 import { TrinketRail } from '../../components/TrinketRail';
-import { MockGameCore, formatCash, useGameStore } from '../../store/gameStore';
+import { formatCash, useGameStore } from '../../store/gameStore';
 import { itemName } from '../meta/metaContent';
 import { TimelinePlayer } from '../../../../../packages/anim/src/runtime/TimelinePlayer';
 import { fever as feverScene } from '../../../../../packages/anim/src/scenes/fever';
@@ -22,19 +22,10 @@ import { PrepControls, coinSpriteKey, drinkSpriteKey } from './PrepControls';
 import { SpinDeck } from './SpinDeck';
 import { TABLE_CSS } from './table.styles';
 import { subscribeCoreEvents, useCoreEvents } from './tableEvents';
-import { createTableCore, decorateCore } from './tableCore';
+import { decorateCore } from './tableCore';
 
 interface SubscribableCore extends GameCore {
   subscribe?(listener: (event: GameEvent) => void): () => void;
-}
-
-function isTestMode(): boolean {
-  if (typeof window === 'undefined') return false;
-  return new URLSearchParams(window.location.search).get('test') === '1';
-}
-
-function isMock(core: GameCore): boolean {
-  return core instanceof MockGameCore;
 }
 
 function useTableAudio(core: GameCore): AudioEngine | null {
@@ -105,7 +96,7 @@ function useCockpitHeight(ref: RefObject<HTMLElement | null>): void {
         below += (Number.parseFloat(style.paddingBottom) || 0) + (Number.parseFloat(style.borderBottomWidth) || 0);
         node = parent;
       }
-      const height = Math.max(540, Math.floor(window.innerHeight - top - below - 1));
+      const height = Math.max(460, Math.floor(window.innerHeight - top - below - 1));
       element.style.setProperty('--table-h', `${height}px`);
     };
     const schedule = (): void => {
@@ -142,14 +133,8 @@ export function TableScreen() {
   const [flash, setFlash] = useState<Flash>({ id: 0, kind: 'none' });
 
   useEffect(() => {
+    // The store boots the real GameCore; only attach the C-8 test hooks here.
     decorateCore(core);
-    if (isTestMode() || !isMock(core)) return;
-    const store = useGameStore.getState();
-    const runSeed = store.state.seed || 'JACKPOT-SYNDICATE';
-    const real = createTableCore({ seed: runSeed });
-    real.dispatch({ c: 'NewRun', seed: runSeed });
-    real.tick();
-    store.attachCore(real);
   }, [core]);
 
   useTableAudio(core);
