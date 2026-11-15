@@ -137,7 +137,7 @@ test('cabinet TimelineFactory is a paused, seekable C-6 no-op', () => {
   timeline.kill();
 });
 
-test('C-9 design tokens and 1440/1024/390 responsive rules are present', () => {
+test('C-9 design tokens and full-width/900/390 responsive rules are present', () => {
   const css = readFileSync(new URL('../src/theme/tokens.css', import.meta.url), 'utf8');
   for (const value of Object.values(contracts.DESIGN_TOKENS.color)) {
     assert.ok(css.includes(value), `missing token ${value}`);
@@ -145,8 +145,8 @@ test('C-9 design tokens and 1440/1024/390 responsive rules are present', () => {
   assert.match(css, /--font-sans:\s*Inter/);
   assert.match(css, /JetBrains Mono/);
   assert.match(css, /Outfit/);
-  assert.match(css, /max-width: 1440px/);
-  assert.match(css, /@media \(min-width: 1024px\)/);
+  assert.match(css, /max-width:\s*none/);
+  assert.match(css, /@media \(min-width: 900px\)/);
   assert.match(css, /@media \(max-width: 480px\)/);
 });
 

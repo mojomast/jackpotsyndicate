@@ -47,9 +47,12 @@ verify` passed against a fresh deterministic build (73 files checked). The table
 symbol frames, seven token skins and four peg skins are inlined as data URIs so spins
 make no late network requests. The board now draws the floor background over the
 pinfield and replaces pegs, orbs and tokens with their manifest images. Shop uses the
-current-floor banner, item artwork and the UI bezel; Compendium uses item, floor and
-boss artwork. VFX sprites remain unconsumed because three of the four keys are still
-placeholders.
+current-floor banner, item artwork, the UI bezel and the generated panel/button art;
+Compendium uses item, floor and boss artwork. The table HUD, side panels, scan cabinet
+and spin button use the generated UI panel/button/cabinet art; the frozen-cell badge
+uses `vfx.freeze`. The horizontal `ui.dozer`, `ui.gutter` and `ui.lip` trims still need
+proper nine-slice/projection support and are not placed in the board. Three VFX keys
+and `glyph.uranium` remain placeholders.
 
 ## Art provenance
 

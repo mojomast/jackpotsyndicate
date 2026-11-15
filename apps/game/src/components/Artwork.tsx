@@ -13,6 +13,35 @@ export function spriteAsset(spriteKey: string | null | undefined): SpriteAsset |
   return spriteKey ? spriteAssetFromManifest(MANIFEST, spriteKey) : null;
 }
 
+function artBackground(spriteKey: string, shade = 0.72): CSSProperties | undefined {
+  const asset = spriteAsset(spriteKey);
+  if (!asset) return undefined;
+  return {
+    backgroundImage: `linear-gradient(180deg, rgba(7, 9, 14, ${shade}), rgba(7, 9, 14, ${Math.min(0.96, shade + 0.12)})), url("${asset.url}")`,
+    backgroundSize: '100% 100%, 100% 100%',
+    backgroundPosition: 'center, center',
+    backgroundRepeat: 'no-repeat, no-repeat',
+  };
+}
+
+/** Subtle generated-panel skin for table HUD and side panels. */
+export function uiPanelStyle(): CSSProperties | undefined {
+  return artBackground('ui.panel', 0.68);
+}
+
+/** Generated button skin for the primary spin control. */
+export function uiButtonStyle(): CSSProperties | undefined {
+  return artBackground('ui.button', 0.48);
+}
+
+/** Expose reusable UI-art URLs to CSS for primary buttons. */
+export function installUiArtVariables(): void {
+  if (typeof document === 'undefined') return;
+  const button = spriteAsset('ui.button');
+  if (button) document.documentElement.style.setProperty('--ui-button-art', `url("${button.url}")`);
+}
+
+
 export interface SpriteImageProps {
   spriteKey: string | null | undefined;
   className?: string;

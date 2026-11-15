@@ -22,7 +22,7 @@ import {
   itemsByCategory,
 } from './metaContent';
 import { MetaScreen } from './MetaScreen';
-import { MetaBezel, SpriteImage } from '../../components/Artwork';
+import { MetaBezel, SpriteImage, uiPanelStyle } from '../../components/Artwork';
 import { navigateTo, type MetaNavigate } from './navigation';
 
 export interface CompendiumScreenProps {
@@ -72,7 +72,7 @@ export function CompendiumScreen({ onNavigate }: CompendiumScreenProps) {
       testId="compendium"
     >
       <MetaBezel />
-      <div className="compendium-summary panel">
+      <div className="compendium-summary panel" style={uiPanelStyle()}>
         <div>
           <span className="eyebrow">Run seed</span>
           <strong>{state.seed}</strong>

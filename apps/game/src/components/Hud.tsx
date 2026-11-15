@@ -2,6 +2,7 @@
 import { FLOOR_LABELS, formatCash, quotaForRound, useGameStore } from '../store/gameStore';
 import { TEST_IDS } from '@jackpotsyndicate/contracts';
 import { CascadeEquation } from './CascadeEquation';
+import { uiButtonStyle, uiPanelStyle, SpriteImage } from './Artwork';
 
 export function Hud() {
   const state = useGameStore((store) => store.state);
@@ -16,11 +17,17 @@ export function Hud() {
   };
 
   return (
-    <section className="hud panel" aria-label="Heads-up display">
+    <section className="hud panel" aria-label="Heads-up display" style={uiPanelStyle()}>
       <div className="hud-topline">
         <span className="hud-label">{state.phase.replaceAll('_', ' ')}</span>
         <span className="hud-label">Round {state.round} · {FLOOR_LABELS[state.floorId]}</span>
         <span className="hud-label">Round cash {formatCash(state.roundCash)}</span>
+        {state.grid.frozen.length > 0 ? (
+          <span className="freeze-chip">
+            <SpriteImage spriteKey="vfx.freeze" className="freeze-chip-art" />
+            {state.grid.frozen.length} frozen
+          </span>
+        ) : null}
       </div>
 
       <CascadeEquation />
@@ -63,6 +70,7 @@ export function Hud() {
           type="button"
           className="btn btn-primary hud-spin"
           data-testid={TEST_IDS.spinBtn}
+          style={uiButtonStyle()}
           onClick={spin}
           disabled={!canSpin}
           aria-keyshortcuts="Space"

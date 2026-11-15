@@ -92,10 +92,10 @@ samp {
 /* ------------------------------------------------------------------ shell */
 .app-shell {
   width: 100%;
-  max-width: 1440px;
+  max-width: none;
   min-height: 100vh;
   margin: 0 auto;
-  padding: clamp(10px, 2.2vw, 30px);
+  padding: clamp(6px, 1.2vw, 20px);
   display: flex;
   flex-direction: column;
   gap: clamp(12px, 2vw, 24px);
@@ -406,12 +406,17 @@ button.btn {
 .btn-primary {
   border-color: rgba(251, 191, 36, 0.62);
   background: linear-gradient(180deg, #ffd75e, #f0a70f);
+  background-image: linear-gradient(180deg, #ffd75e, #f0a70f), var(--ui-button-art, none);
+  background-size: 100% 100%, 100% 100%;
+  background-position: center, center;
+  background-repeat: no-repeat, no-repeat;
   color: #171003;
   box-shadow: 0 8px 22px rgba(251, 191, 36, 0.2);
 }
 
 .btn-primary:hover:not(:disabled) {
   background: linear-gradient(180deg, #ffe07a, #f7b41c);
+  background-image: linear-gradient(180deg, #ffe07a, #f7b41c), var(--ui-button-art, none);
   border-color: var(--color-gold);
 }
 
@@ -470,6 +475,27 @@ a:focus-visible {
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+}
+
+.freeze-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 7px 2px 3px;
+  border: 1px solid rgba(186, 230, 253, 0.35);
+  border-radius: 999px;
+  color: #bae6fd;
+  background: rgba(186, 230, 253, 0.08);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.freeze-chip-art {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
 }
 
 .hud-stats {
@@ -663,6 +689,14 @@ a:focus-visible {
   display: flex;
   flex-direction: column;
   gap: clamp(12px, 2vw, 18px);
+}
+
+@media (min-width: 900px) {
+  .table-side {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: start;
+  }
 }
 
 .cabinet {
@@ -1483,12 +1517,6 @@ input[type='range'] {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
-  }
-}
-
-@media (min-width: 1024px) {
-  .table-layout {
-    grid-template-columns: minmax(0, 1fr) minmax(300px, 360px);
   }
 }
 

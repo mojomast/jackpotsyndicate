@@ -4,6 +4,7 @@ import type { GameCore, GameEvent } from '@jackpotsyndicate/contracts';
 import { createAudioEngine, type AudioEngine, type GestureTarget } from '@jackpotsyndicate/audio';
 import { Hud } from '../../components/Hud';
 import { LogPanel } from '../../components/LogPanel';
+import { SpriteImage } from '../../components/Artwork';
 import { TrinketRail } from '../../components/TrinketRail';
 import { MockGameCore, useGameStore } from '../../store/gameStore';
 import { BoardView } from './BoardView';
@@ -92,13 +93,16 @@ export function TableScreen() {
         <div className="table-main">
           <Hud />
           <div className="table-stage">
-            <CabinetStage
-              core={core}
-              seed={seed}
-              cols={cols}
-              rows={rows}
-              reducedMotion={reducedMotion}
-            />
+            <div className="cabinet-frame">
+              <SpriteImage spriteKey="ui.cabinet" className="cabinet-frame-art" />
+              <CabinetStage
+                core={core}
+                seed={seed}
+                cols={cols}
+                rows={rows}
+                reducedMotion={reducedMotion}
+              />
+            </div>
             <BoardView core={core} floorId={floorId} gutterRisk={gutterRisk} />
           </div>
           <PrepControls />
@@ -131,6 +135,9 @@ function TableStyle() {
     <style>{`
       .table-stage { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
       .table-cabinet { min-width: 0; }
+      .cabinet-frame { position: relative; min-width: 0; isolation: isolate; }
+      .cabinet-frame-art { position: absolute; inset: -2%; width: 104%; height: 104%; object-fit: contain; opacity: .16; pointer-events: none; z-index: 0; filter: saturate(.7); }
+      .cabinet-frame > .table-cabinet { position: relative; z-index: 1; }
       .table-board { min-width: 0; padding: 12px; }
       .table-board-heading { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 8px; color: var(--color-muted); font-family: var(--font-mono); font-size: .72rem; }
       .table-board-svg { display: block; width: 100%; height: auto; aspect-ratio: 600 / 510; border-radius: 10px; background: #07090e; border: 1px solid rgba(251,191,36,.16); }
@@ -142,7 +149,7 @@ function TableStyle() {
       .prep-options { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
       .prep-select { min-width: 180px; }
       .prep-feedback { margin: 8px 0 0; color: var(--color-muted); font-family: var(--font-mono); font-size: .74rem; }
-      @media (min-width: 1024px) { .table-stage { grid-template-columns: minmax(320px, 1.05fr) minmax(300px, .95fr); align-items: start; } }
+      @media (min-width: 900px) { .table-stage { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; } }
       .jsa-root { position: relative; isolation: isolate; color: #e9eef5; }
       .jsa-root * { box-sizing: border-box; }
       .jsa-cabinet { position: relative; width: 100%; padding: 3.3%; border: 1px solid #8e702c; border-radius: 18px; background: linear-gradient(125deg,#30343b,#101521 22%,#0b1019 65%,#3d3123); box-shadow: inset 0 0 0 7px #151c29, 0 18px 70px #0009; }

@@ -39,7 +39,7 @@ every acceptance criterion is green; the gaps are listed explicitly.
   per-key files and records atlas labels/frames.
 - Content item sprite keys were normalized to the canonical kebab-case catalog.
 - Reel symbols are inlined as data URIs to satisfy the zero-network J1 requirement.
-- Shop and Compendium now consume floor, item, boss and UI-bezel art; the board consumes floor, peg, orb and token art. VFX art remains unconsumed and incomplete.
+- The UI is full-width at desktop with the slot cabinet and board using the available width; Shop, Compendium, Boss and Elevator use floor/item/boss art. The HUD, side panels, spin button and cabinet use generated panel/button/cabinet art, and the freeze badge uses `vfx.freeze`. The horizontal dozer/gutter/lip trims remain unplaced pending nine-slice/projection support; three VFX keys and `glyph.uranium` remain placeholders.
 
 Handoff quality issues remain open: diamond token color, skull magnet, boss padding,
 `chassis.harness-hyper` shape, UI nine-slicing, and the four missing clean cutouts.
