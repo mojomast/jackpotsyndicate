@@ -57,6 +57,7 @@ const React = await import('react');
 const rtl = await import('@testing-library/react');
 const contracts = await import('@jackpotsyndicate/contracts');
 const storeModule = await import('../src/store/gameStore');
+const mockModule = await import('./helpers/mockGameCore');
 const apiModule = await import('../src/testApi');
 const appModule = await import('../src/app/App');
 const cabinetModule = await import('../src/components/CabinetMount');
@@ -64,7 +65,8 @@ const cabinetModule = await import('../src/components/CabinetMount');
 const { render, screen, cleanup, fireEvent, act } = rtl;
 const { App } = appModule;
 const { TEST_IDS, STORAGE_KEYS } = contracts;
-const { MockGameCore, useGameStore } = storeModule;
+const { useGameStore } = storeModule;
+const { MockGameCore } = mockModule;
 
 const REQUIRED_TEST_IDS: string[] = [
   TEST_IDS.spinBtn,

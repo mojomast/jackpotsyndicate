@@ -197,3 +197,27 @@ export function shopArchetypeLabel(archetype: string | null): string {
 export function maxShopCapacity(): number {
   return 10;
 }
+
+export type BossRewardKind = 'relicChoice' | 'shopCapacity' | 'victory';
+
+/** What beating a boss pays (R-BOS-02..04), read from its reward hook. */
+export function bossReward(bossId: BossId): { kind: BossRewardKind; amount: number } {
+  const boss = BOSS_BY_ID.get(bossId);
+  const params = boss?.reward.params ?? {};
+  const action = params.action;
+  if (action === 'shopCapacity') return { kind: 'shopCapacity', amount: Number(params.amount ?? 2) };
+  if (action === 'victory') return { kind: 'victory', amount: 0 };
+  return { kind: 'relicChoice', amount: Number(params.count ?? 3) };
+}
+
+export function bossRewardCopy(kind: BossRewardKind, amount: number): string {
+  switch (kind) {
+    case 'shopCapacity':
+      return `+${amount} shop shelf slot${amount === 1 ? '' : 's'} for the rest of the run`;
+    case 'victory':
+      return 'The Syndicate falls: full clear';
+    case 'relicChoice':
+    default:
+      return `Choose 1 of ${amount} relics from the vault, free`;
+  }
+}

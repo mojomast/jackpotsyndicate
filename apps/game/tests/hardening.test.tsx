@@ -57,6 +57,7 @@ const React = await import('react');
 const rtl = await import('@testing-library/react');
 const contracts = await import('@jackpotsyndicate/contracts');
 const storeModule = await import('../src/store/gameStore');
+const mockModule = await import('./helpers/mockGameCore');
 const appModule = await import('../src/app/App');
 const boundaryModule = await import('../src/app/ErrorBoundary');
 const auditModule = await import('../src/app/a11yAudit');
@@ -66,7 +67,8 @@ const { render, screen, cleanup, fireEvent, act } = rtl;
 const { App } = appModule;
 const { AppErrorBoundary } = boundaryModule;
 const { auditAccessibility, seriousA11yFindings, auditTouchTargetCss, auditReducedMotionCss } = auditModule;
-const { MockGameCore, useGameStore } = storeModule;
+const { useGameStore } = storeModule;
+const { MockGameCore } = mockModule;
 const { STORAGE_KEYS } = contracts;
 const { readStoredSave, saveCore } = persistence;
 

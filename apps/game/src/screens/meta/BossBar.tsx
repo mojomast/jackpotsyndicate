@@ -11,13 +11,14 @@ export interface BossBarProps {
 }
 
 /**
- * R-BOS-01 head-to-head tug-of-war bar. Player round cash vs boss score.
+ * R-BOS-01 head-to-head tug-of-war bar. Player round cash vs boss score; the
+ * knot sits where the two meet, so a lead reads at a glance.
  */
 export function BossBar({
   playerScore,
   bossScore,
   bossName = 'Boss',
-  playerLabel = 'Player',
+  playerLabel = 'You',
   pending = false,
 }: BossBarProps) {
   const player = Math.max(0, playerScore);
@@ -29,30 +30,36 @@ export function BossBar({
 
   return (
     <section
-      className="boss-bar panel"
+      className={`boss-bar lead-${lead}`}
       data-testid={TEST_IDS.bossBar}
       aria-label="Boss tug-of-war"
     >
       <div className="boss-bar-heading">
-        <span className="eyebrow">Tug of war</span>
-        <strong>{bossName}</strong>
+        <span className="stat-label">The duel</span>
         <span className={`boss-lead boss-lead-${lead}`}>
-          {lead === 'player' ? 'Player leads' : lead === 'boss' ? 'Boss leads' : 'Level'}
-          {pending ? ' · score pending' : ''}
+          {lead === 'player' ? 'You lead' : lead === 'boss' ? `${bossName} leads` : 'Dead level'}
+          {pending ? ' · scores pending' : ''}
         </span>
       </div>
 
-      <div className="boss-bar-row">
-        <span>{playerLabel}</span>
-        <span data-testid="boss-player-score">{formatCash(player)}</span>
+      <div className="boss-bar-scores">
+        <div className="boss-bar-side side-player">
+          <span className="stat-label">{playerLabel}</span>
+          <strong data-testid="boss-player-score">{formatCash(player)}</strong>
+        </div>
+        <div className="boss-bar-side side-boss">
+          <span className="stat-label">{bossName}</span>
+          <strong data-testid="boss-score">{formatCash(boss)}</strong>
+        </div>
       </div>
       <div
         className="boss-tug"
         role="meter"
-        aria-label="Player share of the tug-of-war"
+        aria-label="Your share of the tug-of-war"
         aria-valuemin={0}
         aria-valuemax={100}
         aria-valuenow={Math.round(playerShare * 100)}
+        style={{ ['--player-share' as string]: `${playerWidth}%` }}
       >
         <div
           className="boss-tug-player"
@@ -64,14 +71,11 @@ export function BossBar({
           data-testid="boss-bar-boss"
           style={{ width: `${100 - playerWidth}%` }}
         />
-      </div>
-      <div className="boss-bar-row">
-        <span>Boss</span>
-        <span data-testid="boss-score">{formatCash(boss)}</span>
+        <span className="boss-tug-knot" aria-hidden="true" />
       </div>
       <p className="meta-hint">
-        The boss scores once per spin. Bank more round cash than the boss after
-        the final spin to take the floor.
+        No quota in a boss round. The boss scores once per spin; bank more round cash
+        than the boss by the final spin to take the floor.
       </p>
     </section>
   );

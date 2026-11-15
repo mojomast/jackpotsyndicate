@@ -50,10 +50,11 @@ export function ResumePrompt({ onNavigate, onResumed }: ResumePromptProps) {
 
   return (
     <MetaScreen
-      eyebrow="Continue · R-RUN-07"
-      title="Resume run"
-      description="Autosaves are written at phase boundaries, including the full shelf state. Resume restores the exact state hash."
+      eyebrow="Saved run"
+      title="Pick up where you left off"
+      description="Runs autosave at every phase boundary, shelf and all. Resuming restores the exact table you left."
       testId="resume-prompt"
+      className="resume-screen"
     >
       {notice ? <MetaNotice tone="info" testId="resume-notice">{notice}</MetaNotice> : null}
       {error ? <MetaNotice tone="error" testId="resume-error">{error}</MetaNotice> : null}
@@ -64,35 +65,35 @@ export function ResumePrompt({ onNavigate, onResumed }: ResumePromptProps) {
         </MetaNotice>
       ) : (
         <>
-          <div className="summary-grid">
-            <div className="summary-card panel">
-              <span className="eyebrow">Seed</span>
-              <p className="seed-value" data-testid="resume-seed">{summary.seed}</p>
-              <CopySeedButton seed={summary.seed} testId="copy-seed" />
+          <div className="stat-grid">
+            <div className="stat-tile tone-gold">
+              <span className="stat-label">Seed</span>
+              <strong className="stat-value seed-value" data-testid="resume-seed">{summary.seed}</strong>
+              <CopySeedButton seed={summary.seed} testId="copy-seed" className="btn btn-ghost btn-sm" />
             </div>
-            <div className="summary-card panel">
-              <span className="eyebrow">Phase boundary</span>
-              <strong data-testid="resume-phase">{summary.phaseLabel}</strong>
-              <span className="meta-hint">{summary.phase.replaceAll('_', ' ')} · tick {summary.tick}</span>
+            <div className="stat-tile">
+              <span className="stat-label">Saved at</span>
+              <strong className="stat-value" data-testid="resume-phase">{summary.phaseLabel}</strong>
+              <span className="stat-hint">Tick {summary.tick}</span>
             </div>
-            <div className="summary-card panel">
-              <span className="eyebrow">Progress</span>
-              <strong>{floorName(summary.floorId)}</strong>
-              <span className="meta-hint">Round {summary.round}</span>
+            <div className="stat-tile">
+              <span className="stat-label">Progress</span>
+              <strong className="stat-value">{floorName(summary.floorId)}</strong>
+              <span className="stat-hint">Round {summary.round}</span>
             </div>
-            <div className="summary-card panel">
-              <span className="eyebrow">Bankroll</span>
-              <strong>{formatCash(summary.bankroll)}</strong>
-              <span className="meta-hint">
+            <div className="stat-tile tone-emerald">
+              <span className="stat-label">Bankroll</span>
+              <strong className="stat-value">{formatCash(summary.bankroll)}</strong>
+              <span className="stat-hint">
                 {summary.resumable ? 'Ready to continue' : 'Run already ended'}
               </span>
             </div>
           </div>
 
-          <div className="stub-actions">
+          <div className="screen-actions">
             <button
               type="button"
-              className="btn btn-primary"
+              className="btn btn-primary btn-lg"
               data-testid="resume-continue"
               onClick={resume}
               disabled={!summary.resumable}
@@ -101,13 +102,13 @@ export function ResumePrompt({ onNavigate, onResumed }: ResumePromptProps) {
             </button>
             <button
               type="button"
-              className="btn"
+              className="btn btn-danger"
               data-testid="resume-discard"
               onClick={discard}
             >
               Discard save
             </button>
-            <button type="button" className="btn" onClick={() => navigateTo('title', onNavigate)}>
+            <button type="button" className="btn btn-ghost" onClick={() => navigateTo('title', onNavigate)}>
               Back to title
             </button>
           </div>

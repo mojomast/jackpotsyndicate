@@ -1,14 +1,26 @@
 /** @jsxRuntime automatic */
+import { useEffect, useRef } from 'react';
 import type { RoundResult as RoundResultData } from '@jackpotsyndicate/contracts';
 import { useGameStore } from '../../store/gameStore';
 import { dispatchMeta } from './commands';
-import { floorName, formatCash, quotaForState } from './metaContent';
-import { MetaNotice, MetaScreen } from './MetaScreen';
+import {
+  bossForFloor,
+  bossForFloorId,
+  bossReward,
+  bossRewardCopy,
+  floorName,
+  formatCash,
+  quotaForState,
+} from './metaContent';
+import { MetaScreen } from './MetaScreen';
 import { useMetaAutosave } from './persistence';
 import { navigateTo, routeForPhase, type MetaNavigate } from './navigation';
+import { StatTile } from './ui';
 
 export interface RoundResultScreenProps {
   onNavigate?: MetaNavigate;
+  /** Focus the primary action on mount (the overlay does). */
+  autoFocus?: boolean;
 }
 
 function latestResult(events: ReturnType<typeof useGameStore.getState>['events']): RoundResultData | null {
@@ -19,12 +31,45 @@ function latestResult(events: ReturnType<typeof useGameStore.getState>['events']
   return null;
 }
 
-export function RoundResultScreen({ onNavigate }: RoundResultScreenProps) {
+function headline(result: RoundResultData): { stamp: string; title: string; copy: string } {
+  if (result.kind === 'boss') {
+    return result.passed
+      ? {
+          stamp: 'Boss broken',
+          title: 'The floor is yours',
+          copy: 'You out-banked the boss. Collect the bounty, then ride up.',
+        }
+      : {
+          stamp: 'House wins',
+          title: 'The boss took the duel',
+          copy: 'The boss banked more than you this round. The run ends here.',
+        };
+  }
+  return result.passed
+    ? {
+        stamp: 'Quota met',
+        title: 'Round cleared',
+        copy: 'The Syndicate takes its tribute. What is left is yours to spend at the vendor.',
+      }
+    : {
+        stamp: 'Quota missed',
+        title: 'The debt is called',
+        copy: 'The bankroll came up short of the quota. The run ends here; the seed lets you try it again.',
+      };
+}
+
+/** R-RUN-03 verdict: shown once the shelf settles after the final spin of a round. */
+export function RoundResultScreen({ onNavigate, autoFocus = false }: RoundResultScreenProps) {
   useMetaAutosave();
   const state = useGameStore((store) => store.state);
   const events = useGameStore((store) => store.events);
   const storedResult = useGameStore((store) => store.lastResult);
   const settled = storedResult ?? latestResult(events);
+  const continueRef = useRef<HTMLButtonElement | null>(null);
+
+  useEffect(() => {
+    if (autoFocus) continueRef.current?.focus({ preventScroll: true });
+  }, [autoFocus]);
 
   const fallback: RoundResultData =
     state.round >= 4
@@ -44,6 +89,26 @@ export function RoundResultScreen({ onNavigate }: RoundResultScreenProps) {
 
   const result = settled ?? fallback;
   const boss = result.kind === 'boss';
+  const copy = headline(result);
+  const tone = result.passed ? 'pass' : 'fail';
+  const bossName = bossForFloor(state.floorId)?.name ?? 'The boss';
+  const rewardEvent = [...events].reverse().find((event) => event.t === 'BossRewarded') as
+    | { t: 'BossRewarded'; reward: 'relicChoice' | 'shopCapacity' | 'victory'; amount: number }
+    | undefined;
+  const reward = boss && result.passed
+    ? rewardEvent
+      ? { kind: rewardEvent.reward, amount: rewardEvent.amount }
+      : bossReward(bossForFloorId(state.floorId))
+    : null;
+  const continueLabel = !result.passed
+    ? 'See run summary'
+    : !boss
+      ? 'Enter the shop'
+      : reward?.kind === 'shopCapacity'
+        ? 'Call the elevator'
+        : reward?.kind === 'victory'
+          ? 'Claim the house'
+          : 'Claim a relic';
 
   const continueRun = () => {
     const outcome = dispatchMeta({ c: 'ContinueAfterRound' });
@@ -53,82 +118,65 @@ export function RoundResultScreen({ onNavigate }: RoundResultScreenProps) {
 
   return (
     <MetaScreen
-      eyebrow="Round settled"
-      title={result.passed ? 'Round cleared' : 'Round missed'}
-      description={
-        boss
-          ? 'Boss rounds have no quota. The higher side of the tug-of-war takes the floor (D-04).'
-          : 'The tribute is deducted after a passed round. What remains is shop money.'
-      }
+      eyebrow={`${floorName(state.floorId)} · ${boss ? 'Boss round' : `Round ${state.round}`}`}
+      title={copy.title}
       testId="round-result"
+      className={`round-result result-${tone}`}
     >
-      <div className="result-grid">
-        <div className={`result-card panel ${result.passed ? 'result-pass' : 'result-fail'}`}>
-          <span className="eyebrow">Outcome</span>
-          <strong data-testid="round-result-outcome">
-            {result.passed ? 'Passed' : 'Missed'}
-          </strong>
-          <span className="meta-hint">
-            {floorName(state.floorId)} · round {state.round}
-          </span>
+      <p className={`result-stamp stamp-${tone}`} aria-hidden="true">{copy.stamp}</p>
+      <p className="result-copy">
+        <span className="sr-only">Outcome: </span>
+        <span className={`result-outcome outcome-${tone}`} data-testid="round-result-outcome">
+          {result.passed ? 'Passed' : 'Missed'}
+        </span>
+        <span className="result-copy-text">{copy.copy}</span>
+      </p>
+
+      {boss ? (
+        <div className="result-ledger result-duel">
+          <StatTile
+            label="Your round cash"
+            value={formatCash(result.playerScore)}
+            tone={result.passed ? 'emerald' : 'ivory'}
+            testId="round-player-score"
+            size="lg"
+          />
+          <span className="ledger-op" aria-hidden="true">vs</span>
+          <StatTile
+            label={bossName}
+            value={formatCash(result.bossScore)}
+            tone={result.passed ? 'ivory' : 'crimson'}
+            testId="round-boss-score"
+            size="lg"
+          />
         </div>
-
-        {boss ? (
-          <>
-            <div className="result-card panel">
-              <span className="eyebrow">Player round cash</span>
-              <strong data-testid="round-player-score">{formatCash(result.playerScore)}</strong>
-            </div>
-            <div className="result-card panel">
-              <span className="eyebrow">Boss score</span>
-              <strong data-testid="round-boss-score">{formatCash(result.bossScore)}</strong>
-            </div>
-          </>
-        ) : (
-          <>
-            <div className="result-card panel">
-              <span className="eyebrow">Quota</span>
-              <strong data-testid="round-quota">{formatCash(result.quota)}</strong>
-            </div>
-            <div className="result-card panel">
-              <span className="eyebrow">Bankroll after tribute</span>
-              <strong data-testid="round-bankroll">{formatCash(result.bankrollAfter)}</strong>
-            </div>
-          </>
-        )}
-      </div>
-
-      {!result.passed ? (
-        <MetaNotice tone="error">
-          The quota was missed. Continue to the run summary and retry with the
-          same seed.
-        </MetaNotice>
       ) : (
-        <MetaNotice tone="success">
-          {boss
-            ? 'Boss beaten. Continue to claim a relic and call the elevator.'
-            : 'Quota paid. Continue to the vendor shelf.'}
-        </MetaNotice>
+        <div className="result-ledger">
+          <StatTile label="Bankroll" value={formatCash(result.bankrollBefore)} />
+          <span className="ledger-op" aria-hidden="true">−</span>
+          <StatTile
+            label="Quota"
+            value={formatCash(result.quota)}
+            tone={result.passed ? 'gold' : 'crimson'}
+            testId="round-quota"
+          />
+          <span className="ledger-op" aria-hidden="true">=</span>
+          <StatTile
+            label={result.passed ? 'Left to spend' : 'Bankroll'}
+            value={formatCash(result.bankrollAfter)}
+            tone={result.passed ? 'emerald' : 'crimson'}
+            testId="round-bankroll"
+            size="lg"
+          />
+        </div>
       )}
 
-      <div className="stub-actions">
-        <button
-          type="button"
-          className="btn btn-primary"
-          data-testid="round-continue"
-          onClick={continueRun}
-          disabled={state.phase !== 'ROUND_RESULT' && state.phase !== 'BOSS_INTRO'}
-        >
-          {result.passed
-            ? boss
-              ? 'Claim boss relic'
-              : 'Enter shop'
-            : 'Finish run'}
-        </button>
-        <button type="button" className="btn" onClick={() => navigateTo('table', onNavigate)}>
-          Back to table
-        </button>
-      </div>
+      {reward ? (
+        <p className="boss-reward" data-testid="boss-reward" data-reward={reward.kind}>
+          <span className="stat-label">Boss reward</span>
+          <strong>{bossRewardCopy(reward.kind, reward.amount)}</strong>
+        </p>
+      ) : null}
 
       <dl className="result-stats">
         <div>
@@ -148,7 +196,34 @@ export function RoundResultScreen({ onNavigate }: RoundResultScreenProps) {
           <dd>{formatCash(state.stats.bestSpinEquity)}</dd>
         </div>
       </dl>
+
+      <div className="screen-actions">
+        <button
+          type="button"
+          className={`btn btn-lg ${result.passed ? 'btn-primary' : 'btn-danger-solid'}`}
+          data-testid="round-continue"
+          ref={continueRef}
+          onClick={continueRun}
+          disabled={state.phase !== 'ROUND_RESULT' && state.phase !== 'BOSS_INTRO'}
+        >
+          {continueLabel}
+        </button>
+      </div>
     </MetaScreen>
+  );
+}
+
+/**
+ * The verdict as a modal over the settled table, so the board that produced
+ * it stays visible behind the card.
+ */
+export function RoundResultOverlay({ onNavigate }: { onNavigate?: MetaNavigate }) {
+  return (
+    <div className="result-overlay" role="dialog" aria-modal="true" aria-label="Round result">
+      <div className="result-overlay-card">
+        <RoundResultScreen onNavigate={onNavigate} autoFocus />
+      </div>
+    </div>
   );
 }
 
