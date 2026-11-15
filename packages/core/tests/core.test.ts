@@ -55,7 +55,7 @@ function lastOrbChips(events: readonly GameEvent[]): number {
 }
 
 test('a scripted run plays a complete round to RoundSettled headlessly', () => {
-  const { core, events } = playRound('seed-11');
+  const { core, events } = playRound('seed-2');
 
   const settled = events.filter(
     (event): event is Extract<GameEvent, { t: 'RoundSettled' }> => event.t === 'RoundSettled',
@@ -215,7 +215,7 @@ test('effect routing: onSpinStart spawns a copper token through the sim', () => 
 
 test('effect routing: gutter-loss X bonuses survive into the next spin', () => {
   const core = createGameCore();
-  core.dispatch({ c: 'NewRun', seed: 'seed-2' });
+  core.dispatch({ c: 'NewRun', seed: 'seed-3' });
   (core.getState() as RunState).trinkets.push('vampiricRakeCollector');
   const events = spinOnce(core);
   const evaluated = events.find(

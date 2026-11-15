@@ -40,8 +40,10 @@ Evidence:
 
 `tools/assets build` reports **71 keys, 65 locked, 6 placeholders**; `tools/assets
 verify` passed against a fresh deterministic build (73 files checked). The table-screen
-cabinet now consumes the atlas resolver for reel symbols. Other groups (floors, items,
-UI and VFX) are resolved in the manifest but are not yet consumed everywhere in the UI.
+cabinet now consumes the atlas resolver for reel symbols; the six symbol frames are
+inlined as data URIs so a J1 spin makes no late network requests. Other groups (floors,
+items, UI and VFX) are resolved in the manifest but are not yet consumed everywhere in
+the UI.
 
 ## Art provenance
 
