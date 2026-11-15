@@ -293,8 +293,8 @@ test('chassis kinds, prices and repeat price lists match SPEC 2.7', () => {
   assert.deepEqual(byKind.get('ADD_COLUMN')!.repeatPrices, [400, 900]);
   assert.equal(byKind.get('ADD_ROW')!.price, 600);
   assert.equal(byKind.get('HARNESS_HYPER')!.price, 300);
-  assert.equal(byKind.get('HARNESS_WAYS')!.price, 500);
-  assert.equal(byKind.get('HARNESS_CLUSTER')!.price, 500);
+  assert.equal(byKind.get('HARNESS_WAYS')!.price, 600);
+  assert.equal(byKind.get('HARNESS_CLUSTER')!.price, 350);
   assert.equal(byKind.get('JUMPER')!.price, 200);
   assert.equal(byKind.get('OVERVOLT')!.price, 350);
 });
@@ -360,7 +360,7 @@ test('all four floors carry SPEC 2.7 physics, branching, peg layouts and shop we
   assert.equal(foundry.bossId, 'zero');
 
   const penthouse = CONTENT_BUNDLE.floors.find((f) => f.id === 'FLOOR_PENTHOUSE')!;
-  assert.equal(penthouse.lipMult, 1.5);
+  assert.equal(penthouse.lipMult, 0.6);
   assert.equal(penthouse.quotaScale, 2.2);
   assert.deepEqual(penthouse.next, []);
   assert.equal(penthouse.bossId, 'auditor');
@@ -376,29 +376,29 @@ test('three bosses encode SPEC 2.7 / R-BOS-02..04 hooks', () => {
 
   const [valenti, zero, auditor] = CONTENT_BUNDLE.bosses;
   assert.equal(valenti!.name, 'Don "The Vacuum" Valenti');
-  assert.deepEqual(valenti!.score.params, { action: 'seededScore', min: 450, max: 900, floorScale: true });
+  assert.deepEqual(valenti!.score.params, { action: 'seededScore', min: 180, max: 320, floorScale: true });
   assert.ok(valenti!.sabotage.some((s) => s.params?.action === 'suction'));
 
   assert.equal(zero!.name, 'Madame Zero');
-  assert.deepEqual(zero!.score.params, { action: 'frozenCellScore', xPerFrozenCell: 0.5 });
+  assert.deepEqual(zero!.score.params, { action: 'frozenCellScore', base: 700, xPerFrozenCell: 0.5, floorScale: true });
   assert.ok(zero!.sabotage.some((s) => s.params?.action === 'freezeCells'));
   assert.ok(zero!.sabotage.some((s) => s.params?.action === 'iceBlocks'));
   assert.deepEqual(zero!.reward.params, { action: 'shopCapacity', amount: 2 });
 
   assert.equal(auditor!.name, 'The Iron Auditor');
-  assert.deepEqual(auditor!.score.params, { action: 'deterministicCurve', base: 600, growth: 1.35 });
+  assert.deepEqual(auditor!.score.params, { action: 'deterministicCurve', base: 700, growth: 1.35, floorScale: true });
   assert.ok(auditor!.sabotage.some((s) => s.params?.action === 'removeCenterTokens'));
   assert.deepEqual(auditor!.reward.params, { action: 'victory' });
 });
 
 test('initial balance carries bankroll, quotas, strips and minimum match', () => {
   const balance = CONTENT_BUNDLE.balance;
-  assert.equal(balance.startBankroll, 500);
+  assert.equal(balance.startBankroll, 1000);
   assert.equal(balance.cashPerChip, 1);
   assert.equal(balance.minMatch, 3);
   assert.equal(balance.quotas.length, 9);
-  const expectedQuotas = Array.from({ length: 9 }, (_, i) => Math.round(1000 * 2.1 ** i));
-  assert.deepEqual(balance.quotas, expectedQuotas);
+  // Tuned quota curve (docs/BALANCE.md); strictly rising within each floor.
+  assert.deepEqual(balance.quotas, [450, 1800, 4500, 8000, 16000, 32000, 27300, 45500, 72700]);
 
   assert.ok(balance.baseStrip.length > 0);
   assert.ok(balance.firstReelStrip.length > 0);

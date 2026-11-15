@@ -90,7 +90,7 @@ export const RULES = {
   MAX_JUMPERS: 3,
   MAX_TUMBLES: 5,
   DRINK_TRAY_SLOTS: 3,
-  SHELF_SEED_TOKENS: 20,
+  SHELF_SEED_TOKENS: 60,
 } as const;
 
 export const SAVE_VERSION = 1;
