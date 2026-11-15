@@ -167,10 +167,8 @@ export const App: FC<AppProps> = ({ initialRoute }) => {
       <TestIdRegistry route={route} />
 
       <footer className="app-footer">
-        <span>T-070 UI shell · MockGameCore · C-8 test surface</span>
-        <span>
-          Play money only · <code>?test=1</code> test bridge
-        </span>
+        <span>Play-money build · development preview</span>
+        <span>No purchases, accounts or network calls</span>
       </footer>
     </div>
   );
