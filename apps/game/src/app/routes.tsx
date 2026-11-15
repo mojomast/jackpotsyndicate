@@ -2,18 +2,8 @@
 import { useEffect, useState } from 'react';
 import { TEST_IDS } from '@jackpotsyndicate/contracts';
 import { useGameStore } from '../store/gameStore';
-import { Hud } from '../components/Hud';
-import { CabinetMount } from '../components/CabinetMount';
-import { TrinketRail } from '../components/TrinketRail';
-import { LogPanel } from '../components/LogPanel';
-import {
-  BossStub,
-  CompendiumStub,
-  ElevatorStub,
-  GameOverStub,
-  ShopStub,
-  VictoryStub,
-} from '../screens/_stubs/StubScreen';
+import { TableScreen as RealTableScreen } from '../screens/table';
+import { MetaRouter } from '../screens/meta';
 
 export type Route =
   | 'title'
@@ -147,28 +137,6 @@ export function TitleScreen({ onNavigate }: { onNavigate: (route: Route) => void
   );
 }
 
-export function TableScreen() {
-  return (
-    <section className="screen" aria-label="Table shell">
-      <h1 className="sr-only">Table</h1>
-      <div className="table-layout">
-        <div className="table-main">
-          <Hud />
-          <CabinetMount />
-        </div>
-        <aside className="table-side">
-          <TrinketRail />
-          <LogPanel />
-        </aside>
-      </div>
-      <p className="stub-note">
-        Table shell: HUD, cabinet mount and log are live over MockGameCore. The
-        board renderer (T-071) and the real table controls (T-072) are not built yet.
-      </p>
-    </section>
-  );
-}
-
 export function SettingsScreen({ onNavigate }: { onNavigate: (route: Route) => void }) {
   const settings = useGameStore((store) => store.settings);
   const setSettings = useGameStore((store) => store.setSettings);
@@ -287,19 +255,19 @@ export function AppRoutes({
     case 'title':
       return <TitleScreen onNavigate={onNavigate} />;
     case 'table':
-      return <TableScreen />;
+      return <RealTableScreen />;
     case 'shop':
-      return <ShopStub onNavigate={onNavigate} />;
+      return <MetaRouter route="shop" onNavigate={onNavigate} />;
     case 'elevator':
-      return <ElevatorStub onNavigate={onNavigate} />;
+      return <MetaRouter route="elevator" onNavigate={onNavigate} />;
     case 'boss':
-      return <BossStub onNavigate={onNavigate} />;
+      return <MetaRouter route="boss" onNavigate={onNavigate} />;
     case 'gameover':
-      return <GameOverStub onNavigate={onNavigate} />;
+      return <MetaRouter route="gameover" onNavigate={onNavigate} />;
     case 'victory':
-      return <VictoryStub onNavigate={onNavigate} />;
+      return <MetaRouter route="victory" onNavigate={onNavigate} />;
     case 'compendium':
-      return <CompendiumStub onNavigate={onNavigate} />;
+      return <MetaRouter route="compendium" onNavigate={onNavigate} />;
     case 'settings':
       return <SettingsScreen onNavigate={onNavigate} />;
     default:
