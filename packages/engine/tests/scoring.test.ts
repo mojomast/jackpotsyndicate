@@ -206,10 +206,11 @@ test('external additive and x-multipliers compose into A and X', () => {
   assert.equal(result.equity, 660);
 });
 
-test('a dead spin yields exactly one Scrap Copper orb worth 15% of the cheapest symbol', () => {
+test('a dead spin yields RULES.SCRAP_ORBS Scrap Copper orbs, each worth 15% of the cheapest symbol', () => {
   assert.equal(DEFAULT_SYMBOL_STATS.cherry.chips, 20);
   assert.equal(scrapChips(), 3);
-  assert.deepEqual(makeScrapOrbPlan(), [{ cell: null, symbolId: 'scrap', chips: 3 }]);
+  assert.deepEqual(makeScrapOrbPlan(), Array.from({ length: RULES.SCRAP_ORBS }, () => ({ cell: null, symbolId: 'scrap', chips: 3 })));
+  assert.deepEqual(makeScrapOrbPlan('scrap', 3, 1), [{ cell: null, symbolId: 'scrap', chips: 3 }]);
 
   const result = scoreClassic(DEAD);
   assert.equal(result.wins.length, 0);
@@ -217,7 +218,7 @@ test('a dead spin yields exactly one Scrap Copper orb worth 15% of the cheapest 
   assert.equal(result.xMult, 1);
   assert.equal(result.chips, 3);
   assert.equal(result.equity, 3);
-  assert.deepEqual(result.orbPlan, [{ cell: null, symbolId: 'scrap', chips: 3 }]);
+  assert.deepEqual(result.orbPlan, Array.from({ length: RULES.SCRAP_ORBS }, () => ({ cell: null, symbolId: 'scrap', chips: 3 })));
 });
 
 test('1e6 seeded CLASSIC spins never produce NaN or negative chips', () => {
@@ -235,8 +236,8 @@ test('1e6 seeded CLASSIC spins never produce NaN or negative chips', () => {
     const result = scoreClassic(grid);
     if (result.wins.length === 0) {
       dead++;
-      assert.equal(result.orbPlan.length, 1);
-      assert.equal(result.orbPlan[0]!.cell, null);
+      assert.equal(result.orbPlan.length, RULES.SCRAP_ORBS);
+      assert.ok(result.orbPlan.every((orb) => orb.cell === null));
     } else {
       wins++;
     }
@@ -349,5 +350,5 @@ test('scoreTumble pays every tumble step as separate orbs; frozen cells stay put
 test('scoreWiring falls back to the content-scaled scrap orb on a dead spin', () => {
   const result = scoreWiring(DEAD, { wiring: 'HYPER', symbols: { cherry: { chips: 40 } } });
   assert.equal(result.wins.length, 0);
-  assert.deepEqual(result.orbPlan, [{ cell: null, symbolId: 'scrap', chips: Math.round(30 * RULES.SCRAP_EQUITY) }]);
+  assert.deepEqual(result.orbPlan, Array.from({ length: RULES.SCRAP_ORBS }, () => ({ cell: null, symbolId: 'scrap', chips: Math.round(30 * RULES.SCRAP_EQUITY) })));
 });

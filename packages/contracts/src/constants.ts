@@ -91,6 +91,10 @@ export const RULES = {
   MAX_TUMBLES: 5,
   DRINK_TRAY_SLOTS: 3,
   SHELF_SEED_TOKENS: 60,
+  /** Cash carried by each seeded shelf token, scaled by the floor's quotaScale (round 1 is not dead air). */
+  SHELF_SEED_TOKEN_CASH: 10,
+  /** Scrap orbs launched by a spin with no winning evaluation (R-CORE-02). */
+  SCRAP_ORBS: 2,
 } as const;
 
 export const SAVE_VERSION = 1;

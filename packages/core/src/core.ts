@@ -433,8 +433,11 @@ export class Core implements GameCore {
       this.sim.applyDirective({ t: 'seedShelf', tokens: this.shelfSeedTokens() });
       // D-05: a new floor starts from a fresh shelf; forget the old tokens' cash.
       const tokenCash = this.machine.getState().tokenCash;
+      const seedCash = Math.round(RULES.SHELF_SEED_TOKEN_CASH * floor.quotaScale);
       for (const event of this.sim.drainEvents()) {
         if (event.t === 'TokenRemoved') delete tokenCash[event.tokenId];
+        // Seeded tokens carry a little cash so the opening spins pay out.
+        if (event.t === 'TokenSpawned' && seedCash > 0) tokenCash[event.tokenId] = seedCash;
       }
     }
   }

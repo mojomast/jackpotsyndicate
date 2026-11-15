@@ -220,8 +220,10 @@ export function scrapChips(
 export function makeScrapOrbPlan(
   symbolId = 'scrap',
   chips = scrapChips(),
+  count: number = RULES.SCRAP_ORBS,
 ): OrbPlanEntry[] {
-  return [{ cell: null, symbolId, chips }];
+  const n = Math.max(1, Math.floor(count));
+  return Array.from({ length: n }, () => ({ cell: null, symbolId, chips }));
 }
 
 function finiteNonNegative(name: string, value: number): number {
