@@ -527,7 +527,7 @@ const floors: FloorDef[] = [
     bossId: 'valenti',
     physics: { friction: 0.9, gutterRisk: 1, dozerSpeed: 0.05, pegs: standardPegs() },
     chuteMults: [0.8, 1.5, 3, 1.5, 2],
-    pegChips: { gold: 5, bumper: 15, golden: 25, splitter: 5 },
+    pegChips: { gold: 50, bumper: 160, golden: 260, splitter: 50 },
     lipMult: 1,
     quotaScale: 1,
     shop: floorShop(
@@ -545,7 +545,7 @@ const floors: FloorDef[] = [
     bossId: 'zero',
     physics: { friction: 0.96, gutterRisk: 1.35, dozerSpeed: 0.075, pegs: standardPegs() },
     chuteMults: [0.8, 1.5, 3, 1.5, 2],
-    pegChips: { gold: 5, bumper: 15, golden: 25, splitter: 5 },
+    pegChips: { gold: 10, bumper: 30, golden: 50, splitter: 10 },
     lipMult: 1,
     quotaScale: 1,
     shop: floorShop(
@@ -563,7 +563,7 @@ const floors: FloorDef[] = [
     bossId: 'zero',
     physics: { friction: 0.84, gutterRisk: 0.65, dozerSpeed: 0.045, pegs: standardPegs() },
     chuteMults: [0.8, 1.5, 3, 1.5, 2],
-    pegChips: { gold: 30, bumper: 40, golden: 50, splitter: 30 },
+    pegChips: { gold: 60, bumper: 80, golden: 100, splitter: 60 },
     lipMult: 1,
     quotaScale: 1,
     shop: floorShop(
@@ -581,7 +581,7 @@ const floors: FloorDef[] = [
     bossId: 'auditor',
     physics: { friction: 0.91, gutterRisk: 1.15, dozerSpeed: 0.065, pegs: standardPegs() },
     chuteMults: [0.8, 1.5, 3, 1.5, 2],
-    pegChips: { gold: 5, bumper: 15, golden: 25, splitter: 5 },
+    pegChips: { gold: 10, bumper: 30, golden: 50, splitter: 10 },
     lipMult: 1.5,
     quotaScale: 2.2,
     shop: floorShop(
@@ -632,16 +632,24 @@ const balance: BalanceDef = {
   quotas: [1000, 2100, 4410, 9261, 19448, 40841, 85766, 180109, 378229],
   minMatch: 3,
   baseStrip: [
-    'cherry', 'cherry', 'diamond', 'cherry', 'cherry',
-    'skull', 'cherry', 'cherry', 'uranium', 'seven',
-    'cherry', 'cherry', 'diamond', 'cherry', 'cherry',
-    'skull', 'cherry', 'cherry', 'uranium', 'seven',
+    'cherry', 'skull', 'cherry', 'skull', 'cherry',
+    'skull', 'cherry', 'skull', 'cherry', 'skull',
+    'cherry', 'skull', 'cherry', 'skull', 'cherry',
+    'uranium', 'diamond', 'seven', 'uranium', 'diamond',
+    'cherry', 'skull', 'cherry', 'skull', 'cherry',
+    'skull', 'cherry', 'skull', 'cherry', 'skull',
+    'cherry', 'skull', 'cherry', 'skull', 'cherry',
+    'uranium', 'seven', 'uranium', 'diamond', 'seven',
   ],
   firstReelStrip: [
-    'cherry', 'cherry', 'diamond', 'skull', 'cherry',
-    'cherry', 'uranium', 'seven', 'cherry', 'cherry',
-    'diamond', 'skull', 'cherry', 'cherry', 'uranium',
-    'seven', 'cherry', 'cherry', 'diamond', 'skull',
+    'cherry', 'cherry', 'skull', 'cherry', 'cherry',
+    'skull', 'cherry', 'cherry', 'skull', 'cherry',
+    'cherry', 'skull', 'uranium', 'skull', 'diamond',
+    'skull', 'uranium', 'diamond', 'seven', 'skull',
+    'cherry', 'cherry', 'skull', 'cherry', 'cherry',
+    'skull', 'cherry', 'cherry', 'skull', 'cherry',
+    'cherry', 'skull', 'uranium', 'skull', 'diamond',
+    'skull', 'uranium', 'seven', 'skull', 'seven',
   ],
 };
 
