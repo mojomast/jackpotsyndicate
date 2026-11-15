@@ -246,6 +246,44 @@ function visibleSymbols(ctx: EffectContext, payload: HookPayload): readonly Symb
   return symbols;
 }
 
+/** Cells of the payload's winning evaluations, or null when no wins were passed. */
+function scoringCells(payload: HookPayload): Set<string> | null {
+  if (!Array.isArray(payload.wins)) return null;
+  const cells = new Set<string>();
+  for (const win of payload.wins as readonly { cells?: readonly Cell[] }[]) {
+    for (const cell of win.cells ?? []) cells.add(`${cell[0]},${cell[1]}`);
+  }
+  return cells;
+}
+
+/**
+ * Symbol behaviours that SPEC 2.6 makes normative but that need an effect
+ * hook rather than a physics flag. Content may override one by giving the
+ * symbol its own reference for the same hook.
+ */
+export const DEFAULT_SYMBOL_EFFECTS: Readonly<Partial<Record<SymbolId, readonly HandlerRef[]>>> = Object.freeze({
+  // Uranium-235: each peg hit adds +15 chips to every other orb in flight.
+  uranium: Object.freeze([{ handler: 'onPegHit', params: { action: 'addChipsAllOrbs', amount: 15 } }]),
+});
+
+/**
+ * Handler references for one symbol and hook: the symbol's own content
+ * references when it has any for `hook`, else the built-in SPEC 2.6 default.
+ */
+export function symbolEffectRefs(
+  symbolId: string,
+  hook: HookName,
+  contentRefs: readonly HandlerRef[] | undefined,
+): HandlerRef[] {
+  const own = (contentRefs ?? []).filter((ref) => ref.handler === hook);
+  if (own.length > 0) return own;
+  const defaults = DEFAULT_SYMBOL_EFFECTS[symbolId as SymbolId] ?? [];
+  return defaults.filter((ref) => ref.handler === hook).map((ref) => ({
+    handler: ref.handler,
+    ...(ref.params === undefined ? {} : { params: { ...ref.params } }),
+  }));
+}
+
 const COPPER_TEMPLATE: TokenTemplate = {
   symbolId: 'scrap',
   skin: 'copper',
@@ -282,12 +320,17 @@ export const EFFECT_HANDLERS: Readonly<Record<string, EffectHandler>> = {
   diamondAdjacencyX(ctx, payload, params) {
     const grid = gridOf(ctx, payload);
     if (grid === undefined) return [];
+    // SPEC 2.6: a Blood Diamond gains +0.2 X per orthogonally adjacent Magnet
+    // Skull, so every (diamond, skull) neighbour pair counts. When the payload
+    // carries the spin's wins, only scoring diamonds earn the bonus.
     const perSkull = num(params, 'xPerSkull', 0.2);
-    const diamonds = new Set<string>();
+    const scoring = scoringCells(payload);
+    let pairs = 0;
     for (let col = 0; col < grid.length; col++) {
       const column = grid[col]!;
       for (let row = 0; row < column.length; row++) {
-        if (column[row] !== 'skull') continue;
+        if (column[row] !== 'diamond') continue;
+        if (scoring !== null && !scoring.has(`${col},${row}`)) continue;
         const neighbours: Cell[] = [
           [col - 1, row],
           [col + 1, row],
@@ -295,12 +338,12 @@ export const EFFECT_HANDLERS: Readonly<Record<string, EffectHandler>> = {
           [col, row + 1],
         ];
         for (const [nc, nr] of neighbours) {
-          if (grid[nc]?.[nr] === 'diamond') diamonds.add(`${nc},${nr}`);
+          if (grid[nc]?.[nr] === 'skull') pairs++;
         }
       }
     }
-    if (diamonds.size === 0) return [];
-    return [{ e: 'mulX', factor: 1 + perSkull * diamonds.size }];
+    if (pairs === 0) return [];
+    return [{ e: 'mulX', factor: round9(1 + perSkull * pairs) }];
   },
 
   feverOnVisibleSevens(ctx, payload, params) {

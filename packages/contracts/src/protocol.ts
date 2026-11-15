@@ -2,7 +2,7 @@
  * C-2 (commands and events), C-4 (effect hooks), C-5 (run state).
  * UI -> core: Command. core -> UI/anim/audio: GameEvent, each stamped with a tick.
  */
-import type { FloorId, ItemCategory, ShopArchetype, SymbolId, Wiring } from './content';
+import type { BossId, FloorId, ItemCategory, ShopArchetype, SymbolId, Wiring } from './content';
 import type { BodyId, PhysicsEvent, PhysicsModifiers, SimDirective, TokenTemplate } from './sim';
 
 export type Cell = [col: number, row: number];
@@ -99,7 +99,13 @@ export type EngineEvent =
   | { t: 'RelicsOffered'; itemIds: string[] }
   | { t: 'BankrollChanged'; delta: number; total: number; reason: 'lip' | 'quota' | 'shop' | 'drain' | 'coin' | 'bonus' }
   | { t: 'RunStarted'; seed: string }
-  | { t: 'RunEnded'; outcome: 'victory' | 'defeat' | 'abandoned' };
+  | { t: 'RunEnded'; outcome: 'victory' | 'defeat' | 'abandoned' }
+  /** A beaten boss paid out (R-BOS-02..04): relic pick, +shop capacity, or victory. */
+  | { t: 'BossRewarded'; bossId: BossId; reward: 'relicChoice' | 'shopCapacity' | 'victory'; amount: number }
+  /** Visible, non-scoring Magnet Skulls drained the bankroll at evaluation (SPEC 2.6). */
+  | { t: 'IdleDrain'; cells: Cell[]; total: number }
+  /** The player picked (or cleared) the overvolted payline. */
+  | { t: 'OvervoltSet'; lineId: string | null };
 
 /** Everything consumers can receive. Physics events pass through unchanged. */
 export type GameEvent = (EngineEvent | PhysicsEvent) & { tick: number };
@@ -175,6 +181,12 @@ export interface RunState {
   orbChips: Record<number, number>;
   tokenCash: Record<number, number>;
   stats: { spins: number; lipDrops: number; gutterLosses: number; cashBanked: number; bestSpinEquity: number };
+  /** True once the Overvolt chassis is bought; SetOvervolt is refused before that (R-MUT-06). Absent = false. */
+  overvoltOwned?: boolean;
+  /** Relic ids dealt at RELIC_PICK, kept so a save there resumes with the same offer. */
+  pendingRelics?: string[];
+  /** Jumper paths dealt at JUMPER_PICK, kept so a save there resumes with the same offer. */
+  pendingJumpers?: Cell[][];
 }
 
 /** The on-disk save: RunState plus the sim's bytes, base64. */

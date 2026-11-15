@@ -4,6 +4,7 @@ import type { Effect, HandlerRef } from '@jackpotsyndicate/contracts';
 import {
   EFFECT_HANDLER_IDS,
   HOOK_NAMES,
+  DEFAULT_SYMBOL_EFFECTS,
   UnknownEffectHandlerError,
   applyEffects,
   applyPhysicsMod,
@@ -15,6 +16,7 @@ import {
   hasEffectHandler,
   hitsEvery,
   stackFactor,
+  symbolEffectRefs,
 } from '../src/effects/index.js';
 
 function ref(
@@ -284,4 +286,43 @@ test('dispatchHookMany merges reference sets and stacks identical effects', () =
   assert.deepEqual(dispatchHookMany('onCellScored', [a, b]), [
     { e: 'addChips', amount: 40 },
   ]);
+});
+
+// ------------------------------------------------- symbol rules (DRIFT.md)
+
+test('Blood Diamond gains +0.2 X per adjacent Skull pair, scoring diamonds only', () => {
+  const refs: HandlerRef[] = [{ handler: 'onSpinEvaluated', params: { action: 'diamondAdjacencyX', xPerSkull: 0.2 } }];
+  // Column-major: the diamond at (1,1) touches skulls at (0,1) and (1,0).
+  const grid = [
+    ['cherry', 'skull', 'cherry'],
+    ['skull', 'diamond', 'cherry'],
+    ['cherry', 'cherry', 'seven'],
+  ] as const;
+  const all = dispatchHook('onSpinEvaluated', refs, {}, { grid: grid as never });
+  assert.deepEqual(all, [{ e: 'mulX', factor: 1.4 }]);
+
+  const scoring = dispatchHook('onSpinEvaluated', refs, {}, {
+    grid: grid as never,
+    wins: [{ cells: [[1, 1]] }],
+  });
+  assert.deepEqual(scoring, [{ e: 'mulX', factor: 1.4 }]);
+
+  const idle = dispatchHook('onSpinEvaluated', refs, {}, {
+    grid: grid as never,
+    wins: [{ cells: [[2, 0]] }],
+  });
+  assert.deepEqual(idle, [], 'a diamond that does not score earns nothing');
+});
+
+test('Uranium adds +15 chips to every other orb on each peg hit by default', () => {
+  assert.deepEqual(symbolEffectRefs('uranium', 'onPegHit', []), [
+    { handler: 'onPegHit', params: { action: 'addChipsAllOrbs', amount: 15 } },
+  ]);
+  assert.deepEqual(symbolEffectRefs('uranium', 'onSpinEvaluated', []), []);
+  assert.deepEqual(symbolEffectRefs('cherry', 'onPegHit', []), []);
+  const override: HandlerRef[] = [{ handler: 'onPegHit', params: { action: 'addChipsAllOrbs', amount: 30 } }];
+  assert.deepEqual(symbolEffectRefs('uranium', 'onPegHit', override), override);
+  const effects = dispatchHook('onPegHit', symbolEffectRefs('uranium', 'onPegHit', undefined), {}, { orbId: 7 });
+  assert.deepEqual(effects, [{ e: 'addChipsAllOrbs', amount: 15, exceptOrbId: 7 }]);
+  assert.ok(Object.isFrozen(DEFAULT_SYMBOL_EFFECTS));
 });
