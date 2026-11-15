@@ -7,7 +7,7 @@
   "types": "src/index.ts",
   "scripts": {
     "dev": "vite",
-    "build": "echo 'app shell pending T-070'",
+    "build": "vite build",
     "test": "vitest run"
   },
   "dependencies": {
