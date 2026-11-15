@@ -15,6 +15,7 @@ export type ContentVariant = 'default' | 'lip' | 'j6';
 
 export async function openHarness(page: Page, hash = '#/table'): Promise<void> {
   await page.goto(`/?test=1${hash}`);
+  await page.waitForLoadState('networkidle');
   await page.waitForFunction(
     () => Boolean(window.__JS_TEST__ && window.__E2E__ && document.getElementById('root')?.childElementCount),
   );

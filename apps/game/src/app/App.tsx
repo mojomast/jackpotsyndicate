@@ -5,6 +5,7 @@ import { useGameStore } from '../store/gameStore';
 import { AppErrorBoundary } from './ErrorBoundary';
 import { AppRoutes, ROUTES, useRoute, type Route } from './routes';
 
+
 const FLOORS: FloorId[] = ['FLOOR_NEON', 'FLOOR_CRYO', 'FLOOR_FOUNDRY', 'FLOOR_PENTHOUSE'];
 
 const REQUIRED_TEST_IDS: string[] = [

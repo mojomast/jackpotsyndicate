@@ -1,4 +1,5 @@
 import type { SpriteFrame, SpriteResolver } from '@jackpotsyndicate/contracts';
+import inlineSymbols from './symbol-data.json';
 
 export interface SpriteManifestFrame { x: number; y: number; w: number; h: number }
 export interface SpriteManifestPivot { x: number; y: number }
@@ -82,6 +83,8 @@ export function createSpriteResolver(
     if (!entry) return null;
     const frame = frameFromEntry(entry);
     if (!frame) return null;
+    const inline = (inlineSymbols as Record<string, string>)[logicalKey];
+    if (inline) return { url: inline, x: frame.x, y: frame.y, w: frame.w, h: frame.h };
     const file = fileFromEntry(entry as SpriteManifestAsset);
     if (!file) return null;
     return { url: assetUrl(baseUrl, file), x: frame.x, y: frame.y, w: frame.w, h: frame.h };
@@ -112,6 +115,26 @@ export async function loadSpriteManifest(
 
 export interface LoadSpriteResolverOptions extends LoadSpriteManifestOptions {
   baseUrl?: string;
+}
+
+/**
+ * Start the browser image cache for every real manifest entry. The app calls
+ * this once during boot so later table/board transitions are served from cache
+ * and the zero-runtime-network invariant is not broken by late texture loads.
+ */
+export function preloadSpriteAssets(
+  manifest: SpriteManifest | null | undefined,
+  baseUrl: string = DEFAULT_ATLAS_BASE_URL,
+): void {
+  if (typeof Image === 'undefined' || !manifest) return;
+  for (const entry of Object.values(manifest)) {
+    if (isRecord(entry) && 'placeholder' in entry && entry.placeholder) continue;
+    const file = fileFromEntry(entry as SpriteManifestAsset);
+    if (!file) continue;
+    const image = new Image();
+    image.decoding = 'async';
+    image.src = assetUrl(baseUrl, file);
+  }
 }
 
 /**
