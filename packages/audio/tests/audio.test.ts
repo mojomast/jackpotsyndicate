@@ -124,7 +124,7 @@ function event(t: GameEvent['t'], extra: Record<string, unknown> = {}): GameEven
 
 test('every mapped GameEvent kind triggers exactly one synthesized voice', () => {
   const kinds = Object.keys(EVENT_VOICE_MAP) as GameEvent['t'][];
-  assert.equal(kinds.length, 13);
+  assert.equal(kinds.length, 21);
   assert.deepEqual(new Set(Object.values(EVENT_VOICE_MAP)), new Set(VOICE_NAMES));
 
   for (const kind of kinds) {

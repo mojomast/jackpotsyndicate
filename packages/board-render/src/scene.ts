@@ -52,8 +52,12 @@ export interface BoardSceneOptions {
 }
 
 export interface BoardScenePerf {
-  /** Exponential moving average of CPU work per frame (scene update + render), ms. */
+  /** Mean CPU work per frame over the last ~1 s window (scene update + render submit), ms. */
   frameMs: number;
+  /** Mean scene update (sprite sync, particles) per frame, ms. */
+  updateMs: number;
+  /** Mean Pixi render submission per frame, ms. */
+  renderMs: number;
   /** Worst frame in the last sampling window, ms. */
   worstMs: number;
   /** Measured frames per second over the last window. */
@@ -251,6 +255,10 @@ export class BoardScene {
   private perfWindowStart = 0;
   private perfFps = 0;
   private perfWorstShown = 0;
+  private updateSum = 0;
+  private renderSum = 0;
+  private updateAvg = 0;
+  private renderAvg = 0;
 
   private constructor(host: HTMLElement, options: BoardSceneOptions) {
     this.host = host;
@@ -605,6 +613,7 @@ export class BoardScene {
         const cash = num(event.cash);
         const x = num(event.x, 300);
         const p = projectShelf(x, BOARD.LIP_Y);
+        if (cash <= 0) return;
         const big = cash >= 500;
         this.popup(`+${this.options.formatCash(cash)}`, p.x, p.y - 12, big ? '#fde68a' : '#fbbf24', big ? 30 : 20, big);
         if (big) this.kick(0.5);
@@ -819,17 +828,27 @@ export class BoardScene {
       this.shake = 0;
     }
 
+    const updated = performance.now();
     app.renderer.render(app.stage);
-    this.recordPerf(performance.now() - start, now);
+    const end = performance.now();
+    this.updateSum += updated - start;
+    this.renderSum += end - updated;
+    this.recordPerf(end - start, now);
   }
 
   private recordPerf(ms: number, now: number): void {
-    this.perfEma = this.perfEma === 0 ? ms : this.perfEma * 0.95 + ms * 0.05;
     this.perfWorst = Math.max(this.perfWorst, ms);
     this.perfFrames++;
     const span = now - this.perfWindowStart;
     if (span >= 1000) {
       this.perfFps = (this.perfFrames * 1000) / span;
+      this.updateAvg = this.updateSum / this.perfFrames;
+      this.renderAvg = this.renderSum / this.perfFrames;
+      this.perfEma = this.updateAvg + this.renderAvg;
+      this.updateSum = 0;
+      this.renderSum = 0;
+      this.host.dataset.updateMs = this.updateAvg.toFixed(2);
+      this.host.dataset.renderMs = this.renderAvg.toFixed(2);
       this.perfWorstShown = this.perfWorst;
       this.perfFrames = 0;
       this.perfWorst = 0;
@@ -843,6 +862,8 @@ export class BoardScene {
   perf(): BoardScenePerf {
     return {
       frameMs: this.perfEma,
+      updateMs: this.updateAvg,
+      renderMs: this.renderAvg,
       worstMs: this.perfWorstShown,
       fps: this.perfFps,
       sprites: this.tokenLayer.children.length + this.orbLayer.children.length + this.fxLayer.children.length,

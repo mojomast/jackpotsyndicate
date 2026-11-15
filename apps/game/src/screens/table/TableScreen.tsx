@@ -247,8 +247,12 @@ function CabinetConsole({ core }: { core: GameCore }) {
         text: lines > 0 ? `${lines} win${lines === 1 ? '' : 's'} · ${event.orbPlan.length} orbs` : 'No line · 1 orb',
         tone: lines > 0 ? 'win' : 'idle',
       }));
-    } else if (event.t === 'CashBanked') {
+    } else if (event.t === 'CashBanked' && event.cash > 0) {
       setMessage((m) => ({ id: (m?.id ?? 0) + 1, text: `Banked ${formatCash(event.cash)}`, tone: 'cash' }));
+    } else if (event.t === 'IdleDrain') {
+      setMessage((m) => ({ id: (m?.id ?? 0) + 1, text: `Skull drain −${formatCash(event.total)}`, tone: 'loss' }));
+    } else if (event.t === 'OvervoltSet') {
+      setMessage((m) => ({ id: (m?.id ?? 0) + 1, text: event.lineId ? `Overvolt ${event.lineId}` : 'Overvolt off', tone: 'win' }));
     } else if (event.t === 'GutterLoss') {
       setMessage((m) => ({ id: (m?.id ?? 0) + 1, text: 'Raked into the gutter', tone: 'loss' }));
     }

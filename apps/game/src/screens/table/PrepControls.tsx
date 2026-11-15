@@ -31,7 +31,13 @@ export function drinkSpriteKey(itemId: string): string | null {
   return findItem(itemId)?.spriteKey ?? null;
 }
 
-function overvoltLines(wiring: Wiring, cols: number, rows: number): { id: string; label: string }[] {
+/** Payline ids match the engine: row:N, diag:down/up, hyper:v/inverted-v, jumper:N. */
+function overvoltLines(
+  wiring: Wiring,
+  cols: number,
+  rows: number,
+  jumpers: number,
+): { id: string; label: string }[] {
   if (wiring !== 'CLASSIC' && wiring !== 'HYPER') return [];
   const lines: { id: string; label: string }[] = [];
   for (let row = 0; row < rows; row++) {
@@ -41,7 +47,20 @@ function overvoltLines(wiring: Wiring, cols: number, rows: number): { id: string
     lines.push({ id: 'diag:down', label: 'Diagonal ↘' });
     lines.push({ id: 'diag:up', label: 'Diagonal ↗' });
   }
+  if (wiring === 'HYPER') {
+    lines.push({ id: 'hyper:v', label: 'Hyper V' });
+    lines.push({ id: 'hyper:inverted-v', label: 'Hyper Λ' });
+  }
+  for (let index = 0; index < jumpers; index++) {
+    lines.push({ id: `jumper:${index}`, label: `Jumper ${index + 1}` });
+  }
   return lines;
+}
+
+function isInstantDrink(itemId: string | null): boolean {
+  if (!itemId) return false;
+  const item = findItem(itemId) as { instant?: boolean } | undefined;
+  return item?.instant === true || itemId === 'lubricantOilShot';
 }
 
 /**
@@ -58,11 +77,13 @@ export function PrepControls() {
   const wiring = useGameStore((store) => store.state.grid.wiring);
   const cols = useGameStore((store) => store.state.grid.cols);
   const rows = useGameStore((store) => store.state.grid.rows);
+  const jumperCount = useGameStore((store) => store.state.jumpers?.length ?? 0);
+  const overvoltOwned = useGameStore((store) => store.state.overvoltOwned === true);
   const dispatch = useGameStore((store) => store.dispatch);
 
   const [message, setMessage] = useState('');
 
-  const lines = useMemo(() => overvoltLines(wiring, cols, rows), [wiring, cols, rows]);
+  const lines = useMemo(() => overvoltLines(wiring, cols, rows, jumperCount), [wiring, cols, rows, jumperCount]);
   const canPrep = phase === 'PREP';
 
   const loadCoin = (coinId: string): void => {
@@ -119,7 +140,7 @@ export function PrepControls() {
               className={`prep-chip prep-drink ${itemId ? '' : 'is-empty'}`}
               data-testid={`prep-drink-${slot}`}
               aria-pressed={activeDrink === itemId && itemId !== null}
-              disabled={!canPrep || itemId === null || activeDrink !== null}
+              disabled={!canPrep || itemId === null || (activeDrink !== null && !isInstantDrink(itemId))}
               aria-label={itemId ? `Drink ${itemName(itemId)}` : `Slot ${slot + 1} empty`}
               title={itemId ? `${itemName(itemId)}: ${itemDescription(itemId)}` : 'Empty drink slot'}
               onClick={() => drink(slot)}
@@ -152,11 +173,11 @@ export function PrepControls() {
           data-testid="prep-overvolt"
           aria-label="Overvolt line"
           value={overvoltLineId ?? ''}
-          disabled={!canPrep || lines.length === 0}
-          title={lines.length > 0 ? 'Triple one CLASSIC/HYPER line.' : `${wiring} has no selectable overvolt line.`}
+          disabled={!canPrep || !overvoltOwned || lines.length === 0}
+          title={!overvoltOwned ? 'Buy the Overvolt chassis in the shop to triple one line.' : lines.length > 0 ? 'Triple one CLASSIC/HYPER line.' : `${wiring} has no selectable overvolt line.`}
           onChange={(event) => setOvervolt(event.target.value)}
         >
-          <option value="">{lines.length > 0 ? 'Off' : 'n/a'}</option>
+          <option value="">{!overvoltOwned ? 'Locked' : lines.length > 0 ? 'Off' : 'n/a'}</option>
           {lines.map((line) => (
             <option key={line.id} value={line.id}>
               {line.label}

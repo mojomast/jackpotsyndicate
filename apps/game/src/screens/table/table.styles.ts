@@ -380,6 +380,10 @@ export const TABLE_CSS = String.raw`
 .table-screen .jsa-relayout-previous { position: absolute; left: 0; top: 0; pointer-events: none; }
 .table-screen [data-anim='win-path'] { filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.9)); }
 
+.table-screen [data-anim='cell'].is-drain { animation: t-drain 1.1s ease-out; }
+.table-screen [data-anim='cell'].is-drain::after { content: '−$'; position: absolute; top: 4%; right: 8%; font: 800 0.8rem/1 var(--font-display); color: #fb7185; text-shadow: 0 0 8px #f43f5e; }
+@keyframes t-drain { 0%, 60% { box-shadow: inset 0 0 0 2px #f43f5e, inset 0 0 26px rgba(244, 63, 94, 0.7); } 100% { box-shadow: none; } }
+
 /* diegetic cabinet base readouts */
 .table-screen .cabinet-console {
   position: absolute;
@@ -1046,7 +1050,8 @@ export const TABLE_CSS = String.raw`
     flex-direction: column;
     gap: 10px;
   }
-  .table-screen .table-top { flex-direction: column; }
+  .table-screen .table-top { display: contents; }
+  .table-screen .hud.ui9-panel { order: 0; }
   .table-screen .hud.ui9-panel {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1088,7 +1093,7 @@ export const TABLE_CSS = String.raw`
   .table-screen .cascade-lip { margin-left: 0; border-left: 0; }
   .table-screen .spin-deck { grid-template-columns: 1fr; padding: 6px; }
   .table-screen .hud-spin.ui9-button { grid-row: auto; width: 100%; min-height: 64px; }
-  .table-screen .spin-lamps { justify-content: center; }
+  .table-screen .spin-lamps { display: none; }
   .table-screen .speed-panel { justify-content: center; }
   .table-screen .speed-btn { min-height: 44px; min-width: 52px; }
   .table-screen .prep-chip,
