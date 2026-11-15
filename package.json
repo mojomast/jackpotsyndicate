@@ -12,6 +12,7 @@
     "preview": "pnpm --filter @jackpotsyndicate/game exec vite preview",
     "test": "tsx --test \"packages/*/tests/**/*.test.ts\"",
     "sim": "tsx tools/sim/src/index.ts",
+    "e2e": "playwright test",
     "sim:rake": "tsx tools/physics-harness/rake.ts",
     "sim:perf": "tsx tools/physics-harness/perf.ts",
     "sim:hitrate": "tsx tools/sim/src/index.ts hitrate",
