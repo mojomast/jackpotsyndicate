@@ -13,6 +13,8 @@ import {
   type TumbleStepParams,
 } from '@jackpotsyndicate/contracts';
 import { useGameStore } from '../../store/gameStore';
+import assetManifest from '../../../public/atlas/asset-manifest.json';
+import { createSpriteResolver, type SpriteManifest } from '../../store/spriteResolver';
 import { createCabinet, setCabinetGrid } from '../../../../../packages/anim/src/runtime/cabinet';
 import { TimelinePlayer } from '../../../../../packages/anim/src/runtime/TimelinePlayer';
 import { gridRelayout } from '../../../../../packages/anim/src/reels/gridRelayout';
@@ -20,7 +22,7 @@ import { lineWin } from '../../../../../packages/anim/src/reels/lineWin';
 import { reelSpin } from '../../../../../packages/anim/src/reels/reelSpin';
 import { tumbleStep } from '../../../../../packages/anim/src/reels/tumbleStep';
 
-const SPRITES: SpriteResolver = () => null;
+const SPRITES: SpriteResolver = createSpriteResolver(assetManifest as SpriteManifest);
 
 function hashSeed(seed: string): number {
   let hash = 0x811c9dc5;
