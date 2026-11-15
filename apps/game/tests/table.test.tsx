@@ -255,7 +255,11 @@ test('J1: fixed-seed spin reaches LipDrop and increases bankroll through the rea
     .reduce((sum, event) => sum + (event as Extract<GameEvent, { t: 'CashBanked' }>).cash, 0);
 
   assert.ok(cashBanked > 0, 'a valued token must cross the lip');
-  assert.equal(api.getState().bankroll, startBankroll + cashBanked);
+  // Every bankroll move is announced; lip cash is one source, skull drains another.
+  const netDelta = events
+    .filter((event) => event.t === 'BankrollChanged')
+    .reduce((sum, event) => sum + (event as Extract<GameEvent, { t: 'BankrollChanged' }>).delta, 0);
+  assert.equal(api.getState().bankroll, startBankroll + netDelta);
   assert.ok(events.some((event) => event.t === 'LipDrop'));
   assert.ok(events.some((event) => event.t === 'TokenSpawned'));
   assert.ok(events.some((event) => event.t === 'OrbLaunched'));
