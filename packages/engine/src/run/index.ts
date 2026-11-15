@@ -15,6 +15,7 @@ import {
   SAVE_VERSION,
   SIM,
   type BalanceDef,
+  type BossDef,
   type Cell,
   type Command,
   type CommandError,
@@ -38,9 +39,15 @@ import {
   rollShop,
   type ShopRoll,
 } from '../shop/index';
-import { chooseJumper, generateJumperOffers, selectOvervolt } from '../mutations/index';
-import { classicLines } from '../scoring/index';
-import { hyperPaylines } from '../slot/wirings/index';
+import {
+  chooseJumper,
+  generateJumperOffers,
+  jumpersAllowed,
+  overvoltAllowed,
+  selectOvervolt,
+} from '../mutations/index';
+import { paylinesForWiring } from '../slot/wirings/index';
+import { selectBossForRun } from '../boss/index';
 
 export type CommandName = Command['c'];
 
@@ -100,6 +107,73 @@ export interface RunContent {
   floors: readonly FloorDef[];
   balance: BalanceDef;
   items?: readonly ItemDef[];
+  /** Boss definitions; the boss module's defaults are used when absent. */
+  bosses?: readonly BossDef[];
+}
+
+/** A shop item the player can no longer use is never offered or sold (R-SHP-01, R-MUT-*). */
+export type PurchaseBlock = 'AT_LIMIT' | 'INVALID_TARGET' | null;
+
+/** Why `item` cannot be bought right now, or null when it can. */
+export function purchaseBlock(state: RunState, item: ItemDef | undefined): PurchaseBlock {
+  if (item === undefined) return null;
+  const grid = state.grid;
+  if (item.category === 'COIN') {
+    return item.price <= 0 || state.ownedCoins.includes(item.id) ? 'AT_LIMIT' : null;
+  }
+  if (item.category !== 'CHASSIS') return null;
+  switch (item.kind) {
+    case 'ADD_COLUMN':
+      return grid.cols >= RULES.MAX_COLS ? 'AT_LIMIT' : null;
+    case 'ADD_ROW':
+      return grid.rows >= RULES.MAX_ROWS ? 'AT_LIMIT' : null;
+    case 'HARNESS_HYPER':
+      return grid.wiring === 'HYPER' ? 'INVALID_TARGET' : null;
+    case 'HARNESS_WAYS':
+      return grid.wiring === 'WAYS' ? 'INVALID_TARGET' : null;
+    case 'HARNESS_CLUSTER':
+      return grid.wiring === 'CLUSTER' ? 'INVALID_TARGET' : null;
+    case 'JUMPER':
+      if (!jumpersAllowed(grid.wiring)) return 'INVALID_TARGET';
+      return state.jumpers.length >= RULES.MAX_JUMPERS ? 'AT_LIMIT' : null;
+    case 'OVERVOLT':
+      if (state.overvoltOwned === true) return 'AT_LIMIT';
+      return overvoltAllowed(grid.wiring) ? null : 'INVALID_TARGET';
+  }
+}
+
+/**
+ * Price of an offer given what the player already owns: chassis with
+ * `repeatPrices` charge the entry for the next copy (+Reel column 400 then 900;
+ * jumper wires 200 each), falling back to the last entry, then `price`.
+ */
+export function offerPrice(state: RunState, item: ItemDef): number {
+  if (item.category !== 'CHASSIS' || item.repeatPrices === undefined || item.repeatPrices.length === 0) {
+    return item.price;
+  }
+  const owned =
+    item.kind === 'ADD_COLUMN'
+      ? state.grid.cols - RULES.MIN_COLS
+      : item.kind === 'ADD_ROW'
+        ? state.grid.rows - RULES.MIN_ROWS
+        : item.kind === 'JUMPER'
+          ? state.jumpers.length
+          : 0;
+  const prices = item.repeatPrices;
+  return prices[Math.min(Math.max(0, owned), prices.length - 1)] ?? item.price;
+}
+
+/** All overvolt-eligible payline ids for the current grid (rows, diagonals, zigzags, jumpers). */
+export function overvoltLineIds(state: RunState): string[] {
+  const { wiring, cols, rows } = state.grid;
+  if (!overvoltAllowed(wiring)) return [];
+  return paylinesForWiring(wiring, cols, rows, state.jumpers).map((line) => line.id);
+}
+
+/** A glyph purchase that should drop bonus tokens on the shelf (SPEC 2.7). */
+export interface GlyphBonus {
+  symbolId: SymbolId;
+  count: number;
 }
 
 export interface CreateRunOptions {
@@ -248,9 +322,11 @@ export class RunMachine {
   private settleRemaining = 0;
   private phaseRemaining = 0;
   private lastResult: RoundResult | null = null;
-  private pendingRelics: string[] = [];
-  private pendingJumpers: Cell[][] = [];
   private returnPhase: Phase | null = null;
+  /** Instant drinks consumed this command; the core applies their effects now. */
+  private instantDrinks: string[] = [];
+  /** Glyph shelf bonuses bought this command; the core spawns the tokens. */
+  private glyphBonuses: GlyphBonus[] = [];
   private orbsInFlight = 0;
   /** Visible grid from before the current spin draw, used to keep frozen cells. */
   private preSpinVisible: SymbolId[][] | null = null;
@@ -271,6 +347,8 @@ export class RunMachine {
   }
 
   private resumeTimers(): void {
+    // A JUMPER_PICK is only ever entered from the shop.
+    if (this.state.phase === 'JUMPER_PICK') this.returnPhase = 'SHOP';
     if (this.state.phase === 'ROUND_SETTLE') this.settleRemaining = SIM.ROUND_SETTLE_TICKS;
     if (this.state.phase === 'BOSS_INTRO') this.phaseRemaining = ANIM_TICKS.bossIntro;
     if (this.state.phase === 'FLOOR_TRANSITION') {
@@ -327,6 +405,42 @@ export class RunMachine {
 
   drainDirectives(): SimDirective[] {
     return this.directives.splice(0, this.directives.length);
+  }
+
+  /** Instant drinks (Lubricant Oil Shot) drunk since the last drain (D-08). */
+  drainInstantDrinks(): string[] {
+    return this.instantDrinks.splice(0, this.instantDrinks.length);
+  }
+
+  /** Glyph shelf-token bonuses bought since the last drain. */
+  drainGlyphBonuses(): GlyphBonus[] {
+    return this.glyphBonuses.splice(0, this.glyphBonuses.length);
+  }
+
+  /**
+   * Draw one refill symbol for a CLUSTER tumble from `col`'s reel strip, using
+   * the seeded `reels` stream (R-MUT-04).
+   */
+  drawRefill(col: number): SymbolId {
+    const strip = this.state.grid.strips[col] ?? this.state.grid.strips[0]!;
+    const reels = this.stream('reels');
+    const symbol = strip[reels.int(strip.length)]!;
+    this.saveStream('reels', reels);
+    return symbol;
+  }
+
+  /** The current offer for a picker phase, re-sent after a resume. */
+  pendingOfferEvent(): EngineEvent | null {
+    if (this.state.phase === 'RELIC_PICK' && this.state.pendingRelics !== undefined) {
+      return { t: 'RelicsOffered', itemIds: [...this.state.pendingRelics] };
+    }
+    if (this.state.phase === 'JUMPER_PICK' && this.state.pendingJumpers !== undefined) {
+      return {
+        t: 'JumpersOffered',
+        options: this.state.pendingJumpers.map((line) => line.map((cell) => [cell[0], cell[1]] as Cell)),
+      };
+    }
+    return null;
   }
 
   currentFloor(): FloorDef {
@@ -408,7 +522,10 @@ export class RunMachine {
     if (this.state.phase !== 'SPINNING' && this.state.phase !== 'RESOLVING') {
       return fail('WRONG_PHASE');
     }
-    this.state.activeDrink = null;
+    if (this.state.activeDrink !== null) {
+      this.state.activeDrink = null;
+      this.emit({ t: 'DrinkActive', itemId: null });
+    }
     this.state.nextSpin = { xBonus: {}, addMult: 0, bonusOrbs: 0 };
     if (this.state.spinsLeft > 0) {
       this.transition('PREP');
@@ -479,9 +596,9 @@ export class RunMachine {
     if (typeof seed !== 'string') return fail('INVALID_TARGET');
     this.state = createRunState(this.content, seed);
     this.lastResult = null;
-    this.pendingRelics = [];
-    this.pendingJumpers = [];
     this.returnPhase = null;
+    this.instantDrinks = [];
+    this.glyphBonuses = [];
     this.settleRemaining = 0;
     this.phaseRemaining = 0;
     this.emit({ t: 'RunStarted', seed });
@@ -496,7 +613,10 @@ export class RunMachine {
   }
 
   private loadCoin(coinId: string): CommandResult {
-    if (!this.state.ownedCoins.includes(coinId)) return fail('NOT_OWNED');
+    const coin = this.findItem(coinId);
+    // A free coin (the starter Copper Token) is always owned.
+    const free = coin?.category === 'COIN' && coin.price <= 0;
+    if (!this.state.ownedCoins.includes(coinId) && !free) return fail('NOT_OWNED');
     this.state.loadedCoin = coinId;
     this.emit({ t: 'CoinLoaded', coinId });
     return OK;
@@ -508,6 +628,15 @@ export class RunMachine {
     }
     const itemId = this.state.drinkTray[slot] ?? null;
     if (itemId === null) return fail('INVALID_TARGET');
+    const item = this.findItem(itemId);
+    if (item?.category === 'DRINK' && item.instant) {
+      // D-08: an instant drink acts now and never occupies the active slot.
+      this.state.drinkTray[slot] = null;
+      this.instantDrinks.push(itemId);
+      this.emit({ t: 'DrinkActive', itemId });
+      this.emit({ t: 'DrinkActive', itemId: this.state.activeDrink });
+      return OK;
+    }
     if (this.state.activeDrink !== null) return fail('AT_LIMIT');
     this.state.drinkTray[slot] = null;
     this.state.activeDrink = itemId;
@@ -518,6 +647,14 @@ export class RunMachine {
   private spin(): CommandResult {
     if (this.state.spinsLeft <= 0) return fail('AT_LIMIT');
     if (this.orbsInFlight > 0) return fail('ORBS_IN_FLIGHT');
+    const coin = this.findItem(this.state.loadedCoin);
+    const coinCost = coin?.category === 'COIN' ? Math.max(0, coin.costPerSpin) : 0;
+    if (coinCost > this.state.bankroll) return fail('INSUFFICIENT_FUNDS');
+    if (coinCost > 0) {
+      // Blood Doubloon: the loaded coin charges per spin (SPEC 2.7).
+      this.state.bankroll -= coinCost;
+      this.emit({ t: 'BankrollChanged', delta: -coinCost, total: this.state.bankroll, reason: 'coin' });
+    }
 
     const preSpinVisible = this.state.grid.visible.map((column) => column.slice());
     const reels = this.stream('reels');
@@ -570,20 +707,67 @@ export class RunMachine {
       // a free shop visit. Boss verdicts are exact because no tribute is paid.
       if (this.state.round === BOSS_ROUND && this.state.boss !== null) {
         if (this.state.roundCash < this.state.boss.score) return this.gameOver('defeat');
-        this.markFloorCleared();
-        if (this.currentFloor().next.length === 0) return this.victory();
-        return this.offerRelics();
+        return this.claimBossReward();
       }
       return this.gameOver('defeat');
     }
 
     if (!result.passed) return this.gameOver('defeat');
-    if (result.kind === 'boss') {
-      this.markFloorCleared();
-      if (this.currentFloor().next.length === 0) return this.victory();
-      return this.offerRelics();
-    }
+    if (result.kind === 'boss') return this.claimBossReward();
     return this.enterShop();
+  }
+
+  /**
+   * Pay out the beaten boss's own reward (R-BOS-02..04): Valenti deals a relic
+   * pick (D-09), Madame Zero adds shop capacity, the Iron Auditor ends the run
+   * in victory. A floor with no exits always ends in victory.
+   */
+  private claimBossReward(): CommandResult {
+    this.markFloorCleared();
+    const boss = selectBossForRun(
+      {
+        floors: this.content.floors,
+        ...(this.content.bosses === undefined ? {} : { bosses: this.content.bosses }),
+      },
+      { floorId: this.state.floorId, seed: this.state.seed },
+    );
+    const reward = boss.reward;
+    if (reward.kind === 'victory' || this.currentFloor().next.length === 0) {
+      this.emit({ t: 'BossRewarded', bossId: boss.id, reward: 'victory', amount: 0 });
+      return this.victory();
+    }
+    if (reward.kind === 'shopCapacity') {
+      const before = this.state.shop.capacity;
+      this.state.shop.capacity = Math.min(RULES.SHOP_MAX_CAPACITY, before + reward.amount);
+      this.emit({
+        t: 'BossRewarded',
+        bossId: boss.id,
+        reward: 'shopCapacity',
+        amount: this.state.shop.capacity - before,
+      });
+      this.transition('ELEVATOR');
+      return OK;
+    }
+    this.emit({ t: 'BossRewarded', bossId: boss.id, reward: 'relicChoice', amount: reward.count });
+    return this.offerRelics(reward.count);
+  }
+
+  private findItem(id: string): ItemDef | undefined {
+    return (this.content.items ?? []).find((item) => item.id === id);
+  }
+
+  /** Items the shop may offer right now: nothing already maxed out or unusable. */
+  private shopCatalog(exclude: readonly string[] = []): ItemDef[] {
+    return (this.content.items ?? []).filter(
+      (item) => !exclude.includes(item.id) && purchaseBlock(this.state, item) === null,
+    );
+  }
+
+  private priceOffers(offers: readonly ShopOffer[]): ShopOffer[] {
+    return offers.map((offer) => {
+      const item = this.findItem(offer.itemId);
+      return { ...offer, price: item === undefined ? offer.price : offerPrice(this.state, item) };
+    });
   }
 
   private judgeRound(): void {
@@ -646,7 +830,7 @@ export class RunMachine {
     const rng = this.stream('shop');
     const rolled = rollShop({
       floor,
-      items: this.content.items ?? [],
+      items: this.shopCatalog(),
       rng,
       capacity: shop.capacity,
       count: shop.capacity,
@@ -654,20 +838,21 @@ export class RunMachine {
     });
     this.saveStream('shop', rng);
 
-    shop.rerollCost = RULES.SHOP_REROLL_BASE;
+    // R-SHP-02: the reroll price escalates across a floor's shops and resets
+    // only on a new floor (chooseFloor / newRun).
     shop.expandCost = Math.max(shop.expandCost, RULES.SHOP_EXPAND_BASE);
     shop.archetype = rolled.archetype;
-    shop.offers = rolled.offers.map((offer) => ({ ...offer }));
+    shop.offers = this.priceOffers(rolled.offers);
     this.transition('SHOP');
-    this.emitShopRolled(rolled);
+    this.emitShopRolled(rolled.archetype);
     return OK;
   }
 
-  private emitShopRolled(rolled: ShopRoll): void {
+  private emitShopRolled(archetype: ShopRoll['archetype']): void {
     this.emit({
       t: 'ShopRolled',
-      archetype: rolled.archetype,
-      offers: rolled.offers.map((offer) => ({ ...offer })),
+      archetype,
+      offers: this.state.shop.offers.map((offer) => ({ ...offer })),
       rerollCost: this.state.shop.rerollCost,
       expandCost:
         this.state.shop.capacity >= RULES.SHOP_MAX_CAPACITY
@@ -683,7 +868,7 @@ export class RunMachine {
     const rng = this.stream('shop');
     const rolled = rollShop({
       floor: this.currentFloor(),
-      items: this.content.items ?? [],
+      items: this.shopCatalog(),
       rng,
       capacity: shop.capacity,
       count: shop.capacity,
@@ -695,14 +880,14 @@ export class RunMachine {
     this.state.bankroll -= cost;
     shop.rerollCost = nextRerollCost(cost);
     shop.archetype = rolled.archetype;
-    shop.offers = rolled.offers.map((offer) => ({ ...offer }));
+    shop.offers = this.priceOffers(rolled.offers);
     this.emit({
       t: 'BankrollChanged',
       delta: -cost,
       total: this.state.bankroll,
       reason: 'shop',
     });
-    this.emitShopRolled(rolled);
+    this.emitShopRolled(rolled.archetype);
     return OK;
   }
 
@@ -720,13 +905,31 @@ export class RunMachine {
       total: this.state.bankroll,
       reason: 'shop',
     });
+
+    // The new slot is stocked right away from the same vendor archetype.
+    if (shop.archetype !== null) {
+      const rng = this.stream('shop');
+      const extra = rollShop({
+        floor: this.currentFloor(),
+        items: this.shopCatalog(shop.offers.map((offer) => offer.itemId)),
+        rng,
+        capacity: 1,
+        count: 1,
+        expansions: 0,
+        archetype: shop.archetype,
+      });
+      this.saveStream('shop', rng);
+      for (const offer of this.priceOffers(extra.offers)) {
+        shop.offers.push({ ...offer, offerId: `offer-${shop.offers.length}` });
+      }
+      this.emitShopRolled(shop.archetype);
+    }
     return OK;
   }
 
   private shopLeave(): CommandResult {
     this.state.shop.offers = [];
     this.state.shop.archetype = null;
-    this.state.shop.rerollCost = RULES.SHOP_REROLL_BASE;
     this.state.roundCash = 0;
 
     if (this.state.round < RULES.NORMAL_ROUNDS_PER_FLOOR) {
@@ -754,6 +957,8 @@ export class RunMachine {
     if (offer.category === 'DRINK' && !this.state.drinkTray.includes(null)) {
       return fail('AT_LIMIT');
     }
+    const blocked = purchaseBlock(this.state, item);
+    if (blocked !== null) return fail(blocked);
     if (offer.category === 'REEL') {
       const reel = target?.reel;
       if (
@@ -765,14 +970,6 @@ export class RunMachine {
       ) {
         return fail('INVALID_TARGET');
       }
-    }
-    if (
-      offer.category === 'CHASSIS' &&
-      item?.category === 'CHASSIS' &&
-      ((item.kind === 'ADD_COLUMN' && this.state.grid.cols >= RULES.MAX_COLS) ||
-        (item.kind === 'ADD_ROW' && this.state.grid.rows >= RULES.MAX_ROWS))
-    ) {
-      return fail('AT_LIMIT');
     }
     if (this.state.bankroll < offer.price) return fail('INSUFFICIENT_FUNDS');
 
@@ -816,6 +1013,9 @@ export class RunMachine {
         if (item?.category === 'REEL' && target?.reel !== undefined) {
           const strip = this.state.grid.strips[target.reel];
           if (strip !== undefined) strip.push(item.symbolId);
+          if (item.bonusTokens > 0) {
+            this.glyphBonuses.push({ symbolId: item.symbolId, count: item.bonusTokens });
+          }
         }
         break;
       }
@@ -882,14 +1082,23 @@ export class RunMachine {
         );
         this.saveStream('jumpers', rng);
         if (options.length === 0) break;
-        this.pendingJumpers = options;
+        this.state.pendingJumpers = options.map((line) => line.map((cell) => [cell[0], cell[1]] as Cell));
         this.returnPhase = 'SHOP';
         this.transition('JUMPER_PICK');
         this.emit({ t: 'JumpersOffered', options: options.map((line) => line.map((cell) => [...cell] as Cell)) });
         break;
       }
       case 'OVERVOLT': {
-        // The player picks the line with SetOvervolt during PREP.
+        // R-MUT-06: owning the Overvolt unlocks SetOvervolt; arm the middle
+        // row so the purchase pays off before the player picks a line.
+        this.state.overvoltOwned = true;
+        if (this.state.overvoltLineId === null) {
+          const middle = `row:${Math.floor((grid.rows - 1) / 2)}`;
+          if (overvoltLineIds(this.state).includes(middle)) {
+            this.state.overvoltLineId = middle;
+            this.emit({ t: 'OvervoltSet', lineId: middle });
+          }
+        }
         break;
       }
     }
@@ -919,21 +1128,24 @@ export class RunMachine {
     return OK;
   }
 
-  private relicOptions(): string[] {
-    if (this.pendingRelics.length > 0) return this.pendingRelics;
+  private relicOptions(count = 3): string[] {
+    if (this.state.pendingRelics !== undefined && this.state.pendingRelics.length > 0) {
+      return this.state.pendingRelics;
+    }
     const trinkets = (this.content.items ?? [])
       .filter((item) => item.category === 'TRINKET')
       .map((item) => item.id);
     if (trinkets.length === 0) return [];
     const rng = this.stream('relics');
-    this.pendingRelics = rng.shuffle(trinkets).slice(0, 3);
+    this.state.pendingRelics = rng.shuffle(trinkets).slice(0, Math.max(1, count));
     this.saveStream('relics', rng);
-    return this.pendingRelics;
+    return this.state.pendingRelics;
   }
 
-  private offerRelics(): CommandResult {
-    const options = this.relicOptions();
+  private offerRelics(count = 3): CommandResult {
+    const options = this.relicOptions(count);
     if (options.length === 0) {
+      delete this.state.pendingRelics;
       this.transition('ELEVATOR');
       return OK;
     }
@@ -943,13 +1155,13 @@ export class RunMachine {
   }
 
   private chooseRelic(index: number): CommandResult {
-    const options = this.relicOptions();
+    const options = this.state.pendingRelics ?? [];
     if (!Number.isInteger(index) || index < 0 || index >= options.length) {
       return fail('INVALID_TARGET');
     }
     const itemId = options[index]!;
     this.state.trinkets.push(itemId);
-    this.pendingRelics = [];
+    delete this.state.pendingRelics;
     this.emit({
       t: 'TrinketMounted',
       itemId,
@@ -960,14 +1172,15 @@ export class RunMachine {
   }
 
   private chooseJumper(index: number): CommandResult {
-    if (!Number.isInteger(index) || index < 0 || index >= this.pendingJumpers.length) {
+    const pending = this.state.pendingJumpers ?? [];
+    if (!Number.isInteger(index) || index < 0 || index >= pending.length) {
       return fail('INVALID_TARGET');
     }
     if (this.state.jumpers.length >= RULES.MAX_JUMPERS) return fail('AT_LIMIT');
-    const chosen = chooseJumper(this.pendingJumpers, index);
+    const chosen = chooseJumper(pending, index);
     if (chosen === null) return fail('INVALID_TARGET');
     this.state.jumpers.push(chosen);
-    this.pendingJumpers = [];
+    delete this.state.pendingJumpers;
     const back = this.returnPhase ?? 'PREP';
     this.returnPhase = null;
     this.transition(back);
@@ -975,16 +1188,14 @@ export class RunMachine {
   }
 
   private setOvervolt(lineId: string | null): CommandResult {
+    if (lineId !== null && this.state.overvoltOwned !== true) return fail('NOT_OWNED');
     const wiring = this.state.grid.wiring;
-    const lines: { id: string }[] =
-      wiring === 'CLASSIC'
-        ? classicLines(this.state.grid.cols, this.state.grid.rows)
-        : wiring === 'HYPER'
-          ? hyperPaylines(this.state.grid.cols, this.state.grid.rows)
-          : [];
-    const selected = selectOvervolt(wiring, lineId, lines);
+    const selected = selectOvervolt(wiring, lineId, overvoltLineIds(this.state));
     if (lineId !== null && selected === null) return fail('INVALID_TARGET');
-    this.state.overvoltLineId = selected;
+    if (this.state.overvoltLineId !== selected) {
+      this.state.overvoltLineId = selected;
+      this.emit({ t: 'OvervoltSet', lineId: selected });
+    }
     return OK;
   }
 }
