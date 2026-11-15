@@ -22,9 +22,12 @@ export {
   DEFAULT_SYMBOL_STATS,
   classicLines,
   evaluateClassic,
+  aggregateWins,
   makeScrapOrbPlan,
   scoreClassic,
   scoreSpin,
+  scoreTumble,
+  scoreWiring,
   scrapChips,
 } from './scoring/index';
 export type {
@@ -33,6 +36,8 @@ export type {
   Payline,
   ScoreOptions,
   ScoreResult,
+  ScoreWiringOptions,
+  ScoredWin,
   SymbolSlotStats,
   SymbolStatsTable,
 } from './scoring/index';

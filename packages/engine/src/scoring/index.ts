@@ -10,8 +10,16 @@
  * Orb-plan order is the first-occurrence order of the flattened wins, which the
  * animation contract uses for cell detach timing.
  */
-import { RULES, type Cell, type SymbolId, type WinEval } from '@jackpotsyndicate/contracts';
+import { RULES, type Cell, type SymbolId, type WinEval, type Wiring } from '@jackpotsyndicate/contracts';
 import { gridSize, symbolAt } from '../slot/core/index';
+import {
+  evaluateCluster,
+  evaluateWays,
+  paylinesForWiring,
+  evaluateClassic as evaluateClassicLines,
+  evaluateHyper,
+  type TumbleResult,
+} from '../slot/wirings/index';
 
 export interface SymbolSlotStats {
   chips: number;
@@ -297,3 +305,144 @@ export function scoreClassic(
 
 /** Readable alias for callers that name the operation after the spin. */
 export const scoreSpin = scoreClassic;
+
+// ------------------------------------------------------------ every wiring
+
+export interface ScoreWiringOptions extends ScoreOptions {
+  wiring?: Wiring;
+  /** Extra jumper paylines (R-MUT-05, CLASSIC/HYPER only). */
+  jumperLines?: readonly (readonly Cell[])[];
+}
+
+/** One winning evaluation plus where it happened (tumble step 0 is the drawn grid). */
+export interface ScoredWin {
+  win: WinEval;
+  /** Tumble step the win belongs to; orbs from different steps never merge. */
+  step: number;
+  /** True when a `line` win covers its whole payline (Seven's full-line X). */
+  fullLine: boolean;
+}
+
+/**
+ * SPEC 2.6 aggregation over any set of wins: A = 1 + Σ symbol +Mult per win,
+ * X = Π symbol x-mult per win (full-line override for `line` wins), one orb per
+ * scoring cell per tumble step with `chips = symbolChips × Σ lineMult`.
+ */
+export function aggregateWins(
+  scored: readonly ScoredWin[],
+  options: ScoreOptions = {},
+): Omit<ScoreResult, 'grid'> {
+  const symbols = resolveSymbols(options.symbols);
+  const extraAddMult = finiteNonNegative('extraAddMult', options.extraAddMult ?? 0);
+  const extraXMult = finiteNonNegative('extraXMult', options.extraXMult ?? 1);
+  const cashPerChip = finiteNonNegative('cashPerChip', options.cashPerChip ?? 1);
+
+  let addMult = 1 + extraAddMult;
+  let xMult = extraXMult;
+  let chips = 0;
+  const orbPlan: OrbPlanEntry[] = [];
+  const byCell = new Map<string, OrbPlanEntry>();
+
+  for (const { win, step, fullLine } of scored) {
+    const stat = symbols[win.symbolId];
+    addMult += stat.addMult;
+    xMult *= fullLine && stat.fullLineXMult !== undefined ? stat.fullLineXMult : stat.xMult;
+    for (const [col, row] of win.cells) {
+      const key = `${step}:${col},${row}`;
+      let entry = byCell.get(key);
+      if (entry === undefined) {
+        entry = { cell: [col, row], symbolId: win.symbolId, chips: 0 };
+        byCell.set(key, entry);
+        orbPlan.push(entry);
+      }
+      const cellChips = stat.chips * win.lineMult;
+      entry.chips += cellChips;
+      chips += cellChips;
+    }
+  }
+
+  if (scored.length === 0) {
+    const scrap = scrapChips(symbols, options.scrapEquity ?? RULES.SCRAP_EQUITY);
+    orbPlan.push(...makeScrapOrbPlan(options.scrapSymbolId ?? 'scrap', scrap));
+    chips = scrap;
+  }
+
+  const equity = chips * addMult * xMult * cashPerChip;
+  finiteNonNegative('equity', equity);
+  return {
+    wins: scored.map((entry) => entry.win),
+    chips,
+    addMult,
+    xMult,
+    equity,
+    orbPlan,
+  };
+}
+
+function lineLengths(wiring: Wiring, cols: number, rows: number, jumpers: readonly (readonly Cell[])[]): Map<string, number> {
+  const lengths = new Map<string, number>();
+  for (const line of paylinesForWiring(wiring, cols, rows, jumpers)) lengths.set(line.id, line.cells.length);
+  return lengths;
+}
+
+function evaluateWiring(
+  grid: readonly (readonly SymbolId[])[],
+  wiring: Wiring,
+  options: ScoreWiringOptions,
+): WinEval[] {
+  const evalOptions = {
+    minMatch: options.minMatch ?? CLASSIC_MIN_MATCH,
+    overvoltLineId: options.overvoltLineId ?? null,
+    jumperLines: options.jumperLines ?? [],
+    frozen: options.frozen ?? [],
+  };
+  switch (wiring) {
+    case 'CLASSIC':
+      return evaluateClassicLines(grid, evalOptions);
+    case 'HYPER':
+      return evaluateHyper(grid, evalOptions);
+    case 'WAYS':
+      return evaluateWays(grid, evalOptions);
+    case 'CLUSTER':
+      return evaluateCluster(grid, evalOptions);
+  }
+}
+
+/**
+ * Score one drawn grid under any wiring (R-SLOT-03, R-MUT-02..06). Payline
+ * ids are shared by every wiring (`row:N`, `diag:down`, `diag:up`,
+ * `hyper:v`, `hyper:inverted-v`, `jumper:N`), so the overvolted line and
+ * Seven's full-line X work the same with or without jumpers.
+ */
+export function scoreWiring(
+  grid: readonly (readonly SymbolId[])[],
+  options: ScoreWiringOptions = {},
+): ScoreResult {
+  const { cols, rows } = gridSize(grid);
+  const wiring = options.wiring ?? 'CLASSIC';
+  const jumpers = wiring === 'CLASSIC' || wiring === 'HYPER' ? options.jumperLines ?? [] : [];
+  const wins = evaluateWiring(grid, wiring, { ...options, jumperLines: jumpers });
+  const lengths = lineLengths(wiring, cols, rows, jumpers);
+  const scored = wins.map((win) => ({
+    win,
+    step: 0,
+    fullLine:
+      win.kind === 'line' &&
+      win.lineId !== undefined &&
+      lengths.get(win.lineId) === win.cells.length,
+  }));
+  return { grid: grid.map((column) => column.slice()), ...aggregateWins(scored, options) };
+}
+
+/** Score a CLUSTER spin including its tumbles (R-MUT-04); `grid` is the drawn grid. */
+export function scoreTumble(
+  grid: readonly (readonly SymbolId[])[],
+  tumble: TumbleResult,
+  options: ScoreOptions = {},
+): ScoreResult {
+  const scored: ScoredWin[] = tumble.initialWins.map((win) => ({ win, step: 0, fullLine: false }));
+  for (const step of tumble.steps) {
+    for (const win of step.wins) scored.push({ win, step: step.step, fullLine: false });
+  }
+  return { grid: grid.map((column) => column.slice()), ...aggregateWins(scored, options) };
+}
