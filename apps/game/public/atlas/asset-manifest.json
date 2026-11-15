@@ -368,10 +368,20 @@
     "source": "imagegen:d5b2d07:floor.FLOOR_PENTHOUSE.bg"
   },
   "glyph.blood-diamond": {
-    "file": "placeholders/glyph.blood-diamond.svg",
-    "placeholder": true,
-    "sha256": "1fbf3cc4e414684aeb0f7036a173a2983d78dc901cc14bd0c10181d656f62f08",
-    "source": "placeholder:obsidian-noir:glyph.blood-diamond"
+    "atlas": "glyphs",
+    "file": "assets/340f807fc452-glyph.blood-diamond.png",
+    "frame": {
+      "h": 224,
+      "w": 224,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "340f807fc452f7155d4ae4dee3f7ff5a6816d32165e7dcf35ecca39a9438605b",
+    "source": "imagegen:refill:glyph.blood-diamond"
   },
   "glyph.cherry": {
     "atlas": "glyphs",
@@ -940,10 +950,20 @@
     "source": "imagegen:d5b2d07:trinket.vip-bullion-stamp"
   },
   "ui.bezel": {
-    "file": "placeholders/ui.bezel.svg",
-    "placeholder": true,
-    "sha256": "45734a25f13ecf41987ec964d4eff0d6fcf412bf4ea46d52138a8769c07db4a6",
-    "source": "placeholder:obsidian-noir:ui.bezel"
+    "atlas": "ui",
+    "file": "assets/21c7b52ca6e3-ui.bezel.png",
+    "frame": {
+      "h": 128,
+      "w": 512,
+      "x": 0,
+      "y": 0
+    },
+    "pivot": {
+      "x": 0.5,
+      "y": 0.5
+    },
+    "sha256": "21c7b52ca6e3657bb113efc333e6faa020702151c2d9a0e194b8cd67fd7f69d6",
+    "source": "imagegen:refill:ui.bezel"
   },
   "ui.button": {
     "atlas": "ui",
