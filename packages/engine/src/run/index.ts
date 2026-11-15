@@ -564,12 +564,17 @@ export class RunMachine {
 
     const result = this.lastResult;
     if (result === null) {
-      // Resumed mid-result: fall back to the structural next phase.
-      if (this.state.round === BOSS_ROUND) {
+      // A pre-lastResult save carries no normal verdict, and the tribute has
+      // already been deducted, so a passed and a missed round are not
+      // distinguishable from bankroll alone. Fail closed instead of granting
+      // a free shop visit. Boss verdicts are exact because no tribute is paid.
+      if (this.state.round === BOSS_ROUND && this.state.boss !== null) {
+        if (this.state.roundCash < this.state.boss.score) return this.gameOver('defeat');
+        this.markFloorCleared();
         if (this.currentFloor().next.length === 0) return this.victory();
         return this.offerRelics();
       }
-      return this.enterShop();
+      return this.gameOver('defeat');
     }
 
     if (!result.passed) return this.gameOver('defeat');
@@ -902,6 +907,8 @@ export class RunMachine {
     this.state.spinsLeft = RULES.SPINS_PER_ROUND;
     this.state.roundCash = 0;
     this.state.boss = null;
+    // Boss locks belong to the floor they were applied on (R-BOS-03).
+    this.state.grid.frozen = [];
     this.state.activeDrink = null;
     this.state.shop.offers = [];
     this.state.shop.archetype = null;

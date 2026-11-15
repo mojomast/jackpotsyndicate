@@ -352,7 +352,9 @@ export const saveFileSchema = z.object({
   run: runStateSchema,
   simBase64: z.string(),
   stateHash: z.string(),
-  lastResult: roundResultSchema.optional(),
+  // Derived, unhashed display data: drop a malformed verdict instead of
+  // rejecting the run it describes (the resume prompt deletes rejected saves).
+  lastResult: roundResultSchema.optional().catch(undefined),
 }) satisfies z.ZodType<SaveFile>;
 
 const exitInfoShape = {

@@ -250,27 +250,30 @@ samp {
 /* Structural 9-slice chrome. The source frames are tight-cropped derivatives
  * of the generated UI art; corners stay fixed while edges stretch. */
 .panel.ui9-panel {
-  border-width: 12px 22px;
+  border-width: 18px 22px;
   border-style: solid;
   border-color: transparent;
   border-radius: 0;
   background: rgba(7, 9, 14, 0.18);
   border-image-source: var(--ui9-panel);
-  border-image-slice: 24 45 24 45 fill;
-  border-image-width: 12px 22px;
+  /* Source 369x161: crest is rows 0-35, bottom rail rows 126-152. Keeping
+     37px at the top keeps the crest in the frame instead of stretching it
+     through the centre slice and over the content. */
+  border-image-slice: 37 45 37 45 fill;
+  border-image-width: 18px 22px;
   border-image-repeat: stretch;
-  padding: clamp(14px, 1.6vw, 22px) clamp(20px, 2vw, 30px);
+  padding: 8px 22px;
 }
 
 .btn-primary.ui9-button {
-  border-width: 9px 18px;
+  border-width: 17px 18px 12px 18px;
   border-style: solid;
   border-color: transparent;
   border-radius: 0;
   background: transparent;
   border-image-source: var(--ui9-button);
-  border-image-slice: 20 36 20 36 fill;
-  border-image-width: 9px 18px;
+  border-image-slice: 34 36 24 36 fill;
+  border-image-width: 17px 18px 12px 18px;
   border-image-repeat: stretch;
   color: #f8e7b0;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
@@ -507,12 +510,6 @@ a:focus-visible {
   gap: 12px;
 }
 
-/* The generated panel has a baked centre crest. Keep the HUD labels below it
- * instead of letting the crest sit on top of the phase and round text. */
-.hud.ui9-panel {
-  padding-top: clamp(26px, 3vw, 40px);
-}
-
 .hud-topline {
   display: flex;
   flex-wrap: wrap;
@@ -610,11 +607,11 @@ a:focus-visible {
   gap: 10px;
 }
 
-.hud-spin {
-  flex: 0 1 360px;
+button.btn.hud-spin {
+  flex: 0 1 auto;
   width: 100%;
-  max-width: 360px;
-  min-height: 56px;
+  max-width: 320px;
+  min-height: 72px;
   font-size: 1.04rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -828,6 +825,17 @@ a:focus-visible {
 .shop-summary b {
   color: var(--color-gold);
   font-variant-numeric: tabular-nums;
+}
+
+.shop-summary > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 110px;
+}
+
+.shop-summary strong {
+  font-size: 1rem;
 }
 
 .compendium-heading {
@@ -1339,18 +1347,18 @@ a:focus-visible {
 
 /* --------------------------------------------------------------- meta art */
 .meta-bezel {
-  height: 16px;
-  overflow: hidden;
+  height: auto;
   display: flex;
-  align-items: center;
+  justify-content: center;
+  overflow: visible;
   opacity: 0.9;
 }
 
 .meta-bezel-art {
   display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: fill;
+  width: min(100%, 384px);
+  height: auto;
+  object-fit: contain;
 }
 
 .floor-banner {
@@ -1911,7 +1919,11 @@ input[type='range'] {
 
 @media (max-width: 480px) {
   .app-shell {
-    padding: 10px;
+    padding:
+      max(10px, env(safe-area-inset-top))
+      max(10px, env(safe-area-inset-right))
+      max(10px, env(safe-area-inset-bottom))
+      max(10px, env(safe-area-inset-left));
     gap: 12px;
   }
 
@@ -1942,5 +1954,17 @@ input[type='range'] {
 
   .log-line {
     grid-template-columns: 38px minmax(0, 1fr);
+  }
+
+  .offer-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .offer-card {
+    grid-template-columns: 56px minmax(0, 1fr);
+  }
+
+  .offer-effect {
+    font-size: 0.8rem;
   }
 }

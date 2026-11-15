@@ -43,10 +43,10 @@ work on 2026-11-15, not what the project is expected to pass later.
 | `pnpm lint` | **PASS** |
 | `pnpm typecheck` | **PASS** |
 | `pnpm build` | **PASS**; Vite reports a >500 kB game chunk warning |
-| `pnpm test` | **PASS** — 223 tests (191 package + 32 app-level) |
+| `pnpm test` | **PASS** — 226 tests (193 package + 33 app-level) |
 | `pnpm sim rake`, `sim hitrate`, `sim balance`, `sim replay` | **NOT RUN** in this docs task |
 | `pnpm assets:build`, `assets:verify` | **PASS** for the working imagegen batch: 71 keys, 67 locked, 4 placeholders; verify checked 73 files |
-| Browser E2E / Playwright / cross-browser determinism | Chromium **10/10 PASS**; Firefox and WebKit golden replay **1/1 each**; full Firefox/WebKit suites were not rerun after the golden re-record |
+| Browser E2E / Playwright / cross-browser determinism | Chromium **10/10 PASS**; Firefox **10/10 PASS**; WebKit golden replay **1/1**; full WebKit journeys were not rerun |
 | Image generation | **Working batch imported**: 67/71 PNGs locked; four placeholders remain. Not final art |
 | HyperFrames lint / trailer re-render | **NOT RUN** in this docs task |
 

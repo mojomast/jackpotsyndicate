@@ -34,8 +34,8 @@ The implementation follows the common 9-slice/nine-patch contract:
 
 | Element | Source | Source crop | Slice (T R B L) | Rendered border | Used by |
 |---|---|---|---|---|---|
-| Panel | `ui.panel` | 369 × 161 | `24 45 24 45 fill` | `12px 22px` | HUD, Prep, Speed, Trinket Rail, Event Log, Shop summary, Compendium summary, board |
-| Button | `ui.button` | 354 × 113 | `20 36 20 36 fill` | `9px 18px` | Spin and Start-run primary actions |
+| Panel | `ui.panel` | 369 × 161 | `37 45 37 45 fill` | `18px 22px` | HUD, Prep, Speed, Trinket Rail, Event Log, Shop summary, Compendium summary, board |
+| Button | `ui.button` | 354 × 113 | `34 36 24 36 fill` | `17px 18px 12px 18px` | Spin and Start-run primary actions |
 | Cabinet | `ui.cabinet` | 365 × 343 | fixed-aspect frame, not 9-sliced | — | Slot cabinet with a transparent window |
 
 - The source crops are tight derivatives of the generated UI art. They are embedded
@@ -53,11 +53,10 @@ The implementation follows the common 9-slice/nine-patch contract:
 
 ## Known limitations
 
-- The generated panel and button art has a **baked top/bottom crest**. The
-  current slice keeps the corners crisp but still stretches that crest along the
-  long edge. The proper next art pass is to export the crest as a separate fixed
-  overlay and leave a plain stretchable edge in the frame source. This is a
-  source-art issue, not a reason to stretch the whole panel as a background.
+- The panel slice now reserves the generated crest rows (`37px` top and bottom),
+  so the crest is no longer stretched through the centre fill. If the art is
+  regenerated, re-measure the crest and rail rows and update the slice values
+  together with `border-image-width`; the two must stay in the same ratio.
 - `ui.dozer`, `ui.gutter` and `ui.lip` are horizontal trim pieces. They still
   need a proper slice/projection contract; they are not placed in the board yet.
 - No screenshot matrix at 320/640/960 has been added yet. The current acceptance

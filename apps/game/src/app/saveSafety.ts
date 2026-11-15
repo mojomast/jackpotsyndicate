@@ -11,15 +11,17 @@ const RESUMABLE_BOUNDARIES: ReadonlySet<Phase> = new Set<Phase>([
   'PREP',
   'ROUND_RESULT',
   'SHOP',
-  'RELIC_PICK',
-  'JUMPER_PICK',
   'BOSS_INTRO',
   'ELEVATOR',
   'FLOOR_TRANSITION',
 ]);
 
+// RELIC_PICK and JUMPER_PICK keep their dealt offers in RunMachine-private
+// fields, so a save there reloads into a picker that cannot be completed.
 const RESUMABLE_PHASES: ReadonlySet<Phase> = new Set<Phase>([
   ...RESUMABLE_BOUNDARIES,
+  // RunMachine.resumeTimers re-arms settleRemaining, so this phase is durable.
+  'ROUND_SETTLE',
 ]);
 
 export type SaveRecoveryStatus = 'preserved' | 'created' | 'discarded' | 'unavailable';

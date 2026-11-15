@@ -202,9 +202,13 @@ function scoreGrid(
   const extraAddMult = state.nextSpin.addMult;
   const extraXMult = 1 + sumRecord(state.nextSpin.xBonus);
   const symbols = contentSymbols(content);
+  const frozen = state.grid.frozen
+    .filter((entry) => entry.spins > 0)
+    .map((entry) => [entry.cell[0], entry.cell[1]] as Cell);
   const options = {
     minMatch: balance.minMatch,
     overvoltLineId: state.overvoltLineId,
+    frozen,
     extraAddMult,
     extraXMult,
     cashPerChip: balance.cashPerChip,
@@ -220,6 +224,7 @@ function scoreGrid(
     minMatch: balance.minMatch,
     overvoltLineId: state.overvoltLineId,
     jumperLines: state.jumpers,
+    frozen,
   });
   const stats: Record<SymbolId, { chips: number; addMult: number; xMult: number }> = {
     diamond: { ...DEFAULT_SYMBOL_STATS.diamond },
@@ -374,7 +379,15 @@ export class Core implements GameCore {
     const loaded = loadSave(save, this.sim);
     if (!loaded.ok) return { ok: false, error: 'INVALID_TARGET' };
     this.machine = RunMachine.fromState(this.content, loaded.state);
-    this.machine.setLastResult(loaded.save.lastResult ?? null);
+    const savedResult = loaded.save.lastResult ?? null;
+    const bossRound = loaded.state.round === RULES.NORMAL_ROUNDS_PER_FLOOR + 1;
+    // lastResult is outside the state hash; refuse a verdict that cannot
+    // belong to this round rather than letting it choose the next phase.
+    this.machine.setLastResult(
+      savedResult !== null && (savedResult.kind === 'boss') === bossRound
+        ? savedResult
+        : null,
+    );
     this.configuredFloorId = loaded.state.floorId;
     this.activeSpin = null;
     this.lastEvaluation = null;

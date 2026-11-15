@@ -160,10 +160,10 @@ function TableStyle() {
       .jsa-cabinet-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 1% 1% 3.4%; color: #fbbf24; font-family: var(--font-display); font-weight: 700; letter-spacing: .18em; }
       .jsa-reel-window { position: relative; width: 100%; background: #07090e; border: 2px solid #5b4729; border-radius: 6px; box-shadow: inset 0 0 25px #000; overflow: hidden; }
       .jsa-layer { position: absolute; inset: 0; pointer-events: none; }
-      .jsa-cell { position: absolute; padding: 3%; border: 1px solid #36415570; display: grid; place-items: center; background: radial-gradient(ellipse at 50% 20%,#23314880,transparent 80%); }
-      .jsa-symbol { width: 100%; height: 100%; position: relative; display: grid; place-items: center; }
+      .jsa-cell { position: absolute; padding: 3%; border: 1px solid #36415570; display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); place-items: center; background: radial-gradient(ellipse at 50% 20%,#23314880,transparent 80%); }
+      .jsa-symbol { width: 100%; height: 100%; min-height: 0; position: relative; display: grid; place-items: center; }
       .jsa-sprite { display: block; width: 100%; height: 100%; overflow: hidden; }
-      .jsa-symbol > .jsa-sprite { max-width: 92%; max-height: 92%; filter: drop-shadow(0 3px 5px #000a); }
+      .jsa-symbol > .jsa-sprite { width: auto; height: 100%; max-width: 100%; max-height: 100%; filter: drop-shadow(0 3px 5px #000a); }
       .jsa-cell-glow { position: absolute; inset: 5%; border: 2px solid #fbbf24; border-radius: 12%; box-shadow: 0 0 18px #fbbf2466; background: #fbbf2419; }
       .jsa-streams { z-index: 2; overflow: hidden; }
       .jsa-reel-stream { position: absolute; top: 0; height: 100%; }

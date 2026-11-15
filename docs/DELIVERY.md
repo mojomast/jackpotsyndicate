@@ -23,7 +23,7 @@ Not run in this docs task:
 | Engine simulation | `pnpm sim rake`, `sim hitrate`, `sim balance`, `sim replay` | **NOT RUN** |
 | Physics harness | `pnpm sim:rake`, `pnpm sim:perf` | **NOT RUN** |
 | Asset build/verify | `pnpm assets:build`, `pnpm assets:verify` | **NOT RUN** |
-| Performance/bundle | `pnpm perf` | **NOT RUN** |
+| Performance/bundle | `pnpm perf` | **PASS** — 1.90 MB gzip of 3.00 MB budget |
 | Browser E2E / cross-browser | Playwright suite | **NOT RUN**; no completed three-browser result is claimed |
 | Preview smoke | `pnpm preview` | **NOT RUN** |
 | HyperFrames lint/render | `pnpm -F @jackpotsyndicate/anim lint` / render | **NOT RUN** |

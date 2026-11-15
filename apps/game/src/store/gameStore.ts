@@ -721,7 +721,12 @@ export const useGameStore = create<GameStore>((set, get) => ({
       set({ state: snapshotState(core), events, lastResult: null, lastSpin: null, lastDropMult: 1 });
       return result;
     }
-    set({ state: snapshotState(core) });
+    set({
+      state: snapshotState(core),
+      // A new spin begins a new round; never let the result screen show the
+      // previous round's verdict while the new spin is in flight.
+      ...(cmd.c === 'Spin' && result.ok ? { lastResult: null } : {}),
+    });
     return result;
   },
 

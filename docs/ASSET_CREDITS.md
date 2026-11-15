@@ -24,7 +24,7 @@ The four placeholders are `glyph.uranium`, `vfx.coinburst`, `vfx.shock` and
 `vfx.spark`. The delivered exports were resized and
 quantized to fit the asset budget; the full source files remain on the handoff branch.
 
-The committed atlas output directory totals **1,484,177 bytes** (1.42 MiB; about
+The committed atlas output directory totals **1,493,787 bytes** (1.42 MiB; about
 1.48 MB decimal), including asset copies, manifest and contact sheet. This is the
 `tools/assets` output size, not a packed-atlas measurement: the current pipeline
 copies locked files and records atlas labels/frames but does not pack pixel atlases.
@@ -44,8 +44,10 @@ Evidence:
 
 `tools/assets build` reports **71 keys, 67 locked, 4 placeholders**; `tools/assets
 verify` passed against a fresh deterministic build (73 files checked). The table-screen cabinet consumes the atlas resolver for reel symbols; the six
-symbol frames, seven token skins and four peg skins are inlined as data URIs so spins
-make no late network requests. The board now draws the floor background over the
+the boot atlas preload also loads the symbol, token and peg frames; the symbol
+blobs remain inlined because removing them made the browser request those URLs
+again after gameplay began, breaking the zero-runtime-network NET test. The
+inline duplication is a known 283 KB bundle cost. The board now draws the floor background over the
 pinfield and replaces pegs, orbs and tokens with their manifest images. Shop uses the
 current-floor banner, item artwork, the UI bezel and the generated panel/button art;
 Compendium uses item, floor and boss artwork. The table HUD, side panels, board, scan cabinet and primary buttons use
@@ -116,7 +118,7 @@ represent the build as having cleared commercial asset rights.
 
 1. **Working batch, not final art.** 67 of 71 keys are locked; four placeholder keys remain. The handoff records quality issues: diamond token is cyan rather than blood-red, skull token lacks the magnet, boss portraits are tightly framed, `chassis.harness-hyper` reads as wearable gear, and UI nine-slicing has not been tested in the game.
 2. **Item sprite-key naming is now normalized.** Content uses canonical kebab-case keys (`trinket.quantum-splitter-coil`, `glyph.blood-diamond`, `chassis.harness-hyper`, etc.) and the content test rejects non-canonical item keys.
-3. **No packed atlases.** The current pipeline copies per-key PNGs and records atlas labels/frames; it does not pack pixel atlases. The committed output is 1,484,177 bytes (1.42 MiB) as a directory, not a verified 1.5 MB atlas.
+3. **No packed atlases.** The current pipeline copies per-key PNGs and records atlas labels/frames; it does not pack pixel atlases. The committed output is 1,493,787 bytes (1.42 MiB) as a directory, not a verified 1.5 MB atlas.
 4. **Asset verification was run on the working branch.** `tools/assets build` reported 71 keys / 67 locked / 4 placeholders and `verify` checked 73 files. This does not establish final art rights, browser rendering everywhere, or trailer re-render.
 5. **The trailer's art path is still placeholder/vector based.** Do not describe it as final sprite art.
 

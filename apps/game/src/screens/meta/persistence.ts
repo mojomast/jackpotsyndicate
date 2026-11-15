@@ -14,14 +14,20 @@ import { phaseLabel } from './navigation';
 
 export const SAVE_STORAGE_KEY = STORAGE_KEYS.save;
 
-const ENDED_PHASES: ReadonlySet<Phase> = new Set<Phase>(['TITLE', 'GAME_OVER', 'VICTORY']);
+const NON_RESUMABLE_PHASES: ReadonlySet<Phase> = new Set<Phase>([
+  'TITLE',
+  'GAME_OVER',
+  'VICTORY',
+  'SPINNING',
+  'RESOLVING',
+  'RELIC_PICK',
+  'JUMPER_PICK',
+]);
 
 const BOUNDARY_PHASES: ReadonlySet<Phase> = new Set<Phase>([
   'PREP',
   'ROUND_RESULT',
   'SHOP',
-  'RELIC_PICK',
-  'JUMPER_PICK',
   'BOSS_INTRO',
   'ELEVATOR',
   'FLOOR_TRANSITION',
@@ -57,11 +63,17 @@ function storage(): Storage | null {
 export function saveCore(core: GameCore = useGameStore.getState().core): SaveFile | null {
   const store = storage();
   if (store === null) return null;
-  // A spin's in-flight schedule lives beside RunState, not inside it. Writing
-  // a save while SPINNING/RESOLVING/ROUND_SETTLE produces a file that reloads
-  // into a stuck phase, so only durable boundaries may be persisted.
+  // A spin's in-flight schedule lives beside RunState, not inside it, so
+  // SPINNING/RESOLVING reload into a phase no command can leave. Picker
+  // phases are also blocked because their dealt offers are machine-private.
+  // ROUND_SETTLE is durable: resumeTimers re-arms its countdown.
   const phase = core.getState().phase;
-  if (phase === 'SPINNING' || phase === 'RESOLVING' || phase === 'ROUND_SETTLE') {
+  if (
+    phase === 'SPINNING' ||
+    phase === 'RESOLVING' ||
+    phase === 'RELIC_PICK' ||
+    phase === 'JUMPER_PICK'
+  ) {
     return null;
   }
   try {
@@ -125,7 +137,7 @@ export function summariseSave(save: SaveFile): SaveSummary {
     round: save.run.round,
     bankroll: save.run.bankroll,
     tick: save.run.tick,
-    resumable: !ENDED_PHASES.has(save.run.phase),
+    resumable: !NON_RESUMABLE_PHASES.has(save.run.phase),
   };
 }
 

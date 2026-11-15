@@ -51,6 +51,8 @@ export interface EvaluateClassicOptions {
   minMatch?: number;
   /** Line id whose lineMult is 3 (R-MUT-06). */
   overvoltLineId?: string | null;
+  /** Boss-frozen cells never start or extend a line (R-BOS-03). */
+  frozen?: readonly Cell[];
 }
 
 export interface ScoreOptions extends EvaluateClassicOptions {
@@ -119,14 +121,19 @@ export function evaluateClassic(
     throw new RangeError('minMatch must be a positive integer');
   }
   const overvoltLineId = options.overvoltLineId ?? null;
+  const frozen = new Set(
+    (options.frozen ?? []).map(([col, row]) => `${col}:${row}`),
+  );
   const wins: WinEval[] = [];
 
   for (const line of classicLines(cols, rows)) {
     if (line.cells.length < minMatch) continue;
+    if (frozen.has(`${line.cells[0]![0]}:${line.cells[0]![1]}`)) continue;
     const first = symbolAt(grid, line.cells[0]![0], line.cells[0]![1]);
     let matched = 1;
     while (
       matched < line.cells.length &&
+      !frozen.has(`${line.cells[matched]![0]}:${line.cells[matched]![1]}`) &&
       symbolAt(grid, line.cells[matched]![0], line.cells[matched]![1]) === first
     ) {
       matched++;

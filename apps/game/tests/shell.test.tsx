@@ -148,8 +148,9 @@ test('C-9 design tokens and full-width/900/390 responsive rules are present', ()
   assert.match(css, /max-width:\s*none/);
   assert.match(css, /@media \(min-width: 900px\)/);
   assert.match(css, /@media \(max-width: 480px\)/);
-  assert.match(css, /border-image-slice:\s*24 45 24 45 fill/);
-  assert.match(css, /border-image-slice:\s*20 36 20 36 fill/);
+  assert.match(css, /border-image-slice:\s*37 45 37 45 fill/);
+  assert.match(css, /border-image-slice:\s*34 36 24 36 fill/);
+  assert.match(css, /border-width:\s*18px 22px/);
 });
 
 test('all C-8 test ids exist in the shell', () => {

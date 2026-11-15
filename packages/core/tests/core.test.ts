@@ -308,3 +308,18 @@ test('a save at ROUND_RESULT keeps its verdict so Continue cannot bypass a faile
     'a resumed failed round must not fall through into the shop',
   );
 });
+
+test('a ROUND_RESULT save without a verdict fails closed instead of granting a shop', () => {
+  const { core } = playRound('RESULT-NO-VERDICT');
+  const save = core.save();
+  delete save.lastResult;
+
+  const reloaded = createGameCore();
+  assert.deepEqual(reloaded.load(save), { ok: true });
+  assert.deepEqual(reloaded.dispatch({ c: 'ContinueAfterRound' }), { ok: true });
+  assert.equal(
+    reloaded.getState().phase,
+    'GAME_OVER',
+    'a pre-lastResult save must not fall through into the shop',
+  );
+});

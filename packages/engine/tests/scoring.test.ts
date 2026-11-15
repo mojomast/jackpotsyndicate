@@ -260,3 +260,25 @@ test('1e6 seeded CLASSIC spins never produce NaN or negative chips', () => {
   assert.ok(wins > 0);
   assert.ok(dead > 0);
 });
+
+test('CLASSIC lines do not start or extend through boss-frozen cells', () => {
+  const unfrozen = evaluateClassic(FULL_ROWS, { minMatch: 3 });
+  assert.ok(unfrozen.some((win) => win.lineId === 'row:0'));
+
+  const frozen = evaluateClassic(FULL_ROWS, { minMatch: 3, frozen: [[0, 0]] });
+  assert.equal(
+    frozen.some((win) => win.lineId === 'row:0'),
+    false,
+    'a line that starts on a frozen cell must not score',
+  );
+
+  const frozenMiddle = evaluateClassic(FULL_ROWS, {
+    minMatch: 3,
+    frozen: [[1, 0]],
+  });
+  assert.equal(
+    frozenMiddle.some((win) => win.lineId === 'row:0'),
+    false,
+    'a line cannot extend through a frozen cell',
+  );
+});

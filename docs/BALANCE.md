@@ -169,11 +169,11 @@ not a simulator failure; the report is still written.
 - `docs/PHYSICS.md` records physics-harness rake numbers from earlier work. Those are
   harness measurements, not a fresh engine-level AC-5 run.
 - `fixtures/replay.golden.json` records a `victory` run with expected hash
-  `f6ee393f9861280acd61c44b`. The pre-audit baseline was
+  `cbb0ca4b92ac7a48e7a2847a`. The prior audit baseline was
   `bade5e3091c269a205ccace5`; the boss-freeze fix changed deterministic play, so the
   old command log no longer timed the final `ContinueAfterRound` correctly. The
   fixture was re-recorded with the fixed engine (seed `sim:greedy-synergy:47`, 150
-  commands, 24,612 ticks) and replayed to a `VICTORY` match. Both earlier hashes and the complete old command log are retained in
-  `fixtures/replay.golden.pre-audit.json` rather than presented as current passes.
+  commands, 24,612 ticks) and replayed to a `VICTORY` match. Both earlier hashes and the complete old command log are retained in `fixtures/replay.golden.pre-audit.json` and this audit record rather
+  than presented as current passes.
 - AC-5, AC-6, AC-7, and the three-browser determinism claim are **not re-verified**
   here. Run the commands above and record the output before claiming them.

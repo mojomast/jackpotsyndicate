@@ -18,9 +18,9 @@ every acceptance criterion is green; the gaps are listed explicitly.
 | AC | Status | Evidence / gap |
 |---|---|---|
 | AC-1 install/build/preview | **PASS** | frozen install, game build and Playwright preview server all run; built cabinet renders in a real browser |
-| AC-2 lint/typecheck/test/coverage | **PARTIAL** | `pnpm lint` PASS; `pnpm typecheck` PASS; `pnpm test` **223 passing** (191 package + 32 app-level); line coverage ≥85% was not measured |
-| AC-3 golden replay | **PASS** | `pnpm sim:replay` MATCH at `f6ee393f9861280acd61c44b`; the fixture was re-recorded on the fixed engine (seed `sim:greedy-synergy:47`, 150 commands, 24,612 ticks) and Playwright golden replay passes in Chromium, Firefox and WebKit. The earlier `bade5e3091c269a205ccace5` pre-audit hash and the intermediate `f1c20d301422d14c0edcaac1` hash are preserved in this audit record; neither is presented as a current pass; the complete old command log is retained as `fixtures/replay.golden.pre-audit.json`. |
-| AC-4 E2E J1–J8 | **PARTIAL** | Chromium **10/10 PASS** after the audit fixes; Firefox and WebKit golden replay **1/1 each** after the re-record. The earlier cross-browser full run was 29 passed, 1 skipped (WebKit J8 4× speed, measured 39.8%, target ≤30% headless timer floor); full Firefox/WebKit suites were not rerun after this change |
+| AC-2 lint/typecheck/test/coverage | **PARTIAL** | `pnpm lint` PASS; `pnpm typecheck` PASS; `pnpm test` **226 passing** (193 package + 33 app-level); line coverage ≥85% was not measured |
+| AC-3 golden replay | **PASS** | `pnpm sim:replay` MATCH at `cbb0ca4b92ac7a48e7a2847a`; the fixture was re-recorded after the frozen-cell scoring fix (seed `sim:greedy-synergy:47`, 150 commands, 24,433 ticks) and Playwright golden replay passes in Chromium, Firefox and WebKit. The earlier `bade5e3091c269a205ccace5` pre-audit hash and the `f1c20d301422d14c0edcaac1`/`f6ee393f9861280acd61c44b` intermediate hashes are preserved in this audit record; none is presented as a current pass; the complete old command log is retained as `fixtures/replay.golden.pre-audit.json`. |
+| AC-4 E2E J1–J8 | **PARTIAL** | Chromium **10/10 PASS** and Firefox **10/10 PASS** after the second audit pass; WebKit golden replay **1/1 PASS**. Full WebKit journeys remain unrunnable on this host without the libevent workaround and were not rerun; the earlier WebKit J8 4× sub-check remains a known skip (39.8% vs 30% target). |
 | AC-5 rake | **PASS** | 10,000 spins/floor: Neon 17.0%, Cryo 22.7%, Foundry 12.0%, Penthouse 21.3%, all in band |
 | AC-6 balance | **PASS** | 2,000 runs/bot: random-buyer Floor 1 51.8%, win 5.1%; greedy win 37.3%; max bankroll 38,982,203 (<1e12) |
 | AC-7 hit rate | **PASS** | 40.6% over 5,000 evaluations, target 30–45% |
@@ -71,12 +71,52 @@ apps/game/tests/table.test.tsx  3 failing: HUD quota, real-core snapshot, transi
 packages/core/tests/core.test.ts 2 failing: boss freeze, ROUND_RESULT verdict
 ```
 
-After restoring the fixes, the same targeted suites pass **15/15**, the app suite
-passes **32/32**, and the full root suite passes **223 tests** (191 package + 32 app).
+After restoring the fixes, the targeted suites pass, the app suite passes
+**33/33**, and the full root suite passes **226 tests** (193 package + 33 app).
 The RED logs are `/tmp/audit-red-app.log` and `/tmp/audit-red-core.log` in the
-development session; they are not committed. Still unproven: coverage ≥85%, the
+first audit pass, and `/tmp/pass2-red-scoring.log` / `/tmp/pass2-red-verdict.log`
+in this pass; they are not committed. Still unproven: coverage ≥85%, the
 full accessibility audit, CI execution of every draft PR, and the remaining art
 pipeline items below.
+
+
+## Second audit pass (2026-11-15)
+
+The follow-up read-only review found several issues in the first fix set. Applied
+in this pass:
+
+- **Save safety**: `ROUND_SETTLE` is resumable again (its timer is re-armed by
+  `RunMachine.resumeTimers`); `RELIC_PICK` and `JUMPER_PICK` are now fail-closed
+  for autosave because their dealt offers are machine-private and cannot be
+  restored from `SaveFile`. Existing picker saves are marked non-resumable instead
+  of being offered as a broken Continue.
+- **ROUND_RESULT**: saves without `lastResult` fail closed to `GAME_OVER` for
+  normal rounds (the tribute already makes a pass indistinguishable from a miss);
+  boss verdicts are reconstructed exactly from `roundCash` versus `boss.score`.
+  A malformed `lastResult` no longer deletes the otherwise valid save, and a
+  normal-round save carrying a boss verdict is rejected as inconsistent.
+- **Frozen-cell scoring**: CLASSIC evaluation now accepts the frozen-cell set and
+  does not start or extend a line through a frozen cell, matching the HYPER/WAYS/
+  CLUSTER evaluators (R-BOS-03). `ChooseFloor` clears boss locks so they cannot
+  leak into the next floor; the store clears a stale verdict when a new spin starts.
+- **UI**: panel slice changed to `37 45 37 45 fill` with an `18px 22px` border,
+  reserving the baked crest instead of stretching it through the fill; reel
+  sprites now size to their cell without clipping; the spin button uses
+  `button.btn.hud-spin` so its 72px height and 16.64px label actually apply;
+  shop summary labels stack above values; the bezel keeps its native aspect; the
+  mobile safe-area padding is preserved; the event log is keyboard-scrollable.
+- **Attempted, reverted**: removing the duplicate inline symbol blobs reduced the
+  bundle to 1.74 MB gzip, but the NET test then observed late symbol/token
+  requests. The inline path was restored to preserve zero-runtime-network; the
+  283 KB duplication remains a known cost.
+
+Negative checks: `evaluateClassic` frozen-line tests and the stripped-verdict
+resume test would fail before these changes. Current verification: **226 tests
+passing** (193 package + 33 app), Chromium **10/10**, Firefox **10/10**, golden
+**1/1 on Chromium, Firefox and WebKit**, `assets:verify` 73 files, perf **1.90 MB
+gzip** of 3.00 MB. Still unproven: the axe browser audit (the jsdom "axe" test is
+a no-op), coverage ≥85%, full WebKit journeys, and a real texture/projection
+contract for `ui.dozer`/`ui.gutter`/`ui.lip`.
 
 ## Asset state
 
@@ -85,10 +125,10 @@ pipeline items below.
   `vfx.spark`.
 - `tools/assets build`: 71 keys / 67 locked / 4 placeholders.
 - `tools/assets verify`: 73 files checked, deterministic rebuild matched.
-- Output directory: 1,484,177 bytes (1.42 MiB), not packed atlases; the pipeline copies
+- Output directory: 1,493,787 bytes (1.42 MiB), not packed atlases; the pipeline copies
   per-key files and records atlas labels/frames.
 - Content item sprite keys were normalized to the canonical kebab-case catalog.
-- Reel symbols are inlined as data URIs to satisfy the zero-network J1 requirement.
+- Reel symbols remain inline as data URIs. Removing the duplicate-looking inline blobs was attempted in this pass, but the NET test then observed the symbol and token requests after gameplay began; the inline path is therefore retained to preserve the zero-runtime-network invariant. The 1.90 MB bundle includes that duplication.
 - The UI is full-width at desktop with the slot cabinet and board using the available width. Panel/button chrome uses CSS `border-image` 9-slice frames (tight-cropped derivatives, fixed corners, fill center); the live reel grid sits inside the transparent window of the generated cabinet art. See `docs/UI-CHROME.md`. Shop, Compendium, Boss and Elevator use floor/item/boss art. The HUD, side panels, spin button and cabinet use generated panel/button/cabinet art, and the freeze badge uses `vfx.freeze`. The horizontal dozer/gutter/lip trims remain unplaced pending nine-slice/projection support; three VFX keys and `glyph.uranium` remain placeholders.
 
 Handoff quality issues remain open: diamond token color, skull magnet, boss padding,
@@ -102,8 +142,8 @@ were rejected for haze or an unrelated character.
 pnpm install --frozen-lockfile       PASS
 pnpm lint                            PASS
 pnpm typecheck                       PASS
-pnpm test                            223 passing (191 package + 32 app-level)
-pnpm sim:replay                      MATCH at f6ee393f9861280acd61c44b (re-recorded fixture, 150 commands)
+pnpm test                            226 passing (193 package + 33 app-level)
+pnpm sim:replay                      MATCH at cbb0ca4b92ac7a48e7a2847a (re-recorded fixture, 150 commands)
 pnpm sim:hitrate                     40.6% PASS
 pnpm assets:verify                   73 files PASS
 pnpm perf                            1.90 MB gzip, PASS; sim tick 0.341 ms

@@ -199,6 +199,24 @@ test('saveCore refuses transient spin phases instead of writing a bricked save',
   assert.equal(browser.localStorage.getItem(STORAGE_KEYS.save), null);
 });
 
+test('saveCore blocks machine-private picker phases and allows durable settle', () => {
+  const fakeCore = (phase: string) =>
+    ({
+      getState: () => ({ phase }),
+      save: () => ({
+        saveVersion: 1,
+        contractsRev: 1,
+        run: {},
+        simBase64: '',
+        stateHash: '',
+      }),
+    }) as never;
+
+  assert.equal(saveCore(fakeCore('RELIC_PICK')), null);
+  assert.equal(saveCore(fakeCore('JUMPER_PICK')), null);
+  assert.ok(saveCore(fakeCore('ROUND_SETTLE')));
+});
+
 test('J1: fixed-seed spin reaches LipDrop and increases bankroll through the real GameCore', async () => {
   const content = { ...CONTENT_BUNDLE, items: [...CONTENT_BUNDLE.items, LIP_ASSIST] };
   const core = createTableCore({ content, seed: 'SEED-1' });
