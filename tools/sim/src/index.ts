@@ -6,11 +6,14 @@
  *   tsx tools/sim/src/index.ts hitrate   [--spins 5000]  [--out artifacts/sim]
  *   tsx tools/sim/src/index.ts balance   [--runs 200] [--bot both] [--out artifacts/sim]
  *   tsx tools/sim/src/index.ts replay    [--fixture fixtures/replay.golden.json] [--record]
+ *   tsx tools/sim/src/index.ts feel      [--runs 200] [--bot both] [--workers 2] [--variant file.ts]
  *
  * All simulation entry points go through the public GameCore commands.
  */
 import { fileURLToPath } from 'node:url';
-import { resolve } from 'node:path';
+import { mkdir, writeFile } from 'node:fs/promises';
+import { join, resolve } from 'node:path';
+import { CONTENT_BUNDLE } from '../../../packages/content/src/index';
 import type { BotId } from './bots';
 import { BOTS } from './bots';
 import {
@@ -22,6 +25,8 @@ import {
   type GoldenFixture,
 } from './golden';
 import { measureHitRate, measureRake, runBalance } from './measures';
+import { formatFeel, headline, pressureLine, registerCategories, summariseBot } from './feel';
+import { runShard, runTelemetryBatch, writeShard } from './parallel';
 import {
   bestRun,
   formatPercent,
@@ -151,6 +156,7 @@ function helpText(): string {
     '  hitrate   measure base 3x3 CLASSIC hit rate (AC-7)',
     '  balance   run random-buyer and greedy-synergy bots (AC-6)',
     '  replay    verify the golden replay fixture, or --record a new one',
+    '  feel      telemetry for feel + balance: per-stage cash, pressure, bosses, item power',
     '',
     'Options:',
     '  --spins N        rake/hitrate sample size (rake is per floor)',
@@ -161,6 +167,8 @@ function helpText(): string {
     '  --fixture PATH   golden fixture (default fixtures/replay.golden.json)',
     '  --record         replay: search and write a new golden fixture',
     '  --candidates N   replay --record candidate seeds (default 100)',
+    '  --workers N      feel: child processes to fan out to (default 2)',
+    '  --variant FILE   feel: module whose default export transforms a content clone',
     '  --quiet          suppress progress output',
   ].join('\n');
 }
@@ -234,6 +242,69 @@ async function commandBalance(options: Record<string, CliValue>): Promise<void> 
     );
   }
   printPaths(paths);
+}
+
+async function commandFeel(options: Record<string, CliValue>): Promise<void> {
+  assertKnown(options, ['runs', 'bot', 'seed', 'out', 'quiet', 'workers', 'variant', 'title']);
+  const runs = numberOption(options, 'runs', 200);
+  const workers = numberOption(options, 'workers', 2);
+  const bot = botOption(options);
+  const seed = stringOption(options, 'seed', 'sim');
+  const variant = options.variant === undefined ? undefined : stringOption(options, 'variant', '');
+  const bots: readonly BotId[] = bot === 'both' ? ['random-buyer', 'greedy-synergy'] : [bot];
+  const quiet = options.quiet === true;
+  let nextProgress = 0;
+  const started = Date.now();
+  const telemetry = await runTelemetryBatch({
+    runsPerBot: runs,
+    bots,
+    seedBase: seed,
+    workers,
+    ...(variant === undefined ? {} : { variant }),
+    onProgress: (done, total) => {
+      if (quiet) return;
+      if (done >= nextProgress || done === total) {
+        process.stderr.write(`  ${done}/${total} runs (${Math.round((Date.now() - started) / 1000)}s)\n`);
+        nextProgress = done + Math.max(1, Math.floor(total / 10));
+      }
+    },
+  });
+  registerCategories(CONTENT_BUNDLE.items);
+  const feels = bots.map((id) => summariseBot(id, telemetry.filter((run) => run.bot === id)));
+  const title = stringOption(options, 'title', `Feel report (${runs} runs/bot, seed "${seed}"${variant === undefined ? '' : `, variant ${variant}`})`);
+  const dir = outDir(options);
+  await mkdir(dir, { recursive: true });
+  const mdPath = join(dir, 'feel.md');
+  const jsonPath = join(dir, 'feel.json');
+  await writeFile(mdPath, formatFeel(feels, title), 'utf8');
+  await writeFile(jsonPath, JSON.stringify(feels, null, 1), 'utf8');
+  for (const feel of feels) console.log(headline(feel));
+  for (const feel of feels) console.log(pressureLine(feel));
+  printPaths([mdPath, jsonPath]);
+}
+
+async function commandFeelShard(options: Record<string, CliValue>): Promise<void> {
+  assertKnown(options, ['runs', 'bot', 'seed', 'shard', 'raw-out', 'variant']);
+  const runs = numberOption(options, 'runs', 200);
+  const bot = botOption(options);
+  const seed = stringOption(options, 'seed', 'sim');
+  const [shardText, shardsText] = stringOption(options, 'shard', '0/1').split('/');
+  const shard = Number(shardText);
+  const shards = Number(shardsText);
+  if (!Number.isInteger(shard) || !Number.isInteger(shards) || shards < 1 || shard < 0 || shard >= shards) {
+    throw new Error('--shard must look like i/n');
+  }
+  const variant = options.variant === undefined ? undefined : stringOption(options, 'variant', '');
+  const result = await runShard({
+    runsPerBot: runs,
+    bots: bot === 'both' ? ['random-buyer', 'greedy-synergy'] : [bot],
+    seedBase: seed,
+    shard,
+    shards,
+    ...(variant === undefined ? {} : { variant }),
+    onProgress: (done) => process.stderr.write(`progress ${done}\n`),
+  });
+  await writeShard(stringOption(options, 'raw-out', 'feel-shard.json'), result);
 }
 
 function fixtureReport(
@@ -331,6 +402,12 @@ export async function main(argv: readonly string[] = process.argv.slice(2)): Pro
       return;
     case 'replay':
       await commandReplay(parsed.options);
+      return;
+    case 'feel':
+      await commandFeel(parsed.options);
+      return;
+    case 'feel-shard':
+      await commandFeelShard(parsed.options);
       return;
     case 'bots': {
       for (const bot of Object.values(BOTS)) console.log(`${bot.id}\t${bot.label}`);
