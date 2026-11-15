@@ -118,6 +118,8 @@ export type PurchaseBlock = 'AT_LIMIT' | 'INVALID_TARGET' | null;
 export function purchaseBlock(state: RunState, item: ItemDef | undefined): PurchaseBlock {
   if (item === undefined) return null;
   const grid = state.grid;
+  // Drinks can only be drunk in PREP, so a full tray cannot take another.
+  if (item.category === 'DRINK') return state.drinkTray.includes(null) ? null : 'AT_LIMIT';
   if (item.category === 'COIN') {
     return item.price <= 0 || state.ownedCoins.includes(item.id) ? 'AT_LIMIT' : null;
   }

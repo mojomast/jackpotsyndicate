@@ -228,7 +228,7 @@ export function evaluateWays(grid: SymbolGrid, options: EvaluateOptions = {}): W
         ways *= matches.length;
         for (const cell of matches) cells.push(cell);
       }
-      if (matchedReels >= MIN_MATCH) {
+      if (matchedReels >= (options.minMatch ?? MIN_MATCH)) {
         wins.push({ kind: 'ways', symbolId: symbol, cells, lineMult: ways });
       }
     }

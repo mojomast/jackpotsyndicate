@@ -365,3 +365,13 @@ test('all wiring evaluators are deterministic on repeated evaluation', () => {
     assert.deepEqual(evaluator.evaluate(grid), evaluator.evaluate(grid));
   }
 });
+
+test('WAYS honours the configured minimum match length', () => {
+  const grid = gridFromRows([
+    ['cherry', 'cherry', 'cherry', 'skull'],
+    ['skull', 'diamond', 'uranium', 'seven'],
+    ['diamond', 'seven', 'skull', 'uranium'],
+  ]);
+  assert.equal(evaluateWays(grid).length, 1);
+  assert.equal(evaluateWays(grid, { minMatch: 4 }).length, 0);
+});

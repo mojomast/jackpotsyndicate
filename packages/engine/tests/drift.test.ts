@@ -305,3 +305,10 @@ test('a consumed drink is announced with DrinkActive(null)', () => {
   machine.spinResolved();
   assert.ok(machine.drainEvents().some((event) => event.t === 'DrinkActive' && event.itemId === null));
 });
+
+test('a full drink tray keeps drinks off the shelf', () => {
+  const state = createRunState(CONTENT, 'tray');
+  assert.equal(purchaseBlock(state, item('nitrousEspresso')), null);
+  state.drinkTray = ['nitrousEspresso', 'nitrousEspresso', 'lubricantOilShot'];
+  assert.equal(purchaseBlock(state, item('nitrousEspresso')), 'AT_LIMIT');
+});
