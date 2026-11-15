@@ -24,7 +24,7 @@ every acceptance criterion is green; the gaps are listed explicitly.
 | AC-5 rake | **PASS** | 10,000 spins/floor: Neon 17.0%, Cryo 22.7%, Foundry 12.0%, Penthouse 21.3%, all in band |
 | AC-6 balance | **PASS** | 2,000 runs/bot: random-buyer Floor 1 51.8%, win 5.1%; greedy win 37.3%; max bankroll 38,982,203 (<1e12) |
 | AC-7 hit rate | **PASS** | 40.6% over 5,000 evaluations, target 30–45% |
-| AC-8 performance/bundle | **PASS** | stress scene: sim tick avg 0.382 ms, render frame avg 0.215 ms; bundle 1.90 MB gzip of 3.00 MB budget |
+| AC-8 performance/bundle | **PASS** | stress scene: sim tick avg 0.341 ms, render frame avg 0.218 ms; bundle 1.90 MB gzip of 3.00 MB budget |
 | AC-9 animation lint/trailer | **PARTIAL** | `hyperframes lint` exits 0 with warnings; trailer MP4 exists but still uses the animation package’s placeholder/vector art path, not a real-sprite re-render |
 | AC-10 README/delivery | **PASS** | five-command quick start, architecture/content/balance/asset-credit docs, manual-dispatch-only deploy workflow; no publish step |
 
