@@ -434,7 +434,7 @@ Build-time env only: `VITE_BUILD_SHA`, `VITE_BASE_PATH` (for sub-path hosting), 
 - `fixtures/snapshot.static.json`: hand-authored `SimSnapshot` with pegs, 6 orbs, 30 tokens; lets T-071 start before physics exists.
 - `fixtures/events.sample.json`: one spin's event stream; lets T-060 and T-070 start before core exists.
 - `fixtures/grids/*.json`: grids with expected wins per wiring (T-010 and T-011 add cases in their own subfolders).
-- `fixtures/replay.golden.json`: seed + command log + expected hash to Victory (created by T-081, hash updated only by T-082).
+- `fixtures/replay.golden.json`: seed + command log + expected hash to Victory (created by T-081; the hash was re-baselined for the 2026-11-15 boss-freeze audit fix, with the old hash retained in `artifacts/acceptance.md`).
 - `MockGameCore` in `contracts/testing`: replays `events.sample.json`; used by UI tasks.
 
 ### 2.11 External animation package (`packages/anim`)

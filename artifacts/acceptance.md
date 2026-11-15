@@ -19,8 +19,8 @@ every acceptance criterion is green; the gaps are listed explicitly.
 |---|---|---|
 | AC-1 install/build/preview | **PASS** | frozen install, game build and Playwright preview server all run; built cabinet renders in a real browser |
 | AC-2 lint/typecheck/test/coverage | **PARTIAL** | `pnpm lint` PASS; `pnpm typecheck` PASS; `pnpm test` **223 passing** (191 package + 32 app-level); line coverage ≥85% was not measured |
-| AC-3 golden replay | **PASS** | `pnpm sim:replay` MATCH at `bade5e3091c269a205ccace5`; Playwright golden replay passes in Chromium, Firefox and WebKit |
-| AC-4 E2E J1–J8 | **PARTIAL** | **29 passed, 1 skipped** across Chromium, Firefox and WebKit. The skip is the WebKit J8 4×-speed sub-check (measured 39.8%, target ≤30%, headless WebKit timer floor). NET passes on all three after inline symbol sprites |
+| AC-3 golden replay | **PASS** | `pnpm sim:replay` MATCH at `f6ee393f9861280acd61c44b`; the fixture was re-recorded on the fixed engine (seed `sim:greedy-synergy:47`, 150 commands, 24,612 ticks) and Playwright golden replay passes in Chromium, Firefox and WebKit. The earlier `bade5e3091c269a205ccace5` pre-audit hash and the intermediate `f1c20d301422d14c0edcaac1` hash are preserved in this audit record; neither is presented as a current pass; the complete old command log is retained as `fixtures/replay.golden.pre-audit.json`. |
+| AC-4 E2E J1–J8 | **PARTIAL** | Chromium **10/10 PASS** after the audit fixes; Firefox and WebKit golden replay **1/1 each** after the re-record. The earlier cross-browser full run was 29 passed, 1 skipped (WebKit J8 4× speed, measured 39.8%, target ≤30% headless timer floor); full Firefox/WebKit suites were not rerun after this change |
 | AC-5 rake | **PASS** | 10,000 spins/floor: Neon 17.0%, Cryo 22.7%, Foundry 12.0%, Penthouse 21.3%, all in band |
 | AC-6 balance | **PASS** | 2,000 runs/bot: random-buyer Floor 1 51.8%, win 5.1%; greedy win 37.3%; max bankroll 38,982,203 (<1e12) |
 | AC-7 hit rate | **PASS** | 40.6% over 5,000 evaluations, target 30–45% |
@@ -103,7 +103,7 @@ pnpm install --frozen-lockfile       PASS
 pnpm lint                            PASS
 pnpm typecheck                       PASS
 pnpm test                            223 passing (191 package + 32 app-level)
-pnpm sim:replay                      MATCH at bade5e3091c269a205ccace5
+pnpm sim:replay                      MATCH at f6ee393f9861280acd61c44b (re-recorded fixture)
 pnpm sim:hitrate                     40.6% PASS
 pnpm assets:verify                   73 files PASS
 pnpm perf                            1.72 MB gzip, PASS

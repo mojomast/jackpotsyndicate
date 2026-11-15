@@ -46,7 +46,7 @@ work on 2026-11-15, not what the project is expected to pass later.
 | `pnpm test` | **PASS** — 223 tests (191 package + 32 app-level) |
 | `pnpm sim rake`, `sim hitrate`, `sim balance`, `sim replay` | **NOT RUN** in this docs task |
 | `pnpm assets:build`, `assets:verify` | **PASS** for the working imagegen batch: 71 keys, 67 locked, 4 placeholders; verify checked 73 files |
-| Browser E2E / Playwright / cross-browser determinism | **NOT RUN**; no completed three-browser E2E result is claimed |
+| Browser E2E / Playwright / cross-browser determinism | Chromium **10/10 PASS**; Firefox and WebKit golden replay **1/1 each**; full Firefox/WebKit suites were not rerun after the golden re-record |
 | Image generation | **Working batch imported**: 67/71 PNGs locked; four placeholders remain. Not final art |
 | HyperFrames lint / trailer re-render | **NOT RUN** in this docs task |
 

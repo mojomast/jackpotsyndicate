@@ -1,0 +1,1023 @@
+{
+  "version": 1,
+  "seed": "sim:greedy-synergy:2",
+  "bot": "greedy-synergy",
+  "expectedHash": "f1c20d301422d14c0edcaac1",
+  "ticks": 28420,
+  "commandLog": [
+    {
+      "tick": 0,
+      "cmd": {
+        "c": "NewRun",
+        "seed": "sim:greedy-synergy:2"
+      }
+    },
+    {
+      "tick": 0,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 154,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 286,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 486,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 599,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 970,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 1241,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 1677,
+      "cmd": {
+        "c": "ContinueAfterRound"
+      }
+    },
+    {
+      "tick": 1677,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-1"
+      }
+    },
+    {
+      "tick": 1677,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-3"
+      }
+    },
+    {
+      "tick": 1677,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-0"
+      }
+    },
+    {
+      "tick": 1677,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-2"
+      }
+    },
+    {
+      "tick": 1677,
+      "cmd": {
+        "c": "ShopLeave"
+      }
+    },
+    {
+      "tick": 1677,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 1937,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2246,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2399,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2744,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2866,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 3176,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 3698,
+      "cmd": {
+        "c": "ContinueAfterRound"
+      }
+    },
+    {
+      "tick": 3698,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-2"
+      }
+    },
+    {
+      "tick": 3698,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-3"
+      }
+    },
+    {
+      "tick": 3698,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-1"
+      }
+    },
+    {
+      "tick": 3698,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-0",
+        "target": {
+          "reel": 2
+        }
+      }
+    },
+    {
+      "tick": 3698,
+      "cmd": {
+        "c": "ShopLeave"
+      }
+    },
+    {
+      "tick": 3698,
+      "cmd": {
+        "c": "Drink",
+        "slot": 0
+      }
+    },
+    {
+      "tick": 3698,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 3909,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 4110,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 4394,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 4693,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 4830,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 5082,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 5681,
+      "cmd": {
+        "c": "ContinueAfterRound"
+      }
+    },
+    {
+      "tick": 5681,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-2"
+      }
+    },
+    {
+      "tick": 5681,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-3",
+        "target": {
+          "reel": 1
+        }
+      }
+    },
+    {
+      "tick": 5681,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-1"
+      }
+    },
+    {
+      "tick": 5681,
+      "cmd": {
+        "c": "ShopLeave"
+      }
+    },
+    {
+      "tick": 5681,
+      "cmd": {
+        "c": "ContinueAfterRound"
+      }
+    },
+    {
+      "tick": 5681,
+      "cmd": {
+        "c": "LoadCoin",
+        "coinId": "polymerSuperball"
+      }
+    },
+    {
+      "tick": 5681,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 5853,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 6133,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 6286,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 6938,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 7204,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 7413,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 7942,
+      "cmd": {
+        "c": "ContinueAfterRound"
+      }
+    },
+    {
+      "tick": 7942,
+      "cmd": {
+        "c": "ChooseRelic",
+        "index": 1
+      }
+    },
+    {
+      "tick": 7942,
+      "cmd": {
+        "c": "ChooseFloor",
+        "floorId": "FLOOR_FOUNDRY"
+      }
+    },
+    {
+      "tick": 8092,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 8484,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 8635,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 8982,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 9134,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 9510,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 9687,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 10146,
+      "cmd": {
+        "c": "ContinueAfterRound"
+      }
+    },
+    {
+      "tick": 10146,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-0"
+      }
+    },
+    {
+      "tick": 10146,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-1"
+      }
+    },
+    {
+      "tick": 10146,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-2"
+      }
+    },
+    {
+      "tick": 10146,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-3"
+      }
+    },
+    {
+      "tick": 10146,
+      "cmd": {
+        "c": "ShopLeave"
+      }
+    },
+    {
+      "tick": 10146,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 10439,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 10735,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 10915,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 11090,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 11419,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 11874,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 12508,
+      "cmd": {
+        "c": "ContinueAfterRound"
+      }
+    },
+    {
+      "tick": 12508,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-2"
+      }
+    },
+    {
+      "tick": 12508,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-1"
+      }
+    },
+    {
+      "tick": 12508,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-3"
+      }
+    },
+    {
+      "tick": 12508,
+      "cmd": {
+        "c": "ShopLeave"
+      }
+    },
+    {
+      "tick": 12508,
+      "cmd": {
+        "c": "Drink",
+        "slot": 0
+      }
+    },
+    {
+      "tick": 12508,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 12814,
+      "cmd": {
+        "c": "Drink",
+        "slot": 1
+      }
+    },
+    {
+      "tick": 12814,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 13238,
+      "cmd": {
+        "c": "Drink",
+        "slot": 2
+      }
+    },
+    {
+      "tick": 13238,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 13658,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 13789,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 13920,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 14257,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 14953,
+      "cmd": {
+        "c": "ContinueAfterRound"
+      }
+    },
+    {
+      "tick": 14953,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-2"
+      }
+    },
+    {
+      "tick": 14953,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-1"
+      }
+    },
+    {
+      "tick": 14953,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-3"
+      }
+    },
+    {
+      "tick": 14953,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-0",
+        "target": {
+          "reel": 0
+        }
+      }
+    },
+    {
+      "tick": 14953,
+      "cmd": {
+        "c": "ShopLeave"
+      }
+    },
+    {
+      "tick": 14953,
+      "cmd": {
+        "c": "ContinueAfterRound"
+      }
+    },
+    {
+      "tick": 14953,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 15287,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 15701,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 16015,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 16380,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 16641,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 17127,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 17871,
+      "cmd": {
+        "c": "ContinueAfterRound"
+      }
+    },
+    {
+      "tick": 17871,
+      "cmd": {
+        "c": "ChooseRelic",
+        "index": 0
+      }
+    },
+    {
+      "tick": 17871,
+      "cmd": {
+        "c": "ChooseFloor",
+        "floorId": "FLOOR_PENTHOUSE"
+      }
+    },
+    {
+      "tick": 18021,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 18412,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 18792,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 19223,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 19642,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 20008,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 20268,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 20918,
+      "cmd": {
+        "c": "ContinueAfterRound"
+      }
+    },
+    {
+      "tick": 20918,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-3",
+        "target": {
+          "reel": 3
+        }
+      }
+    },
+    {
+      "tick": 20918,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-1",
+        "target": {
+          "reel": 0
+        }
+      }
+    },
+    {
+      "tick": 20918,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-2",
+        "target": {
+          "reel": 2
+        }
+      }
+    },
+    {
+      "tick": 20918,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-0"
+      }
+    },
+    {
+      "tick": 20918,
+      "cmd": {
+        "c": "ShopLeave"
+      }
+    },
+    {
+      "tick": 20918,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 21211,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 21513,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 21741,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 21961,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 22335,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 22685,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 23176,
+      "cmd": {
+        "c": "ContinueAfterRound"
+      }
+    },
+    {
+      "tick": 23176,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-3",
+        "target": {
+          "reel": 2
+        }
+      }
+    },
+    {
+      "tick": 23176,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-2",
+        "target": {
+          "reel": 1
+        }
+      }
+    },
+    {
+      "tick": 23176,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-1",
+        "target": {
+          "reel": 3
+        }
+      }
+    },
+    {
+      "tick": 23176,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-0",
+        "target": {
+          "reel": 0
+        }
+      }
+    },
+    {
+      "tick": 23176,
+      "cmd": {
+        "c": "ShopLeave"
+      }
+    },
+    {
+      "tick": 23176,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 23386,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 23753,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 24095,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 24453,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 24738,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 25065,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 25652,
+      "cmd": {
+        "c": "ContinueAfterRound"
+      }
+    },
+    {
+      "tick": 25652,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-0"
+      }
+    },
+    {
+      "tick": 25652,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-3"
+      }
+    },
+    {
+      "tick": 25652,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-1"
+      }
+    },
+    {
+      "tick": 25652,
+      "cmd": {
+        "c": "ShopLeave"
+      }
+    },
+    {
+      "tick": 25652,
+      "cmd": {
+        "c": "ContinueAfterRound"
+      }
+    },
+    {
+      "tick": 25652,
+      "cmd": {
+        "c": "Drink",
+        "slot": 0
+      }
+    },
+    {
+      "tick": 25652,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 25969,
+      "cmd": {
+        "c": "Drink",
+        "slot": 1
+      }
+    },
+    {
+      "tick": 25969,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 26269,
+      "cmd": {
+        "c": "Drink",
+        "slot": 2
+      }
+    },
+    {
+      "tick": 26269,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 26681,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 27094,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 27536,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 27925,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 28420,
+      "cmd": {
+        "c": "ContinueAfterRound"
+      }
+    }
+  ],
+  "outcome": "victory",
+  "reachedVictory": true,
+  "flagged": false,
+  "flag": null,
+  "note": "Reached Victory in the recorded candidate run.",
+  "finalPhase": "VICTORY",
+  "floorId": "FLOOR_PENTHOUSE",
+  "round": 4,
+  "bankroll": 4322501,
+  "floorsCleared": [
+    "FLOOR_NEON",
+    "FLOOR_FOUNDRY",
+    "FLOOR_PENTHOUSE"
+  ]
+}
