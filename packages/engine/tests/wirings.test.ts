@@ -124,7 +124,7 @@ test('line geometry is stable for 3x3, 4x3 and 5x4 grids', () => {
         assert.ok(line.cells[index]![1] >= 0 && line.cells[index]![1] < rows);
       }
     }
-    assert.deepEqual(hyper.find((line) => line.id === 'hyper-v')!.cells, [
+    assert.deepEqual(hyper.find((line) => line.id === 'hyper:v')!.cells, [
       [0, 0],
       ...Array.from({ length: cols - 2 }, (_, index) => {
         const col = index + 1;
@@ -143,7 +143,7 @@ test('HYPER evaluates classic rows plus V and inverted-V zigzags', () => {
   ]);
   const hyper = evaluateHyper(grid);
   assert.equal(hyper.length, 1);
-  assert.equal(hyper[0]!.lineId, 'hyper-v');
+  assert.equal(hyper[0]!.lineId, 'hyper:v');
   assert.equal(hyper[0]!.symbolId, 'cherry');
   assert.deepEqual(hyper[0]!.cells, [
     [0, 0],
@@ -157,7 +157,7 @@ test('HYPER evaluates classic rows plus V and inverted-V zigzags', () => {
     ['uranium', 'diamond', 'uranium'],
     ['skull', 'cherry', 'skull'],
   ]);
-  const inverted = evaluateHyper(invertedGrid).find((win) => win.lineId === 'hyper-inverted-v');
+  const inverted = evaluateHyper(invertedGrid).find((win) => win.lineId === 'hyper:inverted-v');
   assert.ok(inverted);
   assert.equal(inverted!.symbolId, 'skull');
   assert.deepEqual(inverted!.cells, [
@@ -327,29 +327,29 @@ test('jumper selection enforces the three-wire cap', () => {
 
 test('overvolt selects one classic/hyper line and triples only that line', () => {
   const lines = classicPaylines(3, 3);
-  assert.equal(selectOvervolt('CLASSIC', 'row-0', lines), 'row-0');
-  assert.equal(selectOvervolt('HYPER', 'row-0', lines), 'row-0');
+  assert.equal(selectOvervolt('CLASSIC', 'row:0', lines), 'row:0');
+  assert.equal(selectOvervolt('HYPER', 'row:0', lines), 'row:0');
   assert.equal(selectOvervolt('CLASSIC', 'missing', lines), null);
   assert.equal(selectOvervolt('CLASSIC', null, lines), null);
-  assert.equal(selectOvervolt('WAYS', 'row-0', lines), null);
-  assert.equal(selectOvervolt('CLUSTER', 'row-0', lines), null);
-  assert.equal(setOvervolt('HYPER', 'row-1', lines), 'row-1');
-  assert.equal(overvoltMultiplier('HYPER', 'row-0', 'row-0'), 3);
-  assert.equal(overvoltMultiplier('HYPER', 'row-0', 'row-1'), 1);
-  assert.equal(overvoltMultiplier('WAYS', 'row-0', 'row-0'), 1);
+  assert.equal(selectOvervolt('WAYS', 'row:0', lines), null);
+  assert.equal(selectOvervolt('CLUSTER', 'row:0', lines), null);
+  assert.equal(setOvervolt('HYPER', 'row:1', lines), 'row:1');
+  assert.equal(overvoltMultiplier('HYPER', 'row:0', 'row:0'), 3);
+  assert.equal(overvoltMultiplier('HYPER', 'row:0', 'row:1'), 1);
+  assert.equal(overvoltMultiplier('WAYS', 'row:0', 'row:0'), 1);
 
   const grid = gridFromRows([
     ['cherry', 'cherry', 'cherry'],
     ['skull', 'uranium', 'skull'],
     ['diamond', 'seven', 'uranium'],
   ]);
-  const wins = classicEvaluator.evaluate(grid, { overvoltLineId: 'row-0' });
-  const row = wins.find((win) => win.lineId === 'row-0');
+  const wins = classicEvaluator.evaluate(grid, { overvoltLineId: 'row:0' });
+  const row = wins.find((win) => win.lineId === 'row:0');
   assert.ok(row);
   assert.equal(row!.lineMult, 3);
   assert.equal(row!.overvolt, true);
   assert.deepEqual(
-    wins.filter((win) => win.lineId !== 'row-0').map(winSignature),
+    wins.filter((win) => win.lineId !== 'row:0').map(winSignature),
     [],
   );
 });
@@ -364,4 +364,14 @@ test('all wiring evaluators are deterministic on repeated evaluation', () => {
     const evaluator = getWiringEvaluator(wiring);
     assert.deepEqual(evaluator.evaluate(grid), evaluator.evaluate(grid));
   }
+});
+
+test('WAYS honours the configured minimum match length', () => {
+  const grid = gridFromRows([
+    ['cherry', 'cherry', 'cherry', 'skull'],
+    ['skull', 'diamond', 'uranium', 'seven'],
+    ['diamond', 'seven', 'skull', 'uranium'],
+  ]);
+  assert.equal(evaluateWays(grid).length, 1);
+  assert.equal(evaluateWays(grid, { minMatch: 4 }).length, 0);
 });

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import type { Cell, SymbolId } from '@jackpotsyndicate/contracts';
+import { RULES, type Cell, type SymbolId } from '@jackpotsyndicate/contracts';
 import {
   classicLines,
   createRng,
@@ -9,7 +9,10 @@ import {
   evaluateClassic,
   makeScrapOrbPlan,
   scoreClassic,
+  scoreTumble,
+  scoreWiring,
   scrapChips,
+  tumbleCluster,
 } from '@jackpotsyndicate/engine';
 
 type Grid = SymbolId[][];
@@ -281,4 +284,70 @@ test('CLASSIC lines do not start or extend through boss-frozen cells', () => {
     false,
     'a line cannot extend through a frozen cell',
   );
+});
+
+// ------------------------------------------------- every wiring (DRIFT.md)
+
+test('scoreWiring keeps overvolt and Seven full-line X when jumpers are wired', () => {
+  const sevens: Grid = byColumn(
+    ['seven', 'cherry', 'skull'],
+    ['seven', 'diamond', 'uranium'],
+    ['seven', 'uranium', 'diamond'],
+  );
+  const jumper: Cell[] = [[0, 1], [1, 2], [2, 2]];
+  const plain = scoreWiring(sevens, { wiring: 'CLASSIC', overvoltLineId: 'row:0' });
+  const jumpered = scoreWiring(sevens, { wiring: 'CLASSIC', overvoltLineId: 'row:0', jumperLines: [jumper] });
+  // Same wins either way (the jumper path does not match), same ×5 and ×3.
+  assert.equal(plain.xMult, 5);
+  assert.equal(jumpered.xMult, 5);
+  assert.equal(plain.wins[0]!.lineId, 'row:0');
+  assert.equal(jumpered.wins[0]!.lineMult, 3);
+  assert.equal(jumpered.chips, 77 * 3 * 3);
+  assert.deepEqual(scoreClassic(sevens, { overvoltLineId: 'row:0' }).equity, plain.equity);
+});
+
+test('scoreWiring scores HYPER zigzags and jumper lines with shared payline ids', () => {
+  const vee: Grid = byColumn(
+    ['seven', 'cherry', 'skull'],
+    ['diamond', 'cherry', 'seven'],
+    ['seven', 'skull', 'cherry'],
+  );
+  const hyper = scoreWiring(vee, { wiring: 'HYPER', overvoltLineId: 'hyper:v' });
+  const v = hyper.wins.find((win) => win.lineId === 'hyper:v');
+  assert.ok(v, 'the V zigzag wins');
+  assert.equal(v!.lineMult, 3);
+  assert.equal(hyper.xMult, 5, 'a full V of sevens is a full line');
+
+  const jumper: Cell[] = [[0, 1], [1, 1], [2, 2]];
+  const wired = scoreWiring(vee, { wiring: 'CLASSIC', jumperLines: [jumper] });
+  assert.deepEqual(wired.wins.map((win) => win.lineId), ['jumper:0']);
+  assert.equal(wired.xMult, 1);
+  assert.equal(wired.addMult, 1 + 2);
+});
+
+test('scoreTumble pays every tumble step as separate orbs; frozen cells stay put', () => {
+  const grid: Grid = byColumn(
+    ['cherry', 'cherry', 'skull'],
+    ['cherry', 'cherry', 'seven'],
+    ['skull', 'seven', 'diamond'],
+  );
+  const refill = (): SymbolId => 'cherry';
+  const tumble = tumbleCluster(grid, refill, { maxTumbles: 5, frozen: [[2, 2]] });
+  assert.equal(tumble.initialWins.length, 1);
+  assert.ok(tumble.steps.length >= 1);
+  for (const step of tumble.steps) {
+    assert.equal(step.gridAfter[2]![2], 'diamond', 'the frozen cell keeps its symbol');
+    assert.ok(!step.cleared.some(([col, row]) => col === 2 && row === 2));
+  }
+  const scored = scoreTumble(grid, tumble);
+  const cells = tumble.initialWins[0]!.cells.length + tumble.steps.reduce((sum, step) => sum + step.wins.reduce((n, win) => n + win.cells.length, 0), 0);
+  assert.equal(scored.orbPlan.length, cells, 'one orb per cluster cell per step');
+  assert.equal(scored.wins.length, tumble.wins.length);
+  assert.equal(scored.addMult, 1 + 2 * tumble.wins.length);
+});
+
+test('scoreWiring falls back to the content-scaled scrap orb on a dead spin', () => {
+  const result = scoreWiring(DEAD, { wiring: 'HYPER', symbols: { cherry: { chips: 40 } } });
+  assert.equal(result.wins.length, 0);
+  assert.deepEqual(result.orbPlan, [{ cell: null, symbolId: 'scrap', chips: Math.round(30 * RULES.SCRAP_EQUITY) }]);
 });
