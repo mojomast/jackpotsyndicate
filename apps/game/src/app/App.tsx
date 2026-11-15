@@ -2,6 +2,7 @@
 import { useEffect, type FC } from 'react';
 import { TEST_IDS, type FloorId } from '@jackpotsyndicate/contracts';
 import { useGameStore } from '../store/gameStore';
+import { AppErrorBoundary } from './ErrorBoundary';
 import { AppRoutes, ROUTES, useRoute, type Route } from './routes';
 
 const FLOORS: FloorId[] = ['FLOOR_NEON', 'FLOOR_CRYO', 'FLOOR_FOUNDRY', 'FLOOR_PENTHOUSE'];
@@ -157,7 +158,9 @@ export const App: FC<AppProps> = ({ initialRoute }) => {
       </header>
 
       <main className="app-main" id="main-content" tabIndex={-1}>
-        <AppRoutes route={route} onNavigate={go} />
+        <AppErrorBoundary resetKey={route}>
+          <AppRoutes route={route} onNavigate={go} />
+        </AppErrorBoundary>
       </main>
 
       <TestIdRegistry route={route} />

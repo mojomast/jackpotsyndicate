@@ -98,7 +98,6 @@ export function TrinketRail() {
                 className="trinket-chip"
                 data-testid={TEST_IDS.trinket(id)}
                 title={`${meta.name}: ${meta.effect}`}
-                aria-label={`${meta.name}: ${meta.effect}`}
               >
                 <span className="trinket-icon" aria-hidden="true">
                   {meta.name.split(' ').map((word) => word.charAt(0)).slice(0, 2).join('')}

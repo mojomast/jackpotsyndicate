@@ -160,7 +160,7 @@ export function ShopScreen({ onNavigate }: ShopScreenProps) {
         <MetaNotice tone="info">The shelf is empty. Leave and spin the next round.</MetaNotice>
       ) : null}
 
-      <div className="offer-grid" aria-label="Shop offers">
+      <div className="offer-grid" role="group" aria-label="Shop offers">
         {offers.map((offer, index) => {
           const affordable = state.bankroll >= offer.price;
           const kind = chassisKind(offer.itemId);

@@ -142,6 +142,7 @@ export function CabinetMount() {
                 className="reel-cell"
                 data-anim="cell"
                 data-symbol={symbol}
+                role="img"
                 aria-label={`Reel ${colIndex + 1}, row ${rowIndex + 1}: ${symbol}`}
               >
                 {SYMBOL_LABELS[symbol] ?? symbol.slice(0, 3).toUpperCase()}

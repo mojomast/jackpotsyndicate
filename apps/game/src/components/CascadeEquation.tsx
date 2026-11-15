@@ -21,6 +21,7 @@ export function CascadeEquation() {
     <div
       className="cascade"
       data-testid="cascade-equation"
+      role="group"
       aria-label={`Cascade equation: ${chips} chips times ${addMult} additive mult times ${xMult} x mult times ${dropMult} drop, ${lipDrops} lip drops, for ${equity} spin equity`}
     >
       <div className="cascade-heading">

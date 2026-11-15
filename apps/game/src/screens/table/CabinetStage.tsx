@@ -163,7 +163,13 @@ export function CabinetStage({ core, seed, cols, rows, reducedMotion }: CabinetS
   }, [core, cols, rows, seed]);
 
   return (
-    <div className="table-cabinet" data-testid="cabinet" aria-label="Slot cabinet">
+    <div
+      className="table-cabinet"
+      data-testid="cabinet"
+      data-reduced-motion={reducedMotion}
+      role="group"
+      aria-label="Slot cabinet"
+    >
       <div ref={rootRef} data-anim="cabinet-root" />
     </div>
   );

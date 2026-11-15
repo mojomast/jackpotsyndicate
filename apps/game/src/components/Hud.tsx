@@ -28,31 +28,31 @@ export function Hud() {
       <dl className="hud-stats">
         <div className="hud-stat">
           <dt>Bankroll</dt>
-          <dd className="gold" data-testid={TEST_IDS.bankroll} aria-label="Bankroll">
+          <dd className="gold" data-testid={TEST_IDS.bankroll}>
             {formatCash(state.bankroll)}
           </dd>
         </div>
         <div className="hud-stat">
           <dt>Quota</dt>
-          <dd className="cyan" data-testid={TEST_IDS.quota} aria-label="Round quota">
+          <dd className="cyan" data-testid={TEST_IDS.quota}>
             {formatCash(quota)}
           </dd>
         </div>
         <div className="hud-stat">
           <dt>Spins left</dt>
-          <dd data-testid={TEST_IDS.spinsLeft} aria-label="Spins left">
+          <dd data-testid={TEST_IDS.spinsLeft}>
             {state.spinsLeft}
           </dd>
         </div>
         <div className="hud-stat">
           <dt>Fever</dt>
-          <dd className="crimson" data-testid={TEST_IDS.fever} aria-label="Fever">
+          <dd className="crimson" data-testid={TEST_IDS.fever}>
             {fever}%
           </dd>
         </div>
         <div className="hud-stat">
           <dt>Floor</dt>
-          <dd className="emerald" data-testid={TEST_IDS.floorBadge} aria-label="Floor">
+          <dd className="emerald" data-testid={TEST_IDS.floorBadge}>
             {FLOOR_LABELS[state.floorId]}
           </dd>
         </div>

@@ -10,7 +10,8 @@
     "build": "pnpm -r --if-present build",
     "test": "tsx --test \"packages/*/tests/**/*.test.ts\"",
     "sim:rake": "tsx tools/physics-harness/rake.ts",
-    "sim:perf": "tsx tools/physics-harness/perf.ts"
+    "sim:perf": "tsx tools/physics-harness/perf.ts",
+    "perf": "tsx apps/game/scripts/perf.ts"
   },
   "devDependencies": {
     "@playwright/test": "^1.55.0",

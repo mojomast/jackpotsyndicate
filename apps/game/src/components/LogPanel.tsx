@@ -90,7 +90,7 @@ export function LogPanel() {
         <h2>Event log</h2>
         <span>{events.length} events</span>
       </div>
-      <ol className="log" data-testid="event-log" role="log" aria-live="polite" aria-relevant="additions">
+      <ol className="log" data-testid="event-log" aria-live="polite" aria-relevant="additions">
         {events.length === 0 ? (
           <li className="log-empty">No events yet. Start a run and spin.</li>
         ) : (
