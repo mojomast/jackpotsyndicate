@@ -91,6 +91,14 @@ export function offerDescription(offer: ShopOffer): string {
   return itemDescription(offer.itemId);
 }
 
+export function itemSpriteKey(id: string): string | null {
+  return findItem(id)?.spriteKey ?? null;
+}
+
+export function floorSpriteKey(id: FloorId): string {
+  return `floor.${id}.bg`;
+}
+
 export function floorDef(id: FloorId): FloorDef | undefined {
   return FLOOR_BY_ID.get(id);
 }

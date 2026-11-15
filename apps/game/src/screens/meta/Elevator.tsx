@@ -10,9 +10,11 @@ import {
   floorFriction,
   floorGutterRisk,
   floorName,
+  floorSpriteKey,
   formatPercent,
 } from './metaContent';
 import { MetaNotice, MetaScreen } from './MetaScreen';
+import { SpriteImage } from '../../components/Artwork';
 import { useMetaAutosave } from './persistence';
 import { navigateTo, type MetaNavigate } from './navigation';
 
@@ -78,6 +80,7 @@ export function ElevatorScreen({ onNavigate }: ElevatorScreenProps) {
               onClick={() => choose(floor.id)}
               disabled={!canChoose || !available}
             >
+              <SpriteImage spriteKey={floorSpriteKey(floor.id)} className="elevator-floor-art" />
               <span className="eyebrow">Floor {floor.order}</span>
               <strong>{floorName(floor.id)}</strong>
               <span className="offer-meta">

@@ -16,11 +16,13 @@ import {
   floorFriction,
   floorGutterRisk,
   floorName,
+  floorSpriteKey,
   formatCash,
   formatPercent,
   itemsByCategory,
 } from './metaContent';
 import { MetaScreen } from './MetaScreen';
+import { MetaBezel, SpriteImage } from '../../components/Artwork';
 import { navigateTo, type MetaNavigate } from './navigation';
 
 export interface CompendiumScreenProps {
@@ -69,6 +71,7 @@ export function CompendiumScreen({ onNavigate }: CompendiumScreenProps) {
       description="Every trinket, drink, coin, glyph and chassis the run can roll, plus floor dossiers and boss sabotage."
       testId="compendium"
     >
+      <MetaBezel />
       <div className="compendium-summary panel">
         <div>
           <span className="eyebrow">Run seed</span>
@@ -111,6 +114,13 @@ export function CompendiumScreen({ onNavigate }: CompendiumScreenProps) {
               <span className="eyebrow">{item.category} · {item.rarity}</span>
               <span className="compendium-status">{itemStatus(item, discovered)}</span>
             </div>
+            <div className="compendium-art-row">
+              <SpriteImage
+                spriteKey={item.spriteKey}
+                className="sprite-icon compendium-art"
+                fallback={item.category.slice(0, 2)}
+              />
+            </div>
             <h2>{item.name}</h2>
             <p>{item.desc}</p>
             <span className="compendium-price">
@@ -125,6 +135,10 @@ export function CompendiumScreen({ onNavigate }: CompendiumScreenProps) {
       <div className="compendium-grid">
         {META_FLOORS.map((floor) => (
           <article className="compendium-card panel" key={floor.id}>
+            <SpriteImage
+              spriteKey={floorSpriteKey(floor.id)}
+              className="floor-card-art"
+            />
             <span className="eyebrow">
               Floor {floor.order} · quota ×{floor.quotaScale}
             </span>
@@ -146,6 +160,7 @@ export function CompendiumScreen({ onNavigate }: CompendiumScreenProps) {
       <div className="compendium-grid">
         {bossCatalogue().map((boss: BossDef) => (
           <article className="compendium-card panel boss-dossier" key={boss.id}>
+            <SpriteImage spriteKey={boss.spriteKey} className="boss-portrait" decorative={false} alt={boss.name} />
             <span className="eyebrow">{boss.tagline}</span>
             <h2>{boss.name}</h2>
             <p>{BOSS_SABOTAGE[boss.id]}</p>

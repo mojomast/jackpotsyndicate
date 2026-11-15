@@ -9,12 +9,15 @@ import { useGameStore } from '../../store/gameStore';
 import { dispatchMeta } from './commands';
 import {
   chassisKind,
+  floorName,
   formatCash,
   itemName,
+  itemSpriteKey,
   maxShopCapacity,
   offerDescription,
   shopArchetypeLabel,
 } from './metaContent';
+import { FloorBanner, MetaBezel, SpriteImage } from '../../components/Artwork';
 import { MetaNotice, MetaScreen } from './MetaScreen';
 import { JumperPicker, ReelTargetPicker, RelicPicker } from './Pickers';
 import { useMetaAutosave } from './persistence';
@@ -129,6 +132,8 @@ export function ShopScreen({ onNavigate }: ShopScreenProps) {
       description="Spend what the round left behind. Trinkets mount on the cabinet bezel; glyphs need a target reel; jumpers need a target path."
       testId="shop"
     >
+      <FloorBanner floorId={state.floorId} floorName={floorName(state.floorId)} eyebrow="Vendor floor" />
+      <MetaBezel />
       <div className="shop-summary panel">
         <div>
           <span className="eyebrow">Vendor archetype</span>
@@ -177,15 +182,24 @@ export function ShopScreen({ onNavigate }: ShopScreenProps) {
               disabled={disabled}
               title={offerDescription(offer)}
             >
-              <span className="offer-name">{itemName(offer.itemId)}</span>
-              <span className="offer-meta">
-                {offer.category}
-                {kind === 'JUMPER' ? ' · path picker' : ''}
-                {offer.category === 'REEL' ? ' · reel picker' : ''}
-                {offer.sold ? ' · sold' : ''}
+              <span className="offer-art">
+                <SpriteImage
+                  spriteKey={itemSpriteKey(offer.itemId)}
+                  className="sprite-icon offer-art-image"
+                  fallback={offer.category.slice(0, 2)}
+                />
               </span>
-              <span className="offer-price">{formatCash(offer.price)}</span>
-              <span className="offer-effect">{offerDescription(offer)}</span>
+              <span className="offer-copy">
+                <span className="offer-name">{itemName(offer.itemId)}</span>
+                <span className="offer-meta">
+                  {offer.category}
+                  {kind === 'JUMPER' ? ' · path picker' : ''}
+                  {offer.category === 'REEL' ? ' · reel picker' : ''}
+                  {offer.sold ? ' · sold' : ''}
+                </span>
+                <span className="offer-price">{formatCash(offer.price)}</span>
+                <span className="offer-effect">{offerDescription(offer)}</span>
+              </span>
             </button>
           );
         })}

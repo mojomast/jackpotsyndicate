@@ -10,6 +10,7 @@ import {
 } from './metaContent';
 import { BossBar, BossTugOfWar, TugOfWarBar } from './BossBar';
 import { MetaNotice, MetaScreen } from './MetaScreen';
+import { SpriteImage } from '../../components/Artwork';
 import { RelicPicker } from './Pickers';
 import { useMetaAutosave } from './persistence';
 import { navigateTo, type MetaNavigate } from './navigation';
@@ -53,6 +54,12 @@ export function BossIntroScreen({ onNavigate }: BossIntroScreenProps) {
     >
       <div className="boss-layout">
         <div className="boss-dossier panel">
+          <SpriteImage
+            spriteKey={boss?.spriteKey}
+            className="boss-intro-portrait"
+            decorative={false}
+            alt={boss?.name ?? 'Boss portrait'}
+          />
           <span className="eyebrow">{floorName(state.floorId)} · round {state.round}</span>
           <h2>{boss?.name ?? bossId}</h2>
           <p>{BOSS_SABOTAGE[bossId]}</p>

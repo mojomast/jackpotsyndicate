@@ -1,5 +1,6 @@
 /** @jsxRuntime automatic */
 import { TEST_IDS } from '@jackpotsyndicate/contracts';
+import { SpriteImage } from './Artwork';
 import { useGameStore } from '../store/gameStore';
 
 export interface TrinketMeta {
@@ -100,7 +101,11 @@ export function TrinketRail() {
                 title={`${meta.name}: ${meta.effect}`}
               >
                 <span className="trinket-icon" aria-hidden="true">
-                  {meta.name.split(' ').map((word) => word.charAt(0)).slice(0, 2).join('')}
+                  <SpriteImage
+                    spriteKey={`trinket.${id}`}
+                    className="trinket-art"
+                    fallback={meta.name.split(' ').map((word) => word.charAt(0)).slice(0, 2).join('')}
+                  />
                 </span>
                 <span className="trinket-copy">
                   <span className="trinket-name">{meta.name}</span>

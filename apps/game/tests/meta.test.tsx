@@ -170,6 +170,10 @@ test('J2: shop trinket purchase goes through the test API and mounts on the rail
 
   render(React.createElement(ShopScreen, { onNavigate: () => undefined }));
   assert.equal(screen.getByTestId(TEST_IDS.shopOffer(0)).textContent?.includes('Turbo Dozer Cam'), true);
+  assert.ok(
+    screen.getByTestId(TEST_IDS.shopOffer(0)).querySelector('.offer-art-image'),
+    'a real shop offer must render its item artwork',
+  );
   assert.equal(screen.getByTestId('shop-archetype').textContent, 'Mixed');
 
   await act(async () => {
@@ -434,6 +438,10 @@ test('seed entry starts a run and the compendium renders the full catalogue', as
   assert.ok(screen.getByTestId('compendium'));
   assert.ok(screen.getByTestId('compendium-item-turboDozerCam'));
   assert.ok(screen.getByTestId('compendium-item-jumperWire'));
+  assert.ok(
+    screen.getByTestId('compendium-item-turboDozerCam').querySelector('.compendium-art'),
+    'compendium entries must render their item artwork',
+  );
   assert.ok(screen.getByText('The Iron Auditor'));
 });
 

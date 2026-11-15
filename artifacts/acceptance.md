@@ -39,7 +39,7 @@ every acceptance criterion is green; the gaps are listed explicitly.
   per-key files and records atlas labels/frames.
 - Content item sprite keys were normalized to the canonical kebab-case catalog.
 - Reel symbols are inlined as data URIs to satisfy the zero-network J1 requirement.
-- Other asset groups are in the manifest but are not consumed everywhere in the UI.
+- Shop and Compendium now consume floor, item, boss and UI-bezel art; the board consumes floor, peg, orb and token art. VFX art remains unconsumed and incomplete.
 
 Handoff quality issues remain open: diamond token color, skull magnet, boss padding,
 `chassis.harness-hyper` shape, UI nine-slicing, and the four missing clean cutouts.

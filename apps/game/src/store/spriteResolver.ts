@@ -67,6 +67,37 @@ function fileFromEntry(entry: SpriteManifestAsset): string | null {
   return null;
 }
 
+export interface SpriteAsset {
+  url: string;
+  width: number;
+  height: number;
+  frame: SpriteManifestFrame;
+}
+
+/**
+ * Resolve a logical sprite key to a renderable full image URL and its natural
+ * frame size. Unlike `createSpriteResolver`, this also exposes real manifest
+ * entries that are not consumed by the animation package (items, floors,
+ * bosses and UI chrome). Placeholder entries still return null so callers can
+ * fall back to their own styling.
+ */
+export function spriteAssetFromManifest(
+  manifest: SpriteManifest | null | undefined,
+  logicalKey: string,
+  baseUrl: string = DEFAULT_ATLAS_BASE_URL,
+): SpriteAsset | null {
+  if (!manifest || typeof logicalKey !== 'string') return null;
+  const entry = manifest[logicalKey];
+  if (!entry) return null;
+  const frame = frameFromEntry(entry);
+  if (!frame) return null;
+  const inline = (inlineSymbols as Record<string, string>)[logicalKey];
+  if (inline) return { url: inline, width: frame.w, height: frame.h, frame };
+  const file = fileFromEntry(entry as SpriteManifestAsset);
+  if (!file) return null;
+  return { url: assetUrl(baseUrl, file), width: frame.w, height: frame.h, frame };
+}
+
 /**
  * Build a C-6 SpriteResolver from a T-040 asset manifest. Placeholder entries
  * and unknown keys return null, so the animation package draws its own vector
@@ -125,16 +156,24 @@ export interface LoadSpriteResolverOptions extends LoadSpriteManifestOptions {
 export function preloadSpriteAssets(
   manifest: SpriteManifest | null | undefined,
   baseUrl: string = DEFAULT_ATLAS_BASE_URL,
-): void {
-  if (typeof Image === 'undefined' || !manifest) return;
+): Promise<void> {
+  if (typeof Image === 'undefined' || !manifest) return Promise.resolve();
+  const pending: Promise<void>[] = [];
   for (const entry of Object.values(manifest)) {
     if (isRecord(entry) && 'placeholder' in entry && entry.placeholder) continue;
     const file = fileFromEntry(entry as SpriteManifestAsset);
     if (!file) continue;
-    const image = new Image();
-    image.decoding = 'async';
-    image.src = assetUrl(baseUrl, file);
+    pending.push(
+      new Promise<void>((resolve) => {
+        const image = new Image();
+        image.decoding = 'async';
+        image.onload = () => resolve();
+        image.onerror = () => resolve();
+        image.src = assetUrl(baseUrl, file);
+      }),
+    );
   }
+  return Promise.all(pending).then(() => undefined);
 }
 
 /**

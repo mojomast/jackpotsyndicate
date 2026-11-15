@@ -129,6 +129,10 @@ test('real Table mounts cabinet, board, HUD, audio and command-only prep control
     container.querySelector('[data-testid="board"] svg')?.getAttribute('viewBox'),
     '0 0 600 510',
   );
+  assert.ok(
+    (container.querySelectorAll('[data-testid="board"] image').length) > 0,
+    'the board must render real floor, peg, orb or token artwork',
+  );
 
   fireEvent.change(screen.getByTestId('prep-overvolt'), { target: { value: 'row:0' } });
   assert.equal(useGameStore.getState().state.overvoltLineId, 'row:0');

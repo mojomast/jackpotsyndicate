@@ -12,8 +12,10 @@ import {
   type TableTestHooks,
 } from '../../apps/game/src/screens/table/tableCore';
 import { startGameLoop, useGameStore } from '../../apps/game/src/store/gameStore';
+import { preloadSpriteAssets, type SpriteManifest } from '../../apps/game/src/store/spriteResolver';
 import { installTestApi } from '../../apps/game/src/testApi';
 import '../../apps/game/src/theme/tokens.css';
+import assetManifest from '../../apps/game/public/atlas/asset-manifest.json';
 import golden from '../../fixtures/replay.golden.json';
 
 const LIP_ASSIST: ItemDef = {
@@ -233,6 +235,7 @@ function HarnessRoot() {
 attach();
 const root = document.getElementById('root');
 if (!root) throw new Error('Missing #root element');
+await preloadSpriteAssets(assetManifest as SpriteManifest);
 createRoot(root).render(
   <StrictMode>
     <HarnessRoot />
