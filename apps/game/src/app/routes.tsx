@@ -119,7 +119,7 @@ export function TitleScreen({ onNavigate }: { onNavigate: (route: Route) => void
 
       <div className="title-links">
         <button type="button" className="btn" onClick={() => onNavigate('table')}>
-          Open shell demo
+          Open table
         </button>
         <button type="button" className="btn btn-cyan" onClick={() => onNavigate('settings')}>
           Settings

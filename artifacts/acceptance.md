@@ -18,7 +18,7 @@ every acceptance criterion is green; the gaps are listed explicitly.
 | AC | Status | Evidence / gap |
 |---|---|---|
 | AC-1 install/build/preview | **PASS** | frozen install, game build and Playwright preview server all run; built cabinet renders in a real browser |
-| AC-2 lint/typecheck/test/coverage | **PARTIAL** | `pnpm lint` PASS; `pnpm typecheck` PASS; `pnpm test` **189 passing**; line coverage ≥85% was not measured |
+| AC-2 lint/typecheck/test/coverage | **PARTIAL** | `pnpm lint` PASS; `pnpm typecheck` PASS; `pnpm test` **218 passing** (189 package + 29 app-level); line coverage ≥85% was not measured |
 | AC-3 golden replay | **PASS** | `pnpm sim:replay` MATCH at `bade5e3091c269a205ccace5`; Playwright golden replay passes in Chromium, Firefox and WebKit |
 | AC-4 E2E J1–J8 | **PARTIAL** | **29 passed, 1 skipped** across Chromium, Firefox and WebKit. The skip is the WebKit J8 4×-speed sub-check (measured 39.8%, target ≤30%, headless WebKit timer floor). NET passes on all three after inline symbol sprites |
 | AC-5 rake | **PASS** | 10,000 spins/floor: Neon 17.0%, Cryo 22.7%, Foundry 12.0%, Penthouse 21.3%, all in band |
@@ -52,7 +52,7 @@ were rejected for haze or an unrelated character.
 pnpm install --frozen-lockfile       PASS
 pnpm lint                            PASS
 pnpm typecheck                       PASS
-pnpm test                            189 passing
+pnpm test                            218 passing (189 package + 29 app-level)
 pnpm sim:replay                      MATCH at bade5e3091c269a205ccace5
 pnpm sim:hitrate                     40.6% PASS
 pnpm assets:verify                   73 files PASS

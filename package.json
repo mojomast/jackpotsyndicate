@@ -10,7 +10,7 @@
     "build": "pnpm -r --if-present build",
     "dev": "pnpm --filter @jackpotsyndicate/game dev",
     "preview": "pnpm --filter @jackpotsyndicate/game exec vite preview",
-    "test": "tsx --test \"packages/*/tests/**/*.test.ts\"",
+    "test": "tsx --test \"packages/*/tests/**/*.test.ts\" \"apps/game/tests/**/*.test.tsx\"",
     "sim": "tsx tools/sim/src/index.ts",
     "e2e": "playwright test",
     "sim:rake": "tsx tools/physics-harness/rake.ts",

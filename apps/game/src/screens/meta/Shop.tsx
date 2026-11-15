@@ -124,7 +124,7 @@ export function ShopScreen({ onNavigate }: ShopScreenProps) {
 
   return (
     <MetaScreen
-      eyebrow="Vendor shelf · T-073"
+      eyebrow="Vendor shelf"
       title="Shop"
       description="Spend what the round left behind. Trinkets mount on the cabinet bezel; glyphs need a target reel; jumpers need a target path."
       testId="shop"
