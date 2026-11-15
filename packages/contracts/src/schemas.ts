@@ -344,6 +344,9 @@ export const runStateSchema = z.object({
     cashBanked: z.number(),
     bestSpinEquity: z.number(),
   }),
+  overvoltOwned: z.boolean().optional(),
+  pendingRelics: z.array(z.string()).optional(),
+  pendingJumpers: z.array(z.array(cellSchema)).optional(),
 }) satisfies z.ZodType<RunState>;
 
 export const saveFileSchema = z.object({
@@ -421,6 +424,14 @@ export const engineEventSchema = z.discriminatedUnion('t', [
   }),
   z.object({ t: z.literal('RunStarted'), seed: z.string() }),
   z.object({ t: z.literal('RunEnded'), outcome: z.enum(['victory', 'defeat', 'abandoned']) }),
+  z.object({
+    t: z.literal('BossRewarded'),
+    bossId: bossIdSchema,
+    reward: z.enum(['relicChoice', 'shopCapacity', 'victory']),
+    amount: z.number(),
+  }),
+  z.object({ t: z.literal('IdleDrain'), cells: z.array(cellSchema), total: z.number() }),
+  z.object({ t: z.literal('OvervoltSet'), lineId: z.string().nullable() }),
 ]) satisfies z.ZodType<EngineEvent>;
 
 export const physicsEventSchema = z.discriminatedUnion('t', [

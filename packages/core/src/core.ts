@@ -14,6 +14,7 @@
  * `tick()`, matching the C-2 "each event stamped with a tick" contract.
  */
 import {
+  ANIM_TICKS,
   BOARD,
   DEFAULT_MODIFIERS,
   EVAL_DELAY_TICKS,
@@ -66,15 +67,20 @@ import {
   loadSave,
   planBossSpin,
   planDozerExtension,
-  scrapChips,
-  scoreSpin,
+  scoreTumble,
+  scoreWiring,
   selectBossForRun,
+  symbolEffectRefs,
   trinketRefs,
+  tumbleCluster,
+  type BossDefinition,
   type EffectContext,
   type EffectResolution,
+  type GlyphBonus,
   type OrbPlanEntry,
   type RunContent,
   type ScoreResult,
+  type TumbleResult,
 } from '@jackpotsyndicate/engine';
 import { createSimWorld } from '@jackpotsyndicate/physics';
 import { CONTENT_BUNDLE } from '../../content/src/index';
@@ -105,12 +111,18 @@ interface ActiveSpin {
   equity: number;
   launchQueue: { atTick: number; entry: OrbPlanEntry; index: number }[];
   launchCursor: number;
+  /** CLUSTER tumble steps, emitted as TumbleStep before the first orb (C-6). */
+  tumbleQueue: { atTick: number; cleared: Cell[]; gridAfter: SymbolId[][] }[];
+  tumbleCursor: number;
+  /** Peg hits so far this spin, across all orbs ("every 3rd peg hit", Tesla). */
+  pegHits: number;
   nextSpinBaseline: RunState['nextSpin'];
 }
 
 interface OrbMeta {
   count: number;
   stack: number;
+  symbolId: string;
 }
 
 const SCRAP_TEMPLATE: TokenTemplate = {
@@ -188,20 +200,24 @@ function cheapestChips(symbols: readonly SymbolDef[]): number {
   return cheapest;
 }
 
+interface GridScore {
+  result: ScoreResult;
+  /** CLUSTER only: the tumble chain that produced the extra wins. */
+  tumble: TumbleResult | null;
+}
+
 /**
- * Generic wiring score for non-CLASSIC grids (and CLASSIC with jumpers).
- * CLASSIC without jumpers uses the engine's `scoreSpin` so overvolt ids
- * (`row:0`) and full-line rules match exactly.
+ * SPEC 2.6 scoring for the current wiring. Every wiring shares payline ids,
+ * so overvolt and Seven's full-line X behave the same with or without
+ * jumpers. CLUSTER spins tumble (R-MUT-04) with refills drawn by `refill`.
  */
 function scoreGrid(
   content: CoreContent,
   state: RunState,
   grid: SymbolId[][],
-): ScoreResult {
+  refill: (col: number) => SymbolId,
+): GridScore {
   const balance = content.balance;
-  const extraAddMult = state.nextSpin.addMult;
-  const extraXMult = 1 + sumRecord(state.nextSpin.xBonus);
-  const symbols = contentSymbols(content);
   const frozen = state.grid.frozen
     .filter((entry) => entry.spins > 0)
     .map((entry) => [entry.cell[0], entry.cell[1]] as Cell);
@@ -209,74 +225,22 @@ function scoreGrid(
     minMatch: balance.minMatch,
     overvoltLineId: state.overvoltLineId,
     frozen,
-    extraAddMult,
-    extraXMult,
+    extraAddMult: state.nextSpin.addMult,
+    extraXMult: 1 + sumRecord(state.nextSpin.xBonus),
     cashPerChip: balance.cashPerChip,
-    symbols: symbolStatOverrides(symbols),
+    symbols: symbolStatOverrides(contentSymbols(content)),
   };
 
-  if (state.grid.wiring === 'CLASSIC' && state.jumpers.length === 0) {
-    return scoreSpin(grid, options);
+  if (state.grid.wiring === 'CLUSTER') {
+    const tumble = tumbleCluster(grid, (cell) => refill(cell[0]), {
+      maxTumbles: RULES.MAX_TUMBLES,
+      frozen,
+    });
+    return { result: scoreTumble(grid, tumble, options), tumble };
   }
-
-  const evaluator = getWiringEvaluator(state.grid.wiring);
-  const wins: WinEval[] = evaluator.evaluate(grid, {
-    minMatch: balance.minMatch,
-    overvoltLineId: state.overvoltLineId,
-    jumperLines: state.jumpers,
-    frozen,
-  });
-  const stats: Record<SymbolId, { chips: number; addMult: number; xMult: number }> = {
-    diamond: { ...DEFAULT_SYMBOL_STATS.diamond },
-    cherry: { ...DEFAULT_SYMBOL_STATS.cherry },
-    uranium: { ...DEFAULT_SYMBOL_STATS.uranium },
-    skull: { ...DEFAULT_SYMBOL_STATS.skull },
-    seven: { ...DEFAULT_SYMBOL_STATS.seven },
-  };
-  for (const symbol of symbols) {
-    stats[symbol.id] = {
-      chips: symbol.slot.chips,
-      addMult: symbol.slot.addMult,
-      xMult: symbol.slot.xMult,
-    };
-  }
-
-  let addMult = 1 + extraAddMult;
-  let xMult = extraXMult;
-  const byCell = new Map<string, OrbPlanEntry>();
-  const orbPlan: OrbPlanEntry[] = [];
-  for (const win of wins) {
-    const stat = stats[win.symbolId];
-    addMult += stat.addMult;
-    xMult *= stat.xMult;
-    for (const [col, row] of win.cells) {
-      const symbol = grid[col]?.[row];
-      if (symbol === undefined) continue;
-      const key = `${col},${row}`;
-      let entry = byCell.get(key);
-      if (entry === undefined) {
-        entry = { cell: [col, row], symbolId: symbol, chips: 0 };
-        byCell.set(key, entry);
-        orbPlan.push(entry);
-      }
-      entry.chips += stat.chips * win.lineMult;
-    }
-  }
-
-  if (wins.length === 0) {
-    orbPlan.push({ cell: null, symbolId: 'scrap', chips: scrapChips() });
-  }
-
-  let chips = 0;
-  for (const entry of orbPlan) chips += entry.chips;
   return {
-    grid: grid.map((column) => column.slice()),
-    wins,
-    chips,
-    addMult,
-    xMult,
-    equity: chips * addMult * xMult * balance.cashPerChip,
-    orbPlan,
+    result: scoreWiring(grid, { ...options, wiring: state.grid.wiring, jumperLines: state.jumpers }),
+    tumble: null,
   };
 }
 
@@ -293,7 +257,6 @@ export class Core implements GameCore {
   private activeSpin: ActiveSpin | null = null;
   private lastEvaluation: { addMult: number; xMult: number } | null = null;
   private readonly orbMeta = new Map<BodyId, OrbMeta>();
-  private bossSuction = 0;
   private modifiers: PhysicsModifiers = { ...DEFAULT_MODIFIERS, gutterBounceChances: [] };
 
   constructor(options: GameCoreOptions = {}) {
@@ -392,10 +355,12 @@ export class Core implements GameCore {
     this.activeSpin = null;
     this.lastEvaluation = null;
     this.orbMeta.clear();
-    this.bossSuction = 0;
     this.commandLog = [];
     this.bus.clear();
     this.refreshModifiers();
+    // A picker resumed from a save shows the same offer it was dealt.
+    const offer = this.machine.pendingOfferEvent();
+    if (offer !== null) this.emit(offer);
     return { ok: true };
   }
 
@@ -444,7 +409,6 @@ export class Core implements GameCore {
     this.activeSpin = null;
     this.lastEvaluation = null;
     this.orbMeta.clear();
-    this.bossSuction = 0;
     this.configureFloor(true, this.useSeedShelf);
   }
 
@@ -456,7 +420,6 @@ export class Core implements GameCore {
     const state = this.machine.getState();
     if (state.floorId === this.configuredFloorId) return;
     if (state.phase !== 'PREP') return;
-    this.bossSuction = 0;
     this.configureFloor(true, this.useSeedShelf);
   }
 
@@ -468,7 +431,11 @@ export class Core implements GameCore {
     if (seedShelf) {
       this.sim.applyDirective({ t: 'clearShelf' });
       this.sim.applyDirective({ t: 'seedShelf', tokens: this.shelfSeedTokens() });
-      this.sim.drainEvents();
+      // D-05: a new floor starts from a fresh shelf; forget the old tokens' cash.
+      const tokenCash = this.machine.getState().tokenCash;
+      for (const event of this.sim.drainEvents()) {
+        if (event.t === 'TokenRemoved') delete tokenCash[event.tokenId];
+      }
     }
   }
 
@@ -526,12 +493,54 @@ export class Core implements GameCore {
         equity: 0,
         launchQueue: [],
         launchCursor: 0,
+        tumbleQueue: [],
+        tumbleCursor: 0,
+        pegHits: 0,
         nextSpinBaseline: { xBonus: {}, addMult: 0, bonusOrbs: 0 },
       };
       this.handleSpinStart();
     }
+    for (const drinkId of this.machine.drainInstantDrinks()) this.applyInstantDrink(drinkId);
+    for (const bonus of this.machine.drainGlyphBonuses()) this.spawnGlyphBonus(bonus);
     this.refreshModifiers();
     this.flushDirectives();
+  }
+
+  /** D-08: an instant drink (Lubricant Oil Shot) fires its effects immediately. */
+  private applyInstantDrink(drinkId: string): void {
+    const state = this.machine.getState();
+    const refs = drinkRefs(currentItems(this.content), [drinkId]);
+    const payload = {
+      tick: state.tick,
+      grid: state.grid.visible.map((column) => column.slice()),
+      visible: state.grid.visible.map((column) => column.slice()),
+    };
+    this.applyResolution(dispatchHook('onSpinStart', refs, this.effectContext(), payload));
+  }
+
+  /**
+   * SPEC 2.7 reel glyphs drop bonus tokens of their symbol on the shelf. Each
+   * is worth one base orb of that symbol (chips x cashPerChip x stack).
+   */
+  private spawnGlyphBonus(bonus: GlyphBonus): void {
+    const symbol = contentSymbols(this.content).find((candidate) => candidate.id === bonus.symbolId);
+    if (symbol === undefined || bonus.count <= 0) return;
+    const stack = Math.max(1, symbol.token.stack);
+    const template: TokenTemplate = {
+      symbolId: symbol.id,
+      skin: symbol.token.skin,
+      radius: symbol.token.radius,
+      mass: symbol.token.mass,
+      slide: symbol.token.slide,
+      count: bonus.count,
+      stack,
+      weldOnLand: symbol.token.weldOnLand,
+      magnetic: symbol.token.magnetic,
+      seismic: symbol.token.seismic,
+      resistSuction: false,
+    };
+    const each = symbol.slot.chips * this.content.balance.cashPerChip * stack;
+    this.applySpawns([{ template, cash: each * bonus.count }]);
   }
 
   private handleSpinStart(): void {
@@ -557,10 +566,7 @@ export class Core implements GameCore {
 
     if (state.round !== RULES.NORMAL_ROUNDS_PER_FLOOR + 1 || state.boss === null) return;
 
-    const definition = selectBossForRun(
-      { floors: this.content.floors, ...(contentBosses(this.content) === undefined ? {} : { bosses: contentBosses(this.content) }) },
-      { floorId: state.floorId, seed: state.seed },
-    );
+    const definition = this.currentBoss();
     const plan = planBossSpin(definition, {
       seed: state.seed,
       spin: state.boss.spin,
@@ -593,9 +599,31 @@ export class Core implements GameCore {
     }
     for (const directive of plan.directives) this.sim.applyDirective({ ...directive });
     if (plan.scoreDelta !== 0) this.machine.recordBossScore(plan.scoreDelta);
-    this.bossSuction =
-      typeof plan.modifiers.suction === 'number' ? plan.modifiers.suction : 0;
     this.refreshModifiers();
+  }
+
+  /** The boss of the current floor. */
+  private currentBoss(): BossDefinition {
+    const state = this.machine.getState();
+    const bosses = contentBosses(this.content);
+    return selectBossForRun(
+      { floors: this.content.floors, ...(bosses === undefined ? {} : { bosses }) },
+      { floorId: state.floorId, seed: state.seed },
+    );
+  }
+
+  /**
+   * Boss suction (R-BOS-02) is part of the boss round itself, so it is derived
+   * from run state: active from the first PREP of the duel and after a resume.
+   */
+  private bossSuctionNow(): number {
+    const state = this.machine.getState();
+    if (state.round !== RULES.NORMAL_ROUNDS_PER_FLOOR + 1 || state.boss === null) return 0;
+    let suction = 0;
+    for (const entry of this.currentBoss().sabotage) {
+      if (entry.kind === 'suction') suction += entry.amount;
+    }
+    return suction;
   }
 
   // --------------------------------------------------------------- scheduling
@@ -616,6 +644,20 @@ export class Core implements GameCore {
     if (!spin.evaluated && state.tick >= spin.evalTick) this.evaluateCurrentSpin(spin);
 
     while (
+      spin.tumbleCursor < spin.tumbleQueue.length &&
+      state.tick >= spin.tumbleQueue[spin.tumbleCursor]!.atTick
+    ) {
+      const step = spin.tumbleQueue[spin.tumbleCursor]!;
+      spin.tumbleCursor += 1;
+      state.grid.visible = step.gridAfter.map((column) => column.slice());
+      this.emit({
+        t: 'TumbleStep',
+        cleared: step.cleared.map((cell) => [cell[0], cell[1]] as Cell),
+        gridAfter: step.gridAfter.map((column) => column.slice()),
+      });
+    }
+
+    while (
       spin.launchCursor < spin.launchQueue.length &&
       state.tick >= spin.launchQueue[spin.launchCursor]!.atTick
     ) {
@@ -628,10 +670,25 @@ export class Core implements GameCore {
   private evaluateCurrentSpin(spin: ActiveSpin): void {
     const state = this.machine.getState();
     const grid = state.grid.visible.map((column) => column.slice());
-    const base = scoreGrid(this.content, state, grid);
+    const frozenCells = state.grid.frozen.map((entry) => [entry.cell[0], entry.cell[1]] as Cell);
 
+    // D-08: a drink is drunk in PREP for the coming spin, so its "next spin"
+    // bonuses (Martini +1 Mult, Absinthe +1 X, Green Fairy x1.5 X) apply to
+    // this evaluation. Fold them in before scoring reads state.nextSpin.
+    const drink = this.applyDrinkEvaluation(grid, frozenCells);
+
+    const scored = scoreGrid(this.content, state, grid, (col) => this.machine.drawRefill(col));
+    const base = scored.result;
+    // Wins on the drawn grid; tumble wins live on later grids.
+    const drawnWins = scored.tumble === null ? base.wins : scored.tumble.initialWins;
+    this.drainIdleSkulls(grid, drawnWins);
+
+    const consumed = {
+      xBonus: { ...state.nextSpin.xBonus },
+      addMult: state.nextSpin.addMult,
+    };
     const symbolRefs = contentSymbols(this.content).flatMap((symbol) => symbol.effects);
-    const refs = [...symbolRefs, ...this.itemHandlerRefs()];
+    const refs = [...symbolRefs, ...trinketRefs(currentItems(this.content), state.trinkets)];
     const evaluated = dispatchHook(
       'onSpinEvaluated',
       refs,
@@ -640,15 +697,23 @@ export class Core implements GameCore {
         tick: state.tick,
         grid,
         visible: grid,
-        wins: base.wins,
-        frozenCells: state.grid.frozen.map((entry) => [entry.cell[0], entry.cell[1]] as Cell),
+        wins: drawnWins,
+        frozenCells,
       } as never,
     );
     const evaluatedEffects = applyEffects(evaluated, { nextSpin: state.nextSpin });
     this.commitNextSpin(evaluatedEffects);
+    // Next-spin bonuses earned *by* this evaluation (trinkets) carry to the
+    // following spin; everything already in nextSpin was consumed above.
+    const earnedX: Record<string, number> = {};
+    for (const key of Object.keys(evaluatedEffects.nextSpinX)) {
+      const delta = (evaluatedEffects.nextSpinX[key] ?? 0) - (consumed.xBonus[key] ?? 0);
+      if (delta > 1e-9) earnedX[key] = delta;
+    }
+    const earnedAddMult = Math.max(0, evaluatedEffects.nextSpinAddMult - consumed.addMult);
 
-    let addMult = base.addMult + evaluatedEffects.addMult;
-    let xMult = base.xMult * evaluatedEffects.xMult;
+    let addMult = base.addMult + evaluatedEffects.addMult + drink.addMult;
+    let xMult = base.xMult * evaluatedEffects.xMult * drink.xMult;
     const orbPlan = base.orbPlan.map((entry) => ({
       cell: entry.cell === null ? null : ([entry.cell[0], entry.cell[1]] as Cell),
       symbolId: entry.symbolId,
@@ -693,16 +758,22 @@ export class Core implements GameCore {
     const cashPerChip = this.content.balance.cashPerChip;
     const equity = chips * addMult * xMult * cashPerChip;
 
+    const stats = this.machine.getState().stats;
+    if (Number.isFinite(equity) && equity > stats.bestSpinEquity) stats.bestSpinEquity = equity;
+
     spin.orbPlan = orbPlan;
     spin.addMult = addMult;
     spin.xMult = xMult;
     spin.chips = chips;
     spin.equity = equity;
     spin.evaluated = true;
+    const after = this.machine.getState().nextSpin;
+    const baselineX: Record<string, number> = {};
+    for (const key of Object.keys(after.xBonus)) baselineX[key] = (after.xBonus[key] ?? 0) - (earnedX[key] ?? 0);
     spin.nextSpinBaseline = {
-      xBonus: { ...this.machine.getState().nextSpin.xBonus },
-      addMult: this.machine.getState().nextSpin.addMult,
-      bonusOrbs: this.machine.getState().nextSpin.bonusOrbs,
+      xBonus: baselineX,
+      addMult: after.addMult - earnedAddMult,
+      bonusOrbs: after.bonusOrbs,
     };
     this.lastEvaluation = { addMult, xMult };
 
@@ -724,12 +795,75 @@ export class Core implements GameCore {
     this.machine.beginResolving();
     this.flushEngineEvents();
 
-    const firstLaunch = spin.evalTick + ORB_LAUNCH_DELAY_TICKS;
+    // C-6: each tumble step holds the orb plan back by ANIM_TICKS.tumbleStep.
+    const steps = scored.tumble?.steps ?? [];
+    spin.tumbleQueue = steps.map((step, index) => ({
+      atTick: spin.evalTick + ORB_LAUNCH_DELAY_TICKS + index * ANIM_TICKS.tumbleStep,
+      cleared: step.cleared.map((cell) => [cell[0], cell[1]] as Cell),
+      gridAfter: step.gridAfter.map((column) => column.slice()),
+    }));
+    spin.tumbleCursor = 0;
+    const firstLaunch =
+      spin.evalTick + ORB_LAUNCH_DELAY_TICKS + steps.length * ANIM_TICKS.tumbleStep;
     spin.launchQueue = orbPlan.map((entry, index) => ({
       atTick: firstLaunch + index * ORB_LAUNCH_INTERVAL_TICKS,
       entry,
       index: index + 1,
     }));
+  }
+
+  /**
+   * Dispatch the active drink's onSpinEvaluated effects for the spin it was
+   * drunk for. Next-spin parts land in state.nextSpin (consumed by this
+   * scoring pass); direct Mult/X parts are returned for the caller to fold in.
+   */
+  private applyDrinkEvaluation(grid: SymbolId[][], frozenCells: Cell[]): { addMult: number; xMult: number } {
+    const state = this.machine.getState();
+    if (state.activeDrink === null) return { addMult: 0, xMult: 1 };
+    const refs = drinkRefs(currentItems(this.content), [state.activeDrink]);
+    const effects = dispatchHook('onSpinEvaluated', refs, this.effectContext(), {
+      tick: state.tick,
+      grid,
+      visible: grid,
+      frozenCells,
+    } as never);
+    if (effects.length === 0) return { addMult: 0, xMult: 1 };
+    const resolved = applyEffects(effects, { nextSpin: state.nextSpin, modifiers: this.modifiers });
+    this.commitNextSpin(resolved);
+    this.applyResolvedSideEffects(resolved);
+    return { addMult: resolved.addMult, xMult: resolved.xMult };
+  }
+
+  /**
+   * SPEC 2.6 Magnet Skull: each visible Skull that is not part of a winning
+   * evaluation drains its `drainIfIdle` (25) from the bankroll. Boss-frozen
+   * cells are out of play and do not drain.
+   */
+  private drainIdleSkulls(grid: SymbolId[][], wins: readonly WinEval[]): void {
+    const state = this.machine.getState();
+    const scoring = new Set<string>();
+    for (const win of wins) for (const [col, row] of win.cells) scoring.add(`${col},${row}`);
+    const frozen = new Set(
+      state.grid.frozen.filter((entry) => entry.spins > 0).map((entry) => `${entry.cell[0]},${entry.cell[1]}`),
+    );
+    const symbols = contentSymbols(this.content);
+    const cells: Cell[] = [];
+    let total = 0;
+    for (let col = 0; col < grid.length; col++) {
+      const column = grid[col]!;
+      for (let row = 0; row < column.length; row++) {
+        const key = `${col},${row}`;
+        if (scoring.has(key) || frozen.has(key)) continue;
+        const symbol = symbols.find((candidate) => candidate.id === column[row]);
+        const drain = symbol?.slot.drainIfIdle ?? 0;
+        if (drain <= 0) continue;
+        cells.push([col, row]);
+        total += drain;
+      }
+    }
+    if (total <= 0) return;
+    this.emit({ t: 'IdleDrain', cells, total });
+    this.adjustBankroll(-total, 'drain');
   }
 
   private launchPlanOrb(entry: OrbPlanEntry, index: number): void {
@@ -795,7 +929,7 @@ export class Core implements GameCore {
 
     const orbId = this.sim.launchOrb(spec);
     state.orbChips[orbId] = entry.chips;
-    this.orbMeta.set(orbId, { count: spec.token.count, stack: spec.token.stack });
+    this.orbMeta.set(orbId, { count: spec.token.count, stack: spec.token.stack, symbolId: entry.symbolId });
     this.emit({ t: 'OrbValued', orbId, chips: entry.chips });
   }
 
@@ -893,9 +1027,20 @@ export class Core implements GameCore {
     const state = this.machine.getState();
     const floor = this.currentFloor();
     const base = floor.pegChips[event.kind];
+    // Item hooks plus the hitting orb's own symbol behaviour (Uranium: +15
+    // chips to every other orb in flight, SPEC 2.6).
+    const orbSymbol = this.orbMeta.get(event.orbId)?.symbolId;
+    const symbolRefs =
+      orbSymbol === undefined
+        ? []
+        : symbolEffectRefs(
+            orbSymbol,
+            'onPegHit',
+            contentSymbols(this.content).find((candidate) => candidate.id === orbSymbol)?.effects,
+          );
     const effects = dispatchHook(
       'onPegHit',
-      this.itemHandlerRefs(),
+      [...this.itemHandlerRefs(), ...symbolRefs],
       this.effectContext(),
       {
         tick: state.tick,
@@ -903,7 +1048,7 @@ export class Core implements GameCore {
         pegId: event.pegId,
         kind: event.kind,
         hitIndex: event.hitIndex,
-        pegHitCount: event.hitIndex,
+        pegHitCount: this.activeSpin === null ? event.hitIndex : ++this.activeSpin.pegHits,
         chained: event.chained,
         chips: state.orbChips[event.orbId] ?? 0,
       } as never,
@@ -999,11 +1144,15 @@ export class Core implements GameCore {
     this.commitNextSpin(resolved);
     this.applyResolvedSideEffects(resolved);
 
-    const cash = Math.max(0, baseCash * resolved.tokenCashMul + resolved.tokenCashAdd);
-    const meta = this.orbMeta.get(event.orbId) ?? { count: 1, stack: 1 };
+    const meta = this.orbMeta.get(event.orbId) ?? { count: 1, stack: 1, symbolId: event.symbolId };
     const stacks = Math.max(1, meta.stack);
-    const denom = Math.max(1, event.tokenIds.length || meta.count);
-    const perToken = (cash * stacks) / denom;
+    const denom = Math.max(1, event.tokenIds.length + event.mergedInto.length || meta.count);
+    // Multipliers scale the orb's cash (split across micro-medals, tripled for
+    // a bullion stack); flat token bonuses (Gold Peg Alchemist) pay per token.
+    const perToken = Math.max(
+      0,
+      (baseCash * resolved.tokenCashMul * stacks) / denom + resolved.tokenCashAdd,
+    );
 
     for (const tokenId of event.tokenIds) {
       state.tokenCash[tokenId] = perToken;
@@ -1097,11 +1246,7 @@ export class Core implements GameCore {
     this.applyResolution(effects);
 
     if (state.round === RULES.NORMAL_ROUNDS_PER_FLOOR + 1 && state.boss !== null) {
-      const definition = selectBossForRun(
-        { floors: this.content.floors, ...(contentBosses(this.content) === undefined ? {} : { bosses: contentBosses(this.content) }) },
-        { floorId: state.floorId, seed: state.seed },
-      );
-      const plan = planDozerExtension(definition, event.count);
+      const plan = planDozerExtension(this.currentBoss(), event.count);
       for (const directive of plan.directives) this.sim.applyDirective({ ...directive });
       for (const notice of plan.sabotage) this.emit({ t: 'BossSabotage', kind: notice.kind });
     }
@@ -1164,12 +1309,24 @@ export class Core implements GameCore {
         x: BOARD.W / 2,
         y: BOARD.TOKEN_SPAWN_Y,
       };
+      const state = this.machine.getState();
       const ids = this.sim.spawnToken(spec);
-      const per = ids.length === 0 ? 0 : spawn.cash / ids.length;
+      const per = spawn.cash / Math.max(1, Math.floor(spawn.template.count));
       for (const tokenId of ids) {
-        this.machine.getState().tokenCash[tokenId] = per;
+        state.tokenCash[tokenId] = per;
         this.emit({ t: 'TokenValued', tokenId, cash: per });
       }
+      // At the 150-token cap a spawn merges into the nearest token (R-PSH-03);
+      // that token absorbs the cash instead of losing it.
+      const drained = this.sim.drainEvents();
+      if (per !== 0) {
+        for (const event of drained) {
+          if (event.t !== 'TokenMerged') continue;
+          state.tokenCash[event.intoId] = (state.tokenCash[event.intoId] ?? 0) + per;
+          this.emit({ t: 'TokenValued', tokenId: event.intoId, cash: state.tokenCash[event.intoId]! });
+        }
+      }
+      this.emitEvents(drained);
     }
   }
 
@@ -1217,7 +1374,8 @@ export class Core implements GameCore {
         bag,
       );
     }
-    if (this.bossSuction !== 0) bag.suction += this.bossSuction;
+    const suction = this.bossSuctionNow();
+    if (suction !== 0) bag.suction += suction;
     this.modifiers = bag;
     this.sim.setModifiers(bag);
   }
