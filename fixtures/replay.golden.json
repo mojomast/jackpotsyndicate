@@ -1,15 +1,15 @@
 {
   "version": 1,
-  "seed": "sim:greedy-synergy:47",
+  "seed": "sim:greedy-synergy:9",
   "bot": "greedy-synergy",
-  "expectedHash": "cbb0ca4b92ac7a48e7a2847a",
-  "ticks": 24433,
+  "expectedHash": "9e2f1f37a9a7d67463be3038",
+  "ticks": 27117,
   "commandLog": [
     {
       "tick": 0,
       "cmd": {
         "c": "NewRun",
-        "seed": "sim:greedy-synergy:47"
+        "seed": "sim:greedy-synergy:9"
       }
     },
     {
@@ -19,951 +19,2012 @@
       }
     },
     {
-      "tick": 246,
+      "tick": 245,
       "cmd": {
         "c": "Spin"
       }
     },
     {
-      "tick": 382,
+      "tick": 473,
       "cmd": {
         "c": "Spin"
       }
     },
     {
-      "tick": 659,
+      "tick": 678,
       "cmd": {
         "c": "Spin"
       }
     },
     {
-      "tick": 1015,
+      "tick": 886,
       "cmd": {
         "c": "Spin"
       }
     },
     {
-      "tick": 1311,
+      "tick": 1243,
       "cmd": {
         "c": "Spin"
       }
     },
     {
-      "tick": 1443,
+      "tick": 1474,
       "cmd": {
         "c": "Spin"
       }
     },
     {
-      "tick": 2076,
+      "tick": 1976,
       "cmd": {
         "c": "ContinueAfterRound"
       }
     },
     {
-      "tick": 2076,
-      "cmd": {
-        "c": "ShopBuy",
-        "offerId": "offer-2"
-      }
-    },
-    {
-      "tick": 2076,
+      "tick": 1976,
       "cmd": {
         "c": "ShopBuy",
         "offerId": "offer-3"
       }
     },
     {
-      "tick": 2076,
+      "tick": 1976,
       "cmd": {
         "c": "ShopBuy",
         "offerId": "offer-0"
       }
     },
     {
-      "tick": 2076,
-      "cmd": {
-        "c": "ShopBuy",
-        "offerId": "offer-1"
-      }
-    },
-    {
-      "tick": 2076,
-      "cmd": {
-        "c": "ShopLeave"
-      }
-    },
-    {
-      "tick": 2076,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 2276,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 2401,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 2699,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 3129,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 3398,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 3534,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 3980,
-      "cmd": {
-        "c": "ContinueAfterRound"
-      }
-    },
-    {
-      "tick": 3980,
-      "cmd": {
-        "c": "ShopBuy",
-        "offerId": "offer-0"
-      }
-    },
-    {
-      "tick": 3980,
-      "cmd": {
-        "c": "ShopBuy",
-        "offerId": "offer-1"
-      }
-    },
-    {
-      "tick": 3980,
-      "cmd": {
-        "c": "ShopBuy",
-        "offerId": "offer-2"
-      }
-    },
-    {
-      "tick": 3980,
-      "cmd": {
-        "c": "ShopBuy",
-        "offerId": "offer-3"
-      }
-    },
-    {
-      "tick": 3980,
-      "cmd": {
-        "c": "ShopLeave"
-      }
-    },
-    {
-      "tick": 3980,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 4271,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 4553,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 4775,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 4914,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 5184,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 5466,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 5984,
-      "cmd": {
-        "c": "ContinueAfterRound"
-      }
-    },
-    {
-      "tick": 5984,
-      "cmd": {
-        "c": "ShopBuy",
-        "offerId": "offer-3"
-      }
-    },
-    {
-      "tick": 5984,
-      "cmd": {
-        "c": "ShopBuy",
-        "offerId": "offer-1"
-      }
-    },
-    {
-      "tick": 5984,
-      "cmd": {
-        "c": "ShopBuy",
-        "offerId": "offer-2"
-      }
-    },
-    {
-      "tick": 5984,
-      "cmd": {
-        "c": "ShopBuy",
-        "offerId": "offer-0"
-      }
-    },
-    {
-      "tick": 5984,
-      "cmd": {
-        "c": "ShopLeave"
-      }
-    },
-    {
-      "tick": 5984,
-      "cmd": {
-        "c": "ContinueAfterRound"
-      }
-    },
-    {
-      "tick": 5984,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 6211,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 6515,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 6637,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 6872,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 7045,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 7345,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 7808,
-      "cmd": {
-        "c": "ContinueAfterRound"
-      }
-    },
-    {
-      "tick": 7808,
-      "cmd": {
-        "c": "ChooseRelic",
-        "index": 2
-      }
-    },
-    {
-      "tick": 7808,
-      "cmd": {
-        "c": "ChooseFloor",
-        "floorId": "FLOOR_FOUNDRY"
-      }
-    },
-    {
-      "tick": 7958,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 8221,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 8470,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 8719,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 9013,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 9186,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 9420,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 9850,
-      "cmd": {
-        "c": "ContinueAfterRound"
-      }
-    },
-    {
-      "tick": 9850,
-      "cmd": {
-        "c": "ShopBuy",
-        "offerId": "offer-0"
-      }
-    },
-    {
-      "tick": 9850,
-      "cmd": {
-        "c": "ShopBuy",
-        "offerId": "offer-3"
-      }
-    },
-    {
-      "tick": 9850,
-      "cmd": {
-        "c": "ShopBuy",
-        "offerId": "offer-2"
-      }
-    },
-    {
-      "tick": 9850,
-      "cmd": {
-        "c": "ShopBuy",
-        "offerId": "offer-1"
-      }
-    },
-    {
-      "tick": 9850,
-      "cmd": {
-        "c": "ShopLeave"
-      }
-    },
-    {
-      "tick": 9850,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 10181,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 10330,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 10627,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 10939,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 11169,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 11511,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 12160,
-      "cmd": {
-        "c": "ContinueAfterRound"
-      }
-    },
-    {
-      "tick": 12160,
-      "cmd": {
-        "c": "ShopBuy",
-        "offerId": "offer-2"
-      }
-    },
-    {
-      "tick": 12160,
-      "cmd": {
-        "c": "ShopBuy",
-        "offerId": "offer-3"
-      }
-    },
-    {
-      "tick": 12160,
+      "tick": 1976,
       "cmd": {
         "c": "ShopBuy",
         "offerId": "offer-1",
         "target": {
-          "reel": 2
+          "reel": 0
         }
       }
     },
     {
-      "tick": 12160,
-      "cmd": {
-        "c": "ShopBuy",
-        "offerId": "offer-0"
-      }
-    },
-    {
-      "tick": 12160,
+      "tick": 1976,
       "cmd": {
         "c": "ShopLeave"
       }
     },
     {
-      "tick": 12160,
+      "tick": 1976,
       "cmd": {
         "c": "LoadCoin",
         "coinId": "bloodDoubloon"
       }
     },
     {
-      "tick": 12160,
+      "tick": 1976,
       "cmd": {
         "c": "Spin"
       }
     },
     {
-      "tick": 12431,
+      "tick": 1977,
       "cmd": {
         "c": "Spin"
       }
     },
     {
-      "tick": 12793,
+      "tick": 1978,
       "cmd": {
         "c": "Spin"
       }
     },
     {
-      "tick": 13044,
+      "tick": 1979,
       "cmd": {
         "c": "Spin"
       }
     },
     {
-      "tick": 13280,
+      "tick": 1980,
       "cmd": {
         "c": "Spin"
       }
     },
     {
-      "tick": 13536,
+      "tick": 1981,
       "cmd": {
         "c": "Spin"
       }
     },
     {
-      "tick": 13876,
+      "tick": 1982,
       "cmd": {
         "c": "Spin"
       }
     },
     {
-      "tick": 14446,
+      "tick": 1983,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 1984,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 1985,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 1986,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 1987,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 1988,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 1989,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 1990,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 1991,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 1992,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 1993,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 1994,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 1995,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 1996,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 1997,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 1998,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 1999,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2000,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2001,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2002,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2003,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2004,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2005,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2006,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2007,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2008,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2009,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2010,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2011,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2012,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2013,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2014,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2015,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2016,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2017,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2018,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2019,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2020,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2021,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2022,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2023,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2024,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2025,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2026,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2027,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2028,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2029,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2030,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2031,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2032,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2033,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2034,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2035,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2036,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2037,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2038,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2039,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2040,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2041,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2042,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2043,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2044,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2045,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2046,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2047,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2048,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2049,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2050,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2051,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2052,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2053,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2054,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2055,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2056,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2057,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2058,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2059,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2060,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2061,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2062,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2063,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2064,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2065,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2066,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2067,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2068,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2069,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2070,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2071,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2072,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2073,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2074,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2075,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2076,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2077,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2078,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2079,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2080,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2081,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2082,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2083,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2084,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2085,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2086,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2087,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2088,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2089,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2090,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2091,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2092,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2093,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2094,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2095,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2096,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2097,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2098,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2099,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2100,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2101,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2102,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2103,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2104,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2105,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2106,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2107,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2108,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2109,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2110,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2111,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2112,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2113,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2114,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2115,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2116,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2117,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2118,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2119,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2120,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2121,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2122,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2123,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2124,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2125,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2126,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2127,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2128,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2129,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2130,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2131,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2132,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2133,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2134,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2135,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2136,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2137,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2138,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2139,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2140,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2141,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2142,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2143,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2144,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2145,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2146,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2394,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 2802,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 3090,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 3408,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 3607,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 3889,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 4347,
       "cmd": {
         "c": "ContinueAfterRound"
       }
     },
     {
-      "tick": 14446,
-      "cmd": {
-        "c": "ShopBuy",
-        "offerId": "offer-1"
-      }
-    },
-    {
-      "tick": 14446,
-      "cmd": {
-        "c": "ShopBuy",
-        "offerId": "offer-3"
-      }
-    },
-    {
-      "tick": 14446,
+      "tick": 4347,
       "cmd": {
         "c": "ShopBuy",
         "offerId": "offer-0"
       }
     },
     {
-      "tick": 14446,
+      "tick": 4347,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-1",
+        "target": {
+          "reel": 2
+        }
+      }
+    },
+    {
+      "tick": 4347,
       "cmd": {
         "c": "ShopBuy",
         "offerId": "offer-2"
       }
     },
     {
-      "tick": 14446,
+      "tick": 4347,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-3"
+      }
+    },
+    {
+      "tick": 4347,
       "cmd": {
         "c": "ShopLeave"
       }
     },
     {
-      "tick": 14446,
+      "tick": 4347,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 4606,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 4818,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 5174,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 5464,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 5817,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 6065,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 6610,
       "cmd": {
         "c": "ContinueAfterRound"
       }
     },
     {
-      "tick": 14446,
+      "tick": 6610,
       "cmd": {
-        "c": "Spin"
+        "c": "ShopBuy",
+        "offerId": "offer-3"
       }
     },
     {
-      "tick": 14707,
+      "tick": 6610,
       "cmd": {
-        "c": "Spin"
+        "c": "ShopBuy",
+        "offerId": "offer-0"
       }
     },
     {
-      "tick": 14830,
+      "tick": 6610,
       "cmd": {
-        "c": "Spin"
+        "c": "ShopBuy",
+        "offerId": "offer-2"
       }
     },
     {
-      "tick": 15153,
+      "tick": 6610,
       "cmd": {
-        "c": "Spin"
+        "c": "ShopLeave"
       }
     },
     {
-      "tick": 15282,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 15421,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 15541,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 16152,
+      "tick": 6610,
       "cmd": {
         "c": "ContinueAfterRound"
       }
     },
     {
-      "tick": 16152,
+      "tick": 6610,
+      "cmd": {
+        "c": "Drink",
+        "slot": 0
+      }
+    },
+    {
+      "tick": 6610,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 6859,
+      "cmd": {
+        "c": "Drink",
+        "slot": 1
+      }
+    },
+    {
+      "tick": 6859,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 7158,
+      "cmd": {
+        "c": "Drink",
+        "slot": 2
+      }
+    },
+    {
+      "tick": 7158,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 7497,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 7901,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 8082,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 8362,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 8931,
+      "cmd": {
+        "c": "ContinueAfterRound"
+      }
+    },
+    {
+      "tick": 8931,
       "cmd": {
         "c": "ChooseRelic",
-        "index": 1
+        "index": 2
       }
     },
     {
-      "tick": 16152,
+      "tick": 8931,
+      "cmd": {
+        "c": "ChooseFloor",
+        "floorId": "FLOOR_FOUNDRY"
+      }
+    },
+    {
+      "tick": 9081,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 9414,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 9693,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 9964,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 10112,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 10429,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 10601,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 11103,
+      "cmd": {
+        "c": "ContinueAfterRound"
+      }
+    },
+    {
+      "tick": 11103,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-1"
+      }
+    },
+    {
+      "tick": 11103,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-0"
+      }
+    },
+    {
+      "tick": 11103,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-3"
+      }
+    },
+    {
+      "tick": 11103,
+      "cmd": {
+        "c": "ShopLeave"
+      }
+    },
+    {
+      "tick": 11103,
+      "cmd": {
+        "c": "Drink",
+        "slot": 0
+      }
+    },
+    {
+      "tick": 11103,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 11294,
+      "cmd": {
+        "c": "Drink",
+        "slot": 1
+      }
+    },
+    {
+      "tick": 11294,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 11579,
+      "cmd": {
+        "c": "Drink",
+        "slot": 2
+      }
+    },
+    {
+      "tick": 11579,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 11780,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 12075,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 12446,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 12692,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 13300,
+      "cmd": {
+        "c": "ContinueAfterRound"
+      }
+    },
+    {
+      "tick": 13300,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-2"
+      }
+    },
+    {
+      "tick": 13300,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-0"
+      }
+    },
+    {
+      "tick": 13300,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-3"
+      }
+    },
+    {
+      "tick": 13300,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-1"
+      }
+    },
+    {
+      "tick": 13300,
+      "cmd": {
+        "c": "ShopLeave"
+      }
+    },
+    {
+      "tick": 13300,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 13505,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 13653,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 14033,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 14427,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 14874,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 15063,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 15726,
+      "cmd": {
+        "c": "ContinueAfterRound"
+      }
+    },
+    {
+      "tick": 15726,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-2"
+      }
+    },
+    {
+      "tick": 15726,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-3"
+      }
+    },
+    {
+      "tick": 15726,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-1"
+      }
+    },
+    {
+      "tick": 15726,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-0"
+      }
+    },
+    {
+      "tick": 15726,
+      "cmd": {
+        "c": "ShopLeave"
+      }
+    },
+    {
+      "tick": 15726,
+      "cmd": {
+        "c": "ContinueAfterRound"
+      }
+    },
+    {
+      "tick": 15726,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 15878,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 16029,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 16240,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 16535,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 16710,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 17022,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 17601,
+      "cmd": {
+        "c": "ContinueAfterRound"
+      }
+    },
+    {
+      "tick": 17601,
       "cmd": {
         "c": "ChooseFloor",
         "floorId": "FLOOR_PENTHOUSE"
       }
     },
     {
-      "tick": 16302,
+      "tick": 17751,
       "cmd": {
         "c": "Spin"
       }
     },
     {
-      "tick": 16680,
+      "tick": 18040,
       "cmd": {
         "c": "Spin"
       }
     },
     {
-      "tick": 16915,
+      "tick": 18287,
       "cmd": {
         "c": "Spin"
       }
     },
     {
-      "tick": 17036,
+      "tick": 18572,
       "cmd": {
         "c": "Spin"
       }
     },
     {
-      "tick": 17279,
+      "tick": 18758,
       "cmd": {
         "c": "Spin"
       }
     },
     {
-      "tick": 17439,
+      "tick": 19181,
       "cmd": {
         "c": "Spin"
       }
     },
     {
-      "tick": 17589,
+      "tick": 19467,
       "cmd": {
         "c": "Spin"
       }
     },
     {
-      "tick": 18106,
+      "tick": 20042,
       "cmd": {
         "c": "ContinueAfterRound"
       }
     },
     {
-      "tick": 18106,
-      "cmd": {
-        "c": "ShopBuy",
-        "offerId": "offer-2"
-      }
-    },
-    {
-      "tick": 18106,
-      "cmd": {
-        "c": "ShopBuy",
-        "offerId": "offer-3",
-        "target": {
-          "reel": 2
-        }
-      }
-    },
-    {
-      "tick": 18106,
-      "cmd": {
-        "c": "ShopBuy",
-        "offerId": "offer-1",
-        "target": {
-          "reel": 1
-        }
-      }
-    },
-    {
-      "tick": 18106,
-      "cmd": {
-        "c": "ShopBuy",
-        "offerId": "offer-0",
-        "target": {
-          "reel": 2
-        }
-      }
-    },
-    {
-      "tick": 18106,
-      "cmd": {
-        "c": "ShopLeave"
-      }
-    },
-    {
-      "tick": 18106,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 18361,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 18656,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 19072,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 19210,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 19609,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 19730,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 20248,
-      "cmd": {
-        "c": "ContinueAfterRound"
-      }
-    },
-    {
-      "tick": 20248,
-      "cmd": {
-        "c": "ShopBuy",
-        "offerId": "offer-2"
-      }
-    },
-    {
-      "tick": 20248,
-      "cmd": {
-        "c": "ShopBuy",
-        "offerId": "offer-1",
-        "target": {
-          "reel": 0
-        }
-      }
-    },
-    {
-      "tick": 20248,
-      "cmd": {
-        "c": "ShopBuy",
-        "offerId": "offer-3",
-        "target": {
-          "reel": 0
-        }
-      }
-    },
-    {
-      "tick": 20248,
-      "cmd": {
-        "c": "ShopBuy",
-        "offerId": "offer-0",
-        "target": {
-          "reel": 2
-        }
-      }
-    },
-    {
-      "tick": 20248,
-      "cmd": {
-        "c": "ShopLeave"
-      }
-    },
-    {
-      "tick": 20248,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 20386,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 20708,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 20866,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 21072,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 21272,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 21683,
-      "cmd": {
-        "c": "Spin"
-      }
-    },
-    {
-      "tick": 22149,
-      "cmd": {
-        "c": "ContinueAfterRound"
-      }
-    },
-    {
-      "tick": 22149,
+      "tick": 20042,
       "cmd": {
         "c": "ShopBuy",
         "offerId": "offer-1"
       }
     },
     {
-      "tick": 22149,
+      "tick": 20042,
       "cmd": {
         "c": "ShopBuy",
-        "offerId": "offer-3"
+        "offerId": "offer-4"
       }
     },
     {
-      "tick": 22149,
+      "tick": 20042,
       "cmd": {
         "c": "ShopBuy",
         "offerId": "offer-2"
       }
     },
     {
-      "tick": 22149,
+      "tick": 20042,
       "cmd": {
         "c": "ShopBuy",
         "offerId": "offer-0"
       }
     },
     {
-      "tick": 22149,
+      "tick": 20042,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-3"
+      }
+    },
+    {
+      "tick": 20042,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-5"
+      }
+    },
+    {
+      "tick": 20042,
       "cmd": {
         "c": "ShopLeave"
       }
     },
     {
-      "tick": 22149,
+      "tick": 20042,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 20467,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 20755,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 21018,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 21232,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 21400,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 21662,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 22354,
       "cmd": {
         "c": "ContinueAfterRound"
       }
     },
     {
-      "tick": 22149,
+      "tick": 22354,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-4"
+      }
+    },
+    {
+      "tick": 22354,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-3"
+      }
+    },
+    {
+      "tick": 22354,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-5"
+      }
+    },
+    {
+      "tick": 22354,
+      "cmd": {
+        "c": "ShopLeave"
+      }
+    },
+    {
+      "tick": 22354,
+      "cmd": {
+        "c": "Drink",
+        "slot": 0
+      }
+    },
+    {
+      "tick": 22354,
       "cmd": {
         "c": "Spin"
       }
     },
     {
-      "tick": 22313,
+      "tick": 22507,
+      "cmd": {
+        "c": "Drink",
+        "slot": 1
+      }
+    },
+    {
+      "tick": 22507,
       "cmd": {
         "c": "Spin"
       }
     },
     {
-      "tick": 22556,
+      "tick": 22806,
+      "cmd": {
+        "c": "Drink",
+        "slot": 2
+      }
+    },
+    {
+      "tick": 22806,
       "cmd": {
         "c": "Spin"
       }
     },
     {
-      "tick": 22872,
+      "tick": 23098,
       "cmd": {
         "c": "Spin"
       }
     },
     {
-      "tick": 23345,
+      "tick": 23559,
       "cmd": {
         "c": "Spin"
       }
     },
     {
-      "tick": 23495,
+      "tick": 23835,
       "cmd": {
         "c": "Spin"
       }
     },
     {
-      "tick": 23856,
+      "tick": 24006,
       "cmd": {
         "c": "Spin"
       }
     },
     {
-      "tick": 24433,
+      "tick": 24553,
+      "cmd": {
+        "c": "ContinueAfterRound"
+      }
+    },
+    {
+      "tick": 24553,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-1"
+      }
+    },
+    {
+      "tick": 24553,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-3"
+      }
+    },
+    {
+      "tick": 24553,
+      "cmd": {
+        "c": "ShopBuy",
+        "offerId": "offer-2"
+      }
+    },
+    {
+      "tick": 24553,
+      "cmd": {
+        "c": "ShopLeave"
+      }
+    },
+    {
+      "tick": 24553,
+      "cmd": {
+        "c": "ContinueAfterRound"
+      }
+    },
+    {
+      "tick": 24553,
+      "cmd": {
+        "c": "Drink",
+        "slot": 0
+      }
+    },
+    {
+      "tick": 24553,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 24863,
+      "cmd": {
+        "c": "Drink",
+        "slot": 1
+      }
+    },
+    {
+      "tick": 24863,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 25301,
+      "cmd": {
+        "c": "Drink",
+        "slot": 2
+      }
+    },
+    {
+      "tick": 25301,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 25614,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 25949,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 26246,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 26664,
+      "cmd": {
+        "c": "Spin"
+      }
+    },
+    {
+      "tick": 27117,
       "cmd": {
         "c": "ContinueAfterRound"
       }
@@ -973,11 +2034,11 @@
   "reachedVictory": true,
   "flagged": false,
   "flag": null,
-  "note": "Reached Victory in 100 seeded candidate runs.",
+  "note": "Reached Victory in 20 seeded candidate runs.",
   "finalPhase": "VICTORY",
   "floorId": "FLOOR_PENTHOUSE",
   "round": 4,
-  "bankroll": 15869262,
+  "bankroll": 4263105,
   "floorsCleared": [
     "FLOOR_NEON",
     "FLOOR_FOUNDRY",
