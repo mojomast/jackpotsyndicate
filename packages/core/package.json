@@ -1,0 +1,14 @@
+{
+  "name": "@jackpotsyndicate/core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "dependencies": {
+    "@jackpotsyndicate/contracts": "workspace:*",
+    "@jackpotsyndicate/engine": "workspace:*",
+    "@jackpotsyndicate/physics": "workspace:*"
+  },
+  "exports": { ".": "./src/index.ts" }
+}

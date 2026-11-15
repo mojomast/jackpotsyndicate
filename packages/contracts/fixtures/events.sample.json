@@ -1,0 +1,114 @@
+[
+  { "tick": 0, "t": "RunStarted", "seed": "sample-seed-7" },
+  { "tick": 0, "t": "PhaseChanged", "from": "TITLE", "to": "PREP" },
+  { "tick": 1, "t": "SpinStarted", "spinIndex": 0, "cols": 3, "rows": 3 },
+  { "tick": 1, "t": "PhaseChanged", "from": "PREP", "to": "SPINNING" },
+  { "tick": 30, "t": "ReelStopped", "col": 0, "symbols": ["cherry", "uranium", "diamond"] },
+  { "tick": 42, "t": "ReelStopped", "col": 1, "symbols": ["cherry", "seven", "skull"] },
+  { "tick": 54, "t": "ReelStopped", "col": 2, "symbols": ["cherry", "diamond", "uranium"] },
+  {
+    "tick": 60,
+    "t": "SpinEvaluated",
+    "grid": [
+      ["cherry", "uranium", "diamond"],
+      ["cherry", "seven", "skull"],
+      ["cherry", "diamond", "uranium"]
+    ],
+    "wins": [
+      {
+        "kind": "line",
+        "symbolId": "cherry",
+        "cells": [[0, 0], [1, 0], [2, 0]],
+        "lineId": "row0",
+        "lineMult": 1
+      }
+    ],
+    "chips": 60,
+    "addMult": 3,
+    "xMult": 1,
+    "equity": 60,
+    "orbPlan": [
+      { "cell": [0, 0], "symbolId": "cherry", "chips": 20 },
+      { "cell": [1, 0], "symbolId": "cherry", "chips": 20 },
+      { "cell": [2, 0], "symbolId": "cherry", "chips": 20 }
+    ]
+  },
+  { "tick": 61, "t": "PhaseChanged", "from": "SPINNING", "to": "RESOLVING" },
+  { "tick": 66, "t": "OrbValued", "orbId": 100, "chips": 20 },
+  { "tick": 66, "t": "OrbLaunched", "orbId": 100, "x": 100, "symbolId": "cherry" },
+  { "tick": 72, "t": "OrbValued", "orbId": 101, "chips": 20 },
+  { "tick": 72, "t": "OrbLaunched", "orbId": 101, "x": 300, "symbolId": "cherry" },
+  { "tick": 78, "t": "OrbValued", "orbId": 102, "chips": 20 },
+  { "tick": 78, "t": "OrbLaunched", "orbId": 102, "x": 500, "symbolId": "cherry" },
+  { "tick": 80, "t": "PegHit", "orbId": 100, "pegId": 0, "kind": "gold", "hitIndex": 0, "chained": false },
+  {
+    "tick": 100,
+    "t": "ChuteExit",
+    "orbId": 100,
+    "symbolId": "cherry",
+    "chute": 0,
+    "x": 100,
+    "tokenIds": [200],
+    "mergedInto": []
+  },
+  { "tick": 100, "t": "TokenSpawned", "tokenId": 200, "x": 100, "y": 313, "symbolId": "cherry" },
+  { "tick": 100, "t": "TokenValued", "tokenId": 200, "cash": 48 },
+  {
+    "tick": 105,
+    "t": "ChuteExit",
+    "orbId": 101,
+    "symbolId": "cherry",
+    "chute": 1,
+    "x": 300,
+    "tokenIds": [201],
+    "mergedInto": []
+  },
+  { "tick": 105, "t": "TokenSpawned", "tokenId": 201, "x": 300, "y": 313, "symbolId": "cherry" },
+  { "tick": 105, "t": "TokenValued", "tokenId": 201, "cash": 90 },
+  {
+    "tick": 110,
+    "t": "ChuteExit",
+    "orbId": 102,
+    "symbolId": "cherry",
+    "chute": 2,
+    "x": 500,
+    "tokenIds": [202],
+    "mergedInto": []
+  },
+  { "tick": 110, "t": "TokenSpawned", "tokenId": 202, "x": 500, "y": 313, "symbolId": "cherry" },
+  { "tick": 110, "t": "TokenValued", "tokenId": 202, "cash": 180 },
+  { "tick": 120, "t": "DozerFullExtension", "count": 1 },
+  {
+    "tick": 130,
+    "t": "LipDrop",
+    "tokenId": 200,
+    "symbolId": "cherry",
+    "skin": "cherry",
+    "x": 300,
+    "y": 484,
+    "vx": 0,
+    "vy": 1,
+    "radius": 6.5,
+    "stack": 1,
+    "magnetic": false
+  },
+  { "tick": 130, "t": "CashBanked", "tokenId": 200, "cash": 48, "x": 300 },
+  { "tick": 130, "t": "BankrollChanged", "delta": 48, "total": 548, "reason": "lip" },
+  {
+    "tick": 140,
+    "t": "GutterLoss",
+    "side": "left",
+    "tokenId": 201,
+    "symbolId": "cherry",
+    "skin": "cherry",
+    "x": 0,
+    "y": 420,
+    "vx": -1,
+    "vy": 0.25,
+    "radius": 6.5,
+    "stack": 1,
+    "magnetic": false
+  },
+  { "tick": 145, "t": "FeverChanged", "value": 20 },
+  { "tick": 150, "t": "PhaseChanged", "from": "RESOLVING", "to": "PREP" }
+]

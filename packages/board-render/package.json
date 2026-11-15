@@ -1,0 +1,15 @@
+{
+  "name": "@jackpotsyndicate/board-render",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "dependencies": {
+    "@jackpotsyndicate/contracts": "workspace:*",
+    "pixi.js": "^8.0.0"
+  },
+  "exports": {
+    ".": "./src/index.ts"
+  }
+}

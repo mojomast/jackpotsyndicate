@@ -52,6 +52,7 @@ export interface ReelSpinParams extends Motion { cols: number; rows: number; fin
 export interface LineWinParams extends Motion { cols: number; rows: number; wins: { cells: AnimCell[]; kind: 'line' | 'ways' | 'cluster'; overvolt?: boolean }[] }
 export interface TumbleStepParams extends Motion { cols: number; rows: number; cleared: AnimCell[]; gridAfter: SymbolId[][] }
 export interface GridRelayoutParams extends Motion { from: { cols: number; rows: number }; to: { cols: number; rows: number } }
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type -- names the empty reduced-motion payload
 export interface FeverParams extends Motion {}
 export interface BossIntroParams extends Motion { bossId: BossId; bossName: string; tagline: string }
 export interface FloorTransitionParams extends Motion { fromFloor: FloorId; toFloor: FloorId; floorName: string }

@@ -1,0 +1,28 @@
+{
+  "name": "@jackpotsyndicate/game",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "dev": "vite",
+    "build": "echo 'app shell pending T-070'",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@jackpotsyndicate/anim": "workspace:*",
+    "@jackpotsyndicate/audio": "workspace:*",
+    "@jackpotsyndicate/board-render": "workspace:*",
+    "@jackpotsyndicate/contracts": "workspace:*",
+    "@jackpotsyndicate/core": "workspace:*",
+    "gsap": "^3.15.0",
+    "pixi.js": "^8.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "zustand": "^5.0.0"
+  },
+  "exports": {
+    ".": "./src/index.ts"
+  }
+}

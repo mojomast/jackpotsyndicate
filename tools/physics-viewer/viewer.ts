@@ -8,7 +8,7 @@ import { BOARD, DEFAULT_MODIFIERS } from '@jackpotsyndicate/contracts';
 import type { PhysicsEvent, PhysicsModifiers, SimSnapshot } from '@jackpotsyndicate/contracts';
 import { createSimWorld, Prng } from '@jackpotsyndicate/physics';
 import { FLOORS } from '../physics-harness/floors';
-import { ORBS, runSpins, seedShelf, TOKENS } from '../physics-harness/lib';
+import { ORBS, runSpins, seedShelf } from '../physics-harness/lib';
 
 const COLORS: Record<string, string> = { diamond: '#06b6d4', cherry: '#f43f5e', uranium: '#10b981', skull: '#a855f7', seven: '#fbbf24', scrap: '#b45309', ice: '#bae6fd' };
 const canvas = document.getElementById('c') as HTMLCanvasElement;
@@ -113,7 +113,6 @@ function onEvent(e: PhysicsEvent) {
     falling.push({ x: e.x, y: e.y, vx: e.vx, vy: e.t === 'LipDrop' ? Math.max(1, e.vy) : 0.5, r: e.radius, c: e.t === 'LipDrop' ? COLORS[e.symbolId] ?? '#fbbf24' : '#7f1d1d', life: 26, stack: e.stack, gutter: e.t === 'GutterLoss' });
   }
 }
-let frame = 0;
 function loop() {
   for (let k = 0; k < speed; k++) {
     if (auto && world.tick % 190 === 0) spin();
@@ -121,7 +120,6 @@ function loop() {
   }
   for (let i = falling.length - 1; i >= 0; i--) { const f = falling[i]!; f.vy += 0.35; f.x += f.vx; f.y += f.vy; if (--f.life <= 0) falling.splice(i, 1); }
   draw(world.snapshot());
-  frame++;
   requestAnimationFrame(loop);
 }
 const $ = (id: string) => document.getElementById(id)!;
