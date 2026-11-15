@@ -161,3 +161,34 @@ test('a save at RELIC_PICK resumes with the same relic offer re-announced', () =
   assert.deepEqual(resumed.dispatch({ c: 'ChooseRelic', index: 2 }), { ok: true });
   assert.deepEqual(resumed.getState().trinkets, ['turboDozerCam']);
 });
+
+test('drinks boost the spin they are drunk for and do not leak into the next (D-08, SPEC 2.7)', () => {
+  const evaluate = (drink: string | null) => {
+    const core = newCore(contentWithStrips(['cherry'], ['cherry']));
+    if (drink !== null) {
+      live(core).drinkTray = [drink, null, null];
+      assert.deepEqual(core.dispatch({ c: 'Drink', slot: 0 }), { ok: true });
+    }
+    const events = runSpin(core);
+    const evaluated = events.find((event) => event.t === 'SpinEvaluated');
+    assert.ok(evaluated && evaluated.t === 'SpinEvaluated');
+    return { evaluated, nextSpin: core.getState().nextSpin };
+  };
+  const plain = evaluate(null).evaluated;
+  // Five cherry lines: A = 1 + 5 x 2.
+  assert.equal(plain.addMult, 11);
+  assert.equal(plain.xMult, 1);
+
+  const martini = evaluate('dirtySyndicateMartini');
+  assert.equal(martini.evaluated.addMult, 12);
+  assert.equal(martini.evaluated.orbPlan.filter((entry) => entry.cell === null).length, 2, '+2 bonus orbs');
+  assert.deepEqual(martini.nextSpin, { xBonus: {}, addMult: 0, bonusOrbs: 0 });
+
+  const fairy = evaluate('greenFairyAbsinthe');
+  assert.equal(fairy.evaluated.xMult, 1.5);
+  assert.deepEqual(fairy.nextSpin.xBonus, {});
+
+  const absinthe = evaluate('alchemistAbsinthe');
+  assert.equal(absinthe.evaluated.xMult, 2);
+  assert.deepEqual(absinthe.nextSpin.xBonus, {});
+});

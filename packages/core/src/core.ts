@@ -114,6 +114,8 @@ interface ActiveSpin {
   /** CLUSTER tumble steps, emitted as TumbleStep before the first orb (C-6). */
   tumbleQueue: { atTick: number; cleared: Cell[]; gridAfter: SymbolId[][] }[];
   tumbleCursor: number;
+  /** Peg hits so far this spin, across all orbs ("every 3rd peg hit", Tesla). */
+  pegHits: number;
   nextSpinBaseline: RunState['nextSpin'];
 }
 
@@ -489,6 +491,7 @@ export class Core implements GameCore {
         launchCursor: 0,
         tumbleQueue: [],
         tumbleCursor: 0,
+        pegHits: 0,
         nextSpinBaseline: { xBonus: {}, addMult: 0, bonusOrbs: 0 },
       };
       this.handleSpinStart();
@@ -663,14 +666,25 @@ export class Core implements GameCore {
   private evaluateCurrentSpin(spin: ActiveSpin): void {
     const state = this.machine.getState();
     const grid = state.grid.visible.map((column) => column.slice());
+    const frozenCells = state.grid.frozen.map((entry) => [entry.cell[0], entry.cell[1]] as Cell);
+
+    // D-08: a drink is drunk in PREP for the coming spin, so its "next spin"
+    // bonuses (Martini +1 Mult, Absinthe +1 X, Green Fairy x1.5 X) apply to
+    // this evaluation. Fold them in before scoring reads state.nextSpin.
+    const drink = this.applyDrinkEvaluation(grid, frozenCells);
+
     const scored = scoreGrid(this.content, state, grid, (col) => this.machine.drawRefill(col));
     const base = scored.result;
     // Wins on the drawn grid; tumble wins live on later grids.
     const drawnWins = scored.tumble === null ? base.wins : scored.tumble.initialWins;
     this.drainIdleSkulls(grid, drawnWins);
 
+    const consumed = {
+      xBonus: { ...state.nextSpin.xBonus },
+      addMult: state.nextSpin.addMult,
+    };
     const symbolRefs = contentSymbols(this.content).flatMap((symbol) => symbol.effects);
-    const refs = [...symbolRefs, ...this.itemHandlerRefs()];
+    const refs = [...symbolRefs, ...trinketRefs(currentItems(this.content), state.trinkets)];
     const evaluated = dispatchHook(
       'onSpinEvaluated',
       refs,
@@ -680,14 +694,22 @@ export class Core implements GameCore {
         grid,
         visible: grid,
         wins: drawnWins,
-        frozenCells: state.grid.frozen.map((entry) => [entry.cell[0], entry.cell[1]] as Cell),
+        frozenCells,
       } as never,
     );
     const evaluatedEffects = applyEffects(evaluated, { nextSpin: state.nextSpin });
     this.commitNextSpin(evaluatedEffects);
+    // Next-spin bonuses earned *by* this evaluation (trinkets) carry to the
+    // following spin; everything already in nextSpin was consumed above.
+    const earnedX: Record<string, number> = {};
+    for (const key of Object.keys(evaluatedEffects.nextSpinX)) {
+      const delta = (evaluatedEffects.nextSpinX[key] ?? 0) - (consumed.xBonus[key] ?? 0);
+      if (delta > 1e-9) earnedX[key] = delta;
+    }
+    const earnedAddMult = Math.max(0, evaluatedEffects.nextSpinAddMult - consumed.addMult);
 
-    let addMult = base.addMult + evaluatedEffects.addMult;
-    let xMult = base.xMult * evaluatedEffects.xMult;
+    let addMult = base.addMult + evaluatedEffects.addMult + drink.addMult;
+    let xMult = base.xMult * evaluatedEffects.xMult * drink.xMult;
     const orbPlan = base.orbPlan.map((entry) => ({
       cell: entry.cell === null ? null : ([entry.cell[0], entry.cell[1]] as Cell),
       symbolId: entry.symbolId,
@@ -732,16 +754,22 @@ export class Core implements GameCore {
     const cashPerChip = this.content.balance.cashPerChip;
     const equity = chips * addMult * xMult * cashPerChip;
 
+    const stats = this.machine.getState().stats;
+    if (Number.isFinite(equity) && equity > stats.bestSpinEquity) stats.bestSpinEquity = equity;
+
     spin.orbPlan = orbPlan;
     spin.addMult = addMult;
     spin.xMult = xMult;
     spin.chips = chips;
     spin.equity = equity;
     spin.evaluated = true;
+    const after = this.machine.getState().nextSpin;
+    const baselineX: Record<string, number> = {};
+    for (const key of Object.keys(after.xBonus)) baselineX[key] = (after.xBonus[key] ?? 0) - (earnedX[key] ?? 0);
     spin.nextSpinBaseline = {
-      xBonus: { ...this.machine.getState().nextSpin.xBonus },
-      addMult: this.machine.getState().nextSpin.addMult,
-      bonusOrbs: this.machine.getState().nextSpin.bonusOrbs,
+      xBonus: baselineX,
+      addMult: after.addMult - earnedAddMult,
+      bonusOrbs: after.bonusOrbs,
     };
     this.lastEvaluation = { addMult, xMult };
 
@@ -778,6 +806,28 @@ export class Core implements GameCore {
       entry,
       index: index + 1,
     }));
+  }
+
+  /**
+   * Dispatch the active drink's onSpinEvaluated effects for the spin it was
+   * drunk for. Next-spin parts land in state.nextSpin (consumed by this
+   * scoring pass); direct Mult/X parts are returned for the caller to fold in.
+   */
+  private applyDrinkEvaluation(grid: SymbolId[][], frozenCells: Cell[]): { addMult: number; xMult: number } {
+    const state = this.machine.getState();
+    if (state.activeDrink === null) return { addMult: 0, xMult: 1 };
+    const refs = drinkRefs(currentItems(this.content), [state.activeDrink]);
+    const effects = dispatchHook('onSpinEvaluated', refs, this.effectContext(), {
+      tick: state.tick,
+      grid,
+      visible: grid,
+      frozenCells,
+    } as never);
+    if (effects.length === 0) return { addMult: 0, xMult: 1 };
+    const resolved = applyEffects(effects, { nextSpin: state.nextSpin, modifiers: this.modifiers });
+    this.commitNextSpin(resolved);
+    this.applyResolvedSideEffects(resolved);
+    return { addMult: resolved.addMult, xMult: resolved.xMult };
   }
 
   /**
@@ -994,7 +1044,7 @@ export class Core implements GameCore {
         pegId: event.pegId,
         kind: event.kind,
         hitIndex: event.hitIndex,
-        pegHitCount: event.hitIndex,
+        pegHitCount: this.activeSpin === null ? event.hitIndex : ++this.activeSpin.pegHits,
         chained: event.chained,
         chips: state.orbChips[event.orbId] ?? 0,
       } as never,
