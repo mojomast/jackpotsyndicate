@@ -45,13 +45,13 @@ work on 2026-11-15, not what the project is expected to pass later.
 | `pnpm build` | **PASS**; Vite reports a >500 kB game chunk warning |
 | `pnpm test` | **NOT RUN** in this docs task |
 | `pnpm sim rake`, `sim hitrate`, `sim balance`, `sim replay` | **NOT RUN** in this docs task |
-| `pnpm assets:build`, `assets:verify` | **PASS** for the working imagegen batch: 71 keys, 65 locked, 6 placeholders; verify checked 73 files |
+| `pnpm assets:build`, `assets:verify` | **PASS** for the working imagegen batch: 71 keys, 67 locked, 4 placeholders; verify checked 73 files |
 | Browser E2E / Playwright / cross-browser determinism | **NOT RUN**; no completed three-browser E2E result is claimed |
-| Image generation | **Working batch imported**: 65/71 PNGs locked; six placeholders remain. Not final art |
+| Image generation | **Working batch imported**: 67/71 PNGs locked; four placeholders remain. Not final art |
 | HyperFrames lint / trailer re-render | **NOT RUN** in this docs task |
 
-The committed asset manifest currently resolves **65 of 71** logical keys to locked
-imagegen derivatives and **6** to generated vector placeholders. See
+The committed asset manifest currently resolves **67 of 71** logical keys to locked
+imagegen derivatives and **4** to generated vector placeholders. See
 [`docs/ASSET_CREDITS.md`](docs/ASSET_CREDITS.md). The committed golden replay fixture
 records a Victory run at the current hash. See [`docs/DELIVERY.md`](docs/DELIVERY.md)
 for the full evidence log.

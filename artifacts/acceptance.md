@@ -30,19 +30,21 @@ every acceptance criterion is green; the gaps are listed explicitly.
 
 ## Asset state
 
-- 65 of 71 C-7 keys have locked real imagegen derivatives.
-- Six remain generated placeholders: `glyph.blood-diamond`, `glyph.uranium`, `ui.bezel`,
-  `vfx.coinburst`, `vfx.shock`, `vfx.spark`.
-- `tools/assets build`: 71 keys / 65 locked / 6 placeholders.
+- 67 of 71 C-7 keys have locked real imagegen derivatives.
+- Four remain generated placeholders: `glyph.uranium`, `vfx.coinburst`, `vfx.shock`,
+  `vfx.spark`.
+- `tools/assets build`: 71 keys / 67 locked / 4 placeholders.
 - `tools/assets verify`: 73 files checked, deterministic rebuild matched.
-- Output directory: 1,470,299 bytes (1.40 MiB), not packed atlases; the pipeline copies
+- Output directory: 1,484,177 bytes (1.42 MiB), not packed atlases; the pipeline copies
   per-key files and records atlas labels/frames.
 - Content item sprite keys were normalized to the canonical kebab-case catalog.
 - Reel symbols are inlined as data URIs to satisfy the zero-network J1 requirement.
 - Other asset groups are in the manifest but are not consumed everywhere in the UI.
 
 Handoff quality issues remain open: diamond token color, skull magnet, boss padding,
-`chassis.harness-hyper` shape, UI nine-slicing, and the six missing clean cutouts.
+`chassis.harness-hyper` shape, UI nine-slicing, and the four missing clean cutouts.
+The clean glyph and bezel refill candidates are integrated; the other refill sources
+were rejected for haze or an unrelated character.
 
 ## Commands run
 
