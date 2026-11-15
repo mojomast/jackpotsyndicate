@@ -17,6 +17,8 @@ export interface MetaRouterProps {
   /** Omit to derive the screen from the current RunState phase. */
   route?: MetaRoute;
   onNavigate?: MetaNavigate;
+  /** Back target for menu screens (Compendium). */
+  onBack?: () => void;
 }
 
 export function metaRouteForPhase(phase: Phase): MetaRoute {
@@ -43,7 +45,7 @@ export function metaRouteForPhase(phase: Phase): MetaRoute {
 }
 
 /** Standalone meta outlet; the shell router keeps its own Route union. */
-export function MetaRouter({ route, onNavigate }: MetaRouterProps) {
+export function MetaRouter({ route, onNavigate, onBack }: MetaRouterProps) {
   const phase = useGameStore((store) => store.state.phase);
   switch (route ?? metaRouteForPhase(phase)) {
     case 'shop':
@@ -57,7 +59,7 @@ export function MetaRouter({ route, onNavigate }: MetaRouterProps) {
     case 'victory':
       return <VictoryScreen onNavigate={onNavigate} />;
     case 'compendium':
-      return <CompendiumScreen onNavigate={onNavigate} />;
+      return <CompendiumScreen onNavigate={onNavigate} onBack={onBack} />;
     case 'resume':
       return <ResumePrompt onNavigate={onNavigate} />;
     case 'roundresult':

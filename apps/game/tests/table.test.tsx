@@ -58,6 +58,7 @@ const rtl = await import('@testing-library/react');
 const contracts = await import('@jackpotsyndicate/contracts');
 const contentModule = await import('../../../packages/content/src/index');
 const storeModule = await import('../src/store/gameStore');
+const mockModule = await import('./helpers/mockGameCore');
 const apiModule = await import('../src/testApi');
 const tableModule = await import('../src/screens/table/index');
 const hudModule = await import('../src/components/Hud');
@@ -66,7 +67,8 @@ const persistenceModule = await import('../src/screens/meta/persistence');
 const { render, screen, cleanup, fireEvent } = rtl;
 const { TEST_IDS, STORAGE_KEYS } = contracts;
 const { CONTENT_BUNDLE } = contentModule;
-const { MockGameCore, useGameStore } = storeModule;
+const { useGameStore } = storeModule;
+const { MockGameCore } = mockModule;
 const { TableScreen, createTableCore } = tableModule;
 const { Hud } = hudModule;
 const { saveCore } = persistenceModule;
@@ -200,7 +202,7 @@ test('saveCore refuses transient spin phases instead of writing a bricked save',
   assert.equal(browser.localStorage.getItem(STORAGE_KEYS.save), null);
 });
 
-test('saveCore blocks machine-private picker phases and allows durable settle', () => {
+test('saveCore writes durable picker and settle phases', () => {
   const fakeCore = (phase: string) =>
     ({
       getState: () => ({ phase }),
@@ -213,8 +215,8 @@ test('saveCore blocks machine-private picker phases and allows durable settle', 
       }),
     }) as never;
 
-  assert.equal(saveCore(fakeCore('RELIC_PICK')), null);
-  assert.equal(saveCore(fakeCore('JUMPER_PICK')), null);
+  assert.ok(saveCore(fakeCore('RELIC_PICK')));
+  assert.ok(saveCore(fakeCore('JUMPER_PICK')));
   assert.ok(saveCore(fakeCore('ROUND_SETTLE')));
 });
 

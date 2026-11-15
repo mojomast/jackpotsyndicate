@@ -6,22 +6,7 @@ import { MetaNotice, MetaScreen } from './MetaScreen';
 import { navigateTo, type MetaNavigate } from './navigation';
 import { saveCore } from './persistence';
 import { startRun } from './commands';
-
-const SEED_ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-
-function randomSeed(): string {
-  const bytes = new Uint8Array(6);
-  try {
-    globalThis.crypto?.getRandomValues(bytes);
-  } catch {
-    for (let index = 0; index < bytes.length; index++) {
-      bytes[index] = Math.floor(Math.random() * 256);
-    }
-  }
-  let out = '';
-  for (const byte of bytes) out += SEED_ALPHABET[byte % SEED_ALPHABET.length];
-  return `JS-${out}`;
-}
+import { randomSeed } from './seed';
 
 export interface SeedEntryProps {
   onNavigate?: MetaNavigate;
@@ -53,23 +38,24 @@ export function SeedEntry({ onNavigate, initialSeed, compact = false }: SeedEntr
 
   return (
     <MetaScreen
-      eyebrow="Seed entry · R-RUN-06"
+      eyebrow="Seeded run"
       title={compact ? 'Seed' : 'Start a run'}
       description="The seed fixes every reel stop, boss score and shop roll. Type one or roll a random seed, then copy it for a retry."
       testId="seed-entry"
+      className="seed-entry-screen"
     >
       {error ? <MetaNotice tone="error" testId="seed-entry-error">{error}</MetaNotice> : null}
       <form
-        className="start-form seed-entry-form"
+        className="seed-form seed-entry-form"
         onSubmit={(event) => {
           event.preventDefault();
           start();
         }}
       >
-        <label className="field">
+        <label className="field seed-field">
           <span>Run seed</span>
           <input
-            className="input"
+            className="input input-mono"
             type="text"
             value={seed}
             onChange={(event) => setSeed(event.target.value)}
@@ -79,18 +65,18 @@ export function SeedEntry({ onNavigate, initialSeed, compact = false }: SeedEntr
             spellCheck={false}
           />
         </label>
-        <button type="submit" className="btn btn-primary ui9-button" data-testid="start-run">
+        <button type="submit" className="btn btn-primary" data-testid="start-run">
           Start run
         </button>
         <button
           type="button"
-          className="btn"
+          className="btn btn-secondary"
           data-testid="randomize-seed"
           onClick={() => setSeed(randomSeed())}
         >
           Random seed
         </button>
-        <CopySeedButton seed={seed.trim().length > 0 ? seed.trim() : stateSeed} testId="copy-seed" />
+        <CopySeedButton seed={seed.trim().length > 0 ? seed.trim() : stateSeed} testId="copy-seed" className="btn btn-ghost" />
       </form>
       <p className="meta-hint">
         Current run seed: <strong>{stateSeed}</strong>. Seeds are shareable and

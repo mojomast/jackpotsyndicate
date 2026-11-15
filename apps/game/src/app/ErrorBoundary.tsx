@@ -110,7 +110,7 @@ export class AppErrorBoundary extends Component<AppErrorBoundaryProps, AppErrorB
           </p>
         ) : null}
 
-        <div className="stub-actions">
+        <div className="screen-actions">
           <button
             type="button"
             className="btn btn-cyan"
@@ -138,7 +138,7 @@ export class AppErrorBoundary extends Component<AppErrorBoundaryProps, AppErrorB
           </button>
         </div>
 
-        <p className="stub-note">
+        <p className="meta-hint">
           The resume path only accepts a validated save at a resumable phase. A
           damaged save is removed instead of being handed back to the loader.
         </p>
