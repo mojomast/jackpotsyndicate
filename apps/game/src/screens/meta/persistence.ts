@@ -57,6 +57,13 @@ function storage(): Storage | null {
 export function saveCore(core: GameCore = useGameStore.getState().core): SaveFile | null {
   const store = storage();
   if (store === null) return null;
+  // A spin's in-flight schedule lives beside RunState, not inside it. Writing
+  // a save while SPINNING/RESOLVING/ROUND_SETTLE produces a file that reloads
+  // into a stuck phase, so only durable boundaries may be persisted.
+  const phase = core.getState().phase;
+  if (phase === 'SPINNING' || phase === 'RESOLVING' || phase === 'ROUND_SETTLE') {
+    return null;
+  }
   try {
     const save = core.save();
     store.setItem(SAVE_STORAGE_KEY, JSON.stringify(save));

@@ -23,7 +23,8 @@ export function RoundResultScreen({ onNavigate }: RoundResultScreenProps) {
   useMetaAutosave();
   const state = useGameStore((store) => store.state);
   const events = useGameStore((store) => store.events);
-  const settled = latestResult(events);
+  const storedResult = useGameStore((store) => store.lastResult);
+  const settled = storedResult ?? latestResult(events);
 
   const fallback: RoundResultData =
     state.round >= 4

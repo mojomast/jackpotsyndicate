@@ -60,12 +60,16 @@ const contentModule = await import('../../../packages/content/src/index');
 const storeModule = await import('../src/store/gameStore');
 const apiModule = await import('../src/testApi');
 const tableModule = await import('../src/screens/table/index');
+const hudModule = await import('../src/components/Hud');
+const persistenceModule = await import('../src/screens/meta/persistence');
 
 const { render, screen, cleanup, fireEvent } = rtl;
-const { TEST_IDS } = contracts;
+const { TEST_IDS, STORAGE_KEYS } = contracts;
 const { CONTENT_BUNDLE } = contentModule;
 const { MockGameCore, useGameStore } = storeModule;
 const { TableScreen, createTableCore } = tableModule;
+const { Hud } = hudModule;
+const { saveCore } = persistenceModule;
 
 type GameEvent = import('@jackpotsyndicate/contracts').GameEvent;
 type RunState = import('@jackpotsyndicate/contracts').RunState;
@@ -157,6 +161,42 @@ test('real Table mounts cabinet, board, HUD, audio and command-only prep control
   assert.equal(useGameStore.getState().settings.speed, 4);
   fireEvent.click(screen.getByTestId('table-speed-1'));
   assert.equal(useGameStore.getState().settings.speed, 1);
+});
+
+test('HUD quota follows the content table on every floor (not the shallow prototype formula)', () => {
+  const baseline = useGameStore.getState().state;
+  useGameStore.setState({ state: { ...baseline, floorId: 'FLOOR_CRYO', round: 1 } });
+
+  render(React.createElement(Hud));
+  assert.equal(
+    screen.getByTestId(TEST_IDS.quota).textContent,
+    '$9,261',
+    'Cryo round 1 must use the content quota, not the 1000 × local-scale shortcut',
+  );
+});
+
+test('store snapshots a real core so React subscribers observe engine updates', () => {
+  const core = createTableCore({ seed: 'STORE-SNAPSHOT' });
+  assert.deepEqual(core.dispatch({ c: 'NewRun', seed: 'STORE-SNAPSHOT' }), { ok: true });
+  core.tick();
+  useGameStore.getState().attachCore(core);
+
+  const before = useGameStore.getState().state;
+  core.tick();
+  useGameStore.getState().tick();
+  const after = useGameStore.getState().state;
+
+  assert.notEqual(before, after, 'the store must not expose the core-owned mutable object to React');
+  assert.notEqual(before.tick, after.tick);
+});
+
+test('saveCore refuses transient spin phases instead of writing a bricked save', () => {
+  const core = useGameStore.getState().core;
+  assert.deepEqual(core.dispatch({ c: 'Spin' }), { ok: true });
+  assert.equal(core.getState().phase, 'SPINNING');
+
+  assert.equal(saveCore(core), null);
+  assert.equal(browser.localStorage.getItem(STORAGE_KEYS.save), null);
 });
 
 test('J1: fixed-seed spin reaches LipDrop and increases bankroll through the real GameCore', async () => {

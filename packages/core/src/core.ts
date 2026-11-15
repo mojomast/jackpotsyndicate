@@ -364,13 +364,17 @@ export class Core implements GameCore {
   }
 
   save(): SaveFile {
-    return createSaveFile(this.machine.getState(), this.sim);
+    const save = createSaveFile(this.machine.getState(), this.sim);
+    const lastResult = this.machine.getLastResult();
+    if (lastResult !== null) save.lastResult = lastResult;
+    return save;
   }
 
   load(save: SaveFile): CommandResult {
     const loaded = loadSave(save, this.sim);
     if (!loaded.ok) return { ok: false, error: 'INVALID_TARGET' };
     this.machine = RunMachine.fromState(this.content, loaded.state);
+    this.machine.setLastResult(loaded.save.lastResult ?? null);
     this.configuredFloorId = loaded.state.floorId;
     this.activeSpin = null;
     this.lastEvaluation = null;
@@ -519,6 +523,14 @@ export class Core implements GameCore {
 
   private handleSpinStart(): void {
     const state = this.machine.getState();
+    // RunMachine draws the reel before this hook. Keep the previous visible
+    // symbols for cells that were already frozen so a boss freeze actually
+    // survives the next draw instead of becoming a cosmetic badge.
+    const previousVisible = this.machine.getPreSpinVisible();
+    const frozenBefore = new Set(
+      state.grid.frozen.map((entry) => `${entry.cell[0]}:${entry.cell[1]}`),
+    );
+    this.machine.clearPreSpinVisible();
     const payload = {
       tick: state.tick,
       spinIndex: Math.max(0, state.stats.spins - 1),
@@ -550,6 +562,16 @@ export class Core implements GameCore {
       cell: [entry.cell[0], entry.cell[1]] as Cell,
       spins: entry.spins,
     }));
+    if (previousVisible !== null) {
+      for (const entry of state.grid.frozen) {
+        const key = `${entry.cell[0]}:${entry.cell[1]}`;
+        if (!frozenBefore.has(key)) continue;
+        const previous = previousVisible[entry.cell[0]]?.[entry.cell[1]];
+        if (previous !== undefined && state.grid.visible[entry.cell[0]] !== undefined) {
+          state.grid.visible[entry.cell[0]]![entry.cell[1]] = previous;
+        }
+      }
+    }
     if (plan.addedFrozen.length > 0) {
       this.emit({ t: 'CellsFrozen', cells: plan.addedFrozen.map((cell) => [...cell] as Cell), spins: 2 });
     }

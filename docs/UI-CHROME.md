@@ -41,11 +41,10 @@ The implementation follows the common 9-slice/nine-patch contract:
 - The source crops are tight derivatives of the generated UI art. They are embedded
   as data URIs in `apps/game/src/components/ui9-data.json`; the CSS variables are
   installed before first render so the zero-network test still holds.
-- The cabinet window is inset at left 12.6%, top 19%, width 71.5%, height 44%.
-  The live `.jsa-reel-window` fills that entire window; its 3×3 grid cells scale
-  to the window and the symbol artwork preserves its aspect ratio inside each
-  cell. The generated cabinet header and bezel rail are hidden because the asset
-  is now the chrome.
+- The cabinet window is inset at left 12.6%, top 25.7%, width 71.8%, height 44.3%.
+  Those percentages come from the transparent hole in the 365 × 343 cabinet
+  alpha, not from the earlier visual estimate; the old 19% top left the reel
+  window roughly one cell too high and let the cabinet frame paint over it.
 - The shell removes the 1440px cap, uses `100dvh`, safe-area padding and a
   full-width table stage. Desktop splits the stage into two equal columns; below
   900px it stacks. The side panels move below the game in a three-column row.

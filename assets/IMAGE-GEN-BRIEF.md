@@ -1,6 +1,6 @@
 # Image-generation brief — Jackpot Syndicate sprites
 
-**Status:** all **71** C-7 logical sprite keys currently resolve to generated vector placeholders. **0** real assets are locked. The game is fully playable with placeholders, but it does not have final art.
+**Status:** **67 of 71** C-7 logical sprite keys have locked generated assets; **4** remain generated placeholders (`glyph.uranium`, `vfx.coinburst`, `vfx.shock`, `vfx.spark`). The game is fully playable; these four are the remaining art gaps.
 
 This brief is ready to hand to an image-generation agent. The machine-readable request is [`assets/imagegen-keys.json`](imagegen-keys.json).
 

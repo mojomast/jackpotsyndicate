@@ -488,11 +488,19 @@ function contactSheetSvg(keys: string[], manifest: ResolvedManifest): string {
     const x = padding + (index % columns) * cellWidth;
     const y = header + Math.floor(index / columns) * cellHeight;
     const label = key.length > 27 ? `${key.slice(0, 26)}...` : key;
+    // Include the actual resolved image (or the placeholder vector), not just
+    // metadata. The contact sheet is the documented owner-review gate, so it
+    // must let a reviewer see the art without opening 71 files one by one.
+    const thumbnail =
+      'file' in entry && typeof entry.file === 'string' ? entry.file : null;
     lines.push(
       `  <rect x="${x + 4}" y="${y + 4}" width="${cellWidth - 8}" height="${cellHeight - 8}" rx="8" fill="hsl(${hue} 38% 13%)" stroke="hsl(${(hue + 42) % 360} 55% 38%)"/>`,
       `  <text x="${x + 14}" y="${y + 30}" font-family="monospace" font-size="11" fill="#fbbf24">${escapeXml(label)}</text>`,
       `  <text x="${x + 14}" y="${y + 50}" font-family="monospace" font-size="9" fill="#94a3b8">${'placeholder' in entry ? 'placeholder vector' : escapeXml(entry.atlas)}</text>`,
       `  <text x="${x + 14}" y="${y + 68}" font-family="monospace" font-size="8" fill="#64748b">${entry.sha256.slice(0, 16)}</text>`,
+      ...(thumbnail === null
+        ? []
+        : [`  <image x="${x + 158}" y="${y + 18}" width="56" height="56" href="${escapeXml(thumbnail)}" preserveAspectRatio="xMidYMid meet"/>`]),
     );
   });
   lines.push('</svg>', '');

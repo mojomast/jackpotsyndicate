@@ -1,7 +1,7 @@
 {
   "project": "jackpotsyndicate",
   "style_pack": "obsidian-noir",
-  "status": "all 71 C-7 keys currently resolve to generated vector placeholders; 0 locked real assets",
+  "status": "67 of 71 C-7 keys have locked generated assets; 4 remain placeholders (glyph.uranium, vfx.coinburst, vfx.shock, vfx.spark).",
   "delivery": {
     "root": "assets/imagegen/",
     "format": "PNG RGBA for alpha:true; PNG (opaque) for alpha:false",

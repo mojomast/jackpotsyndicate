@@ -352,6 +352,7 @@ export const saveFileSchema = z.object({
   run: runStateSchema,
   simBase64: z.string(),
   stateHash: z.string(),
+  lastResult: roundResultSchema.optional(),
 }) satisfies z.ZodType<SaveFile>;
 
 const exitInfoShape = {

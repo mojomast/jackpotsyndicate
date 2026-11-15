@@ -250,7 +250,9 @@ samp {
 /* Structural 9-slice chrome. The source frames are tight-cropped derivatives
  * of the generated UI art; corners stay fixed while edges stretch. */
 .panel.ui9-panel {
-  border: 12px solid transparent;
+  border-width: 12px 22px;
+  border-style: solid;
+  border-color: transparent;
   border-radius: 0;
   background: rgba(7, 9, 14, 0.18);
   border-image-source: var(--ui9-panel);
@@ -261,7 +263,9 @@ samp {
 }
 
 .btn-primary.ui9-button {
-  border: 9px solid transparent;
+  border-width: 9px 18px;
+  border-style: solid;
+  border-color: transparent;
   border-radius: 0;
   background: transparent;
   border-image-source: var(--ui9-button);
@@ -503,6 +507,12 @@ a:focus-visible {
   gap: 12px;
 }
 
+/* The generated panel has a baked centre crest. Keep the HUD labels below it
+ * instead of letting the crest sit on top of the phase and round text. */
+.hud.ui9-panel {
+  padding-top: clamp(26px, 3vw, 40px);
+}
+
 .hud-topline {
   display: flex;
   flex-wrap: wrap;
@@ -601,7 +611,9 @@ a:focus-visible {
 }
 
 .hud-spin {
-  flex: 1 1 190px;
+  flex: 0 1 360px;
+  width: 100%;
+  max-width: 360px;
   min-height: 56px;
   font-size: 1.04rem;
   letter-spacing: 0.1em;
@@ -717,6 +729,268 @@ a:focus-visible {
 
 .cascade-lip b {
   color: var(--color-emerald);
+}
+
+/* --------------------------------------------------------- meta screen chrome */
+.meta-notice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 12px;
+  padding: 10px 14px;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-radius: 9px;
+  background: rgba(148, 163, 184, 0.06);
+  color: var(--color-text);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.meta-notice-error {
+  border-color: rgba(244, 63, 94, 0.45);
+  background: rgba(244, 63, 94, 0.1);
+  color: #fecdd3;
+}
+
+.meta-notice-success {
+  border-color: rgba(16, 185, 129, 0.4);
+  background: rgba(16, 185, 129, 0.09);
+  color: #a7f3d0;
+}
+
+.meta-notice-info {
+  border-color: rgba(56, 189, 248, 0.32);
+  background: rgba(56, 189, 248, 0.07);
+  color: #bae6fd;
+}
+
+.boss-bar-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.boss-lead {
+  color: var(--color-text);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+.boss-lead-player { color: var(--color-emerald); }
+.boss-lead-boss { color: var(--color-crimson); }
+
+.boss-tug {
+  display: flex;
+  height: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  border-radius: 999px;
+  background: rgba(7, 9, 14, 0.72);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.55);
+}
+
+.boss-tug-player,
+.boss-tug-boss {
+  display: block;
+  height: 100%;
+  transition: width 220ms ease;
+}
+
+.boss-tug-player {
+  background: linear-gradient(90deg, rgba(16, 185, 129, 0.5), rgba(52, 211, 153, 0.95));
+}
+
+.boss-tug-boss {
+  margin-left: auto;
+  background: linear-gradient(90deg, rgba(244, 63, 94, 0.95), rgba(190, 24, 93, 0.5));
+}
+
+.shop-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px 18px;
+}
+
+.shop-summary p {
+  margin: 0;
+}
+
+.shop-summary b {
+  color: var(--color-gold);
+  font-variant-numeric: tabular-nums;
+}
+
+.compendium-heading {
+  margin: 18px 0 10px;
+  color: var(--color-gold);
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.elevator-current {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px 18px;
+  margin-bottom: 14px;
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 12px;
+  margin: 14px 0;
+}
+
+.result-card {
+  padding: 14px 16px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 10px;
+  background: rgba(7, 9, 14, 0.5);
+}
+
+.result-card h3 {
+  margin: 0 0 6px;
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.result-card b {
+  color: var(--color-gold);
+  font-size: 1.15rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.result-pass {
+  border-color: rgba(16, 185, 129, 0.42);
+  box-shadow: inset 0 0 0 1px rgba(16, 185, 129, 0.08);
+}
+
+.result-fail {
+  border-color: rgba(244, 63, 94, 0.42);
+  box-shadow: inset 0 0 0 1px rgba(244, 63, 94, 0.08);
+}
+
+.result-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.summary-card {
+  padding: 14px 16px;
+}
+
+.summary-card h3 {
+  margin: 0 0 6px;
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.summary-card b {
+  color: var(--color-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.seed-value {
+  display: block;
+  overflow-wrap: anywhere;
+  color: var(--color-gold);
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  letter-spacing: 0.04em;
+}
+
+.seed-copy-wrap {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.relic-grid,
+.jumper-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 10px;
+  margin: 12px 0;
+}
+
+.relic-card,
+.jumper-card {
+  min-height: 44px;
+  padding: 12px 14px;
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  border-radius: 9px;
+  background: linear-gradient(180deg, rgba(22, 28, 43, 0.92), rgba(11, 16, 26, 0.92));
+  color: var(--color-text);
+  text-align: left;
+  cursor: pointer;
+}
+
+.relic-card:hover,
+.jumper-card:hover {
+  border-color: rgba(251, 191, 36, 0.55);
+}
+
+.jumper-path {
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+}
+
+.target-picker {
+  margin: 12px 0;
+}
+
+.target-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.error-boundary {
+  max-width: 720px;
+  margin: 10vh auto;
+  padding: 24px;
+}
+
+.stub-screen {
+  display: grid;
+  place-items: center;
+  min-height: 40vh;
+  color: var(--color-muted);
+  text-align: center;
 }
 
 /* ---------------------------------------------------------------- cabinet */
@@ -1577,10 +1851,9 @@ input[type='range'] {
 
   .nav {
     width: 100%;
-    overflow-x: auto;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
+    overflow-x: visible;
     padding-bottom: 2px;
-    scrollbar-width: none;
   }
 
   .nav::-webkit-scrollbar {

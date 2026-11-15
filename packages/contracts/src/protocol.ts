@@ -184,6 +184,11 @@ export interface SaveFile {
   run: RunState;
   simBase64: string;
   stateHash: string;
+  /**
+   * The verdict for a save taken at ROUND_RESULT. It is deliberately outside
+   * RunState so it does not change the C-5 state hash or golden replays.
+   */
+  lastResult?: RoundResult;
 }
 
 /** What the UI talks to. Implemented by packages/core; mocked by contracts/testing. */

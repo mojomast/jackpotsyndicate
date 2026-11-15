@@ -5,284 +5,355 @@
   <text x="38" y="88" font-family="monospace" font-size="11" fill="#fbbf24">boss.auditor</text>
   <text x="38" y="108" font-family="monospace" font-size="9" fill="#94a3b8">bosses</text>
   <text x="38" y="126" font-family="monospace" font-size="8" fill="#64748b">d887f97488d9f25e</text>
+  <image x="182" y="76" width="56" height="56" href="assets/d887f97488d9-boss.auditor.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="258" y="62" width="222" height="84" rx="8" fill="hsl(287 38% 13%)" stroke="hsl(329 55% 38%)"/>
   <text x="268" y="88" font-family="monospace" font-size="11" fill="#fbbf24">boss.valenti</text>
   <text x="268" y="108" font-family="monospace" font-size="9" fill="#94a3b8">bosses</text>
   <text x="268" y="126" font-family="monospace" font-size="8" fill="#64748b">dccf6d70fd04b52d</text>
+  <image x="412" y="76" width="56" height="56" href="assets/dccf6d70fd04-boss.valenti.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="488" y="62" width="222" height="84" rx="8" fill="hsl(164 38% 13%)" stroke="hsl(206 55% 38%)"/>
   <text x="498" y="88" font-family="monospace" font-size="11" fill="#fbbf24">boss.zero</text>
   <text x="498" y="108" font-family="monospace" font-size="9" fill="#94a3b8">bosses</text>
   <text x="498" y="126" font-family="monospace" font-size="8" fill="#64748b">cdfc2cfe0db40c43</text>
+  <image x="642" y="76" width="56" height="56" href="assets/cdfc2cfe0db4-boss.zero.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="718" y="62" width="222" height="84" rx="8" fill="hsl(35 38% 13%)" stroke="hsl(77 55% 38%)"/>
   <text x="728" y="88" font-family="monospace" font-size="11" fill="#fbbf24">chassis.harness-cluster</text>
   <text x="728" y="108" font-family="monospace" font-size="9" fill="#94a3b8">chassis</text>
   <text x="728" y="126" font-family="monospace" font-size="8" fill="#64748b">587d7210e4b983ff</text>
+  <image x="872" y="76" width="56" height="56" href="assets/587d7210e4b9-chassis.harness-cluster.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="948" y="62" width="222" height="84" rx="8" fill="hsl(175 38% 13%)" stroke="hsl(217 55% 38%)"/>
   <text x="958" y="88" font-family="monospace" font-size="11" fill="#fbbf24">chassis.harness-hyper</text>
   <text x="958" y="108" font-family="monospace" font-size="9" fill="#94a3b8">chassis</text>
   <text x="958" y="126" font-family="monospace" font-size="8" fill="#64748b">9e724ebb48afb40d</text>
+  <image x="1102" y="76" width="56" height="56" href="assets/9e724ebb48af-chassis.harness-hyper.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="1178" y="62" width="222" height="84" rx="8" fill="hsl(122 38% 13%)" stroke="hsl(164 55% 38%)"/>
   <text x="1188" y="88" font-family="monospace" font-size="11" fill="#fbbf24">chassis.harness-ways</text>
   <text x="1188" y="108" font-family="monospace" font-size="9" fill="#94a3b8">chassis</text>
   <text x="1188" y="126" font-family="monospace" font-size="8" fill="#64748b">f1898763adc81960</text>
+  <image x="1332" y="76" width="56" height="56" href="assets/f1898763adc8-chassis.harness-ways.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="28" y="154" width="222" height="84" rx="8" fill="hsl(180 38% 13%)" stroke="hsl(222 55% 38%)"/>
   <text x="38" y="180" font-family="monospace" font-size="11" fill="#fbbf24">chassis.jumper-wire</text>
   <text x="38" y="200" font-family="monospace" font-size="9" fill="#94a3b8">chassis</text>
   <text x="38" y="218" font-family="monospace" font-size="8" fill="#64748b">285c1bb12a8d5f10</text>
+  <image x="182" y="168" width="56" height="56" href="assets/285c1bb12a8d-chassis.jumper-wire.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="258" y="154" width="222" height="84" rx="8" fill="hsl(68 38% 13%)" stroke="hsl(110 55% 38%)"/>
   <text x="268" y="180" font-family="monospace" font-size="11" fill="#fbbf24">chassis.overvolt</text>
   <text x="268" y="200" font-family="monospace" font-size="9" fill="#94a3b8">chassis</text>
   <text x="268" y="218" font-family="monospace" font-size="8" fill="#64748b">82642fcfc6ac2ec1</text>
+  <image x="412" y="168" width="56" height="56" href="assets/82642fcfc6ac-chassis.overvolt.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="488" y="154" width="222" height="84" rx="8" fill="hsl(276 38% 13%)" stroke="hsl(318 55% 38%)"/>
   <text x="498" y="180" font-family="monospace" font-size="11" fill="#fbbf24">chassis.reel-column</text>
   <text x="498" y="200" font-family="monospace" font-size="9" fill="#94a3b8">chassis</text>
   <text x="498" y="218" font-family="monospace" font-size="8" fill="#64748b">0834f605c5c21fef</text>
+  <image x="642" y="168" width="56" height="56" href="assets/0834f605c5c2-chassis.reel-column.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="718" y="154" width="222" height="84" rx="8" fill="hsl(349 38% 13%)" stroke="hsl(31 55% 38%)"/>
   <text x="728" y="180" font-family="monospace" font-size="11" fill="#fbbf24">chassis.row</text>
   <text x="728" y="200" font-family="monospace" font-size="9" fill="#94a3b8">chassis</text>
   <text x="728" y="218" font-family="monospace" font-size="8" fill="#64748b">b6573549179a837c</text>
+  <image x="872" y="168" width="56" height="56" href="assets/b6573549179a-chassis.row.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="948" y="154" width="222" height="84" rx="8" fill="hsl(126 38% 13%)" stroke="hsl(168 55% 38%)"/>
   <text x="958" y="180" font-family="monospace" font-size="11" fill="#fbbf24">coin.blood-doubloon</text>
   <text x="958" y="200" font-family="monospace" font-size="9" fill="#94a3b8">coins</text>
   <text x="958" y="218" font-family="monospace" font-size="8" fill="#64748b">e6ada7024d802cd4</text>
+  <image x="1102" y="168" width="56" height="56" href="assets/e6ada7024d80-coin.blood-doubloon.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="1178" y="154" width="222" height="84" rx="8" fill="hsl(112 38% 13%)" stroke="hsl(154 55% 38%)"/>
   <text x="1188" y="180" font-family="monospace" font-size="11" fill="#fbbf24">coin.copper-token</text>
   <text x="1188" y="200" font-family="monospace" font-size="9" fill="#94a3b8">coins</text>
   <text x="1188" y="218" font-family="monospace" font-size="8" fill="#64748b">5ce5bb1bf99e5899</text>
+  <image x="1332" y="168" width="56" height="56" href="assets/5ce5bb1bf99e-coin.copper-token.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="28" y="246" width="222" height="84" rx="8" fill="hsl(309 38% 13%)" stroke="hsl(351 55% 38%)"/>
   <text x="38" y="272" font-family="monospace" font-size="11" fill="#fbbf24">coin.heavy-lead-slug</text>
   <text x="38" y="292" font-family="monospace" font-size="9" fill="#94a3b8">coins</text>
   <text x="38" y="310" font-family="monospace" font-size="8" fill="#64748b">fedbec32fb8bec04</text>
+  <image x="182" y="260" width="56" height="56" href="assets/fedbec32fb8b-coin.heavy-lead-slug.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="258" y="246" width="222" height="84" rx="8" fill="hsl(196 38% 13%)" stroke="hsl(238 55% 38%)"/>
   <text x="268" y="272" font-family="monospace" font-size="11" fill="#fbbf24">coin.polymer-superball</text>
   <text x="268" y="292" font-family="monospace" font-size="9" fill="#94a3b8">coins</text>
   <text x="268" y="310" font-family="monospace" font-size="8" fill="#64748b">8ba62e74879844f7</text>
+  <image x="412" y="260" width="56" height="56" href="assets/8ba62e748798-coin.polymer-superball.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="488" y="246" width="222" height="84" rx="8" fill="hsl(135 38% 13%)" stroke="hsl(177 55% 38%)"/>
   <text x="498" y="272" font-family="monospace" font-size="11" fill="#fbbf24">drink.alchemist-absinthe</text>
   <text x="498" y="292" font-family="monospace" font-size="9" fill="#94a3b8">drinks</text>
   <text x="498" y="310" font-family="monospace" font-size="8" fill="#64748b">8400ad99379eb298</text>
+  <image x="642" y="260" width="56" height="56" href="assets/8400ad99379e-drink.alchemist-absinthe.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="718" y="246" width="222" height="84" rx="8" fill="hsl(310 38% 13%)" stroke="hsl(352 55% 38%)"/>
   <text x="728" y="272" font-family="monospace" font-size="11" fill="#fbbf24">drink.dirty-syndicate-mart...</text>
   <text x="728" y="292" font-family="monospace" font-size="9" fill="#94a3b8">drinks</text>
   <text x="728" y="310" font-family="monospace" font-size="8" fill="#64748b">8694f2369bebe75a</text>
+  <image x="872" y="260" width="56" height="56" href="assets/8694f2369beb-drink.dirty-syndicate-martini.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="948" y="246" width="222" height="84" rx="8" fill="hsl(15 38% 13%)" stroke="hsl(57 55% 38%)"/>
   <text x="958" y="272" font-family="monospace" font-size="11" fill="#fbbf24">drink.green-fairy-absinthe</text>
   <text x="958" y="292" font-family="monospace" font-size="9" fill="#94a3b8">drinks</text>
   <text x="958" y="310" font-family="monospace" font-size="8" fill="#64748b">37be311dad267b4b</text>
+  <image x="1102" y="260" width="56" height="56" href="assets/37be311dad26-drink.green-fairy-absinthe.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="1178" y="246" width="222" height="84" rx="8" fill="hsl(208 38% 13%)" stroke="hsl(250 55% 38%)"/>
   <text x="1188" y="272" font-family="monospace" font-size="11" fill="#fbbf24">drink.lubricant-oil-shot</text>
   <text x="1188" y="292" font-family="monospace" font-size="9" fill="#94a3b8">drinks</text>
   <text x="1188" y="310" font-family="monospace" font-size="8" fill="#64748b">a8e389463db0f178</text>
+  <image x="1332" y="260" width="56" height="56" href="assets/a8e389463db0-drink.lubricant-oil-shot.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="28" y="338" width="222" height="84" rx="8" fill="hsl(17 38% 13%)" stroke="hsl(59 55% 38%)"/>
   <text x="38" y="364" font-family="monospace" font-size="11" fill="#fbbf24">drink.nitrous-espresso</text>
   <text x="38" y="384" font-family="monospace" font-size="9" fill="#94a3b8">drinks</text>
   <text x="38" y="402" font-family="monospace" font-size="8" fill="#64748b">e56f98f91b99c9f6</text>
+  <image x="182" y="352" width="56" height="56" href="assets/e56f98f91b99-drink.nitrous-espresso.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="258" y="338" width="222" height="84" rx="8" fill="hsl(70 38% 13%)" stroke="hsl(112 55% 38%)"/>
   <text x="268" y="364" font-family="monospace" font-size="11" fill="#fbbf24">floor.FLOOR_CRYO.bg</text>
   <text x="268" y="384" font-family="monospace" font-size="9" fill="#94a3b8">floors</text>
   <text x="268" y="402" font-family="monospace" font-size="8" fill="#64748b">1a54403988ac1737</text>
+  <image x="412" y="352" width="56" height="56" href="assets/1a54403988ac-floor.FLOOR_CRYO.bg.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="488" y="338" width="222" height="84" rx="8" fill="hsl(180 38% 13%)" stroke="hsl(222 55% 38%)"/>
   <text x="498" y="364" font-family="monospace" font-size="11" fill="#fbbf24">floor.FLOOR_FOUNDRY.bg</text>
   <text x="498" y="384" font-family="monospace" font-size="9" fill="#94a3b8">floors</text>
   <text x="498" y="402" font-family="monospace" font-size="8" fill="#64748b">3691455c03fbd081</text>
+  <image x="642" y="352" width="56" height="56" href="assets/3691455c03fb-floor.FLOOR_FOUNDRY.bg.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="718" y="338" width="222" height="84" rx="8" fill="hsl(215 38% 13%)" stroke="hsl(257 55% 38%)"/>
   <text x="728" y="364" font-family="monospace" font-size="11" fill="#fbbf24">floor.FLOOR_NEON.bg</text>
   <text x="728" y="384" font-family="monospace" font-size="9" fill="#94a3b8">floors</text>
   <text x="728" y="402" font-family="monospace" font-size="8" fill="#64748b">207e76948c291abf</text>
+  <image x="872" y="352" width="56" height="56" href="assets/207e76948c29-floor.FLOOR_NEON.bg.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="948" y="338" width="222" height="84" rx="8" fill="hsl(157 38% 13%)" stroke="hsl(199 55% 38%)"/>
   <text x="958" y="364" font-family="monospace" font-size="11" fill="#fbbf24">floor.FLOOR_PENTHOUSE.bg</text>
   <text x="958" y="384" font-family="monospace" font-size="9" fill="#94a3b8">floors</text>
   <text x="958" y="402" font-family="monospace" font-size="8" fill="#64748b">8f064b1e05412315</text>
+  <image x="1102" y="352" width="56" height="56" href="assets/8f064b1e0541-floor.FLOOR_PENTHOUSE.bg.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="1178" y="338" width="222" height="84" rx="8" fill="hsl(58 38% 13%)" stroke="hsl(100 55% 38%)"/>
   <text x="1188" y="364" font-family="monospace" font-size="11" fill="#fbbf24">glyph.blood-diamond</text>
   <text x="1188" y="384" font-family="monospace" font-size="9" fill="#94a3b8">glyphs</text>
   <text x="1188" y="402" font-family="monospace" font-size="8" fill="#64748b">340f807fc452f715</text>
+  <image x="1332" y="352" width="56" height="56" href="assets/340f807fc452-glyph.blood-diamond.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="28" y="430" width="222" height="84" rx="8" fill="hsl(211 38% 13%)" stroke="hsl(253 55% 38%)"/>
   <text x="38" y="456" font-family="monospace" font-size="11" fill="#fbbf24">glyph.cherry</text>
   <text x="38" y="476" font-family="monospace" font-size="9" fill="#94a3b8">glyphs</text>
   <text x="38" y="494" font-family="monospace" font-size="8" fill="#64748b">aa6277bdf531d182</text>
+  <image x="182" y="444" width="56" height="56" href="assets/aa6277bdf531-glyph.cherry.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="258" y="430" width="222" height="84" rx="8" fill="hsl(111 38% 13%)" stroke="hsl(153 55% 38%)"/>
   <text x="268" y="456" font-family="monospace" font-size="11" fill="#fbbf24">glyph.lucky-seven</text>
   <text x="268" y="476" font-family="monospace" font-size="9" fill="#94a3b8">glyphs</text>
   <text x="268" y="494" font-family="monospace" font-size="8" fill="#64748b">f371940b99606123</text>
+  <image x="412" y="444" width="56" height="56" href="assets/f371940b9960-glyph.lucky-seven.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="488" y="430" width="222" height="84" rx="8" fill="hsl(138 38% 13%)" stroke="hsl(180 55% 38%)"/>
   <text x="498" y="456" font-family="monospace" font-size="11" fill="#fbbf24">glyph.magnet-skull</text>
   <text x="498" y="476" font-family="monospace" font-size="9" fill="#94a3b8">glyphs</text>
   <text x="498" y="494" font-family="monospace" font-size="8" fill="#64748b">fe9b2bc319e9e4c4</text>
+  <image x="642" y="444" width="56" height="56" href="assets/fe9b2bc319e9-glyph.magnet-skull.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="718" y="430" width="222" height="84" rx="8" fill="hsl(299 38% 13%)" stroke="hsl(341 55% 38%)"/>
   <text x="728" y="456" font-family="monospace" font-size="11" fill="#fbbf24">glyph.uranium</text>
   <text x="728" y="476" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
   <text x="728" y="494" font-family="monospace" font-size="8" fill="#64748b">01b02c1183a0635d</text>
+  <image x="872" y="444" width="56" height="56" href="placeholders/glyph.uranium.svg" preserveAspectRatio="xMidYMid meet"/>
   <rect x="948" y="430" width="222" height="84" rx="8" fill="hsl(359 38% 13%)" stroke="hsl(41 55% 38%)"/>
   <text x="958" y="456" font-family="monospace" font-size="11" fill="#fbbf24">peg.bumper</text>
   <text x="958" y="476" font-family="monospace" font-size="9" fill="#94a3b8">pegs</text>
   <text x="958" y="494" font-family="monospace" font-size="8" fill="#64748b">aa4fe7ca7c26acd0</text>
+  <image x="1102" y="444" width="56" height="56" href="assets/aa4fe7ca7c26-peg.bumper.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="1178" y="430" width="222" height="84" rx="8" fill="hsl(25 38% 13%)" stroke="hsl(67 55% 38%)"/>
   <text x="1188" y="456" font-family="monospace" font-size="11" fill="#fbbf24">peg.gold</text>
   <text x="1188" y="476" font-family="monospace" font-size="9" fill="#94a3b8">pegs</text>
   <text x="1188" y="494" font-family="monospace" font-size="8" fill="#64748b">bb986433d28565a1</text>
+  <image x="1332" y="444" width="56" height="56" href="assets/bb986433d285-peg.gold.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="28" y="522" width="222" height="84" rx="8" fill="hsl(1 38% 13%)" stroke="hsl(43 55% 38%)"/>
   <text x="38" y="548" font-family="monospace" font-size="11" fill="#fbbf24">peg.golden</text>
   <text x="38" y="568" font-family="monospace" font-size="9" fill="#94a3b8">pegs</text>
   <text x="38" y="586" font-family="monospace" font-size="8" fill="#64748b">41bb3531c5c561f7</text>
+  <image x="182" y="536" width="56" height="56" href="assets/41bb3531c5c5-peg.golden.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="258" y="522" width="222" height="84" rx="8" fill="hsl(205 38% 13%)" stroke="hsl(247 55% 38%)"/>
   <text x="268" y="548" font-family="monospace" font-size="11" fill="#fbbf24">peg.splitter</text>
   <text x="268" y="568" font-family="monospace" font-size="9" fill="#94a3b8">pegs</text>
   <text x="268" y="586" font-family="monospace" font-size="8" fill="#64748b">9c4c0a70f320a197</text>
+  <image x="412" y="536" width="56" height="56" href="assets/9c4c0a70f320-peg.splitter.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="488" y="522" width="222" height="84" rx="8" fill="hsl(154 38% 13%)" stroke="hsl(196 55% 38%)"/>
   <text x="498" y="548" font-family="monospace" font-size="11" fill="#fbbf24">symbol.cherry</text>
   <text x="498" y="568" font-family="monospace" font-size="9" fill="#94a3b8">symbols</text>
   <text x="498" y="586" font-family="monospace" font-size="8" fill="#64748b">a5e0d26063489da8</text>
+  <image x="642" y="536" width="56" height="56" href="assets/a5e0d2606348-symbol.cherry.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="718" y="522" width="222" height="84" rx="8" fill="hsl(52 38% 13%)" stroke="hsl(94 55% 38%)"/>
   <text x="728" y="548" font-family="monospace" font-size="11" fill="#fbbf24">symbol.diamond</text>
   <text x="728" y="568" font-family="monospace" font-size="9" fill="#94a3b8">symbols</text>
   <text x="728" y="586" font-family="monospace" font-size="8" fill="#64748b">f09dc56740608cc3</text>
+  <image x="872" y="536" width="56" height="56" href="assets/f09dc5674060-symbol.diamond.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="948" y="522" width="222" height="84" rx="8" fill="hsl(114 38% 13%)" stroke="hsl(156 55% 38%)"/>
   <text x="958" y="548" font-family="monospace" font-size="11" fill="#fbbf24">symbol.scrap</text>
   <text x="958" y="568" font-family="monospace" font-size="9" fill="#94a3b8">symbols</text>
   <text x="958" y="586" font-family="monospace" font-size="8" fill="#64748b">5dc5b9178f98c8e9</text>
+  <image x="1102" y="536" width="56" height="56" href="assets/5dc5b9178f98-symbol.scrap.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="1178" y="522" width="222" height="84" rx="8" fill="hsl(125 38% 13%)" stroke="hsl(167 55% 38%)"/>
   <text x="1188" y="548" font-family="monospace" font-size="11" fill="#fbbf24">symbol.seven</text>
   <text x="1188" y="568" font-family="monospace" font-size="9" fill="#94a3b8">symbols</text>
   <text x="1188" y="586" font-family="monospace" font-size="8" fill="#64748b">01342373d196a0b4</text>
+  <image x="1332" y="536" width="56" height="56" href="assets/01342373d196-symbol.seven.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="28" y="614" width="222" height="84" rx="8" fill="hsl(261 38% 13%)" stroke="hsl(303 55% 38%)"/>
   <text x="38" y="640" font-family="monospace" font-size="11" fill="#fbbf24">symbol.skull</text>
   <text x="38" y="660" font-family="monospace" font-size="9" fill="#94a3b8">symbols</text>
   <text x="38" y="678" font-family="monospace" font-size="8" fill="#64748b">a752186c0e6ef4e0</text>
+  <image x="182" y="628" width="56" height="56" href="assets/a752186c0e6e-symbol.skull.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="258" y="614" width="222" height="84" rx="8" fill="hsl(46 38% 13%)" stroke="hsl(88 55% 38%)"/>
   <text x="268" y="640" font-family="monospace" font-size="11" fill="#fbbf24">symbol.uranium</text>
   <text x="268" y="660" font-family="monospace" font-size="9" fill="#94a3b8">symbols</text>
   <text x="268" y="678" font-family="monospace" font-size="8" fill="#64748b">9e7279b4c14b86e4</text>
+  <image x="412" y="628" width="56" height="56" href="assets/9e7279b4c14b-symbol.uranium.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="488" y="614" width="222" height="84" rx="8" fill="hsl(252 38% 13%)" stroke="hsl(294 55% 38%)"/>
   <text x="498" y="640" font-family="monospace" font-size="11" fill="#fbbf24">token.bullion</text>
   <text x="498" y="660" font-family="monospace" font-size="9" fill="#94a3b8">tokens</text>
   <text x="498" y="678" font-family="monospace" font-size="8" fill="#64748b">1ccd89ac8a46c326</text>
+  <image x="642" y="628" width="56" height="56" href="assets/1ccd89ac8a46-token.bullion.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="718" y="614" width="222" height="84" rx="8" fill="hsl(2 38% 13%)" stroke="hsl(44 55% 38%)"/>
   <text x="728" y="640" font-family="monospace" font-size="11" fill="#fbbf24">token.cherry</text>
   <text x="728" y="660" font-family="monospace" font-size="9" fill="#94a3b8">tokens</text>
   <text x="728" y="678" font-family="monospace" font-size="8" fill="#64748b">5fd04a49dcb4ed77</text>
+  <image x="872" y="628" width="56" height="56" href="assets/5fd04a49dcb4-token.cherry.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="948" y="614" width="222" height="84" rx="8" fill="hsl(82 38% 13%)" stroke="hsl(124 55% 38%)"/>
   <text x="958" y="640" font-family="monospace" font-size="11" fill="#fbbf24">token.copper</text>
   <text x="958" y="660" font-family="monospace" font-size="9" fill="#94a3b8">tokens</text>
   <text x="958" y="678" font-family="monospace" font-size="8" fill="#64748b">6e626d78562fe79c</text>
+  <image x="1102" y="628" width="56" height="56" href="assets/6e626d78562f-token.copper.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="1178" y="614" width="222" height="84" rx="8" fill="hsl(97 38% 13%)" stroke="hsl(139 55% 38%)"/>
   <text x="1188" y="640" font-family="monospace" font-size="11" fill="#fbbf24">token.diamond</text>
   <text x="1188" y="660" font-family="monospace" font-size="9" fill="#94a3b8">tokens</text>
   <text x="1188" y="678" font-family="monospace" font-size="8" fill="#64748b">ccb88c8a334acb25</text>
+  <image x="1332" y="628" width="56" height="56" href="assets/ccb88c8a334a-token.diamond.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="28" y="706" width="222" height="84" rx="8" fill="hsl(37 38% 13%)" stroke="hsl(79 55% 38%)"/>
   <text x="38" y="732" font-family="monospace" font-size="11" fill="#fbbf24">token.ice</text>
   <text x="38" y="752" font-family="monospace" font-size="9" fill="#94a3b8">tokens</text>
   <text x="38" y="770" font-family="monospace" font-size="8" fill="#64748b">12328bd8d04db6e1</text>
+  <image x="182" y="720" width="56" height="56" href="assets/12328bd8d04d-token.ice.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="258" y="706" width="222" height="84" rx="8" fill="hsl(324 38% 13%)" stroke="hsl(6 55% 38%)"/>
   <text x="268" y="732" font-family="monospace" font-size="11" fill="#fbbf24">token.skull</text>
   <text x="268" y="752" font-family="monospace" font-size="9" fill="#94a3b8">tokens</text>
   <text x="268" y="770" font-family="monospace" font-size="8" fill="#64748b">e7db5b77e4986b75</text>
+  <image x="412" y="720" width="56" height="56" href="assets/e7db5b77e498-token.skull.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="488" y="706" width="222" height="84" rx="8" fill="hsl(357 38% 13%)" stroke="hsl(39 55% 38%)"/>
   <text x="498" y="732" font-family="monospace" font-size="11" fill="#fbbf24">token.uranium</text>
   <text x="498" y="752" font-family="monospace" font-size="9" fill="#94a3b8">tokens</text>
   <text x="498" y="770" font-family="monospace" font-size="8" fill="#64748b">5e20fc6bb13a5dca</text>
+  <image x="642" y="720" width="56" height="56" href="assets/5e20fc6bb13a-token.uranium.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="718" y="706" width="222" height="84" rx="8" fill="hsl(29 38% 13%)" stroke="hsl(71 55% 38%)"/>
   <text x="728" y="732" font-family="monospace" font-size="11" fill="#fbbf24">trinket.electromagnetic-ho...</text>
   <text x="728" y="752" font-family="monospace" font-size="9" fill="#94a3b8">trinkets</text>
   <text x="728" y="770" font-family="monospace" font-size="8" fill="#64748b">6a341ffa4e0156a9</text>
+  <image x="872" y="720" width="56" height="56" href="assets/6a341ffa4e01-trinket.electromagnetic-hopper.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="948" y="706" width="222" height="84" rx="8" fill="hsl(43 38% 13%)" stroke="hsl(85 55% 38%)"/>
   <text x="958" y="732" font-family="monospace" font-size="11" fill="#fbbf24">trinket.gold-peg-alchemist</text>
   <text x="958" y="752" font-family="monospace" font-size="9" fill="#94a3b8">trinkets</text>
   <text x="958" y="770" font-family="monospace" font-size="8" fill="#64748b">0bebb5ed6cc857f9</text>
+  <image x="1102" y="720" width="56" height="56" href="assets/0bebb5ed6cc8-trinket.gold-peg-alchemist.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="1178" y="706" width="222" height="84" rx="8" fill="hsl(286 38% 13%)" stroke="hsl(328 55% 38%)"/>
   <text x="1188" y="732" font-family="monospace" font-size="11" fill="#fbbf24">trinket.gutter-guard-bumper</text>
   <text x="1188" y="752" font-family="monospace" font-size="9" fill="#94a3b8">trinkets</text>
   <text x="1188" y="770" font-family="monospace" font-size="8" fill="#64748b">938a96557f8b6ad7</text>
+  <image x="1332" y="720" width="56" height="56" href="assets/938a96557f8b-trinket.gutter-guard-bumper.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="28" y="798" width="222" height="84" rx="8" fill="hsl(334 38% 13%)" stroke="hsl(16 55% 38%)"/>
   <text x="38" y="824" font-family="monospace" font-size="11" fill="#fbbf24">trinket.hydraulic-dozer-pi...</text>
   <text x="38" y="844" font-family="monospace" font-size="9" fill="#94a3b8">trinkets</text>
   <text x="38" y="862" font-family="monospace" font-size="8" fill="#64748b">5776f54b47231bb4</text>
+  <image x="182" y="812" width="56" height="56" href="assets/5776f54b4723-trinket.hydraulic-dozer-piston.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="258" y="798" width="222" height="84" rx="8" fill="hsl(187 38% 13%)" stroke="hsl(229 55% 38%)"/>
   <text x="268" y="824" font-family="monospace" font-size="11" fill="#fbbf24">trinket.loaded-platinum-die</text>
   <text x="268" y="844" font-family="monospace" font-size="9" fill="#94a3b8">trinkets</text>
   <text x="268" y="862" font-family="monospace" font-size="8" fill="#64748b">8283d0cd77222dae</text>
+  <image x="412" y="812" width="56" height="56" href="assets/8283d0cd7722-trinket.loaded-platinum-die.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="488" y="798" width="222" height="84" rx="8" fill="hsl(115 38% 13%)" stroke="hsl(157 55% 38%)"/>
   <text x="498" y="824" font-family="monospace" font-size="11" fill="#fbbf24">trinket.midas-lip-sensor</text>
   <text x="498" y="844" font-family="monospace" font-size="9" fill="#94a3b8">trinkets</text>
   <text x="498" y="862" font-family="monospace" font-size="8" fill="#64748b">1a6ea3b72c3c4e80</text>
+  <image x="642" y="812" width="56" height="56" href="assets/1a6ea3b72c3c-trinket.midas-lip-sensor.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="718" y="798" width="222" height="84" rx="8" fill="hsl(312 38% 13%)" stroke="hsl(354 55% 38%)"/>
   <text x="728" y="824" font-family="monospace" font-size="11" fill="#fbbf24">trinket.ouroboros-capacitor</text>
   <text x="728" y="844" font-family="monospace" font-size="9" fill="#94a3b8">trinkets</text>
   <text x="728" y="862" font-family="monospace" font-size="8" fill="#64748b">5822f14d38133453</text>
+  <image x="872" y="812" width="56" height="56" href="assets/5822f14d3813-trinket.ouroboros-capacitor.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="948" y="798" width="222" height="84" rx="8" fill="hsl(253 38% 13%)" stroke="hsl(295 55% 38%)"/>
   <text x="958" y="824" font-family="monospace" font-size="11" fill="#fbbf24">trinket.overvolted-solenoid</text>
   <text x="958" y="844" font-family="monospace" font-size="9" fill="#94a3b8">trinkets</text>
   <text x="958" y="862" font-family="monospace" font-size="8" fill="#64748b">ec4709290bf0f520</text>
+  <image x="1102" y="812" width="56" height="56" href="assets/ec4709290bf0-trinket.overvolted-solenoid.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="1178" y="798" width="222" height="84" rx="8" fill="hsl(61 38% 13%)" stroke="hsl(103 55% 38%)"/>
   <text x="1188" y="824" font-family="monospace" font-size="11" fill="#fbbf24">trinket.quantum-splitter-c...</text>
   <text x="1188" y="844" font-family="monospace" font-size="9" fill="#94a3b8">trinkets</text>
   <text x="1188" y="862" font-family="monospace" font-size="8" fill="#64748b">5c353ded45e4e683</text>
+  <image x="1332" y="812" width="56" height="56" href="assets/5c353ded45e4-trinket.quantum-splitter-coil.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="28" y="890" width="222" height="84" rx="8" fill="hsl(84 38% 13%)" stroke="hsl(126 55% 38%)"/>
   <text x="38" y="916" font-family="monospace" font-size="11" fill="#fbbf24">trinket.rubber-gutter-bump...</text>
   <text x="38" y="936" font-family="monospace" font-size="9" fill="#94a3b8">trinkets</text>
   <text x="38" y="954" font-family="monospace" font-size="8" fill="#64748b">b36efddaa3835ac1</text>
+  <image x="182" y="904" width="56" height="56" href="assets/b36efddaa383-trinket.rubber-gutter-bumper.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="258" y="890" width="222" height="84" rx="8" fill="hsl(348 38% 13%)" stroke="hsl(30 55% 38%)"/>
   <text x="268" y="916" font-family="monospace" font-size="11" fill="#fbbf24">trinket.tesla-peg-capacitor</text>
   <text x="268" y="936" font-family="monospace" font-size="9" fill="#94a3b8">trinkets</text>
   <text x="268" y="954" font-family="monospace" font-size="8" fill="#64748b">79af49ca1d3548e0</text>
+  <image x="412" y="904" width="56" height="56" href="assets/79af49ca1d35-trinket.tesla-peg-capacitor.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="488" y="890" width="222" height="84" rx="8" fill="hsl(218 38% 13%)" stroke="hsl(260 55% 38%)"/>
   <text x="498" y="916" font-family="monospace" font-size="11" fill="#fbbf24">trinket.turbo-dozer-cam</text>
   <text x="498" y="936" font-family="monospace" font-size="9" fill="#94a3b8">trinkets</text>
   <text x="498" y="954" font-family="monospace" font-size="8" fill="#64748b">d31e0fb81cb6549b</text>
+  <image x="642" y="904" width="56" height="56" href="assets/d31e0fb81cb6-trinket.turbo-dozer-cam.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="718" y="890" width="222" height="84" rx="8" fill="hsl(85 38% 13%)" stroke="hsl(127 55% 38%)"/>
   <text x="728" y="916" font-family="monospace" font-size="11" fill="#fbbf24">trinket.vampiric-rake-coll...</text>
   <text x="728" y="936" font-family="monospace" font-size="9" fill="#94a3b8">trinkets</text>
   <text x="728" y="954" font-family="monospace" font-size="8" fill="#64748b">fe7a8ea8b9d782c8</text>
+  <image x="872" y="904" width="56" height="56" href="assets/fe7a8ea8b9d7-trinket.vampiric-rake-collector.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="948" y="890" width="222" height="84" rx="8" fill="hsl(77 38% 13%)" stroke="hsl(119 55% 38%)"/>
   <text x="958" y="916" font-family="monospace" font-size="11" fill="#fbbf24">trinket.vampiric-stepper-m...</text>
   <text x="958" y="936" font-family="monospace" font-size="9" fill="#94a3b8">trinkets</text>
   <text x="958" y="954" font-family="monospace" font-size="8" fill="#64748b">aa9e923dbbf75811</text>
+  <image x="1102" y="904" width="56" height="56" href="assets/aa9e923dbbf7-trinket.vampiric-stepper-motor.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="1178" y="890" width="222" height="84" rx="8" fill="hsl(184 38% 13%)" stroke="hsl(226 55% 38%)"/>
   <text x="1188" y="916" font-family="monospace" font-size="11" fill="#fbbf24">trinket.vip-bullion-stamp</text>
   <text x="1188" y="936" font-family="monospace" font-size="9" fill="#94a3b8">trinkets</text>
   <text x="1188" y="954" font-family="monospace" font-size="8" fill="#64748b">bd1b1c783b7f6a2e</text>
+  <image x="1332" y="904" width="56" height="56" href="assets/bd1b1c783b7f-trinket.vip-bullion-stamp.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="28" y="982" width="222" height="84" rx="8" fill="hsl(297 38% 13%)" stroke="hsl(339 55% 38%)"/>
   <text x="38" y="1008" font-family="monospace" font-size="11" fill="#fbbf24">ui.bezel</text>
   <text x="38" y="1028" font-family="monospace" font-size="9" fill="#94a3b8">ui</text>
   <text x="38" y="1046" font-family="monospace" font-size="8" fill="#64748b">21c7b52ca6e3657b</text>
+  <image x="182" y="996" width="56" height="56" href="assets/21c7b52ca6e3-ui.bezel.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="258" y="982" width="222" height="84" rx="8" fill="hsl(161 38% 13%)" stroke="hsl(203 55% 38%)"/>
   <text x="268" y="1008" font-family="monospace" font-size="11" fill="#fbbf24">ui.button</text>
   <text x="268" y="1028" font-family="monospace" font-size="9" fill="#94a3b8">ui</text>
   <text x="268" y="1046" font-family="monospace" font-size="8" fill="#64748b">5d7e0f0f0dce8475</text>
+  <image x="412" y="996" width="56" height="56" href="assets/5d7e0f0f0dce-ui.button.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="488" y="982" width="222" height="84" rx="8" fill="hsl(341 38% 13%)" stroke="hsl(23 55% 38%)"/>
   <text x="498" y="1008" font-family="monospace" font-size="11" fill="#fbbf24">ui.cabinet</text>
   <text x="498" y="1028" font-family="monospace" font-size="9" fill="#94a3b8">ui</text>
   <text x="498" y="1046" font-family="monospace" font-size="8" fill="#64748b">afad1e5ba3ccc8bc</text>
+  <image x="642" y="996" width="56" height="56" href="assets/afad1e5ba3cc-ui.cabinet.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="718" y="982" width="222" height="84" rx="8" fill="hsl(315 38% 13%)" stroke="hsl(357 55% 38%)"/>
   <text x="728" y="1008" font-family="monospace" font-size="11" fill="#fbbf24">ui.dozer</text>
   <text x="728" y="1028" font-family="monospace" font-size="9" fill="#94a3b8">ui</text>
   <text x="728" y="1046" font-family="monospace" font-size="8" fill="#64748b">2100d1dfcfe4a6de</text>
+  <image x="872" y="996" width="56" height="56" href="assets/2100d1dfcfe4-ui.dozer.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="948" y="982" width="222" height="84" rx="8" fill="hsl(57 38% 13%)" stroke="hsl(99 55% 38%)"/>
   <text x="958" y="1008" font-family="monospace" font-size="11" fill="#fbbf24">ui.gutter</text>
   <text x="958" y="1028" font-family="monospace" font-size="9" fill="#94a3b8">ui</text>
   <text x="958" y="1046" font-family="monospace" font-size="8" fill="#64748b">39b287741185f2d2</text>
+  <image x="1102" y="996" width="56" height="56" href="assets/39b287741185-ui.gutter.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="1178" y="982" width="222" height="84" rx="8" fill="hsl(250 38% 13%)" stroke="hsl(292 55% 38%)"/>
   <text x="1188" y="1008" font-family="monospace" font-size="11" fill="#fbbf24">ui.lip</text>
   <text x="1188" y="1028" font-family="monospace" font-size="9" fill="#94a3b8">ui</text>
   <text x="1188" y="1046" font-family="monospace" font-size="8" fill="#64748b">8dbab0fabeab52ae</text>
+  <image x="1332" y="996" width="56" height="56" href="assets/8dbab0fabeab-ui.lip.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="28" y="1074" width="222" height="84" rx="8" fill="hsl(169 38% 13%)" stroke="hsl(211 55% 38%)"/>
   <text x="38" y="1100" font-family="monospace" font-size="11" fill="#fbbf24">ui.panel</text>
   <text x="38" y="1120" font-family="monospace" font-size="9" fill="#94a3b8">ui</text>
   <text x="38" y="1138" font-family="monospace" font-size="8" fill="#64748b">4e597c51938cefe1</text>
+  <image x="182" y="1088" width="56" height="56" href="assets/4e597c51938c-ui.panel.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="258" y="1074" width="222" height="84" rx="8" fill="hsl(300 38% 13%)" stroke="hsl(342 55% 38%)"/>
   <text x="268" y="1100" font-family="monospace" font-size="11" fill="#fbbf24">vfx.coinburst</text>
   <text x="268" y="1120" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
   <text x="268" y="1138" font-family="monospace" font-size="8" fill="#64748b">c36a37685d3249ff</text>
+  <image x="412" y="1088" width="56" height="56" href="placeholders/vfx.coinburst.svg" preserveAspectRatio="xMidYMid meet"/>
   <rect x="488" y="1074" width="222" height="84" rx="8" fill="hsl(306 38% 13%)" stroke="hsl(348 55% 38%)"/>
   <text x="498" y="1100" font-family="monospace" font-size="11" fill="#fbbf24">vfx.freeze</text>
   <text x="498" y="1120" font-family="monospace" font-size="9" fill="#94a3b8">vfx</text>
   <text x="498" y="1138" font-family="monospace" font-size="8" fill="#64748b">a7067029beac47fa</text>
+  <image x="642" y="1088" width="56" height="56" href="assets/a7067029beac-vfx.freeze.png" preserveAspectRatio="xMidYMid meet"/>
   <rect x="718" y="1074" width="222" height="84" rx="8" fill="hsl(234 38% 13%)" stroke="hsl(276 55% 38%)"/>
   <text x="728" y="1100" font-family="monospace" font-size="11" fill="#fbbf24">vfx.shock</text>
   <text x="728" y="1120" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
   <text x="728" y="1138" font-family="monospace" font-size="8" fill="#64748b">c1cffed49d9927b3</text>
+  <image x="872" y="1088" width="56" height="56" href="placeholders/vfx.shock.svg" preserveAspectRatio="xMidYMid meet"/>
   <rect x="948" y="1074" width="222" height="84" rx="8" fill="hsl(197 38% 13%)" stroke="hsl(239 55% 38%)"/>
   <text x="958" y="1100" font-family="monospace" font-size="11" fill="#fbbf24">vfx.spark</text>
   <text x="958" y="1120" font-family="monospace" font-size="9" fill="#94a3b8">placeholder vector</text>
   <text x="958" y="1138" font-family="monospace" font-size="8" fill="#64748b">3f2e0225320100d0</text>
+  <image x="1102" y="1088" width="56" height="56" href="placeholders/vfx.spark.svg" preserveAspectRatio="xMidYMid meet"/>
 </svg>

@@ -27,7 +27,7 @@ What the five commands do:
 | Command | Purpose |
 |---|---|
 | `pnpm install --frozen-lockfile` | Installs the exact workspace lockfile |
-| `pnpm test` | Runs the package unit suites (`packages/*/tests`) |
+| `pnpm test` | Runs the package and app-level unit suites |
 | `pnpm sim:rake` | Runs the no-trinket physics rake harness |
 | `pnpm build` | Builds `packages/anim` and `apps/game` (`apps/game/dist`) |
 | `pnpm preview` | Serves the built game from `apps/game/dist` |
@@ -43,7 +43,7 @@ work on 2026-11-15, not what the project is expected to pass later.
 | `pnpm lint` | **PASS** |
 | `pnpm typecheck` | **PASS** |
 | `pnpm build` | **PASS**; Vite reports a >500 kB game chunk warning |
-| `pnpm test` | **NOT RUN** in this docs task |
+| `pnpm test` | **PASS** — 223 tests (191 package + 32 app-level) |
 | `pnpm sim rake`, `sim hitrate`, `sim balance`, `sim replay` | **NOT RUN** in this docs task |
 | `pnpm assets:build`, `assets:verify` | **PASS** for the working imagegen batch: 71 keys, 67 locked, 4 placeholders; verify checked 73 files |
 | Browser E2E / Playwright / cross-browser determinism | **NOT RUN**; no completed three-browser E2E result is claimed |
@@ -66,7 +66,7 @@ These scripts exist in the root `package.json`; run only the ones you need.
 | `pnpm build` | Build the animation package and game |
 | `pnpm preview` | Preview the built game |
 | `pnpm lint` / `pnpm typecheck` | Static checks |
-| `pnpm test` | Package unit tests |
+| `pnpm test` | Package and app-level unit tests |
 | `pnpm sim rake` | Engine-level gutter rake report (AC-5) |
 | `pnpm sim hitrate` | Base 3×3 CLASSIC hit-rate report (AC-7) |
 | `pnpm sim balance` | Random-buyer and greedy-synergy bot reports (AC-6) |
@@ -77,9 +77,10 @@ These scripts exist in the root `package.json`; run only the ones you need.
 | `pnpm perf` | Game stress/perf and bundle budget report |
 | `pnpm release:zip` | Build and zip `apps/game/dist` into `artifacts/` without tagging or publishing |
 
-`pnpm test` currently covers `packages/*/tests` only; app-shell tests, the simulation
-CLIs, asset verification, and browser E2E are separate commands. None of those extra
-checks are claimed as run here.
+`pnpm test` covers both `packages/*/tests` and the app-level suite under
+`apps/game/tests`; the simulation CLIs, asset verification, and browser E2E are
+separate commands. The verification rows above reflect the last local run, not a
+claim about future revisions.
 
 ## What is in the repository
 

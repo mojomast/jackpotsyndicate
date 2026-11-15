@@ -6,6 +6,7 @@ import {
   createFixedStepLoop,
   createGameCore,
 } from '../src/index';
+import { runStateHash } from '@jackpotsyndicate/engine';
 
 interface PlayedRound {
   core: ReturnType<typeof createGameCore>;
@@ -256,4 +257,54 @@ test('fixed-step loop and browser driver honour speed multipliers', () => {
 
   assert.throws(() => slow.setSpeed(0), RangeError);
   assert.throws(() => slow.advance(-1), RangeError);
+});
+
+test('boss freeze keeps the frozen cell symbol across the next spin draw', () => {
+  const core = createGameCore();
+  assert.deepEqual(core.dispatch({ c: 'NewRun', seed: 'BOSS-FREEZE' }), { ok: true });
+  core.tick();
+
+  // Fabricate a save into Madame Zero's boss round. The helper keeps the
+  // existing sim hash so the normal version/hash gate still applies.
+  const save = core.save();
+  const simHash = save.stateHash.slice(8);
+  save.run.phase = 'PREP';
+  save.run.floorId = 'FLOOR_CRYO';
+  save.run.round = 4;
+  save.run.spinsLeft = 7;
+  save.run.boss = { score: 0, spin: 0 };
+  save.stateHash = `${runStateHash(save.run)}${simHash}`;
+  assert.deepEqual(core.load(save), { ok: true });
+
+  assert.deepEqual(core.dispatch({ c: 'Spin' }), { ok: true });
+  let guard = 0;
+  while (core.getState().phase !== 'PREP' && guard++ < 20_000) core.tick();
+  assert.ok(guard < 20_000, 'boss spin must settle');
+
+  const frozen = core.getState().grid.frozen;
+  assert.ok(frozen.length > 0, 'Madame Zero must freeze at least one cell');
+  const [col, row] = frozen[0]!.cell;
+  const before = core.getState().grid.visible[col]![row]!;
+
+  assert.deepEqual(core.dispatch({ c: 'Spin' }), { ok: true });
+  const after = core.getState().grid.visible[col]![row]!;
+  assert.equal(after, before, 'a frozen cell must not be replaced by the next reel draw');
+});
+
+test('a save at ROUND_RESULT keeps its verdict so Continue cannot bypass a failed round', () => {
+  const { core } = playRound('RESULT-SAVE');
+  const save = core.save();
+  assert.ok(save.lastResult, 'a boundary save must carry the settled verdict');
+  assert.equal(save.lastResult.kind, 'normal');
+  // Force a failed verdict without changing RunState or the C-5 hash.
+  save.lastResult = { ...save.lastResult, passed: false };
+
+  const reloaded = createGameCore();
+  assert.deepEqual(reloaded.load(save), { ok: true });
+  assert.deepEqual(reloaded.dispatch({ c: 'ContinueAfterRound' }), { ok: true });
+  assert.equal(
+    reloaded.getState().phase,
+    'GAME_OVER',
+    'a resumed failed round must not fall through into the shop',
+  );
 });

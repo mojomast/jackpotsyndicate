@@ -136,7 +136,7 @@ function TableStyle() {
       .table-cabinet { min-width: 0; }
       .slot-frame { position: relative; width: 100%; aspect-ratio: 365 / 343; min-width: 0; }
       .slot-frame-art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill; pointer-events: none; z-index: 0; filter: drop-shadow(0 18px 35px #0008); }
-      .slot-frame-window { position: absolute; left: 12.6%; top: 19%; width: 71.5%; height: 44%; display: flex; align-items: center; justify-content: center; overflow: hidden; z-index: 1; }
+      .slot-frame-window { position: absolute; left: 12.6%; top: 25.7%; width: 71.8%; height: 44.3%; display: flex; align-items: center; justify-content: center; overflow: hidden; z-index: 1; }
       .slot-frame-window .table-cabinet { position: absolute; inset: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
       .slot-frame-window .jsa-root { width: 100%; height: 100%; }
       .slot-frame-window .jsa-cabinet { position: absolute; inset: 0; width: auto; height: auto; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; display: flex; align-items: center; justify-content: center; }

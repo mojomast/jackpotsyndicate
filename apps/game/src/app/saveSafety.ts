@@ -20,9 +20,6 @@ const RESUMABLE_BOUNDARIES: ReadonlySet<Phase> = new Set<Phase>([
 
 const RESUMABLE_PHASES: ReadonlySet<Phase> = new Set<Phase>([
   ...RESUMABLE_BOUNDARIES,
-  'ROUND_SETTLE',
-  'SPINNING',
-  'RESOLVING',
 ]);
 
 export type SaveRecoveryStatus = 'preserved' | 'created' | 'discarded' | 'unavailable';

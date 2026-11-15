@@ -72,7 +72,7 @@ export function createTestApi(core: GameCore = useGameStore.getState().core): Te
       const grantable = core as GrantableCore;
       if (typeof grantable.grantCash === 'function') {
         grantable.grantCash(amount);
-        useGameStore.setState({ state: core.getState() });
+        useGameStore.setState({ state: { ...core.getState() } });
         return;
       }
       const state = core.getState();

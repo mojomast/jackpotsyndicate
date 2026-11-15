@@ -233,6 +233,7 @@ export function createRunState(content: RunContent, seed: string): RunState {
 export interface RunMachineOptions {
   content: RunContent;
   state: RunState;
+  lastResult?: RoundResult | null;
 }
 
 /**
@@ -251,10 +252,13 @@ export class RunMachine {
   private pendingJumpers: Cell[][] = [];
   private returnPhase: Phase | null = null;
   private orbsInFlight = 0;
+  /** Visible grid from before the current spin draw, used to keep frozen cells. */
+  private preSpinVisible: SymbolId[][] | null = null;
 
   constructor(options: RunMachineOptions) {
     this.content = options.content;
     this.state = clone(options.state);
+    this.lastResult = options.lastResult ?? null;
     this.resumeTimers();
   }
 
@@ -276,6 +280,25 @@ export class RunMachine {
 
   getState(): RunState {
     return this.state;
+  }
+
+  getLastResult(): RoundResult | null {
+    return this.lastResult === null ? null : clone(this.lastResult);
+  }
+
+  setLastResult(result: RoundResult | null): void {
+    this.lastResult = result === null ? null : clone(result);
+  }
+
+  /** Snapshot used by Core's boss-freeze pass; null outside a spin draw. */
+  getPreSpinVisible(): SymbolId[][] | null {
+    return this.preSpinVisible === null
+      ? null
+      : this.preSpinVisible.map((column) => column.slice());
+  }
+
+  clearPreSpinVisible(): void {
+    this.preSpinVisible = null;
   }
 
   getContent(): RunContent {
@@ -496,12 +519,14 @@ export class RunMachine {
     if (this.state.spinsLeft <= 0) return fail('AT_LIMIT');
     if (this.orbsInFlight > 0) return fail('ORBS_IN_FLIGHT');
 
+    const preSpinVisible = this.state.grid.visible.map((column) => column.slice());
     const reels = this.stream('reels');
     const drawn = drawGrid(reels, {
       strips: this.state.grid.strips,
       rows: this.state.grid.rows,
     });
     this.saveStream('reels', reels);
+    this.preSpinVisible = preSpinVisible;
     this.state.grid.visible = drawn.grid;
 
     const spinIndex = this.state.stats.spins;

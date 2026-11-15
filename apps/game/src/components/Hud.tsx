@@ -1,5 +1,6 @@
 /** @jsxRuntime automatic */
-import { FLOOR_LABELS, formatCash, quotaForRound, useGameStore } from '../store/gameStore';
+import { FLOOR_LABELS, formatCash, useGameStore } from '../store/gameStore';
+import { quotaForState } from '../screens/meta/metaContent';
 import { TEST_IDS } from '@jackpotsyndicate/contracts';
 import { CascadeEquation } from './CascadeEquation';
 import { SpriteImage } from './Artwork';
@@ -8,7 +9,7 @@ export function Hud() {
   const state = useGameStore((store) => store.state);
   const dispatch = useGameStore((store) => store.dispatch);
 
-  const quota = quotaForRound(state.round, state.floorId);
+  const quota = quotaForState(state);
   const canSpin = state.phase === 'PREP';
   const fever = Math.round(state.fever);
 

@@ -10,6 +10,7 @@ import {
   type FloorId,
   type GameCore,
   type GameEvent,
+  type RoundResult,
   type RunState,
   type SaveFile,
   type SimSnapshot,
@@ -128,6 +129,29 @@ function createRunState(seed: string): RunState {
 function cloneState(state: RunState): RunState {
   if (typeof structuredClone === 'function') return structuredClone(state);
   return JSON.parse(JSON.stringify(state)) as RunState;
+}
+
+/**
+ * GameCore may return its live internal state (the real engine does). Zustand
+ * only re-renders subscribers when the selected value changes identity, so the
+ * store must snapshot every read. Without this, a real core's bankroll, phase
+ * and quota updates are invisible to React even though the engine advanced.
+ */
+function snapshotState(core: GameCore): RunState {
+  return cloneState(core.getState() as RunState);
+}
+
+/**
+ * The real engine keeps the settled verdict beside the run and only persists it
+ * in SaveFile. Read it when attaching so a reloaded ROUND_RESULT screen shows
+ * the actual outcome instead of re-guessing from bankroll after tribute.
+ */
+function lastResultFromCore(core: GameCore): RoundResult | null {
+  try {
+    return core.save().lastResult ?? null;
+  } catch {
+    return null;
+  }
 }
 
 function fnv64(input: string): string {
@@ -637,6 +661,7 @@ export interface GameStore {
   core: GameCore;
   state: RunState;
   events: GameEvent[];
+  lastResult: RoundResult | null;
   lastSpin: SpinEvalEvent | null;
   lastDropMult: number;
   settings: Settings;
@@ -656,14 +681,22 @@ const initialEvents = initialCore.tick();
 
 export const useGameStore = create<GameStore>((set, get) => ({
   core: initialCore,
-  state: initialCore.getState(),
+  state: snapshotState(initialCore),
   events: initialEvents,
+  lastResult: null,
   lastSpin: null,
   lastDropMult: 1,
   settings: readSettings(),
 
   attachCore(core) {
-    set({ core, state: core.getState(), events: [], lastSpin: null, lastDropMult: 1 });
+    set({
+      core,
+      state: snapshotState(core),
+      events: [],
+      lastResult: lastResultFromCore(core),
+      lastSpin: null,
+      lastDropMult: 1,
+    });
   },
 
   newRun(seed) {
@@ -672,8 +705,9 @@ export const useGameStore = create<GameStore>((set, get) => ({
     if (!result.ok) return;
     const events = core.tick();
     set({
-      state: core.getState(),
+      state: snapshotState(core),
       events,
+      lastResult: null,
       lastSpin: null,
       lastDropMult: 1,
     });
@@ -684,10 +718,10 @@ export const useGameStore = create<GameStore>((set, get) => ({
     const result = core.dispatch(cmd);
     if (cmd.c === 'NewRun' && result.ok) {
       const events = core.tick();
-      set({ state: core.getState(), events, lastSpin: null, lastDropMult: 1 });
+      set({ state: snapshotState(core), events, lastResult: null, lastSpin: null, lastDropMult: 1 });
       return result;
     }
-    set({ state: core.getState() });
+    set({ state: snapshotState(core) });
     return result;
   },
 
@@ -696,10 +730,12 @@ export const useGameStore = create<GameStore>((set, get) => ({
     const incoming = core.tick();
     const previous = get();
     let lastSpin = previous.lastSpin;
+    let lastResult = previous.lastResult;
     let lastDropMult = previous.lastDropMult;
 
     for (const event of incoming) {
       if (event.t === 'SpinEvaluated') lastSpin = event;
+      if (event.t === 'RoundSettled') lastResult = event.result;
       if (event.t === 'ChuteExit') lastDropMult = DEFAULT_CHUTE_MULTS[event.chute] ?? 1;
     }
 
@@ -707,7 +743,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
       ? [...previous.events, ...incoming].slice(-250)
       : previous.events;
 
-    set({ state: core.getState(), events, lastSpin, lastDropMult });
+    set({ state: snapshotState(core), events, lastResult, lastSpin, lastDropMult });
     return incoming;
   },
 

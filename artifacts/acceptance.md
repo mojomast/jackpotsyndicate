@@ -18,15 +18,65 @@ every acceptance criterion is green; the gaps are listed explicitly.
 | AC | Status | Evidence / gap |
 |---|---|---|
 | AC-1 install/build/preview | **PASS** | frozen install, game build and Playwright preview server all run; built cabinet renders in a real browser |
-| AC-2 lint/typecheck/test/coverage | **PARTIAL** | `pnpm lint` PASS; `pnpm typecheck` PASS; `pnpm test` **218 passing** (189 package + 29 app-level); line coverage ≥85% was not measured |
+| AC-2 lint/typecheck/test/coverage | **PARTIAL** | `pnpm lint` PASS; `pnpm typecheck` PASS; `pnpm test` **223 passing** (191 package + 32 app-level); line coverage ≥85% was not measured |
 | AC-3 golden replay | **PASS** | `pnpm sim:replay` MATCH at `bade5e3091c269a205ccace5`; Playwright golden replay passes in Chromium, Firefox and WebKit |
 | AC-4 E2E J1–J8 | **PARTIAL** | **29 passed, 1 skipped** across Chromium, Firefox and WebKit. The skip is the WebKit J8 4×-speed sub-check (measured 39.8%, target ≤30%, headless WebKit timer floor). NET passes on all three after inline symbol sprites |
 | AC-5 rake | **PASS** | 10,000 spins/floor: Neon 17.0%, Cryo 22.7%, Foundry 12.0%, Penthouse 21.3%, all in band |
 | AC-6 balance | **PASS** | 2,000 runs/bot: random-buyer Floor 1 51.8%, win 5.1%; greedy win 37.3%; max bankroll 38,982,203 (<1e12) |
 | AC-7 hit rate | **PASS** | 40.6% over 5,000 evaluations, target 30–45% |
-| AC-8 performance/bundle | **PASS** | stress scene: sim tick avg 0.382 ms, render frame avg 0.215 ms; bundle 1.72 MB gzip of 3.00 MB budget |
+| AC-8 performance/bundle | **PASS** | stress scene: sim tick avg 0.382 ms, render frame avg 0.215 ms; bundle 1.90 MB gzip of 3.00 MB budget |
 | AC-9 animation lint/trailer | **PARTIAL** | `hyperframes lint` exits 0 with warnings; trailer MP4 exists but still uses the animation package’s placeholder/vector art path, not a real-sprite re-render |
 | AC-10 README/delivery | **PASS** | five-command quick start, architecture/content/balance/asset-credit docs, manual-dispatch-only deploy workflow; no publish step |
+
+## Audit fixes (2026-11-15)
+
+The read-only audit found correctness and presentation defects beyond the original
+acceptance checklist. The following fixes are in this branch:
+
+- **HUD quota** now uses the content quota table (`quotaForState`), not the shallow
+  `1000 × floor-scale` prototype formula. Cryo round 1 displays **$9,261**, not
+  **$1,000**.
+- **Real-engine React updates**: the store snapshots `core.getState()` on every
+  attach/dispatch/tick. The real `Core` returns its live mutable state, so Zustand
+  previously saw the same object identity and did not repaint bankroll/phase changes.
+- **Save safety**: `saveCore` refuses `SPINNING`, `RESOLVING` and `ROUND_SETTLE`
+  because the in-flight spin schedule is not in `RunState`; a save taken there
+  previously reloaded into a stuck phase.
+- **ROUND_RESULT resume**: `SaveFile.lastResult` now carries the settled verdict
+  outside `RunState` (so the C-5 state hash and golden replay are unchanged). A
+  resumed `ContinueAfterRound` can no longer fall through into the shop after a
+  failed round, and the result screen reads the persisted verdict.
+- **Boss freeze**: a cell frozen by Madame Zero keeps its symbol through the next
+  draw instead of being replaced while the freeze badge remains.
+- **UI chrome**: the cabinet window is inset to the measured alpha hole
+  (`left 12.6%`, `top 25.7%`, `width 71.8%`, `height 44.3%`). Panel and button
+  borders now reserve `12px 22px` / `9px 18px` with separate
+  `border-width`/`border-style` declarations, so `border-image-width` cannot paint
+  over content. Missing meta-screen styles (notices, boss tug bar, result/summary
+  cards, relic/jumper pickers, seed copy, error/stub screens) are present.
+- **First paint**: the shell renders before the 67-image atlas preload; the preload
+  continues in the background instead of holding the screen blank.
+- **Mobile nav**: below 620px the nav wraps instead of hiding later routes behind
+  horizontal scrolling.
+- **Contact sheet**: the generated review sheet embeds the 71 resolved images (or
+  placeholder vectors), so it is an actual art-review gate rather than metadata-only.
+- **Test bridge**: `window.__JS_TEST__` is enabled only in development/e2e builds,
+  not by a production `?test=1` query string.
+
+Negative-test evidence (the new tests were run against the pre-fix source with the
+fixes stashed):
+
+```text
+apps/game/tests/table.test.tsx  3 failing: HUD quota, real-core snapshot, transient save
+packages/core/tests/core.test.ts 2 failing: boss freeze, ROUND_RESULT verdict
+```
+
+After restoring the fixes, the same targeted suites pass **15/15**, the app suite
+passes **32/32**, and the full root suite passes **223 tests** (191 package + 32 app).
+The RED logs are `/tmp/audit-red-app.log` and `/tmp/audit-red-core.log` in the
+development session; they are not committed. Still unproven: coverage ≥85%, the
+full accessibility audit, CI execution of every draft PR, and the remaining art
+pipeline items below.
 
 ## Asset state
 
@@ -52,7 +102,7 @@ were rejected for haze or an unrelated character.
 pnpm install --frozen-lockfile       PASS
 pnpm lint                            PASS
 pnpm typecheck                       PASS
-pnpm test                            218 passing (189 package + 29 app-level)
+pnpm test                            223 passing (191 package + 32 app-level)
 pnpm sim:replay                      MATCH at bade5e3091c269a205ccace5
 pnpm sim:hitrate                     40.6% PASS
 pnpm assets:verify                   73 files PASS
